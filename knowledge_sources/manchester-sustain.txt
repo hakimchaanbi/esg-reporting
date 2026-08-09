@@ -1,0 +1,97 @@
+SOURCE: manchester-sustain
+URL: https://www.manchester.ac.uk/about/social-responsibility/environmental-sustainability/our-sustainability-commitments/sustainability-strategy/
+WORDS: 1600
+============================================================
+
+Download the full Social Responsibility Framework (PDF, 6.7MB).
+Our sustainability strategy
+Our Sustainable Future, the University's Environmental Sustainability Strategy 2023-28, outlines how we will reduce our carbon footprint, promote sustainability in our teaching and learning, research and innovation, and reduce our negative environmental operational impact.
+We have illustrated practical steps we will take to protect and enhance our environment. We will report on every stage of the process and remain transparent.
+Strategy highlights
+Our Sustainable Future is organised around the University's three core goals.
+Social responsibility
+As the first University to set social responsibility as one of its core goals, Manchester is unique in its commitment to making a difference to the social and economic wellbeing of our communities.
+Download the full Social Responsibility and Civic Engagement plan (PDF, 4.38MB).
+Teaching and learning
+We ensure that through interdisciplinary and research-led teaching, our students are invited to learn about the UN’s Sustainable Developments Goals with their programmes of study so they can better understand the challenges our world is facing and how they can help.
+Read more about our teaching and learning goals.
+Research and discovery
+Guided by our Sustainable Futures platform, our research aims to address the major environmental challenges we face in the 21st century and beyond. We prioritise research that has a positive impact on society.
+Read more about our research and discovery.
+Find out more about the Sustainable Futures platform.
+Our carbon commitments
+Our university is committed to reducing its carbon emissions through two primary goals:
+| Target | Baseline | Scope | What does this include? |
+| Zero direct carbon emissions by 2038 | The University commits to a 13% annual reduction from a 2018 baseline, aligned with milestones set by the Manchester Climate Change Partnership (MCCP), to remain within its 'carbon budget'. | Scope 1 and 2 | Emissions from the energy we buy and use on campus. This includes electricity, oil, gas, and renewable sources. |
+| Net zero by 2050 | 2018/19 | Scope 3 | Indirect emission such as:  |
+Zero carbon ambition (Scope 1 and 2)
+Climate change is the great threat facing humanity. The 2015 Paris Agreement outlined the need for urgent reductions to global carbon emissions to keep the average temperature rise to 1.5 degrees Celsius or lower.
+Our University aims to achieve zero direct carbon emissions by 2038.
+Read the full Carbon Action plan (Word Doc, 227KB).
+Read the Race to Zero report (Word Doc, 424KB).
+Our carbon budget* was set by climate scientists at the University’s Tyndall Centre for Climate Change Research.
+*A 'carbon budget’ refers to the emissions an individual or organisation can emit into the atmosphere before contributing more than their ‘fair share’ of the total we can emit globally if we are to stay within 1.5 degrees.
+- Providing staff with training to educate on causes and impact of climate change and how they can mitigate against it.
+- Entering into Power Purchase Agreements to generate additional zero carbon electricity to match our own consumption.
+- Summary of key environmental sustainability targets (Word Doc, 145KB).
+Further commitments can be found in the full strategy.
+Scope 3 emissions
+The 2038 target and carbon budget relate to our "Scope 1" and "Scope 2" emissions, primarily from gas and electricity usage, as defined by the Greenhouse Gas Protocol.
+Scope 1 and 2 emissions constitute around 10% of our carbon footprint. The remaining 90% comes from indirect emissions, like those from goods purchased and staff and student travel, known as "Scope 3 emissions.“
+To address the scale and importance of these emissions, in July 2023, we set a Scope 3 emissions target of net zero by 2050.
+Details of this plan can be found in our Scope 3 report (PDF, 1.13MB).
+|  | Total Scope 3 emissions (tCO2e) |  |
+| 2018/2019 (baseline) | 390,672 | Read the full Scope 3 emissions report (PDF, 1.13MB) |
+| 2022/2023 | 459,142 | Read the full Scope 3 Results and Workshop 2022/23 report (PDF, 1.64MB) |
+| 2023/2024 | 617,090  | Read the full Scope 3 emissions report (PDF, 2.8MB) |
+The scope of the footprint has been increased in line with carbon accounting best practice. With the newly included emission sources, the overall emissions value has increased compared to both the baseline and the previous year, with the baseline value being exceeded by 58%. There are some large increases in emissions for individual categories too, including a nearly 3-fold increase for upstream leased assets. Areas of significant progress are:
+- Waste – the University produces less than a quarter of the waste it did in 2018/19.
+- Upstream transportation and distribution – the University spends 35% less of shipping and freight services than it did in 2018/19.
+- Capital goods – the University spent less than one-tenth the amount on capital goods in 2023/24 as it did in the baseline.
+In the like-for-like comparison we see a 1% decrease in overall emissions compared to the previous year. However, when the like-for-like emissions are compared to the baseline year, an increase of 16% is seen. This is largely driven by an increase in emissions from purchased goods and services. The emission sources that were calculated for the first time in this iteration of the footprint but excluded from this like-for-like analysis are:
+- Energy use in 19 upstream leased assets (6,925 tCO2e).
+- Student placement travel (6,769 tCO2e).
+- Use of sold products (10 tCO2e).
+- Energy use in 23 downstream leased assets (5,555 tCO2e).
+- Emissions associated with the Greater Manchester Pension Fund and Universities Superannuation Scheme (16,200 tCO2e and 130,000 tCO2e, respectively) have been included for the first time this year. The resulting emissions of the category were more than five times greater than if the additional funds had not been included. As a result of the increased scope, the total emissions are 36% greater than they otherwise would have been.
+The scope of included emissions was increased for this iteration of the footprint in order to better align with the guidance of the Greenhouse Gas Protocol (GHG) and the carbon accounting practices of other universities.
+| Category | Sources of emissions | 2018/19 emissions | 2022/23 emissions | 2023/24 emissions | Change since 2018/19 | Change since 2022/23 |
+| 1 | Purchased goods and services | 171,213 | 203,036 | 192,794 | 13% | -5% |
+| 2 | Capital goods | 40,654 | 13,634 | 29,174 | -28% | 114% |
+| 3 | Fuel- and energy-related activities | 10,215 | 11,588 | 13,251 | 30% | 14% |
+| 4 | Upstream transport and distribution | 652 | 698 | 227 | -65% | -68% |
+| 5 | Waste generated during operations | 831 | 227 | 163 | -80% | -28% |
+| 6 | Business travel | 19,042 | 12,945 | 14,531 | -24% | 12% |
+| 7 | Employee commuting | 3,639 | 8,880 | 7,181 | 97% | -19% |
+| 8 | Upstream leased assets | 4,160 | 2,452 | 9,463 | 127% | 286% |
+| 9 | Downstream transport and distribution | 97,461 | 169,722 | 105,636 | 8% | -38% |
+| 11 | Use of sold products | - | - | 10 | - | - |
+| 12 | End of life of sold products | 6 | 2 | 4 | -40% | 108% |
+| 14 | Downstream leased assets | 1,163 | 2,588 | 10,730 | 823% | 315% |
+| 15 | Investments | 41,247 | 33,371 | 233,927 | 467% | 601% |
+|  | Total | 390,283 | 459,142 | 617,090 | 58% | 34% |
+We undertake regular environmental audits of our operations and processes.
+- Waste audit University Place 2023 (PDF, 302KB)
+- Student and staff travel survey results 2024 (PDF, 648KB)
+- Supplier carbon audit (excerpt) 2023 (Word Doc, 77.1KB)
+- Energy audits 2021 (PDF, 1.31MB)
+- Water audits 2021 (Word Doc, 46.3KB)
+- Nancy Rothwell Building water audit 2021 (Image, 52.6KB)
+- Construction audit 2023 (PowerPoint, 558KB)
+- Waste and materials section 2021 (Image, 217KB)
+- Emissions audit 2023/2024 (Word Doc, 81.3KB)
+- Nancy Rothwell Building emissions and discharges audit 2021 (Image, 108KB)
+- Main campus biodiversity audit 2022 (PDF, 11.2MB)
+- Scope 1 and 2 carbon data verification (2025) (PDF, 302KB)
+- Bird, bat and bug house audit (2025) (PDF, 9.26MB)
+- Electric vehicle charging audit (2026) (PDF, 2.11MB)
+- Audit of recycling points on campus (2024)
+- Audit of end of term student donation points (2025) (PDF, 1.30MB)
+- Socially Responsible Investment Policy (Revised May 2020) (Word Doc, 874KB). The University will end investments in fossil fuel reserve and extraction companies by 2022, and 'decarbonise' all investments by 2038.
+- Staff and student environmental engagement strategy (Word Doc, 199KB).
+- Environmental sustainability performance 2019/20, published October 2020 (Word Doc, 3.7MB).
+- Biodiversity Baseline Survey 2022 (PDF, 11.2MB).
+- Environmental information for UK higher education providers is collected as part of the Higher Education Statistics Agency (HESA) Estates management record and published on the HESA website in a series of tables for several academic years. Source data from any of the tables can be downloaded.
+Sustainable Development Goals
+As one of the world’s leading research institutions and the UK’s only university to have social responsibility as a core goal, Manchester is playing a leading role in tackling the Sustainable Development Goals in four ways – through our research, learning and students, public engagement activities and responsible campus operations.
+Find out how we contribute to the UN's Sustainable Development Goals.

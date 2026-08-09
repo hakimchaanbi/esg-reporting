@@ -1,0 +1,101 @@
+SOURCE: greenscope-agencies
+URL: https://www.greenscope.io/esg/agence-notation-esg
+WORDS: 1423
+============================================================
+
+Comparatif des agences de notation extra-financière (ESG) : rôle, méthodologie et principaux acteurs
+Les notations ESG façonnent désormais les décisions d’investissement. Découvrez comment les agences de notation extra-financière évaluent les enjeux liés à la durabilité
+La notation extra-financière, ou notation ESG, est une évaluation qui mesure la performance durable d’un acteur économique, c’est-à-dire sa capacité à gérer les risques et opportunités liés à l’environnement, au social et à la gouvernance (ESG).
+Complémentaire à la notation financière et réalisée par des agences de notation spécialisées, elle influence désormais la perception des investisseurs et l’allocation des capitaux.
+Qu’est-ce qu’une agence de notation extra-financière (ESG) ?
+Comprendre la notation extra-financière ESG
+La notation extra-financière mesure la façon dont une entreprise ou un émetteur intègre le développement durable, la responsabilité sociale et la bonne gouvernance dans ses activités.
+Elle repose sur une analyse approfondie de politiques internes, de rapports publics, d’indicateurs clés de performance ESG et d’informations issues de sources ouvertes ou déclaratives.
+Principaux indicateurs analysés :
+- Volet Environnemental (E) : empreinte carbone, mix énergétique, gestion des déchets, impact biodiversité, investissements durables.
+- Volet Social (S) : conditions de travail, égalité femmes-hommes, santé et sécurité, politique de diversité et d’inclusion.
+- Volet Gouvernance (G) : indépendance du conseil, transparence, politique d’achats responsables, distribution de la valeur.
+💡 Objectif : identifier les risques ESG susceptibles d’affecter la performance économique pour orienter les décisions d’investissement ou ajuster la stratégie ESG des entreprise face aux évolutions du marché.
+Notation ESG vs indices de développement durable
+Les notations ESG évaluent individuellement la performance d’un acteur, tandis que les indices (comme le DJSI ou le FTSE4Good) regroupent plusieurs entreprises répondant à des critères de durabilité définis.
+Exemples d’indices de référence :
+- DJSI (Europe)
+- FTSE4Good (Global & Europe)
+- Bloomberg Gender Equality Index
+- Refinitiv Diversity & Inclusion Index
+- Euronext Vigeo Europe / Eurozone
+- MSCI Low Carbon Leaders Index
+Entrer dans ces indices suppose d’obtenir une bonne notation ESG auprès d’une ou plusieurs agences (ex. S&P Global CSA).
+Rôle et fonctionnement des agences de notation ESG
+Les agences de notation extra-financière sont des organismes indépendants qui évaluent les pratiques ESG selon leur propre méthodologie.
+Elles collectent et analysent les données ESG issues :
+- des rapports annuels et documents publics
+- des questionnaires envoyés aux entreprises
+- des bases de données spécialisées et sources médiatiques
+Les notations ESG aident les investisseurs à gérer leurs risques et opportunités, permettent aux entreprises de se comparer à leurs pairs, soutiennent les banques et fonds dans leurs décisions d’allocation d’actifs.
+📅 Les notations sont généralement mises à jour chaque année, avec des ajustements ponctuels en cas d’événements majeurs (controverses, changements de gouvernance, évolutions réglementaires…).
+Comparatif des principales agences de notation extra-financière
+- Origine : États-Unis
+- Échelle : de AAA (meilleure) à CCC (plus faible)
+- Public cible : investisseurs institutionnels et gestionnaires d’actifs
+- Méthodologie : approche par les risques et opportunités ESG matériels susceptibles d’impacter la performance financière. L’objectif principal est de mesurer la résilience ESG d’un acteur face aux enjeux sectoriels
+- Origine : Pays-Bas / Canada
+- Échelle : de Faible à Élevé, représentée par 1 à 5 globes
+- Portée : plus de 10 000 entreprises
+- S’adresse principalement aux fonds d’investissement et évalue l’efficacité des entreprises détenues au sein d’un portefeuille en matière de gestion des risques et opportunités ESG, en les comparant à au moins dix fonds similaires de la même catégorie.
+- Méthodologie : repose sur des données publiques - rapports annuels, médias, sites d’entreprise et bases de données spécialisées
+- Origine : États-Unis
+- Échelle : 12 niveaux, allant de A+ / 4.00 (excellent) à D- / 1.00 (faible performance)
+- Fournit une indication précise du niveau de risque et d’opportunité ESG d’un portefeuille ou d’une entreprise, en analysant la capacité à gérer les risques, réduire les impacts négatifs et générer des effets positifs sur l’environnement et la société
+- Méthodologie : s’appuie sur des standards internationaux reconnus - notamment les IFRS, ESRS et indicateurs GRI - et exploite un large éventail de données publiques (rapports annuels, médias, sites d’entreprise, bases de données spécialisées) pour garantir une évaluation rigoureuse et comparable.
+- Portée : 7 300 entreprises
+- Origine : Suisse / USA
+- D’abord conçu pour aider les entreprises à faire du benchmark ESG et se comparer à leurs pairs et à faire évoluer leurs pratiques de durabilité. Il intéresse aujourd’hui de plus en plus les investisseurs, qui l’utilisent pour évaluer la performance ESG de leurs portefeuilles et ajuster leur allocation d’actifs
+- Echelle : échelle de 0 à 100, assortie d’un classement en centiles permettant de situer chaque entreprise par rapport à son secteur
+- Méthodologie : score calculé à partir de données internes (in-house) recueillies via 62 questionnaires sectoriels couvrant 110 questions réparties sur 23 thématiques de durabilité (gouvernance, climat, ressources, innovation, etc.). Cette méthodologie propriétaire alimente directement plusieurs indices ESG, dont le S&P Global LargeMid Cap Index, le S&P 500 ESG Index, le S&P Global 1200 Index et le S&P 500 Scored & Screened Index
+- Portée : 3 600 entreprises (2022)
+- Origine : États-Unis
+- Echelle : trois scores thématiques, notés de A à D, reflètent le degré de divulgation et d’action sur les enjeux climatiques (Climate Change), forestiers (Forest) et hydriques (Water Security)
+- CDP Score se distingue des notations ESG classiques : il ne mesure pas la performance ou la gestion des risques ESG, mais évalue la transparence et la qualité de la communication des entreprises concernant leurs engagements et impacts environnementaux
+- Méthodologie : le score est calculé à partir de données internes (in-house) recueillies via des questionnaires standardisés adressés aux entreprises, afin de mesurer la cohérence et la maturité de leurs activités
+- Portée : 22 700 entreprises
+- Origine : France / Royaume-Uni
+- Moody’s ESG Solutions est principalement utilisée par les prêteurs et institutions financières pour évaluer l’exposition aux risques ESG des émetteurs de crédit
+- Echelle : score à cinq niveaux, de CIS-1 (impact positif) à CIS-5 (impact très fortement négatif), reflétant la contribution des considérations ESG à la qualité du crédit
+- Ces résultats permettent également d’établir des profils de risque détaillés pour chaque émetteur privé, avec un score distinct par pilier ESG - un score E (Environnement), un score S (Social) et un score G (Gouvernance)
+- Portée : 1 700 profils (2022)
+Autres agences
+Selon les secteurs, tailles d’entreprises ou autres spécificités, d’autres acteurs proposent des notations plus spécialisées :
+- Inrate
+- Ecovadis
+- Solaron ESG Tracker
+- etc.
+Comment les agences évaluent-elles la performance extra-financière ?
+Chaque agence dispose d’une méthodologie propriétaire combinant plusieurs sources :
+- Données publiques (rapports, études, enquêtes, controverses médiatiques)
+- Données issues de bases spécialisées
+- Questionnaires adressés aux entreprises, souvent sectoriels
+Cette diversité de méthodes entraîne parfois des écarts de notation pour une même entreprise, un défi de transparence et de comparabilité pour les investisseurs.
+Limites et défis des notations ESG
+Malgré leur utilité, les notations extra-financières présentent certaines limites :
+- Absence de normalisation : chaque agence utilise sa propre méthodologie
+- Transparence partielle : les pondérations ne sont pas toujours publiques
+- Écarts de notation : une même entreprise peut obtenir des scores très différents selon l’agence
+- Risque de “greenwashing” si les données publiées ne sont pas vérifiées
+💬 Enjeux pour les investisseurs : apprendre à interpréter les notations, croiser plusieurs sources, et privilégier les agences dont la méthodologie est la plus alignée avec leurs priorités ESG.
+Conclusion : comment exploiter les notations ESG
+Les notations extra-financières sont devenues un outil stratégique pour piloter les décisions d’investissement et évaluer la durabilité des portefeuilles.
+Cependant, leur diversité méthodologique impose une lecture éclairée :
+- Identifier les agences les plus pertinentes selon votre secteur
+- Comprendre les indicateurs ESG sous-jacents à chaque score
+- Utiliser les notations comme outil de pilotage, et non comme vérité absolue
+🧭 En combinant plusieurs sources (MSCI, Sustainalytics, ISS ESG, S&P Global CSA), les investisseurs peuvent construire une vision plus robuste et nuancée de la performance durable d’un actif.
+Nos derniers articles
+Actualités ESG - Juillet 2026
+Découvrez les évolutions clés: projets en cours, mises à jour des normes, nouveaux documents officiels.
+Actualités ESG - Juin 2026
+Découvrez les évolutions clés: projets en cours, mises à jour des normes, nouveaux documents officiels.
+Actualités ESG - Mai 2026
+Découvrez les évolutions clés: projets en cours, mises à jour des normes, nouveaux documents officiels.
+Actualités ESG - Avril 2026
+Découvrez les évolutions clés : projets en cours, mises à jour des normes, nouveaux documents officiels.

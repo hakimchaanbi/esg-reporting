@@ -1,0 +1,68 @@
+SOURCE: stars-technical-manual
+URL: https://stars.aashe.org/resources-support/technical-manual/
+WORDS: 600
+============================================================
+
+Download STARS credit criteria and reporting requirements
+STARS 3.0
+Materials
+- Credit checklist (Google Sheet). An overview of the credits and indicators included in STARS 3.0 to assist in planning and estimating the outcome of participation.
+- STARS Technical Manual v3.0.1 (PDF). The definitive guide to STARS credits and reporting criteria. Updated July 2025 with minor corrections and clarifications.
+- Full set of standard credits (zipped file). Individual credits in PDF format for sharing with data providers.
+- Tracking worksheet (Google Sheet). A list of the documentation fields associated with each credit to inform data collection.
+- Innovation & Leadership Credit Catalog v3.0.1 (PDF). Optional credits that may be added to a STARS report to earn bonus points. Updated July 2025 with minor corrections and clarifications.
+Individual Credits (PDF)
+Report Preface (PRE)
+Academics (AC)
+Engagement (EN)
+Operations (OP)
+- OP 1: Building Design and Construction
+- OP 2: Building Operations and Maintenance
+- OP 3: Water Use
+- OP 4: Ecologically Managed Grounds
+- OP 5: Energy Use. Template: Energy calculator (Google Sheet)
+- OP 6: Greenhouse Gas Emissions
+- OP 7: Dining Service Procurement. Resources: Qualifying food and beverage certifications and Food and beverage purchasing inventory (Google Sheets)
+- OP 8: Food Recovery
+- OP 9: Sustainable Procurement System
+- OP 10: Purchased Goods. Resource: Qualifying certifications and standards for purchased goods (Google Sheet)
+- OP 11: Materials Management
+- OP 12: Waste Generation and Recovery
+- OP 13: Vehicle Fleet
+- OP 14: Commute Modal Split
+- OP 15: Air Travel
+Planning & Administration (PA)
+- PA 1: Sustainability Coordination
+- PA 2: Commitments and Planning
+- PA 3: Institutional Governance
+- PA 4: Sustainable Investment Program
+- PA 5: Investment Holdings
+- PA 6: Institutional Climate
+- PA 7: Racial and Ethnic Representation. Required template: Demographics worksheet (Google Sheet)
+- PA 8: Gender Parity
+- PA 9: Affordability and Access
+- PA 10: Student Success
+- PA 11: Health, Safety and Wellbeing
+- PA 12: Employee Rights
+- PA 13: Pay Equity and Living Wage
+Technical Notes
+- Summary of Changes (Google Doc). An overview of how STARS 3.0 differs from the previous iteration (v2.2).
+- STARS Technical Manual v3.0 (PDF). Released May 2024 and superseded by Administrative Update One (v3.0.1, available above).
+- Innovation & Leadership Credit Catalog v3.0 (PDF). Released May 2024 and superseded by Administrative Update One (v3.0.1, available above).
+- Point Allocation (PDF). An overview of the methodology used to allocate points across the impact areas, credits and indicators included in STARS 3.0.
+- Benchmarking (PDF). An overview of the methodology used to calculate the water, energy, GHG emissions and waste benchmarks included in STARS 3.0.
+- Technical development. Provisional drafts and public comment.
+Updated 5 July 2025
+- STARS 2.2Materials
+  - Credit checklist (XLS). A snapshot of the credits included in STARS 2.2, outlining minimum requirements and applicability.
+  - Technical Manual v2.2 (PDF). The definitive guide to STARS credits and reporting requirements (published June 2019).
+  - Innovation & Leadership Credit Catalog v2.2 (PDF). Optional credits that may be added to a report to earn bonus points.
+  - Summary of Changes (PDF). Learn more about the how the new version differs from STARS 2.1.
+ CreditsDownload a zipped file containing all credits or view/download individual credits: Download a zipped file containing all optional Innovation & Leadership (IN) credits or view/download individual IN credits: .
+- ArchiveThis archive provides access to the Technical Manuals associated with previous versions of STARS, as well as a detailed record or summary of changes for each version.STARS 2.1
+ STARS 2.0
+ STARS 1.2
+ STARS 1.1
+ STARS 1.0
+ STARS 0.4-0.5
+ .

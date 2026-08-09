@@ -1,0 +1,42 @@
+SOURCE: robeco-esg-definition
+URL: https://www.robeco.com/en-us/glossary/sustainable-investing/esg-definition
+WORDS: 750
+============================================================
+
+Environmental
+- Energy usage and efficiency
+- Climate change strategy
+- Waste reduction
+- Biodiversity loss
+- Greenhouse gas emissions
+- Carbon footprint reduction
+Environmental factors cover pollution, greenhouse gas emissions, waste generation, energy efficiency and the impact on biodiversity. The need to tackle climate change led by lowering emissions to achieve net zero by 2050 has made this factor much more important than simply looking at primarily localized issues such as pollution of waste disposal.
+Social factors include attitudes to diversity and labor standards at a company’s main operating centers and in its supply chains, along with more routine issues such as workplace health and safety. In extreme cases it can relate to the use (wittingly or otherwise) of child or forced labor, and wider human rights issues such as sourcing from conflict areas.
+Governance factors cover how well a company is managed, from boardroom diversity and gender equality, to being free from corrupt practices. Good governance also includes how well capital is distributed, how external or minority shareholders are treated, and whether the firm adheres to recognized standards regarding accounting and risk.
+Energy usage and efficiency
+Climate change strategy
+Waste reduction
+Biodiversity loss
+Greenhouse gas emissions
+Carbon footprint reduction
+Fair pay and living wages
+Equal employment opportunity
+Employee benefits
+Workplace health and safety
+Community engagement
+Responsible supply chain partnership
+Adhering to labor laws
+Corporate governance
+Risk management
+Compliance
+Ethical business practices
+Avoiding conflicts of interest
+Accounting integrity and transparency
+Companies will have differing exposures to ESG factors depending on what they do. A miner, for example, will be heavily judged on its environmental records, including any pollution caused by extraction and the remediation of mined areas. The E is also a huge issue for high carbon emitters led by energy companies who are at the forefront of net-zero decarbonization efforts.
+Social issues will be bigger for companies in the hospitality and retail sectors which typically have larger but lower-paid workforces with less secure employment conditions or pension eligibility. The Covid pandemic laid bare just how vulnerable many people were at work. Gender pay gaps remain a problem for most companies, while racial or other forms of discrimination can surface at some.
+Governance is a bigger problem for companies such as banks which have faced huge issues with risk management – leading to many financial crises over the years – particularly where incentive schemes prioritized short-term profits over long-term stability. The financial industry is less affected by environmental or social issues as they tend to be low emitters with more highly paid staff.
+The basis of ESG comes from the United Nations World Commission on Environment and Development – known as the Brundtland Commission – which is most notable for coining the term ‘sustainable development’. This was defined as “development that meets the needs of the present without compromising the ability of future generations to meet their own needs.”
+Tying this into corporate activities later led to a concept of the ‘three Ps’ – People, Planet, Profit – gaining traction in the 1990s. This argued that a focus on each of these three words (and not just profit) was equally important for any commercial enterprise to be sustainable. This morphed into a more specific focus on environmental (planet), social (people) and governance (profit) factors.
+Robeco has routinely integrated ESG since 2010, and now uses it across the entire range of fundamental equities, fixed income, quantitative and bespoke sustainability strategies – one of the few asset managers in the world to use such an all-encompassing approach. Some 96% of investment products are classified as Article 8 (using ESG factors) or Article 9 (pursuing a specific sustainability objective) under the EU’s Sustainable Finance Disclosure Regulation (SFDR).
+ESG factors are also used to assess the sustainability of countries. The Robeco Country Sustainability Ranking particularly looks for energy use (E), human rights (S) and political unrest (G) when assessing domestic risks. This information is then used as part of the decision-making process for buying government bonds.
+Since the political and economic stability of any country is set by the government and the system it uses – particularly regarding whether it is a democracy, autocracy, or embroiled in civil unrest – the G factor has the highest weighting of 40%. Social factors which are largely a result of the political system used are given a weighting of 30%, with the remaining 30% for environmental factors. Amid the weightings, 7.5% of the scores are now attributed to biodiversity (E), human ageing (S) and corruption (G).

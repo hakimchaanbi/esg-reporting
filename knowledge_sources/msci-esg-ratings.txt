@@ -1,0 +1,29 @@
+SOURCE: msci-esg-ratings
+URL: https://www.msci.com/data-and-analytics/sustainability-solutions/esg-ratings
+WORDS: 470
+============================================================
+
+What do MSCI ESG Ratings measure?
+Our ESG Ratings are designed to measure companies’ resilience to financially relevant, industry-specific sustainability risks and opportunities.
+We use a rules-based methodology to identify industry leaders and laggards, assigning each company an industry-relative letter rating from AAA to CCC based on how well they manage these risks and opportunities relative to peers.
+How investors use MSCI ESG Ratings
+Pension funds, sovereign wealth funds, endowments and asset managers use our ratings as part of their investment processes for an informed understanding of risk and returns. Our ratings provide insight into how companies within a given industry compare with one another based on their exposure to, and management of, financially relevant, sustainability-related risks.
+Monitor portfolio exposures to sustainability-related risks.
+Integrate financially relevant, industry-specific sustainability-related risks into portfolio construction.
+Get support for your fundamental research.
+Identify leaders and laggards in each industry and monitor progress.
+Compare performance on financially relevant, industry-specific sustainability issues.
+Report on mandatory disclosures and update clients and other stakeholders on progress.
+See financial significance
+Our ratings support the construction of portfolios designed to enhance long-term risk-adjusted returns.
+Our ESG Ratings cover more than 17,000 issuers and 999,000 securities worldwide.1
+We continuously monitor emerging risks and opportunities, focusing on issues most relevant to a company’s core business based on its industry.
+To uncover risks and opportunities, we augment corporate disclosure with alternative data to go beyond what traditional financial analysis can capture.
+We leverage technology throughout our data creation process to provide scale, speed and differentiated data.
+Ongoing client feedback, monitoring of emerging sustainability issues, and assessing new technologies and datasets enhance our methodology and coverage.
+MSCI has assessed sustainability risks based on industry financial materiality since 1999 with the establishment of MSCI ESG Ratings.2
+Companies with the highest MSCI ESG Ratings historically outperformed their lower-rated peers
+Top rated companies outperformed their lower-rated peers due chiefly to better earnings fundamentals in developed markets over 17 years and, combined with emerging markets, over 11 years, ending Dec. 29, 2023.
+We identify the key issues we’ve determined to be material to each Global Industry Classification Standard (GICS®)3 sub-industry or sector based on 18 years of ratings history in developed markets and 12 years in emerging markets.4
+Quintiles are created every month based on adjusted scores in MSCI ACWI index. Scores are first standardized by the Global Industry Classification Standard (GICS®)* sectors, region (North America, Europe, Pacific and EM sub-indexes of the MSCI ACWI Index), and then size adjusted. The next month’s performance (in USD return) of the quintiles is calculated. The graph shows the cumulative difference between the top and bottom quintiles’ performance. Data from Dec. 31, 2012, to Dec. 31, 2024. Source: MSCI Sustainability and Climate. *GICS is the global industry classification standard jointly developed by MSCI and S&P Global Market Intelligence.
+Research and resources

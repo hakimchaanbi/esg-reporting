@@ -1,0 +1,10 @@
+SOURCE: cambridge-esg
+URL: https://dictionary.cambridge.org/dictionary/english/esg
+WORDS: 111
+============================================================
+
+- ESG should not be merely good intentions; it needs to be a practical, tangible plan with measurable results.
+- ESG needs to be embedded into an organization's strategy in a way that generates value for all stakeholders including employees, customers, suppliers, and backers.
+- Environmental, social, and governance (ESG) investing refers to a set of standards for a company’s behaviour used by socially conscious investors to screen potential investments.
+- In less than 20 years, the ESG movement has grown from a corporate social responsibility initiative launched by the United Nations into a global phenomenon.
+                                     (Definition of ESG from the Cambridge Advanced Learner's Dictionary & Thesaurus © Cambridge University Press)

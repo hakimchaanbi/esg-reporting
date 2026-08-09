@@ -1,0 +1,50 @@
+SOURCE: cfi-esg
+URL: https://corporatefinanceinstitute.com/resources/esg/esg-environmental-social-governance/
+WORDS: 1091
+============================================================
+
+Over 3 million + professionals use CFI to learn accounting, financial analysis, modeling and more. Unlock the essentials of corporate finance with our free resources and get an exclusive sneak peek at the first module of each course.
+Start Free
+What is ESG?
+ESG is a framework that helps stakeholders understand how an organization is managing risks and opportunities related to environmental, social, and governance criteria (sometimes called ESG factors). ESG takes the holistic view that sustainability extends beyond just environmental issues.
+While the term ESG is often used in the context of investing, stakeholders include not just the investment community but also customers, suppliers, and employees, all of whom are increasingly interested in how sustainable an organization’s operations are.
+Key Highlights
+ESG is a framework that helps stakeholders understand how an organization manages risks and opportunities around sustainability issues.
+ESG has evolved from other historical movements that focused on health and safety issues, pollution reduction, and corporate philanthropy.
+ESG has changed how capital allocation decisions are made by many of the largest financial services firms and asset managers in the world.
+An emerging class of ESG specialists is stepping into the industry and supporting both net zero and carbon neutrality goals.
+What Does ESG Stand For?
+ESG is an acronym that stands for environmental, social, and governance.
+1. Environmental
+Environmental factors refer to an organization’s environmental impact(s) and risk management practices. These include direct and indirect greenhouse gas emissions, management’s stewardship over natural resources, and the firm’s overall resiliency against physical climate risks (like climate change, flooding, and fires).
+2. Social
+The social pillar refers to an organization’s relationships with stakeholders. Examples of factors that a firm may be measured against include human capital management (HCM) metrics (like fair wages and employee engagement) but also an organization’s impact on the communities in which it operates.
+A hallmark of ESG is how social impact expectations have extended outside the walls of the company and to supply chain partners, particularly those in developing economies where environmental and labor standards may be less robust.
+3. Governance
+Corporate governance refers to how an organization is led and managed. ESG analysts will seek to understand better how leadership’s incentives are aligned with stakeholder expectations, how shareholder rights are viewed and honored, and what types of internal controls exist to promote transparency and accountability on the part of leadership.
+The Evolution of ESG
+The ESG lens helps assess how an organization manages the risks and opportunities created by changing conditions, such as shifts in environmental, economic, and social systems.
+Some of these conditions were identified in earlier versions of sustainability-focused strategic and/or regulatory frameworks, including:
+EHS (Environment, Health, and Safety)
+As far back as the 1980s, organizations in the United States were considering how to use regulation to manage or reduce pollution (and other negative externalities) produced in the pursuit of economic growth. They sought to also improve employee labor and safety standards, although much progress remains to be made even today.
+Corporate Sustainability
+EHS evolved in the 1990s into what was then known as the Corporate Sustainability movement. This emerged as some management teams wanted to focus on reducing their firm’s environmental impacts beyond the reductions that had been legally mandated.
+It’s widely agreed that corporate sustainability was often employed by management teams as a marketing tool to overstate (or otherwise misrepresent) efforts and environmental impacts — a practice that would later become known as greenwashing.
+CSR (Corporate Social Responsibility)
+By the early 2000s, the corporate sustainability movement began to integrate ideas around how companies should respond to social issues. This would become known as corporate social responsibility.
+Corporate philanthropy was a key component of CSR, although some critics argue that tax incentives made cash donations as attractive as their ultimate economic impact on recipients. Employee volunteerism was another hallmark of CSR.
+ESG
+Though the term “ESG” made its first mainstream appearance in a 2004 UN report[1], it was not until the late 2010s and into the 2020s that ESG emerged as a much more proactive (instead of reactive) movement.
+ESG has now evolved into a comprehensive framework that includes key elements around environmental and social impact, as well as how governance structures can be amended to maximize stakeholder well-being.
+Investing and ESG Funds
+ESG really went mainstream when the framework became an integral part of many institutional investors’ playbooks. There are a growing number of ESG rating agencies that assign ESG scores, as well as new and evolving reporting frameworks, all of which are improving the transparency and consistency of the ESG information that firms are reporting publicly (often called ESG disclosure).
+The capital markets can be a powerful tool to create change. By restricting access to capital (or making the terms under which it’s available less favorable), bad actors may be incentivized to improve performance across E, S, or G measures. Conversely, rewarding companies and their management teams that are performing well against ESG factors encourages continued progress and improvements.
+Many ESG investment vehicles have emerged, including green bonds, mutual funds, ETFs, and index funds (among others). These publicly traded instruments make it easier for investors to align their investment decisions more closely with their own beliefs and values around E, S, or G factors.
+What is an ESG Specialist?
+If someone is an ESG specialist, it can mean a number of things. But in general, this is someone with very strong analytical skills and a comprehensive understanding of how ESG factors relate to risks and opportunities.
+ESG specialists may work in the analyst community, perhaps with institutional investors or investment banks. Alternatively, they may work in industry, at either private or public companies. In all instances, they are either directly or indirectly supporting organizations in their efforts to reach net zero emissions and/or carbon neutrality.
+In the public markets (in particular), there is growing pressure by regulators and other stakeholders that issuers produce clear, transparent, and comparable ESG disclosure alongside other quarterly filings and annual reporting.
+Connect what you just learned to a clear career path with CFI’s role‑based courses and certification programs.
+Take your learning and productivity to the next level with our Premium Templates.
+Upgrading to a paid membership gives you access to our extensive collection of plug-and-play Templates designed to power your performance—as well as CFI's full course catalog and accredited Certification Programs.
+Gain unlimited access to more than 250 productivity Templates, CFI's full course catalog and accredited Certification Programs, hundreds of resources, expert reviews and support, the chance to work with real-world finance and research tools, and more.

@@ -1,0 +1,21 @@
+SOURCE: worldbank-framework
+URL: https://www.worldbank.org/en/news/feature/2022/12/12/world-bank-relaunches-sovereign-esg-data-portal
+WORDS: 502
+============================================================
+
+STORY HIGHLIGHTS
+- The new portal is now home to 71 ESG indicators along with 40 additional indicators, which span 60 years and 217 economies.
+- The beta version of portal was launched in 2019 and has since become an influential resource for the financial sector.
+- Interactive tools, visualizations and research help users leverage the full potential of the World Bank’s sovereign ESG data.
+- lp-body-content
+- first-letter
+The World Bank is launching a new Sovereign Environmental, Social, and Governance (ESG) Data Portal. Since the beta version of portal launched in 2019, it has already become an influential resource for the financial sector. It is being used by asset managers, investment banks, rating agencies and other ESG data providers to inform sovereign ESG investments. With this experience, the data portal team saw an opportunity to incorporate user feedback and to build on past successes by filling important data gaps, adding new indicators to the framework and helping users better leverage the full potential of the World Bank’s sovereign ESG data.
+With a growing body of research demonstrating the materiality of ESG, investors need to manage and assess ESG risks and opportunities associated with their investments. The World Bank Group collaborates with investors and other market participants to provide financial markets with improved sovereign ESG data and analytics that increase transparency around countries’ sustainability performance. With better ESG data, financial flows can be channeled to more sustainable activities that are better aligned with the Sustainable Development Goals.
+New additions to the data framework
+Digging deeper into the data
+Data is just part of the story. The new portal offers users a wide range of tools, visualizations and data stories to better understand what the data is all about. How has access to internet evolved over time? Who are the leaders and the laggards? How do countries perform compared to their peers? Read our data story on the relaunch to understand how the new website can answer these questions.
+Country profile pages collect all relevant ESG data, including new land cover profiles and wealth accounting data, in one place. The income adjustment tool helps users understand how the ingrained income bias affects various indicators – and how one can adjust for it. Interactive indicator graphs compare countries’ ESG performances with those of peer countries of the same income group, geographic region or climate classification. A score builder tool constructs customized ESG scores in a 3-step process where users can determine the countries, indicators and aggregation method.
+What's next?
+The sovereign ESG landscape has grown tremendously within just three years since our first launch. The new portal is a response to this rapid development, expanding the data framework and adding tools to explore the data. Nevertheless, much remains to be done. Closing data gaps, filling in the most recent values and delving into practical applications are some of the items on the team’s agenda. To stay up to date on the latest developments, keep an eye on our data stories.
+- lp-body-content
+- first-letter

@@ -1,0 +1,28 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.venv/
+__pycache__/
+.env
+data/raw/
+data/processed/
+data/warehouse/
+*.duckdb
+.ollama/
+chroma_db/
+
+# Scraper cache (rebuildable, not source)
+cache_credits/
+cache_credits_cork/
+cache_credits_tudublin/
+
+# Windows artifacts
+*.zip
+*:Zone.Identifier

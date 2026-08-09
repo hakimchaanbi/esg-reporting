@@ -1,0 +1,9 @@
+SOURCE: gri-standards
+URL: https://www.globalreporting.org/standards/
+WORDS: 48
+============================================================
+
+Continuous improvement
+The GRI Standards reflect global best practices for sustainability reporting, helping thousands of organizations around the world to understand their impacts and respond to information demands from stakeholders and regulators.
+Find out more about the latest projects to update or create new GRI Standards:
+Standards development
