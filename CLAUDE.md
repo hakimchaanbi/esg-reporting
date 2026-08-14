@@ -27,9 +27,9 @@ is in French — do not let French leak into outputs).
 | # | Phase | Status |
 |---|-------|--------|
 | 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | ✅ done |
-| 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done |
-| 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done |
-| 4 | **Map** — STARS credits → GRI / TCFD / ESRS disclosures | ⬅ **next** |
+| 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
+| 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
+| 4 | **Map** — STARS credits → **GRI only** (§9) | 🔶 drafted — 55 rows, **all `proposed`, 0 human-confirmed** |
 | 5 | **Generate** — LLM writes prose, code injects numbers | pending |
 | 6 | **Output** — ESG report + BI dashboard | pending |
 
@@ -104,24 +104,74 @@ Slugs: `university-of-california-berkeley-ca`,
 
 ### Scrapers — Branch B (STARS data), two levels each
 
+Note: files live in per-university folders (`Berkley/`, `Cork/`, `Dublin/` —
+the Berkeley folder is spelled `Berkley`), and the on-disk names have **no
+`_v2` suffix** even though the docstrings call them v2.
+
 **Level 1 — scorecard** (public, no auth): one score per credit.
-- `scrape_berkeley.py` → `berkeley_stars.csv`
-- `scrape_cork.py` → `cork_stars.csv`
-- `scrape_tudublin.py` → `tudublin_stars.csv`
+- `Berkley/scrape_berkeley.py` → `berkeley_stars.csv`
+- `Cork/scrape_cork.py` → `cork_stars.csv`
+- `Dublin/scrape_tudublin.py` → `tudublin_stars.csv`
 
-**Level 2 — credit detail** (**requires auth**): Q&A + narrative per credit.
-- `scrape_berkeley_deep_v2.py` → `berkeley_credits.txt`, `berkeley_qa.csv`
-- `scrape_cork_deep_v2.py` → `cork_credits.txt`, `cork_qa.csv`
-- `scrape_tudublin_deep_v2.py` → `tudublin_credits.txt`, `tudublin_qa.csv`
+**Level 2 — credit detail** (**requires auth**): downloads the credit pages.
+- `Berkley/scrape_berkeley_deep.py` → `cache_credits/`
+- `Cork/scrape_cork_deep.py` → `cache_credits_cork/`
+- `Dublin/scrape_tudublin_deep.py` → `cache_credits_tudublin/`
 
-> Use the `_v2` deep scripts only. v1 had no login detection and silently wrote
-> 118 pages of "Please log in" placeholder text.
+> These have login detection (v1 silently wrote 118 pages of "Please log in").
+> **Use them only to download.** Their `extract_qa()` is broken — see §6.5 —
+> and the `*_qa.csv` / `*_credits.txt` they emit are boilerplate. Left on disk
+> as artefacts; nothing reads them.
+
+**Level 2 parsing — `parse_credits_v3.py`** (repo root, **no network**):
+reads all three caches → `Berkley/berkeley_fields.csv`, `Cork/cork_fields.csv`,
+`Dublin/tudublin_fields.csv`, and
+`Combined_universities_data/combined_credit_fields.csv`.
+
+Columns: `institution, credit_code, category, pillar, credit_name, section,
+field, value, units, value_numeric, value_type`
+
+`value_type` ∈ `number | year | boolean | url | date | text | text_long |
+not_reported` — so the BI layer can filter to the numeric subset without
+re-parsing. `value_numeric` is the comma-stripped float (null when not a
+number); `units` is never left inside `value`.
+
+`year` exists because *"Performance year for water use = 2023"* is a number to
+a regex but not a measurement — 52 such fields would otherwise drift into
+metric averages. Requires three signals (year/date in the field name, no units,
+4-digit 19xx/20xx) so a genuine count near 2000 is not mislabelled.
+
+Current output: **3,197 field rows** — 1,114 Berkeley / 1,054 Cork / 1,029 TU
+Dublin. Breakdown: 1,040 number · 663 boolean · 528 text_long · 496
+not_reported · 310 text · 108 url · 52 year.
+
+- `verify_v3.py` (repo root) — spot-checks the parse against values read by eye
+  from the raw HTML, including the scope-1+2 sum check. Run after any parser
+  change.
+
+### Phase 3b — the master table
+- `Combined_universities_data/build_master_dataset.py` →
+  **`esg_master_dataset.csv`** — joins the credit scores to the field detail on
+  `(institution, credit_code)`. **This is what the dashboard and Phase 5 read.**
+
+  3,199 rows = 3,197 fields + 2 credits that have no fields. The join is
+  **outer** on purpose: TU Dublin PA-4/PA-5 have no detail (§6.6) and an inner
+  join would silently delete that finding.
+
+  ⚠️ **One-to-many trap.** A credit's score repeats on every field row — OP-6's
+  8.01 appears ~99 times. Naive `SUM(score)` = 14,242 vs the true **638.15**
+  (22× overcount, and it looks plausible). The `credit_row_anchor` boolean is
+  True on exactly one row per credit; **every credit-level aggregate must filter
+  on it**. Field-level aggregates use the full table and filter `value_type`.
+  The build script asserts this on every run.
 
 ### Scraper — Branch A (knowledge)
-- `scrape_knowledge_v2.py` → `knowledge_sources/*.txt` + `_summary.csv`
+- `scrape_knowledge.py` → `knowledge_sources/*.txt` + `_summary.csv`
+  (docstring says v2; on disk there is no suffix)
 
 ### Phase 3
-- `combine_universities.py` → `combined_esg_dataset.csv`
+- `Combined_universities_data/combine_universities.py` → `combined_esg_dataset.csv`
+  (scores only, one row per credit — the input to Phase 3b below)
 
 ---
 
@@ -164,14 +214,59 @@ publishes a "Summary of Changes" doc in the Technical Manual. All three current
 reports are v3.0, so *current* comparisons are fine — the issue only arises when
 pulling a university's older reports.
 
-### 6.5 Deep-page data mostly lands as "narrative", not clean Q&A
-Berkeley deep run: 118 credits, ~354 Q&A rows, narrative on every credit.
-Most Q&A pairs are the repeated header (Overall Rating / Score / Date).
-Reason: STARS credit tables are **not simple two-column label/value** — the
-parser's Q&A logic only catches clean 2-cell rows, so real figures fall into the
-narrative catch-all. **Nothing is lost**, but exact numbers are prose, not rows.
+### 6.5 The deep Q&A output was ~100% boilerplate — DIAGNOSED AND FIXED
+**Fixed 2026-08-14 by `parse_credits_v3.py`.** History kept because the failure
+mode is instructive and the original diagnosis in this file was wrong.
 
-Whether this needs fixing is an **open question for the supervisor** (see §9).
+**Earlier diagnosis in this file was wrong.** It said the credit tables were "not
+simple two-column label/value" so figures fell into the narrative catch-all.
+Verified against the cached HTML (2026-08-14): the real data is **not in
+`<table>` elements at all**. Each credit page has exactly **2 tables**, both
+boilerplate (Overall Rating / Score / Liaison / Submission Date, and a
+Status/Score/Responsible-Party row). The v1 parser only reads `<table>`, so it
+captured nothing else.
+
+How bad: `berkeley_qa.csv` and `tudublin_qa.csv` have **3 distinct questions
+each**, repeated 118× — Overall Rating, Overall Score, Submission Date. That is
+**0 rows of real data**. Cork got 32 distinct (a few leaked through).
+
+**Where the data actually lives** — a flat sequence, not a table:
+```html
+<div class="field-header"><h5>Scope 1 GHG emissions</h5><p>guidance…</p></div>
+<span class="scorecardFieldTitle">Scope 1 GHG emissions from stationary combustion:</span>
+<div class="well">134,957 <i>Metric tons of CO2 equivalent</i></div>
+```
+Extraction rule: `span.scorecardFieldTitle` = question, the **next**
+`div.well` = answer, the trailing `<i>` inside it = **units** (keep units in
+their own column — they matter for the report). Nearest preceding
+`div.field-header h5` = the section the field belongs to.
+
+**Measured yield of this rule against the existing cache:**
+
+| Institution | Pages with fields | Field/value pairs | Empty |
+|---|---|---|---|
+| Berkeley | 70 / 118 | **1,114** | 0 |
+| Cork | 59 / 118 | **1,054** | 0 |
+| TU Dublin | 60 / 118 | **1,029** | 0 |
+
+~3,200 real pairs vs ~0 today. The 48 pages with no fields are IL (bonus) and
+unscored credits — expected, not a parse failure.
+
+**This runs entirely offline against the existing cache** (118 pages × 3 already
+on disk) — no auth, no re-scrape, no politeness delay. Iterate freely.
+
+**Correctness proof (not just "it produced a lot of rows"):** on Berkeley OP-6
+the extracted parts sum to the total STARS states in a separate field —
+134,957 + 1,676 + 76 (scope 1) + 1,256 + 0 (scope 2) = **137,965**, exactly
+matching the page's own "Annual scope 1 and 2 GHG emissions". The parser never
+sees that arithmetic, so it only balances if every value *and its units* were
+read correctly. `verify_v3.py` re-runs this and other checks.
+
+**Lesson:** the v2 scraper's docstring said *"extract Q&A (unchanged logic, it
+was never the problem)"*. It was the problem. Row count looked healthy (354),
+which hid it. `parse_credits_v3.py` therefore prints **distinct question count**
+every run and warns loudly below 20 — a boilerplate-only parse can never again
+look like success.
 
 ### 6.6 TU Dublin has no investment data — this is real, not a bug
 `PA-4` (Sustainable Investment Program) and `PA-5` (Investment Holdings) come
@@ -196,7 +291,8 @@ narrative credits — correct, not a bug). Core AC/EN/OP/PA = 206.91 / 250.
 21 IL credits are **bonus** (capped at 10 in reality) — tag separately so they
 don't inflate pillar totals.
 
-**Berkeley deep:** 118 credit pages, ~381 KB, 354 Q&A rows + narrative.
+**Berkeley deep:** 118 credit pages, ~381 KB. The 354 Q&A rows are **entirely
+boilerplate** — see §6.5. Real yield after the parser fix: ~1,114 pairs.
 
 **Knowledge corpus:** 18/20 sources clean, **21,654 words, 13/14 English**.
 Two known failures, both already covered by other files:
@@ -227,23 +323,35 @@ credit_code, credit_name, status, score, max`
 
 ---
 
-## 9. OPEN QUESTIONS for the supervisor — resolve before building Phase 4/5
+## 9. SUPERVISOR DECISIONS — both open questions ANSWERED (2026-08-14)
 
-1. **Does the BI dashboard need the deep inner-page figures (actual tonnes CO₂,
-   kWh), or just the STARS scores?**
-   - Scores only → extraction is complete; deep data stays as RAG context.
-   - Raw figures → the deep parser needs upgrading (see §6.5).
-2. **Framework priority.** The brief lists five (GRI/ISSB/CSRD-ESRS/TCFD/SASB).
-   Mapping to all five is a lot of manual work. Is GRI the priority?
+Answered by Hiba Maalaoui. These are settled; build against them.
 
-Do not guess these. They change what gets built.
+1. **Deep inner-page figures — YES, use all available data.**
+   Not scores-only. The deep parser upgrade is **required**, not optional.
+   → Rebuild the deep parser per the verified rule in §6.5 (offline, runs
+   against the existing cache). Real figures — tonnes CO₂e, kWh, m³, % — become
+   first-class rows with units, feeding both the report and the BI dashboard.
+
+2. **Framework priority — GRI.**
+   GRI only for now. ISSB / CSRD-ESRS / TCFD / SASB are **out of scope** unless
+   re-raised. Do not spend manual effort mapping to the other four; a short
+   "extensible to X" note in the report is enough. This makes Phase 4 tractable:
+   one hand-built, cited STARS→GRI table instead of five.
+
+Consequence for sequencing: extraction is **not** finished. The parser fix is a
+prerequisite for Phase 4 — the GRI mapping should be built knowing which fields
+actually exist per credit, otherwise it maps to data that was never captured.
 
 ---
 
-## 10. Phase 4 — how the mapping works (next task)
+## 10. Phase 4 — how the mapping works (GRI only, per §9)
 
 **The problem:** STARS speaks its own vocabulary (`OP-6`, `PA-13`). Reports must
-speak GRI/ESRS. Mapping is the translation table.
+speak GRI. Mapping is the translation table.
+
+**Scope:** GRI only. The ESRS/TCFD/SASB columns below are retained as *shape*
+illustration but are **not to be built** unless the supervisor re-opens it.
 
 **Structural difference:**
 
@@ -264,7 +372,16 @@ PA-13 Pay Equity & Living Wage   → GRI 405 (Diversity)      → ESRS S1 (Own W
 PA-11 Health, Safety & Wellbeing → GRI 403 (Occupational H&S) → ESRS S1
 ```
 ⚠️ **The rows above are illustrative shape, NOT verified mappings.** Build the
-real table against the actual GRI/ESRS documents and cite them.
+real table against the actual GRI documents and cite them.
+
+**Map at field level, not just credit level.** Now that §6.5's parser recovers
+the inner fields, the mapping can hit *specific numbered disclosures* instead of
+whole topic standards. STARS OP-6 exposes `Scope 1 … stationary combustion`,
+`… mobile combustion`, `Scope 2 … market-based`, `… location-based` as separate
+values with units — which is exactly the granularity GRI 305-1 / 305-2 / 305-3
+ask for. Mapping `OP-6 → GRI 305` is vague; `OP-6.scope_1_stationary →
+GRI 305-1` is citable and directly injectable by Jinja2 in Phase 5. Do the
+latter. This is only possible *after* the parser fix — hence the ordering.
 
 **Three complications to expect:**
 1. **Many-to-many** — one credit can feed several disclosures and vice versa.
@@ -274,6 +391,66 @@ real table against the actual GRI/ESRS documents and cite them.
 3. **The gaps are a research finding, not a failure.** "Here is exactly what a
    university can and cannot report under GRI" is likely the most original
    contribution of the report.
+
+### Phase 4 as built (2026-08-14) — DRAFTED, NOT YET VERIFIED
+
+Files:
+- `standards/gri_disclosures.json` — **67 disclosures across 12 GRI standards**,
+  retrieved from globalreporting.org and recorded with per-standard source URLs.
+  GRI 302/303/305/306 were cross-checked against two independent secondary
+  sources and matched verbatim. This is the *target vocabulary*.
+- `standards/gri/gri-401.pdf`, `gri-403.pdf` (+ `.txt`) — official PDFs,
+  fetched by `standards/fetch_gri.sh`, text via `extract_disclosures.sh`.
+- `mapping/stars_gri_mapping.csv` — **55 rows**: 7 equivalent · 25 component ·
+  4 intensity · 8 partial · 8 gap_gri_side · 3 gap_stars_side.
+- `mapping/validate_mapping.py` — the integrity gate.
+- `mapping/test_validator_catches_fabrication.py` — negative test.
+
+⚠️ **ALL 55 ROWS ARE `review_status = proposed`. NOTHING IS CONFIRMED.**
+They were drafted with LLM assistance, which §3 forbids as a *final* artefact.
+`report_ready()` returns only `confirmed` rows — currently **0** — so Phase 5
+cannot cite any of it yet. That is the correct state until Hakim reviews each
+row against the standard and flips it to `confirmed` or `rejected`.
+
+**How §3 is enforced mechanically**, not by discipline:
+1. Every `gri_disclosure` must exist in `gri_disclosures.json` → an invented
+   disclosure number is a hard error.
+2. Every `stars_credit` / `stars_field` must exist in `esg_master_dataset.csv`
+   → a mapping to a field that was never scraped is a hard error.
+3. `report_ready()` filters to `confirmed` only → Phase 5 must call it.
+
+The negative test proves 1 and 2 by injecting four fabricated rows (bad
+disclosure number, right disclosure under the wrong standard, invented STARS
+field, invented credit) and asserting each is rejected. **Run it after any
+schema change** — the integrity claim is only worth what the test proves.
+
+**Two findings already visible in the gap rows:**
+- *GRI asks, STARS cannot answer (8):* 305-6 ODS, 305-7 NOx/SOx, 403-9 injuries,
+  403-10 ill health, 401-1 hires/turnover, 405-2 gender pay ratio, 202-2 local
+  senior hires, 2-21 compensation ratio. Note **PA-13 is named "Pay Equity" but
+  still cannot satisfy GRI 405-2** — it has living-wage coverage, not a gender
+  pay ratio. PA-11 "Health, Safety and Wellbeing" has *no* numeric health data
+  at all; its only numbers are STARS scoring artefacts.
+- *STARS collects, GRI has no slot (3 so far):* AC-1 courses taught, AC-6
+  research, EN-1 outreach. Teaching and research have no corporate analogue.
+
+**Watch out — real traps found while building this:**
+- **GRI 306 has two live versions.** *Waste 2020* supersedes *Effluents and
+  Waste 2016*; the 2016 PDF is still downloadable and has different
+  disclosures. Map to **2020**.
+- Fields named `Points earned for indicator OP X.Y` are STARS scoring
+  internals, not ESG metrics. They are typed `number` and must be excluded
+  before any metric aggregation (the validator's coverage stat excludes them).
+- Unit and definition mismatches are the norm, not the exception: GRI 302-1
+  wants joules (STARS gives MWh), GRI 303-5 defines consumption as withdrawal
+  minus discharge (STARS "potable water use" is not that), GRI 305-5 wants an
+  absolute reduction in tCO₂e (STARS gives a percentage). Every `partial` row
+  carries the specific difference in its `caveat` column, and the validator
+  warns if a `partial` row has an empty caveat.
+
+Coverage today: 42 of 257 distinct non-scoring numeric STARS fields (16%) have
+a proposed GRI target. Low is expected — many of the rest are denominators
+(FTE enrollment, floor area) or STARS-internal indicators.
 
 The Phase 3 `pillar` column is the **first half of this mapping already done** —
 GRI topics group into environmental (300s), social (400s), governance.

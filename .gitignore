@@ -23,6 +23,11 @@ cache_credits/
 cache_credits_cork/
 cache_credits_tudublin/
 
+# Third-party standards documents — GRI's own PDFs, not ours to redistribute.
+# Re-download with: bash standards/fetch_gri.sh
+standards/gri/*.pdf
+standards/gri/*.txt
+
 # Windows artifacts
 *.zip
 *:Zone.Identifier

@@ -46,8 +46,23 @@ SETUP — one time, takes 2 minutes
 ────────────────────────────────────────────────────────────────────────
 OUTPUT
     berkeley_credits.txt   readable, one section per credit
-    berkeley_qa.csv        structured: credit_code, category, question, answer
+    berkeley_qa.csv        SUPERSEDED — see warning below
     cache_credits/         cached HTML (only saved when NOT a login wall)
+
+────────────────────────────────────────────────────────────────────────
+⚠️  THE Q&A EXTRACTION IN THIS FILE IS BROKEN — USE parse_credits_v3.py
+────────────────────────────────────────────────────────────────────────
+    The downloading half of this script is correct and still the right way to
+    populate cache_credits/. The parsing half (extract_qa, below) is not.
+
+    extract_qa only reads HTML <table> elements. STARS credit pages keep their
+    real content outside tables, so it captured nothing but the boilerplate
+    header box: berkeley_qa.csv holds 3 distinct questions repeated 118 times
+    and zero real figures.
+
+    parse_credits_v3.py (repo root) reads the same cached HTML correctly and
+    recovers 1,114 fields with units. Run that for data. Treat berkeley_qa.csv
+    as an artefact of the old bug — nothing should read it.
 """
 
 import os
