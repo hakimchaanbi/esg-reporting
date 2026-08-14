@@ -46,7 +46,13 @@ SETUP — one time, takes 2 minutes
 ────────────────────────────────────────────────────────────────────────
 OUTPUT
     tudublin_credits.txt   readable, one section per credit
-    tudublin_qa.csv        structured: credit_code, category, question, answer
+    tudublin_qa.csv        SUPERSEDED — the extract_qa() below only reads HTML
+                           <table> elements, but STARS keeps its real content
+                           outside tables, so this file is 3 distinct questions
+                           repeated 118 times and zero real figures. Use
+                           parse_credits_v3.py (repo root) instead: same cached
+                           HTML, 1,029 real fields. The downloading half of
+                           this script is still correct.
     cache_credits/         cached HTML (only saved when NOT a login wall)
 """
 

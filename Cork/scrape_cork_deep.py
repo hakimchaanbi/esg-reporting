@@ -46,7 +46,12 @@ SETUP — one time, takes 2 minutes
 ────────────────────────────────────────────────────────────────────────
 OUTPUT
     cork_credits.txt   readable, one section per credit
-    cork_qa.csv        structured: credit_code, category, question, answer
+    cork_qa.csv        SUPERSEDED — the extract_qa() below only reads HTML
+                       <table> elements, but STARS keeps its real content
+                       outside tables, so this file is almost entirely the
+                       repeated header box. Use parse_credits_v3.py (repo
+                       root) instead: same cached HTML, 1,054 real fields.
+                       The downloading half of this script is still correct.
     cache_credits/         cached HTML (only saved when NOT a login wall)
 """
 
