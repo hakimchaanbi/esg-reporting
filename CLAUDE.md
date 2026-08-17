@@ -104,29 +104,49 @@ Slugs: `university-of-california-berkeley-ca`,
 
 ### Scrapers — Branch B (STARS data), two levels each
 
-Note: files live in per-university folders (`Berkley/`, `Cork/`, `Dublin/` —
-the Berkeley folder is spelled `Berkley`), and the on-disk names have **no
-`_v2` suffix** even though the docstrings call them v2.
+**Restructured 2026-08-17.** There used to be six near-identical scraper files
+(three scorecard, three deep) differing only in configuration — Berkeley's and
+Cork's deep scrapers differed by 37 lines out of ~300, and all 37 were config.
+That is why the §6.5 bug existed in triplicate. They are now **two modules plus
+one config table**, and every generated CSV was verified byte-identical
+(md5) across the change.
 
-**Level 1 — scorecard** (public, no auth): one score per credit.
-- `Berkley/scrape_berkeley.py` → `berkeley_stars.csv`
-- `Cork/scrape_cork.py` → `cork_stars.csv`
-- `Dublin/scrape_tudublin.py` → `tudublin_stars.csv`
+```
+scrapers/
+  institutions.py        ALL per-university config: slug, report date, paths,
+                         E/S/G pillar mapping. Change a URL in one place.
+  scorecard.py           level 1 — public, no auth. → <prefix>_stars.csv
+  credit_pages.py        level 2 — DOWNLOAD ONLY, needs AASHE_SESSIONID.
+                         → cache_credits*/
+  parse_credit_pages.py  level 2 — PARSE ONLY, no network. → <prefix>_fields.csv
+pipeline/
+  combine_scores.py      3 scorecards → combined_esg_dataset.csv
+  build_master.py        scores + fields → esg_master_dataset.csv
+tests/
+  test_parse_credits.py  arithmetic proof the parse is right (was verify_v3.py)
+```
 
-**Level 2 — credit detail** (**requires auth**): downloads the credit pages.
-- `Berkley/scrape_berkeley_deep.py` → `cache_credits/`
-- `Cork/scrape_cork_deep.py` → `cache_credits_cork/`
-- `Dublin/scrape_tudublin_deep.py` → `cache_credits_tudublin/`
+Run them as modules from the project root:
+```bash
+python -m scrapers.scorecard              # or: ... scorecard berkeley
+python -m scrapers.credit_pages
+python -m scrapers.parse_credit_pages
+python -m pipeline.combine_scores
+python -m pipeline.build_master
+```
 
-> These have login detection (v1 silently wrote 118 pages of "Please log in").
-> **Use them only to download.** Their `extract_qa()` is broken — see §6.5 —
-> and the `*_qa.csv` / `*_credits.txt` they emit are boilerplate. Left on disk
-> as artefacts; nothing reads them.
+**Download and parse are deliberately separate.** That split is why §6.5 was
+cheap to fix: the parser was rewritten and re-run ~20 times against the cache
+with no auth, no network, no waiting. The old files mixed the two, so every
+experiment would have cost 118 requests to someone else's server.
 
-**Level 2 parsing — `parse_credits_v3.py`** (repo root, **no network**):
-reads all three caches → `Berkley/berkeley_fields.csv`, `Cork/cork_fields.csv`,
-`Dublin/tudublin_fields.csv`, and
-`Combined_universities_data/combined_credit_fields.csv`.
+Berkeley's folder is spelled `Berkley` on disk. Left alone — renaming breaks
+the caches for no benefit.
+
+> The old `extract_qa()` is **gone**, not carried forward: it only searched
+> `<table>` elements and produced 354 rows of boilerplate (§6.5). The
+> `*_qa.csv` files it wrote have been deleted. The `*_credits.txt` files remain
+> pending a check that nothing unique is left in them — see §14.
 
 Columns: `institution, credit_code, category, pillar, credit_name, section,
 field, value, units, value_numeric, value_type`
@@ -145,9 +165,9 @@ Current output: **3,197 field rows** — 1,114 Berkeley / 1,054 Cork / 1,029 TU
 Dublin. Breakdown: 1,040 number · 663 boolean · 528 text_long · 496
 not_reported · 310 text · 108 url · 52 year.
 
-- `verify_v3.py` (repo root) — spot-checks the parse against values read by eye
-  from the raw HTML, including the scope-1+2 sum check. Run after any parser
-  change.
+- `tests/test_parse_credits.py` — spot-checks the parse against values read by
+  eye from the raw HTML, including the scope-1+2 sum check. Run after any
+  parser change.
 
 ### Phase 3b — the master table
 - `Combined_universities_data/build_master_dataset.py` →
@@ -170,8 +190,11 @@ not_reported · 310 text · 108 url · 52 year.
   (docstring says v2; on disk there is no suffix)
 
 ### Phase 3
-- `Combined_universities_data/combine_universities.py` → `combined_esg_dataset.csv`
-  (scores only, one row per credit — the input to Phase 3b below)
+- `pipeline/combine_scores.py` → `combined_esg_dataset.csv`
+  (scores only, one row per credit — the input to Phase 3b below).
+  Reads each institution's `<prefix>_stars.csv` from its own folder. There used
+  to be a second copy of all three in `Combined_universities_data/`; the copies
+  are gone, since two sources of the same truth can silently diverge.
 
 ---
 
@@ -215,8 +238,9 @@ reports are v3.0, so *current* comparisons are fine — the issue only arises wh
 pulling a university's older reports.
 
 ### 6.5 The deep Q&A output was ~100% boilerplate — DIAGNOSED AND FIXED
-**Fixed 2026-08-14 by `parse_credits_v3.py`.** History kept because the failure
-mode is instructive and the original diagnosis in this file was wrong.
+**Fixed 2026-08-14 by `scrapers/parse_credit_pages.py`.** History kept because
+the failure mode is instructive and the original diagnosis in this file was
+wrong.
 
 **Earlier diagnosis in this file was wrong.** It said the credit tables were "not
 simple two-column label/value" so figures fell into the narrative catch-all.
@@ -260,11 +284,11 @@ the extracted parts sum to the total STARS states in a separate field —
 134,957 + 1,676 + 76 (scope 1) + 1,256 + 0 (scope 2) = **137,965**, exactly
 matching the page's own "Annual scope 1 and 2 GHG emissions". The parser never
 sees that arithmetic, so it only balances if every value *and its units* were
-read correctly. `verify_v3.py` re-runs this and other checks.
+read correctly. `tests/test_parse_credits.py` re-runs this and other checks.
 
 **Lesson:** the v2 scraper's docstring said *"extract Q&A (unchanged logic, it
 was never the problem)"*. It was the problem. Row count looked healthy (354),
-which hid it. `parse_credits_v3.py` therefore prints **distinct question count**
+which hid it. `parse_credit_pages.py` therefore prints **distinct question count**
 every run and warns loudly below 20 — a boilerplate-only parse can never again
 look like success.
 
@@ -304,7 +328,11 @@ consultancy, **not S&P**, do not relabel it as S&P).
 
 ---
 
-## 8. Phase 3 pillar mapping (implemented in `combine_universities.py`)
+## 8. Phase 3 pillar mapping (implemented in `scrapers/institutions.py`)
+
+`pillar_for()` lives there and is imported by both the credit parser and the
+score combiner. It used to be copy-pasted into both, each with a comment
+warning they must be kept in sync — now they cannot drift.
 
 ```
 OP           → Environmental
@@ -400,7 +428,9 @@ Files:
   GRI 302/303/305/306 were cross-checked against two independent secondary
   sources and matched verbatim. This is the *target vocabulary*.
 - `standards/gri/gri-401.pdf`, `gri-403.pdf` (+ `.txt`) — official PDFs,
-  fetched by `standards/fetch_gri.sh`, text via `extract_disclosures.sh`.
+  downloaded and text-extracted by `standards/fetch_gri.py` (one file; was two
+  shell scripts). PDFs are gitignored — GRI's documents, not ours to
+  redistribute.
 - `mapping/stars_gri_mapping.csv` — **55 rows**: 7 equivalent · 25 component ·
   4 intensity · 8 partial · 8 gap_gri_side · 3 gap_stars_side.
 - `mapping/validate_mapping.py` — the integrity gate.
@@ -469,7 +499,8 @@ Why two HTML readers: **BeautifulSoup for data** (want exact fields — tweezers
 **trafilatura for knowledge** (want clean prose, discard structure — strainer).
 
 **RAG (built 2026-08-17):** `onnxruntime` + `tokenizers` + `numpy`.
-**LangChain, ChromaDB and sentence-transformers were all dropped** — see §13.
+**LangChain and sentence-transformers dropped; ChromaDB installed but unused** —
+see §13 for all three reasons.
 
 **Planned:** Jinja2 (number injection) · Claude API (narrative) ·
 SQLite (Phase 3+ store) · python-docx / WeasyPrint (report) ·
@@ -493,6 +524,41 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
   118 blocked pages without noticing.
 - **Scope before building.** Don't build a parser upgrade for data nobody has
   confirmed they need.
+- **Re-test an environment claim before writing it down.** "ChromaDB can't be
+  installed, grpcio is blocked" was recorded as fact and was simply a symptom
+  of a bad connection. A degraded network reports as a missing package.
+
+---
+
+## 14. OPEN ITEMS
+
+1. **`*_credits.txt` — safe to delete?** Not yet established. A comparison
+   against `*_fields.csv` leaves ~270 lines per institution unaccounted for.
+   Most are STARS form guidance (`span.help_text` — correctly excluded), but
+   three sampled items of real institutional content (Berkeley's impervious-
+   surface figures, Cork course descriptions, "Seeds of Change") sit inside
+   `div.well` and *should* have been captured. Suspects: `div.tabContent`
+   sections outside the title→well pairing, or the parser's duplicate-well
+   guard dropping a second field. **Resolve before deleting the txt files** —
+   they are the only other copy of that text.
+
+2. **Links and attachments are not extracted.** 1,249 links live inside answer
+   wells. 828 have link text identical to the URL and survive; **421 keep only
+   their label and lose the `href`**, including all document attachments.
+   Breakdown: 1,195 external (tudublin.ie 332, ucc.ie 274), 54 AASHE uploads
+   needing `AASHE_SESSIONID`, and 188 document links (164 pdf / 19 xlsx /
+   5 docx). Fix is an `href` column plus a re-parse of the cache — no
+   re-scraping.
+
+3. **Lane C — institution prose is unused.** `esg_master_dataset.csv` holds
+   **838 prose rows / 733,500 chars (~122k words)**, which is **4.9× the whole
+   knowledge corpus**, and nothing reads it. It is concentrated in exactly the
+   credits that have no numbers (PA-6 79,928 chars, AC-8 50,105, EN-2 46,908),
+   so without it the Social and Governance sections have almost nothing to say.
+   Needs its own RAG lane with **institution filtering by default** — Berkeley
+   prose in Cork's section is the Toronto contamination failure again, but
+   internal and 20× larger. 30 of the 838 rows contain figures and must carry
+   `has_quantity` so they cannot compete with Jinja2-injected values.
 
 ---
 
@@ -555,11 +621,20 @@ Enforced in the test suite.
 - **LangChain dropped** — deliberate. The whole job is split → label → embed →
   query, ~60 readable lines. Every decision stays visible and defensible in a
   viva instead of buried in library defaults.
-- **ChromaDB dropped** — *cannot be installed here*: it hard-requires `grpcio`,
-  which resolves to "from versions: none" on this machine (blocked at the index
-  level; `onnxruntime` cp312 wheels from the same index are fine). Irrelevant
-  anyway: 226 × 384 floats is 347 KB, so exact cosine similarity is one dot
-  product. A vector database solves a problem this corpus does not have.
+- **ChromaDB** — ⚠️ **an earlier version of this file said it "cannot be
+  installed here" because `grpcio` was blocked. That was WRONG.** The
+  `grpcio` "from versions: none" error was a symptom of a badly degraded
+  network: pip could not read the package index and reported that as "no
+  such package". On a healthy connection `chromadb 1.5.9` and
+  `grpcio 1.83.0` install without incident, and both are now installed.
+  Lesson: re-test an environment claim on a good connection before writing it
+  down as fact.
+
+  It is still **not used**. 226 × 384 floats is 347 KB, so exact cosine
+  similarity is one dot product; a vector database, a client/server process
+  and a telemetry stack solve problems this corpus does not have. Available if
+  the supervisor wants a named vector DB — `retrieve.py`'s interface would not
+  change, only its storage.
 - **sentence-transformers dropped** — needs PyTorch (~2 GB). Same model reached
   via ONNX Runtime at 23 MB.
 - **int8 quantised model** chosen over fp32 (90 MB): accuracy cost on retrieval
