@@ -36,8 +36,10 @@ INDEX_DIR = HERE / "index"
 VECTORS = INDEX_DIR / "vectors.npy"
 MANIFEST = INDEX_DIR / "index.json"
 
-META_FIELDS = ("id", "source", "url", "source_type", "language",
-               "has_quantity", "chunk_index", "words")
+META_FIELDS = ("id", "lane", "institution", "institution_key", "source", "url",
+               "source_type", "language", "has_quantity", "chunk_index",
+               "words", "credit_code", "credit_name", "pillar", "section",
+               "field")
 
 
 def load_chunks() -> list[dict]:
@@ -101,15 +103,26 @@ def main():
     print(f"  vectors L2-normalised: min={norms.min():.4f} max={norms.max():.4f} "
           f"(want ~1.000)")
 
-    peer = sum(c["source_type"] == "peer_report" for c in manifest["chunks"])
-    nonen = sum(c["language"] != "en" for c in manifest["chunks"])
-    quant = sum(c["has_quantity"] for c in manifest["chunks"])
+    chunks = manifest["chunks"]
+    knowledge = [c for c in chunks if c["lane"] == "knowledge"]
+    institution = [c for c in chunks if c["lane"] == "institution"]
+
+    peer = sum(c["source_type"] == "peer_report" for c in knowledge)
+    nonen = sum(c["language"] != "en" for c in knowledge)
+    quant = sum(c["has_quantity"] for c in chunks)
     default_pool = sum(
         c["source_type"] != "peer_report" and c["language"] == "en"
-        for c in manifest["chunks"])
-    print(f"  default retrieval pool: {default_pool} of {len(records)} chunks")
+        for c in knowledge)
+
+    print(f"  lane A (knowledge)  : {len(knowledge)} chunks, "
+          f"{default_pool} in the default pool")
     print(f"    held back: {peer} peer-report, {nonen} non-English")
-    print(f"    droppable on request: {quant} containing a figure")
+    print(f"  lane C (institution): {len(institution)} chunks, "
+          f"NOT searchable without naming an institution")
+    for inst in sorted({c["institution"] for c in institution}):
+        n = sum(c["institution"] == inst for c in institution)
+        print(f"    {inst[:36]:38} {n:4}")
+    print(f"  droppable on request: {quant} chunks containing a figure")
 
 
 if __name__ == "__main__":

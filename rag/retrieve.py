@@ -100,9 +100,24 @@ class Hit:
     score: float
     has_quantity: bool
     chunk_id: str
+    lane: str = "knowledge"
+    institution: str = ""
+    credit_code: str = ""
+    pillar: str = ""
 
     def cite(self) -> str:
+        if self.lane == "institution":
+            return f"{self.institution}, STARS {self.credit_code} <{self.url}>"
         return f"{self.source} <{self.url}>"
+
+
+class LaneMisuse(RuntimeError):
+    """Raised when the institution lane is searched without naming one.
+
+    Deliberately an exception, not a warning or a silent default. Returning
+    every university's prose to a question about one of them is how Berkeley's
+    achievements end up in Cork's report — and it would read perfectly well.
+    """
 
 
 def _load():
@@ -138,14 +153,54 @@ def backend_name() -> str:
     return _load()[1]["backend"]
 
 
+def _top_indices(scores: np.ndarray, k: int) -> list[int]:
+    """Indices of the k highest scores, best first."""
+    if k <= 0:
+        return []
+    if k == 1:
+        return [int(scores.argmax())]
+    idx = np.argpartition(-scores, k - 1)[:k]
+    return sorted((int(i) for i in idx), key=lambda i: -scores[i])
+
+
+def known_institutions() -> list[str]:
+    _, manifest, _ = _load()
+    return sorted({c["institution"] for c in manifest["chunks"]
+                   if c["institution"]})
+
+
 def retrieve(query: str,
              k: int = 5,
+             lane: str = "knowledge",
+             institution: str | None = None,
              exclude_peer_reports: bool = True,
              language: str | None = "en",
              drop_quantities: bool = False,
              source_types: list[str] | None = None,
+             pillars: list[str] | None = None,
              min_score: float = 0.0) -> list[Hit]:
-    """Search the knowledge corpus. Safe by default — see module docstring."""
+    """Search the corpus. Safe by default — see module docstring.
+
+    lane="knowledge"    general ESG explainers (default)
+    lane="institution"  what one university said about itself —
+                        REQUIRES institution=
+    lane="all"          both; still requires institution= to reach lane C
+    """
+    if lane not in ("knowledge", "institution", "all"):
+        raise ValueError(f"lane must be knowledge/institution/all, got {lane!r}")
+
+    if lane in ("institution", "all") and not institution:
+        available = ", ".join(known_institutions()) or "(index has no lane C)"
+        raise LaneMisuse(
+            f"lane={lane!r} needs institution=. Searching every university's "
+            f"prose at once is how one institution's achievements end up in "
+            f"another's report. Choose one of: {available}")
+
+    if institution and institution not in known_institutions():
+        raise LaneMisuse(
+            f"unknown institution {institution!r}. "
+            f"Choose one of: {', '.join(known_institutions())}")
+
     scope_warning = check_query_scope(query)
     if scope_warning:
         warnings.warn(f"{query!r}: {scope_warning}", stacklevel=2)
@@ -158,13 +213,33 @@ def retrieve(query: str,
     # never occupy one of the k slots.
     allowed = np.ones(len(chunks), dtype=bool)
     for i, c in enumerate(chunks):
-        if exclude_peer_reports and c["source_type"] == "peer_report":
+        c_lane = c.get("lane", "knowledge")
+
+        # --- lane gate: the institution filter is absolute -------------
+        if lane != "all" and c_lane != lane:
             allowed[i] = False
-        elif language and c["language"] != language:
+            continue
+        if c_lane == "institution" and c["institution"] != institution:
             allowed[i] = False
-        elif drop_quantities and c["has_quantity"]:
+            continue
+
+        # --- lane A filters (meaningless for lane C, hence the guard) --
+        if c_lane == "knowledge":
+            if exclude_peer_reports and c["source_type"] == "peer_report":
+                allowed[i] = False
+                continue
+            if language and c["language"] != language:
+                allowed[i] = False
+                continue
+            if source_types and c["source_type"] not in source_types:
+                allowed[i] = False
+                continue
+
+        # --- applies to both lanes -------------------------------------
+        if drop_quantities and c["has_quantity"]:
             allowed[i] = False
-        elif source_types and c["source_type"] not in source_types:
+            continue
+        if pillars and c.get("pillar") not in pillars:
             allowed[i] = False
 
     if not allowed.any():
@@ -172,11 +247,31 @@ def retrieve(query: str,
 
     q = embedder.encode([query])[0]
     scores = vectors @ q                       # cosine: both sides normalised
-    scores = np.where(allowed, scores, -np.inf)
 
-    k = min(k, int(allowed.sum()))
-    top = np.argpartition(-scores, k - 1)[:k] if k > 1 else [int(scores.argmax())]
-    top = sorted(top, key=lambda i: -scores[i])
+    # lane="all" splits k between the lanes instead of taking a single top-k.
+    #
+    # Without this the institution lane simply wins: it has 1,049 chunks to the
+    # knowledge lane's 226, and on any campus-flavoured question its prose is a
+    # closer match. A plain top-k returned twelve institution chunks and zero
+    # style guidance — useless for generation, which needs both "how an ESG
+    # report is written" AND "what this university did".
+    if lane == "all":
+        lanes_of = np.array([c.get("lane", "knowledge") for c in chunks])
+        k_inst = (k + 1) // 2                  # odd k favours the facts
+        picks = []
+        for lane_name, lane_k in (("institution", k_inst),
+                                  ("knowledge", k - k_inst)):
+            if lane_k <= 0:
+                continue
+            mask = allowed & (lanes_of == lane_name)
+            if not mask.any():
+                continue
+            picks.extend(_top_indices(np.where(mask, scores, -np.inf),
+                                      min(lane_k, int(mask.sum()))))
+        top = sorted(picks, key=lambda i: -scores[i])
+    else:
+        top = _top_indices(np.where(allowed, scores, -np.inf),
+                           min(k, int(allowed.sum())))
 
     hits = []
     for i in top:
@@ -189,7 +284,11 @@ def retrieve(query: str,
                         source_type=c["source_type"],
                         score=float(scores[i]),
                         has_quantity=bool(c["has_quantity"]),
-                        chunk_id=c["id"]))
+                        chunk_id=c["id"],
+                        lane=c.get("lane", "knowledge"),
+                        institution=c.get("institution", ""),
+                        credit_code=c.get("credit_code", ""),
+                        pillar=c.get("pillar", "")))
     return hits
 
 
@@ -201,9 +300,17 @@ def as_context_block(hits: list[Hit]) -> str:
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Query the ESG knowledge corpus.")
+    ap = argparse.ArgumentParser(description="Query the ESG corpus.")
     ap.add_argument("query")
     ap.add_argument("-k", type=int, default=5)
+    ap.add_argument("--lane", default="knowledge",
+                    choices=["knowledge", "institution", "all"])
+    ap.add_argument("--institution", "-i",
+                    help="required for --lane institution/all. Accepts a "
+                         "substring, e.g. 'cork'")
+    ap.add_argument("--pillar", action="append",
+                    help="filter to a pillar (repeatable): Environmental, "
+                         "Social, Governance, Context")
     ap.add_argument("--include-peer-reports", action="store_true",
                     help="allow Toronto/Manchester chunks — style reference only")
     ap.add_argument("--drop-quantities", action="store_true",
@@ -211,13 +318,43 @@ def main():
     ap.add_argument("--any-language", action="store_true")
     args = ap.parse_args()
 
-    hits = retrieve(args.query,
-                    k=args.k,
-                    exclude_peer_reports=not args.include_peer_reports,
-                    language=None if args.any_language else "en",
-                    drop_quantities=args.drop_quantities)
+    institution = args.institution
+    if institution:
+        # Accept either the short key ("tudublin") or any distinctive part of
+        # the display name ("cork", "Berkeley"). "tudublin" is not a substring
+        # of "Technological University Dublin", so key matching is not optional.
+        _, manifest, _ = _load()
+        keys = {c["institution_key"]: c["institution"]
+                for c in manifest["chunks"] if c.get("institution_key")}
+        needle = institution.lower()
+        if needle in keys:
+            institution = keys[needle]
+            matches = [institution]
+        else:
+            matches = [n for n in known_institutions() if needle in n.lower()]
+        if len(matches) != 1:
+            print(f"'{institution}' matched {len(matches)} institutions. "
+                  f"Choose one of:")
+            for n in known_institutions():
+                print(f"  {n}")
+            return
+        institution = matches[0]
 
-    print(f"backend: {backend_name()}\n")
+    try:
+        hits = retrieve(args.query,
+                        k=args.k,
+                        lane=args.lane,
+                        institution=institution,
+                        pillars=args.pillar,
+                        exclude_peer_reports=not args.include_peer_reports,
+                        language=None if args.any_language else "en",
+                        drop_quantities=args.drop_quantities)
+    except LaneMisuse as exc:
+        print(f"!! {exc}")
+        return
+
+    print(f"backend: {backend_name()}   lane: {args.lane}"
+          f"{'   institution: ' + institution if institution else ''}\n")
 
     note = check_query_scope(args.query)
     if note:
@@ -230,8 +367,10 @@ def main():
     for i, h in enumerate(hits, 1):
         warn = "  [FIGURE]" if h.has_quantity else ""
         peer = "  [PEER INSTITUTION]" if h.source_type == "peer_report" else ""
-        print(f"[{i}] {h.source}  ({h.source_type})  score={h.score:.3f}"
-              f"{warn}{peer}")
+        label = (f"{h.institution} — {h.source} ({h.pillar})"
+                 if h.lane == "institution"
+                 else f"{h.source} ({h.source_type})")
+        print(f"[{i}] {label}  score={h.score:.3f}{warn}{peer}")
         print(f"    {h.url}")
         text = " ".join(h.text.split())
         print(f"    {text[:320]}{'...' if len(text) > 320 else ''}\n")

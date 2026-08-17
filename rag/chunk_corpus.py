@@ -47,9 +47,16 @@ RUN
 import json
 import pathlib
 import re
+import sys
 
-SOURCES = pathlib.Path(__file__).parent.parent / "knowledge_sources"
+import pandas as pd
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+from scrapers.institutions import INSTITUTIONS, PROJECT_ROOT  # noqa: E402
+
+SOURCES = PROJECT_ROOT / "knowledge_sources"
 SUMMARY = SOURCES / "_summary.csv"
+MASTER = PROJECT_ROOT / "Combined_universities_data" / "esg_master_dataset.csv"
 OUT = pathlib.Path(__file__).parent / "chunks.jsonl"
 
 # Aim for chunks big enough to carry a whole idea, small enough that a retrieval
@@ -179,7 +186,9 @@ def chunk_paragraphs(paras: list[str]) -> list[str]:
     return chunks
 
 
-def main():
+def chunk_knowledge() -> tuple[list[dict], list[tuple[str, str]]]:
+    """Lane A — general ESG explainers. Teaches language, states no facts about
+    our three universities."""
     flags = read_summary_flags()
     records, skipped = [], []
 
@@ -200,6 +209,9 @@ def main():
             records.append({
                 "id": f"{source}::{i:03d}",
                 "text": text,
+                "lane": "knowledge",
+                "institution": "",          # by definition, not about any of ours
+                "institution_key": "",
                 "source": source,
                 "url": meta["url"],
                 "source_type": source_type,
@@ -211,39 +223,144 @@ def main():
                 "scraper_flags": source_flags,
             })
 
+    return records, skipped
+
+
+# ----------------------------------------------------------------------
+# Lane C — what OUR universities actually said about themselves
+# ----------------------------------------------------------------------
+def chunk_institution_prose() -> list[dict]:
+    """The narrative answers inside esg_master_dataset.csv.
+
+    838 rows, ~733,500 chars — 4.9x the entire knowledge corpus, and until now
+    nothing read a word of it. It matters most where numbers are scarcest:
+    PA-6 Institutional Climate (79,928 chars), AC-8 Responsible Research
+    (50,105), EN-2 Co-Curricular Activities (46,908). The Environmental pillar
+    is measurements; Social and Governance are almost entirely prose. Without
+    this lane those sections of the report have nothing to say.
+
+    EVERY chunk is stamped with its institution, and retrieve() refuses to
+    search this lane without one. Berkeley's prose appearing in Cork's section
+    is the Toronto contamination failure again — internal this time, and twenty
+    times larger.
+    """
+    if not MASTER.exists():
+        print(f"[warn] {MASTER.name} not found — skipping lane C. "
+              f"Run: python -m pipeline.build_master")
+        return []
+
+    df = pd.read_csv(MASTER)
+    prose = df[df.value_type.isin(("text", "text_long"))
+               & df.value.notna()].copy()
+
+    by_name = {i.name: i for i in INSTITUTIONS.values()}
+    records = []
+
+    for row in prose.itertuples(index=False):
+        institution = by_name.get(row.institution)
+        if institution is None:
+            print(f"[warn] unknown institution {row.institution!r} — skipped")
+            continue
+
+        # Answers are already one-per-question, so short ones stay whole and
+        # only the long ones get split. Splitting on paragraphs keeps the
+        # question's answer readable on its own.
+        pieces = (chunk_paragraphs(split_paragraphs(str(row.value)))
+                  if len(str(row.value)) > TARGET_CHARS
+                  else [str(row.value).strip()])
+
+        field = str(row.field) if pd.notna(row.field) else ""
+        section = str(row.section) if pd.notna(row.section) else ""
+
+        for i, text in enumerate(pieces):
+            if len(text) < MIN_CHUNK_CHARS:
+                continue
+            records.append({
+                "id": f"{institution.key}::{row.credit_code}::"
+                      f"{abs(hash(field)) % 10**6:06d}::{i:02d}",
+                # Prepending the question makes a chunk answerable on its own —
+                # "Yes, and here is how" is meaningless without knowing what
+                # was asked.
+                "text": f"{field}\n{text}" if field else text,
+                "lane": "institution",
+                "institution": institution.name,
+                "institution_key": institution.key,
+                "source": f"STARS {row.credit_code}",
+                "url": f"{institution.report_url}{row.category_code}/"
+                       f"{row.credit_code}/",
+                "source_type": "institution_prose",
+                "language": "en",
+                "has_quantity": bool(QUANTITY_RE.search(text)),
+                "chunk_index": i,
+                "chars": len(text),
+                "words": len(text.split()),
+                "scraper_flags": "",
+                # extra Lane C context, useful as retrieval filters
+                "credit_code": str(row.credit_code),
+                "credit_name": str(row.credit_name) if pd.notna(row.credit_name) else "",
+                "pillar": str(row.pillar) if pd.notna(row.pillar) else "",
+                "section": section,
+                "field": field,
+            })
+
+    return records
+
+
+def main():
+    knowledge, skipped = chunk_knowledge()
+    institution = chunk_institution_prose()
+    records = knowledge + institution
+
+    # Lane A rows have no Lane C fields and vice versa; fill so every row in
+    # chunks.jsonl has the same shape and the index builder stays simple.
+    for r in records:
+        for key in ("credit_code", "credit_name", "pillar", "section",
+                    "field", "institution_key"):
+            r.setdefault(key, "")
+
     with OUT.open("w", encoding="utf-8") as f:
         for r in records:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
-    # ---------------- summary ----------------
-    print(f"[save] {len(records)} chunks -> {OUT}")
+    print(f"[save] {len(records)} chunks -> {OUT.name}")
+    print(f"       lane A (knowledge)   {len(knowledge):5}")
+    print(f"       lane C (institution) {len(institution):5}")
 
     if skipped:
         print(f"\n--- skipped {len(skipped)} document(s) ---")
         for name, why in skipped:
             print(f"  {name:26} {why}")
 
+    print("\n--- lane A: chunks by source_type ---")
     by_type = {}
-    for r in records:
+    for r in knowledge:
         by_type.setdefault(r["source_type"], []).append(r)
-    print("\n--- chunks by source_type ---")
     for t, rs in sorted(by_type.items(), key=lambda kv: -len(kv[1])):
-        note = "  <-- excluded from retrieval by default" if t == "peer_report" else ""
+        note = "  <-- excluded by default" if t == "peer_report" else ""
         print(f"  {t:12} {len(rs):4} chunks{note}")
 
-    quantity = [r for r in records if r["has_quantity"]]
-    print(f"\n--- chunks containing a quantity: {len(quantity)} ---")
-    for r in quantity:
-        snippet = QUANTITY_RE.search(r["text"])
-        print(f"  {r['id']:34} [{r['source_type']:11}] ...{snippet.group(0)}")
+    fr = [r for r in knowledge if r["language"] != "en"]
+    print(f"  {'french':12} {len(fr):4} chunks  <-- excluded by default")
 
-    fr = [r for r in records if r["language"] != "en"]
-    print(f"\n--- non-English chunks: {len(fr)} "
-          f"(filtered out by default; CLAUDE.md requires English deliverables) ---")
-    for r in fr[:3]:
-        print(f"  {r['id']}")
-    if len(fr) > 3:
-        print(f"  ... and {len(fr) - 3} more")
+    print("\n--- lane C: chunks per institution ---")
+    for inst in sorted({r["institution"] for r in institution}):
+        rows = [r for r in institution if r["institution"] == inst]
+        quant = sum(r["has_quantity"] for r in rows)
+        print(f"  {inst[:34]:36} {len(rows):4} chunks  "
+              f"{sum(r['chars'] for r in rows):>7,} chars  "
+              f"{quant:3} with a figure")
+
+    print("\n--- lane C: pillars covered (the reason this lane exists) ---")
+    by_pillar = {}
+    for r in institution:
+        by_pillar.setdefault(r["pillar"], 0)
+        by_pillar[r["pillar"]] += 1
+    for p, n in sorted(by_pillar.items(), key=lambda kv: -kv[1]):
+        print(f"  {p or '(none)':16} {n:4} chunks")
+
+    quantity = [r for r in records if r["has_quantity"]]
+    print(f"\n--- chunks containing a figure: {len(quantity)} "
+          f"(droppable via drop_quantities) ---")
 
     sizes = sorted(r["chars"] for r in records)
     print(f"\n--- chunk size (chars) ---")

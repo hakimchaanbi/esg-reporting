@@ -550,15 +550,7 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
    5 docx). Fix is an `href` column plus a re-parse of the cache — no
    re-scraping.
 
-3. **Lane C — institution prose is unused.** `esg_master_dataset.csv` holds
-   **838 prose rows / 733,500 chars (~122k words)**, which is **4.9× the whole
-   knowledge corpus**, and nothing reads it. It is concentrated in exactly the
-   credits that have no numbers (PA-6 79,928 chars, AC-8 50,105, EN-2 46,908),
-   so without it the Social and Governance sections have almost nothing to say.
-   Needs its own RAG lane with **institution filtering by default** — Berkeley
-   prose in Cork's section is the Toronto contamination failure again, but
-   internal and 20× larger. 30 of the 838 rows contain figures and must carry
-   `has_quantity` so they cannot compete with Jinja2-injected values.
+3. ~~Lane C~~ **DONE 2026-08-17** — see §13.
 
 ---
 
@@ -643,6 +635,48 @@ Enforced in the test suite.
 
 The backend name is written into `index.json` and checked at load, so vectors
 from different embedders can never be silently compared.
+
+### THREE LANES (lane C added 2026-08-17)
+
+```
+Lane A  knowledge      HOW to write        general ESG explainers, no facts
+                                           about our universities
+Lane B  master numbers WHAT the values are exact lookup + Jinja2; the model
+                                           never sees a number  (§3)
+Lane C  master prose   WHAT this uni did   838 rows / 733,500 chars of the
+                                           universities' own narrative
+```
+
+**Lane C exists because the pillars invert.** Environmental is measurements
+(~214 numeric fields each); Social and Governance are almost entirely prose.
+Chunk counts bear it out: Social 172, Governance 158, Environmental 125. Without
+lane C the S and G sections of the report would have nearly nothing to say.
+
+Built from `esg_master_dataset.csv` rows where `value_type ∈ {text, text_long}`
+→ **1,049 chunks** (Berkeley 384 / Cork 341 / TU Dublin 324). The field name is
+prepended to each chunk — *"Yes, and here is how"* is meaningless without the
+question it answers.
+
+⚠️ **`retrieve(lane="institution")` RAISES without `institution=`.** Not a
+default that can be overridden — a required argument, enforced by `LaneMisuse`.
+Berkeley's prose in Cork's section is the Toronto contamination failure again,
+internal and 20× larger (1,049 chunks vs 41). Also raises on an unknown
+institution rather than silently returning nothing.
+
+`lane="all"` **splits k between the lanes** instead of taking one top-k. Without
+that the institution lane simply wins — 1,049 chunks to 226, and on any campus
+question its prose is the closer match. A plain top-12 returned twelve
+institution chunks and zero style guidance, which is useless for generation.
+Odd k favours the facts.
+
+**Use the pillar filter — it matters a lot.** *"who is responsible for
+sustainability governance"* unfiltered returns AC-5 literacy-assessment prose;
+with `--pillar Governance` it returns PA-1 and the actual sustainability
+officer job description at 0.632. Phase 5 should pass the pillar it is writing
+about.
+
+CLI accepts the short key or a name fragment: `-i tudublin` works, and must —
+"tudublin" is not a substring of "Technological University Dublin".
 
 ### Measured quality (`eval_retrieval.py`)
 Moving tfidf → minilm took *"what does GRI require about greenhouse gas
