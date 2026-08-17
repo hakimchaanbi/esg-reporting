@@ -48,16 +48,17 @@ OUTPUT
                              Phase 5 number-injection both read from.
 
 RUN
-    python build_master_dataset.py        (from Combined_universities_data/)
+    python -m pipeline.build_master
 """
-
-import pathlib
 
 import pandas as pd
 
-SCORES_IN = pathlib.Path("combined_esg_dataset.csv")
-FIELDS_IN = pathlib.Path("combined_credit_fields.csv")
-OUTPUT = pathlib.Path("esg_master_dataset.csv")
+from scrapers.institutions import PROJECT_ROOT
+
+DATA_DIR = PROJECT_ROOT / "Combined_universities_data"
+SCORES_IN = DATA_DIR / "combined_esg_dataset.csv"
+FIELDS_IN = DATA_DIR / "combined_credit_fields.csv"
+OUTPUT = DATA_DIR / "esg_master_dataset.csv"
 
 KEY = ["institution", "credit_code"]
 
@@ -75,14 +76,15 @@ COLUMN_ORDER = [
 
 def main():
     if not SCORES_IN.exists() or not FIELDS_IN.exists():
-        print(f"[stop] need both {SCORES_IN} and {FIELDS_IN}.")
-        print("       run combine_universities.py and parse_credits_v3.py first.")
+        print(f"[stop] need both {SCORES_IN.name} and {FIELDS_IN.name}.")
+        print("       run: python -m pipeline.combine_scores")
+        print("            python -m scrapers.parse_credit_pages")
         return
 
     scores = pd.read_csv(SCORES_IN)
     fields = pd.read_csv(FIELDS_IN)
-    print(f"[load] {len(scores):>5} credit rows   from {SCORES_IN}")
-    print(f"[load] {len(fields):>5} field rows    from {FIELDS_IN}")
+    print(f"[load] {len(scores):>5} credit rows   from {SCORES_IN.name}")
+    print(f"[load] {len(fields):>5} field rows    from {FIELDS_IN.name}")
 
     # The scorecard is authoritative for pillar, category and credit_name — it
     # was validated in Phase 3. Drop the field table's copies so the join can't

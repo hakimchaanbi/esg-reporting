@@ -1,16 +1,17 @@
 """
-STARS credit-detail parser v3 — reads the fields the v2 parser could not see
-============================================================================
+STARS credit-detail parser — reads the fields the old parser could not see
+==========================================================================
 
-WHAT WAS WRONG WITH v2
-    v2 looked for data inside HTML <table> elements. On a STARS credit page the
+Was parse_credits_v3.py at the project root; moved here so the whole scraping
+layer lives in one package and shares institutions.py.
+
+WHAT THE OLD PARSER GOT WRONG
+    It looked for data inside HTML <table> elements. On a STARS credit page the
     only tables are boilerplate: the "Overall Rating / Overall Score / Liaison /
-    Submission Date" box, and a Status/Score/Responsible-Party row. Both are
-    identical on all 118 pages.
-
-    The real credit content is not in a table at all. Result: berkeley_qa.csv
-    and tudublin_qa.csv contained three distinct questions, repeated 118 times,
-    and not a single real figure.
+    Submission Date" box, and a Status/Score/Responsible-Party row — identical
+    on all 118 pages. So berkeley_qa.csv and tudublin_qa.csv held three distinct
+    questions repeated 118 times and not a single real figure, while looking
+    healthy at 354 rows.
 
 WHERE THE DATA ACTUALLY IS
     A flat run of sibling elements, one per field:
@@ -27,48 +28,29 @@ WHERE THE DATA ACTUALLY IS
     A section heading applies to every field after it until the next heading.
 
 NO NETWORK ACCESS
-    This reads the HTML already cached on disk by the deep scrapers. It does not
-    contact AASHE, needs no AASHE_SESSIONID, and has no politeness delay — so it
-    is safe to run as often as you like.
+    Reads only the HTML already cached by credit_pages.py. No AASHE_SESSIONID,
+    no politeness delay — safe to run as often as you like.
 
-    Run:  python parse_credits_v3.py
+RUN
+    python -m scrapers.parse_credit_pages              all three
+    python -m scrapers.parse_credit_pages berkeley     just one
 """
 
+from __future__ import annotations
+
+import argparse
 import re
 import unicodedata
-from pathlib import Path
 
 import pandas as pd
 from bs4 import BeautifulSoup
 
-# ----------------------------------------------------------------------
-# CONFIG
-# ----------------------------------------------------------------------
-INSTITUTIONS = [
-    # display name, cache dir, per-institution output CSV
-    ("University of California, Berkeley", "Berkley/cache_credits", "Berkley/berkeley_fields.csv"),
-    ("University College Cork", "Cork/cache_credits_cork", "Cork/cork_fields.csv"),
-    ("Technological University Dublin", "Dublin/cache_credits_tudublin", "Dublin/tudublin_fields.csv"),
-]
+from .institutions import PROJECT_ROOT, Institution, pillar_for, resolve
 
-COMBINED_OUT = Path("Combined_universities_data/combined_credit_fields.csv")
+COMBINED_OUT = PROJECT_ROOT / "Combined_universities_data" / "combined_credit_fields.csv"
 
 # STARS renders "no answer given" as a green triple dash.
 NOT_REPORTED = {"---", "--", "—"}
-
-# Pillar grouping — kept identical to combine_universities.py (CLAUDE.md §8) so
-# the two datasets join cleanly. Changing it here would silently desync them.
-PILLARS = {"OP": "Environmental", "AC": "Context", "EN": "Context",
-           "IL": "Bonus", "PRE": "Preface"}
-
-
-def pillar_for(code: str) -> str:
-    """PA splits by credit number: PA-1..5 governance, PA-6..13 social."""
-    cat = code.split("-")[0]
-    if cat != "PA":
-        return PILLARS.get(cat, "Unknown")
-    m = re.match(r"PA-(\d+)", code)
-    return "Governance" if m and int(m.group(1)) <= 5 else "Social"
 
 
 def clean(text: str) -> str:
@@ -216,60 +198,73 @@ def sort_key(code: str):
     return order.get(cat, 9), int(num) if num.isdigit() else 0
 
 
+def parse_one(institution: Institution) -> pd.DataFrame:
+    cache = institution.credit_cache_dir
+    if not cache.is_dir():
+        print(f"[skip] {institution.name}: no cache at {cache}")
+        return pd.DataFrame()
+
+    pages = sorted(cache.glob("*.html"), key=lambda p: sort_key(p.stem))
+    rows, empty_pages = [], []
+
+    for page in pages:
+        html = page.read_text(encoding="utf-8", errors="replace")
+        page_rows = list(parse_page(html, page.stem))
+        if page_rows:
+            rows.extend(page_rows)
+        else:
+            empty_pages.append(page.stem)
+
+    df = pd.DataFrame(rows)
+    df.insert(0, "institution", institution.name)
+    institution.fields_csv.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(institution.fields_csv, index=False)
+
+    numeric = int(df["value_numeric"].notna().sum())
+    print(f"[ok] {institution.name}")
+    print(f"     {len(pages)} pages -> {len(df)} fields "
+          f"({len(pages) - len(empty_pages)} pages with fields)")
+    print(f"     {df['field'].nunique()} distinct questions, "
+          f"{numeric} numeric values, "
+          f"{int((df.value_type == 'not_reported').sum())} not reported")
+    print(f"     -> {institution.fields_csv}")
+
+    # The old failure was invisible because nobody checked this. Now it is
+    # checked on every run, and it is loud.
+    if df["field"].nunique() < 20:
+        print(f"     [WARN] only {df['field'].nunique()} distinct questions — "
+              f"this looks like the boilerplate bug all over again.")
+
+    return df
+
+
 def main():
-    frames = []
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("institutions", nargs="*",
+                    help="berkeley / cork / tudublin (default: all)")
+    args = ap.parse_args()
 
-    for institution, cache_dir, out_csv in INSTITUTIONS:
-        cache = Path(cache_dir)
-        if not cache.is_dir():
-            print(f"[skip] {institution}: no cache at {cache_dir}")
-            continue
-
-        pages = sorted(cache.glob("*.html"), key=lambda p: sort_key(p.stem))
-        rows, empty_pages = [], []
-
-        for page in pages:
-            html = page.read_text(encoding="utf-8", errors="replace")
-            page_rows = list(parse_page(html, page.stem))
-            if page_rows:
-                rows.extend(page_rows)
-            else:
-                empty_pages.append(page.stem)
-
-        df = pd.DataFrame(rows)
-        df.insert(0, "institution", institution)
-        Path(out_csv).parent.mkdir(parents=True, exist_ok=True)
-        df.to_csv(out_csv, index=False)
-        frames.append(df)
-
-        numeric = int(df["value_numeric"].notna().sum())
-        print(f"[ok] {institution}")
-        print(f"     {len(pages)} pages -> {len(df)} fields "
-              f"({len(pages) - len(empty_pages)} pages with fields)")
-        print(f"     {df['field'].nunique()} distinct questions, "
-              f"{numeric} numeric values, "
-              f"{int((df.value_type == 'not_reported').sum())} not reported")
-        print(f"     -> {out_csv}")
-
-        # The v2 failure was invisible because nobody checked this. Now it is
-        # checked on every run, and it is loud.
-        if df["field"].nunique() < 20:
-            print(f"     [WARN] only {df['field'].nunique()} distinct questions — "
-                  f"this looks like the v2 boilerplate bug all over again.")
+    chosen = resolve(args.institutions)
+    frames = [df for df in (parse_one(i) for i in chosen) if not df.empty]
 
     if not frames:
-        print("[error] no caches found — run the deep scrapers first.")
+        print("[error] no caches found — run scrapers.credit_pages first.")
         return
 
-    combined = pd.concat(frames, ignore_index=True)
-    COMBINED_OUT.parent.mkdir(parents=True, exist_ok=True)
-    combined.to_csv(COMBINED_OUT, index=False)
-
-    print(f"\n[done] {len(combined)} field rows across {len(frames)} institutions")
-    print(f"       -> {COMBINED_OUT}")
-    print("\nvalue_type breakdown:")
-    for kind, count in combined["value_type"].value_counts().items():
-        print(f"  {kind:14} {count:6}")
+    # Only rewrite the combined file when every institution was parsed,
+    # otherwise a single-institution run would silently truncate it.
+    if len(chosen) == len(frames) == 3:
+        combined = pd.concat(frames, ignore_index=True)
+        COMBINED_OUT.parent.mkdir(parents=True, exist_ok=True)
+        combined.to_csv(COMBINED_OUT, index=False)
+        print(f"\n[done] {len(combined)} field rows across {len(frames)} "
+              f"institutions\n       -> {COMBINED_OUT}")
+        print("\nvalue_type breakdown:")
+        for kind, count in combined["value_type"].value_counts().items():
+            print(f"  {kind:14} {count:6}")
+    else:
+        print(f"\n[note] parsed {len(frames)} institution(s); "
+              f"{COMBINED_OUT.name} left untouched (needs all three).")
 
 
 if __name__ == "__main__":
