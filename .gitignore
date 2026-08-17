@@ -28,6 +28,11 @@ cache_credits_tudublin/
 standards/gri/*.pdf
 standards/gri/*.txt
 
+# Downloaded embedding model (~23 MB binary). Re-fetched automatically by
+# rag/build_index.py. rag/index/ IS committed — it is small and rebuildable
+# but useful to have present.
+rag/models/
+
 # Windows artifacts
 *.zip
 *:Zone.Identifier
