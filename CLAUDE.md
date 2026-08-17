@@ -30,7 +30,7 @@ is in French — do not let French leak into outputs).
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
 | 4 | **Map** — STARS credits → **GRI only** (§9) | 🔶 drafted — 55 rows, **all `proposed`, 0 human-confirmed** |
-| 5 | **Generate** — LLM writes prose, code injects numbers | pending |
+| 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 RAG layer done (§13); generation not started |
 | 6 | **Output** — ESG report + BI dashboard | pending |
 
 ### Two input branches (important conceptual split)
@@ -468,9 +468,12 @@ GRI topics group into environmental (300s), social (400s), governance.
 Why two HTML readers: **BeautifulSoup for data** (want exact fields — tweezers),
 **trafilatura for knowledge** (want clean prose, discard structure — strainer).
 
-**Planned:** Jinja2 (number injection) · Claude API (narrative) · LangChain +
-ChromaDB + sentence-transformers (RAG) · SQLite (Phase 3+ store) ·
-python-docx / WeasyPrint (report) · Power BI or Streamlit + Plotly (dashboard)
+**RAG (built 2026-08-17):** `onnxruntime` + `tokenizers` + `numpy`.
+**LangChain, ChromaDB and sentence-transformers were all dropped** — see §13.
+
+**Planned:** Jinja2 (number injection) · Claude API (narrative) ·
+SQLite (Phase 3+ store) · python-docx / WeasyPrint (report) ·
+Power BI or Streamlit + Plotly (dashboard)
 
 **Why files not a database (yet):** extraction output is raw and the schema is
 still settling; files are inspectable. The database belongs in the Structure
@@ -490,3 +493,90 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
   118 blocked pages without noticing.
 - **Scope before building.** Don't build a parser upgrade for data nobody has
   confirmed they need.
+
+---
+
+## 13. Phase 5a — the RAG layer over the knowledge corpus (built 2026-08-17)
+
+Branch A teaches the model the **language** of ESG reporting. It is never a
+source of facts about our three universities — those come from
+`esg_master_dataset.csv` and are injected by code (§3). The labelling below is
+what keeps that separation real rather than aspirational.
+
+### Files (`rag/`)
+| File | Role |
+|---|---|
+| `chunk_corpus.py` | 18 usable sources → **226 labelled chunks** → `chunks.jsonl` |
+| `embed.py` | two interchangeable embedding backends |
+| `build_index.py` | embeds chunks → `rag/index/` (`vectors.npy` + `index.json`) |
+| `retrieve.py` | **the only API Phase 5 may call** |
+| `test_retrieval_safety.py` | 10 checks; all pass |
+| `eval_retrieval.py` | honest quality probe — shows what the corpus *cannot* answer |
+
+Chunking: paragraph-aware, ~1000 chars, 200-char overlap (median 868).
+`gri-standards.txt` is skipped — 48 words, the scrape failed.
+
+### THE CONTAMINATION RISK — why retrieval is filtered
+Two sources are **other universities' own sustainability reports**. Toronto's
+contains, verbatim:
+
+> "St. George campus has reduced carbon by over 26,000 tons"
+
+A Phase 5 prompt asking "describe campus carbon reduction progress" retrieves
+exactly that, and the model can put **Toronto's figure into a Berkeley report**.
+It reads naturally and is false. Corpus-wide there are only 8 quantity-mentions
+in 21,702 words — narrow, but concentrated where it does most harm.
+
+Three labels on every chunk, and `retrieve()` is safe by default:
+- `source_type` — 41 `peer_report` chunks **excluded unless explicitly opted in**
+- `has_quantity` — 7 chunks; `drop_quantities=True` when writing numeric sections
+- `language` — 14 French chunks excluded (deliverables must be English)
+
+Default pool: **171 of 226 chunks**.
+
+### THE FALSE-CONFIDENCE TRAP — found by evaluation, not guesswork
+*"What are the exact disclosure requirements of GRI 305-1?"* scores **0.536** —
+above any sane weak-match threshold — yet every hit is generic GRI marketing
+prose containing nothing about 305-1. **A similarity score only ever means
+"closest chunk in the corpus", never "chunk that answers the question."**
+
+So `check_query_scope()` pattern-matches disclosure references (`305-1`,
+`GRI 302`, `disclosure 403-9`) and warns the caller to use
+`standards/gri_disclosures.json` / `standards/gri/` instead. The corpus holds
+**explainers about frameworks, never the normative text of a standard.**
+Enforced in the test suite.
+
+### Backends — and why the planned stack was abandoned
+| Backend | What | When |
+|---|---|---|
+| `minilm` | all-MiniLM-L6-v2, 384-dim, int8 ONNX (23 MB) | **current** |
+| `tfidf` | pure numpy, lexical | offline fallback |
+
+- **LangChain dropped** — deliberate. The whole job is split → label → embed →
+  query, ~60 readable lines. Every decision stays visible and defensible in a
+  viva instead of buried in library defaults.
+- **ChromaDB dropped** — *cannot be installed here*: it hard-requires `grpcio`,
+  which resolves to "from versions: none" on this machine (blocked at the index
+  level; `onnxruntime` cp312 wheels from the same index are fine). Irrelevant
+  anyway: 226 × 384 floats is 347 KB, so exact cosine similarity is one dot
+  product. A vector database solves a problem this corpus does not have.
+- **sentence-transformers dropped** — needs PyTorch (~2 GB). Same model reached
+  via ONNX Runtime at 23 MB.
+- **int8 quantised model** chosen over fp32 (90 MB): accuracy cost on retrieval
+  is well under a percent, download is 4× smaller. `quint8_avx2` matches this
+  CPU (avx2, no avx512).
+
+The backend name is written into `index.json` and checked at load, so vectors
+from different embedders can never be silently compared.
+
+### Measured quality (`eval_retrieval.py`)
+Moving tfidf → minilm took *"what does GRI require about greenhouse gas
+emissions"* from **0.221 → 0.643**, and fixed the ranking (tfidf put the right
+chunk third because it says "carbon footprint" where the query says "greenhouse
+gas").
+
+Corpus ceiling, honestly: strong on framing and framework comparison
+(emissions narrative 0.696, GRI-vs-SASB 0.524), weak-to-absent on pay equity /
+living wage (0.274). **That is information, not a bug** — it marks topics Phase
+5 must not ask the corpus to ground. Re-run `eval_retrieval.py` after any
+corpus change.
