@@ -16,7 +16,8 @@ RUN
 
 import sys
 
-from retrieve import check_query_scope, retrieve
+from retrieve import (LaneMisuse, check_query_scope, known_institutions,
+                      retrieve)
 
 BAIT = "campus carbon emissions reduction progress in tons"
 
@@ -88,7 +89,53 @@ def main():
     check("ordinary questions are NOT flagged",
           check_query_scope("how should we describe our emissions?") is None)
 
-    print("\n5. Attribution is always available\n")
+    print("\n5. Lane C — one university's prose cannot reach another's report\n")
+
+    # Lane C is 1,049 chunks of institution-specific claims. Leaking Berkeley's
+    # into Cork's section is the Toronto failure again, internally, at 20x the
+    # volume. The filter is not a default that can be overridden — it is a
+    # required argument.
+    try:
+        retrieve("what sustainability initiatives exist", lane="institution")
+        check("searching lane C without an institution raises", False,
+              "it returned results instead of refusing")
+    except LaneMisuse:
+        check("searching lane C without an institution raises", True)
+
+    try:
+        retrieve("anything", lane="institution", institution="Oxford")
+        check("an unknown institution raises", False, "it was accepted")
+    except LaneMisuse:
+        check("an unknown institution raises", True)
+
+    institutions = known_institutions()
+    check("index knows exactly the three institutions", len(institutions) == 3,
+          ", ".join(institutions))
+
+    CAMPUS_Q = "campus sustainability strategy and climate commitments"
+    for target in institutions:
+        hits = retrieve(CAMPUS_Q, k=10, lane="institution", institution=target)
+        others = {h.institution for h in hits} - {target}
+        check(f"asking about {target[:30]} returns only its own prose",
+              not others and bool(hits),
+              f"{len(hits)} hits, foreign institutions: {others or 'none'}")
+
+    print("\n6. The two lanes stay separate\n")
+
+    knowledge_hits = retrieve(CAMPUS_Q, k=10)
+    check("the default (knowledge) lane returns no institution prose",
+          all(h.lane == "knowledge" for h in knowledge_hits),
+          f"lanes returned: {sorted({h.lane for h in knowledge_hits})}")
+
+    both = retrieve(CAMPUS_Q, k=12, lane="all",
+                    institution=institutions[0])
+    lanes = {h.lane for h in both}
+    check("lane='all' can reach both, still scoped to one institution",
+          lanes == {"knowledge", "institution"}
+          and all(h.institution in ("", institutions[0]) for h in both),
+          f"lanes: {sorted(lanes)}")
+
+    print("\n7. Attribution is always available\n")
 
     hits = retrieve("what is double materiality", k=3)
     check("every hit carries a source and a URL",
