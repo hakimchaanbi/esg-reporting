@@ -33,14 +33,29 @@ is in French — do not let French leak into outputs).
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 RAG layer done (§13); generation not started |
 | 6 | **Output** — ESG report + BI dashboard | pending |
 
-### Two input branches (important conceptual split)
+### THREE inputs (the A/B split predates Phase 4 and was incomplete)
 
-- **Branch A — Knowledge:** reference websites (IBM, GRI, CSRD, SASB, STARS…).
-  Teaches the LLM the *language* of ESG. No numbers. Feeds RAG.
-- **Branch B — Data:** AASHE STARS reports for 3 universities. The *facts* the
-  report is about. All numbers.
+What separates them is not only their content but **how each may be read**:
 
-One-liner: *"Knowledge grounds how the model writes; data is what it writes about."*
+- **A — Knowledge:** reference websites (IBM, MSCI, Cambridge…). Teaches the
+  LLM the *language* of ESG. No facts about our universities. → **fuzzy
+  retrieval** (`rag/`, 226 chunks).
+- **B — STARS data:** AASHE reports for the 3 universities. The *facts*. →
+  **exact lookup** from `esg_master_dataset.csv` + Jinja2 injection (§3).
+- **C — GRI standards:** the target vocabulary — which questions the report must
+  answer and GRI's precise wording for each. → **lookup by disclosure number**
+  in `standards/`, never searched.
+
+*"Knowledge grounds how the model writes. STARS is what it writes about. GRI
+decides which questions get answered."*
+
+⚠️ **GRI is deliberately NOT in the RAG corpus.** Standards text is precise and
+conditional (*report X, unless Y, using method Z*); chunking it at ~1000 chars
+separates a requirement from its exceptions and the model paraphrases half a
+rule confidently. `check_query_scope()` refuses disclosure-shaped queries and
+points at `standards/` (§13). Note the distinction this protects:
+`knowledge_sources/ibm-gri.txt` — IBM *explaining* GRI — is legitimately in
+Branch A; GRI's normative wording is not.
 
 ---
 
@@ -581,9 +596,27 @@ schema change** — the integrity claim is only worth what the test proves.
   carries the specific difference in its `caveat` column, and the validator
   warns if a `partial` row has an empty caveat.
 
-Coverage today: 42 of 257 distinct non-scoring numeric STARS fields (16%) have
-a proposed GRI target. Low is expected — many of the rest are denominators
-(FTE enrollment, floor area) or STARS-internal indicators.
+### Why the table has 56 rows
+
+**45 are an actual link; 11 record an absence** (8 gap_gri_side, 3
+gap_stars_side). The links are many-to-one — STARS splits a figure into parts
+where GRI wants one number — so 45 distinct STARS fields reach only **15 GRI
+disclosures**. GRI 305-1 alone takes six rows (the scope 1 total, its four
+combustion components, biogenic).
+
+| Reach | Count |
+|---|---|
+| STARS credits in the dataset | 86 |
+| STARS credits the mapping touches | **7** |
+| Distinct non-scoring numeric STARS fields | 257 |
+| …mapped to GRI | 45 (18%) |
+| GRI disclosures reached | 15 |
+
+**Seven credits of eighty-six is the finding, not a shortfall.** GRI has
+vocabulary for emissions, energy, water, waste and workforce diversity; it has
+none for the other 79 credits — courses taught, research produced, community
+engagement, campus life. The mapped seven are OP-3, OP-5, OP-6, OP-12, PA-7,
+PA-8, PA-13.
 
 The Phase 3 `pillar` column is the **first half of this mapping already done** —
 GRI topics group into environmental (300s), social (400s), governance.
