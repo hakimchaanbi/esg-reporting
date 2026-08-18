@@ -427,14 +427,73 @@ Files:
   retrieved from globalreporting.org and recorded with per-standard source URLs.
   GRI 302/303/305/306 were cross-checked against two independent secondary
   sources and matched verbatim. This is the *target vocabulary*.
-- `standards/gri/gri-401.pdf`, `gri-403.pdf` (+ `.txt`) — official PDFs,
-  downloaded and text-extracted by `standards/fetch_gri.py` (one file; was two
-  shell scripts). PDFs are gitignored — GRI's documents, not ours to
-  redistribute.
+- **`standards/gri_requirements.json`** (gitignored) — **75 disclosures,
+  142,559 chars of GRI's actual requirement text**, extracted 2026-08-18.
+  Titles alone cannot check a mapping: *"305-1 Direct (Scope 1) GHG emissions"*
+  does not tell you GRI also demands the gases included, biogenic CO₂
+  separately, the base year, the emission factors and the consolidation
+  approach. This does.
+
+  **Verbatim, never summarised.** No model touches the extraction path — it is
+  BeautifulSoup over GRI's own HTML, the same way STARS is scraped, with
+  whitespace collapsed and nothing reworded. Asking an LLM to "describe what
+  305-1 requires" would produce something authoritative-looking and
+  unverifiable, which is exactly what §3 exists to prevent.
+  `tests/test_gri_requirements.py` proves it: **882 substantial lines, all
+  found character-for-character in the cached source.**
+
+  Gitignored because it is GRI's copyrighted content; regenerate with
+  `python standards/fetch_gri.py`. Only the short titles stay committed.
+
+- `standards/gri/pages/*.html` (gitignored) — cached source pages, one per
+  standard. All 12 standards have a publication page carrying the full text,
+  so **GRI 301 and 308 no longer rest on a secondary source.**
+- `standards/gri/*.pdf|.txt` (gitignored) — the two PDFs, via `--pdfs`.
+
+**Independent confirmation of Phase 4:** the extractor cross-checks every title
+against `gri_disclosures.json`. All 67 built earlier from publication pages and
+secondary sources **matched GRI's own pages exactly.**
+
+**Two markup traps, both found by things going quietly missing:**
+- Disclosure **302-4 is a `<span class="heading">`** where every other
+  disclosure in the same document is an `<h2>`. GRI's own HTML is inconsistent.
+- Those heading spans **nest**. Promoting all of them made the inner ones look
+  like non-disclosure headings that cancelled the disclosure the outer one had
+  just opened — so 302-4 still came out empty. Only the outermost is promoted.
+- Body text uses `get_text()` with **no separator** so `CO<sub>2</sub>` becomes
+  `CO2`, but headings use a separator, or
+  `Disclosure 302-4Reduction of energy consumption` fails the heading regex.
+  Different rules for different elements, on purpose.
 - `mapping/stars_gri_mapping.csv` — **55 rows**: 7 equivalent · 25 component ·
   4 intensity · 8 partial · 8 gap_gri_side · 3 gap_stars_side.
 - `mapping/validate_mapping.py` — the integrity gate.
 - `mapping/test_validator_catches_fabrication.py` — negative test.
+
+### The review is now a screen, not a PDF hunt
+```bash
+python mapping/validate_mapping.py --review
+```
+Prints each unreviewed row with **GRI's requirement text beside the actual STARS
+values for all three universities**, and flags where the data is sparse:
+
+```
+line 2  [equivalent]  confidence=high
+  GRI 305-1 — Direct (Scope 1) GHG emissions
+      The reporting organization shall report the following information:
+      Gross direct (Scope 1) GHG emissions in metric tons of CO2 equivalent.
+      Gases included in the calculation; whether CO2, CH4, N2O, ...
+  STARS OP-6 — Annual scope 1 GHG emissions
+      Technological University Dublin    «not reported»
+      University College Cork            6,215.78 Metric tons of CO2 equivalent
+      University of California, Berkeley «not reported»
+      ^ ONLY 1 OF 3 INSTITUTIONS REPORT THIS
+```
+
+**8 of the 55 rows** map to a field that not all three universities populate —
+`Annual scope 1 GHG emissions` among them, because Berkeley and TU Dublin
+report only the stationary/mobile/fugitive components. A mapping can be
+perfectly correct and still unusable, so availability is shown as a first-class
+review input. It decides nothing; it puts both sides on one screen.
 
 ⚠️ **ALL 55 ROWS ARE `review_status = proposed`. NOTHING IS CONFIRMED.**
 They were drafted with LLM assistance, which §3 forbids as a *final* artefact.

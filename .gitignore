@@ -23,10 +23,15 @@ cache_credits/
 cache_credits_cork/
 cache_credits_tudublin/
 
-# Third-party standards documents — GRI's own PDFs, not ours to redistribute.
-# Re-download with: bash standards/fetch_gri.sh
+# Third-party standards content — GRI's copyrighted documents and the
+# requirement text extracted from them. Not ours to redistribute; all of it is
+# regenerable with: python standards/fetch_gri.py
+# The short disclosure TITLES stay committed in standards/gri_disclosures.json —
+# those are identifiers you would cite anyway.
 standards/gri/*.pdf
 standards/gri/*.txt
+standards/gri/pages/
+standards/gri_requirements.json
 
 # Downloaded embedding model (~23 MB binary). Re-fetched automatically by
 # rag/build_index.py. rag/index/ IS committed — it is small and rebuildable
