@@ -45,7 +45,8 @@ import unicodedata
 import pandas as pd
 from bs4 import BeautifulSoup
 
-from .institutions import PROJECT_ROOT, Institution, pillar_for, resolve
+from .institutions import (BASE_URL, PROJECT_ROOT, Institution, pillar_for,
+                           resolve)
 
 COMBINED_OUT = PROJECT_ROOT / "Combined_universities_data" / "combined_credit_fields.csv"
 
@@ -97,6 +98,33 @@ def to_number(value: str):
         return float(value.replace(",", ""))
     except ValueError:
         return None
+
+
+def read_links(well) -> str:
+    """Every href inside an answer, as a space-separated list.
+
+    Without this the destinations are simply lost. 1,249 links live inside
+    answer wells; 828 happen to use the URL as their own link text and survive
+    into `value`, but 421 keep only a label — "Pre-assessment", a truncated
+    filename — and the href goes nowhere. That includes every document
+    attachment: 140 unique PDFs, spreadsheets and Word files.
+
+    AASHE paths are relative (/media/secure/...) and are made absolute here so
+    the column is usable without knowing where it came from.
+    """
+    if well is None:
+        return ""
+    seen, out = set(), []
+    for a in well.find_all("a", href=True):
+        href = a["href"].strip()
+        if not href or href.startswith(("#", "mailto:", "javascript:")):
+            continue
+        if href.startswith("/"):
+            href = BASE_URL + href
+        if href not in seen:
+            seen.add(href)
+            out.append(href)
+    return " ".join(out)
 
 
 def read_well(well) -> tuple[str, str]:
@@ -185,6 +213,7 @@ def parse_page(html: str, code: str):
             "units": units,
             "value_numeric": to_number(value),
             "value_type": classify(field, value, units),
+            "links": read_links(well),
         }
 
 
