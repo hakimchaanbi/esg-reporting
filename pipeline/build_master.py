@@ -71,6 +71,9 @@ COLUMN_ORDER = [
     # field level (from the credit detail pages)
     "has_detail", "section", "field", "value", "units", "value_numeric",
     "value_type",
+    # every URL cited in the answer; documents/manifest.csv says which of them
+    # were retrievable
+    "links",
 ]
 
 

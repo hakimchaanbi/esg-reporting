@@ -38,6 +38,13 @@ standards/gri_requirements.json
 # but useful to have present.
 rag/models/
 
+# Documents linked from STARS answers — the universities' own PDFs and
+# spreadsheets, ~440 MB. Not ours to redistribute and fully rebuildable:
+#   python -m scrapers.fetch_documents --with-aashe
+# documents/manifest.csv IS committed: it records what exists, where it came
+# from and which links are dead, which is the part worth keeping in history.
+documents/cache/
+
 # Windows artifacts
 *.zip
 *:Zone.Identifier
