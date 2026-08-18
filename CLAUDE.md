@@ -29,7 +29,7 @@ is in French — do not let French leak into outputs).
 | 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | ✅ done |
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
-| 4 | **Map** — STARS credits → **GRI only** (§9) | 🔶 drafted — 55 rows, **all `proposed`, 0 human-confirmed** |
+| 4 | **Map** — STARS credits → **GRI only** (§9) | 🔶 56 rows, 54 confirmed / 2 rejected — but `reviewed_by=claude`, **no human pass yet** |
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 RAG layer done (§13); generation not started |
 | 6 | **Output** — ESG report + BI dashboard | pending |
 
@@ -495,11 +495,55 @@ report only the stationary/mobile/fugitive components. A mapping can be
 perfectly correct and still unusable, so availability is shown as a first-class
 review input. It decides nothing; it puts both sides on one screen.
 
-⚠️ **ALL 55 ROWS ARE `review_status = proposed`. NOTHING IS CONFIRMED.**
-They were drafted with LLM assistance, which §3 forbids as a *final* artefact.
-`report_ready()` returns only `confirmed` rows — currently **0** — so Phase 5
-cannot cite any of it yet. That is the correct state until Hakim reviews each
-row against the standard and flips it to `confirmed` or `rejected`.
+### Review status (2026-08-18) — reviewed by Claude at Hakim's instruction
+
+**56 rows: 54 `confirmed`, 2 `rejected`.** Every row carries `reviewed_by` and
+`reviewed_date`, plus `claude_verdict` / `claude_note` recording the reasoning.
+
+⚠️ **`reviewed_by = claude` on all of them.** Hakim asked for this explicitly
+after being told the risk; §3 still expects a human pass, and the column exists
+so those rows can be found and re-checked. Filter on it before the viva.
+
+Outcome of the review against the extracted requirement text:
+
+- **2 rejected.** `Annual potable water use` → 303-5 was the serious one: that
+  field is *byte-identical* to `Total water withdrawal` for all three
+  universities, and GRI 303-5 defines consumption as withdrawal **minus
+  discharge**. Berkeley returns 107,386 m³, so the mapping overstated its water
+  consumption by 5.4%. 303-5 must be **derived**, not mapped. The other,
+  `water recovered and/or returned` → 303-4, confuses recovery-for-reuse with
+  discharge — but the field survives as the subtrahend for that derivation.
+- **8 amended.** Two were *under*-stated (303-3-a-v and 306-4-c are exact, not
+  approximate). `Annual renewable energy consumption` was too broad for GRI's
+  renewable-**fuel** line, so it dropped to `partial` and a new row points at
+  `Renewable stationary fuels` — which is ~0 everywhere, itself a finding:
+  these universities' renewables are purchased electricity, not fuel. Waste
+  generated dropped `equivalent`→`partial` (GRI 306-3 is total waste incl.
+  hazardous; STARS is non-hazardous only).
+- **PA-7/PA-8: the original caveat was wrong.** It claimed no governance-body
+  breakdown exists. It does — `Ethnic diversity index for executive staff` and
+  `Percentage of executive staff that identify as women…`. Both rows repointed
+  from credit-level to those fields.
+
+**Data findings, not mapping errors:** `Annual scope 1` and `Annual scope 2`
+are populated by **Cork alone** — Berkeley and TU Dublin give only components,
+so Phase 5 must sum them. Cork reports 8,144 for annual scope 2, market-based
+*and* location-based alike, which suggests only one method was calculated.
+TU Dublin's PA-7 index reads `"0 Revised on Nov. 24, 2025"` — annotation text
+concatenated onto the number; it will not parse.
+
+### `report_ready()` excludes `partial` by default
+Confirming rows made a latent hole live: 8 confirmed rows are `partial`, which
+means they **overlap** a disclosure without satisfying it. STARS' living-wage
+coverage is not GRI 202-1's minimum-wage ratio.
+
+```
+directly citable (equivalent/component/intensity): 35
++ partial, only with their caveat printed         :  8
+```
+
+`include_partial=True` is an explicit opt-in and **raises** if any partial row
+has an empty caveat — so the promise to footnote it is at least keepable.
 
 **How §3 is enforced mechanically**, not by discipline:
 1. Every `gri_disclosure` must exist in `gri_disclosures.json` → an invented
