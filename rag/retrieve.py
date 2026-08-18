@@ -231,11 +231,14 @@ def retrieve(query: str,
             if language and c["language"] != language:
                 allowed[i] = False
                 continue
-            if source_types and c["source_type"] not in source_types:
-                allowed[i] = False
-                continue
 
         # --- applies to both lanes -------------------------------------
+        # source_types spans lanes: "institution_prose" selects the STARS
+        # answers, "document" the evidence PDFs behind them, and the lane A
+        # values still work as before.
+        if source_types and c["source_type"] not in source_types:
+            allowed[i] = False
+            continue
         if drop_quantities and c["has_quantity"]:
             allowed[i] = False
             continue

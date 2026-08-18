@@ -44,6 +44,7 @@ RUN
     python chunk_corpus.py          (from rag/)
 """
 
+import hashlib
 import json
 import pathlib
 import re
@@ -306,10 +307,117 @@ def chunk_institution_prose() -> list[dict]:
     return records
 
 
+# ----------------------------------------------------------------------
+# Lane C, part two — the evidence documents STARS answers link to
+# ----------------------------------------------------------------------
+MANIFEST = PROJECT_ROOT / "documents" / "manifest.csv"
+DOC_TEXT = PROJECT_ROOT / "documents" / "text"
+
+# Two filters, both deliberate — see the docstring below.
+SPREADSHEET_EXT = {".xlsx", ".xlsm", ".xls"}
+MAX_DOC_CHARS = 200_000
+
+
+def chunk_documents() -> list[dict]:
+    """Climate plans, policies, pay-gap reports — the evidence behind the answers.
+
+    120 documents were downloaded and 109 yielded text, but only 81 are indexed.
+    The two exclusions are the point:
+
+    SPREADSHEETS ARE EXCLUDED (18 docs, 8.7M chars). A procurement ledger or a
+    course inventory chunked into "12345 | Office Depot | 45.20" produces
+    embeddings that mean nothing and match everything. They are data, not prose;
+    the numbers they contain belong in the data layer. The extracted text stays
+    on disk for reference.
+
+    DOCUMENTS OVER 200k CHARS ARE EXCLUDED (10 docs, 8.9M chars). Not only for
+    volume: one 300k document yields ~350 chunks by itself and drowns the
+    corpus in a single voice. Checked individually, the excluded set is two
+    Environmental Impact Reports for a building project, campus design
+    standards, Ireland's national government review (not about UCC at all), and
+    a duplicate. None is about a university's sustainability performance.
+
+    Duplicates are dropped by content hash: the same document is sometimes
+    linked from two credits under two URLs, and indexing it twice would give it
+    double weight in every search.
+    """
+    if not MANIFEST.exists() or not DOC_TEXT.is_dir():
+        print("[warn] no document manifest — skipping evidence documents. "
+              "Run: python -m scrapers.fetch_documents && "
+              "python -m scrapers.extract_documents")
+        return []
+
+    manifest = pd.read_csv(MANIFEST)
+    ok = manifest[manifest.extract_status == "ok"].copy()
+    by_name = {i.name: i for i in INSTITUTIONS.values()}
+
+    records, seen_hashes = [], {}
+    kept = skipped_sheet = skipped_big = skipped_dupe = 0
+
+    for r in ok.itertuples(index=False):
+        name = str(r.original_name)
+        ext = "." + name.lower().rsplit(".", 1)[-1] if "." in name else ""
+
+        if ext in SPREADSHEET_EXT:
+            skipped_sheet += 1
+            continue
+        if r.text_chars > MAX_DOC_CHARS:
+            skipped_big += 1
+            continue
+
+        path = DOC_TEXT / (str(r.local_file).rsplit(".", 1)[0] + ".txt")
+        if not path.exists():
+            continue
+        body = path.read_text(encoding="utf-8", errors="replace")
+
+        digest = hashlib.sha1(body.encode("utf-8", "replace")).hexdigest()
+        if digest in seen_hashes:
+            skipped_dupe += 1
+            continue
+        seen_hashes[digest] = name
+
+        institution = by_name.get(r.institution)
+        if institution is None:
+            continue
+
+        kept += 1
+        for i, text in enumerate(chunk_paragraphs(split_paragraphs(body))):
+            records.append({
+                "id": f"doc::{institution.key}::{str(r.local_file)[:12]}::{i:04d}",
+                # The filename is prepended for the same reason the field name
+                # is on STARS answers: a paragraph from "Climate-Action-Plan"
+                # means more when you know which document it came from.
+                "text": f"{name}\n{text}",
+                "lane": "institution",
+                "institution": institution.name,
+                "institution_key": institution.key,
+                "source": name[:80],
+                "url": str(r.url),
+                "source_type": "document",
+                "language": "en",
+                "has_quantity": bool(QUANTITY_RE.search(text)),
+                "chunk_index": i,
+                "chars": len(text),
+                "words": len(text.split()),
+                "scraper_flags": "",
+                "credit_code": str(r.credit_code),
+                "credit_name": "",
+                "pillar": "",
+                "section": "",
+                "field": str(r.field)[:120],
+            })
+
+    print(f"[docs] {kept} indexed  "
+          f"({skipped_sheet} spreadsheets, {skipped_big} oversized, "
+          f"{skipped_dupe} duplicates excluded)")
+    return records
+
+
 def main():
     knowledge, skipped = chunk_knowledge()
     institution = chunk_institution_prose()
-    records = knowledge + institution
+    documents = chunk_documents()
+    records = knowledge + institution + documents
 
     # Lane A rows have no Lane C fields and vice versa; fill so every row in
     # chunks.jsonl has the same shape and the index builder stays simple.
@@ -324,7 +432,8 @@ def main():
 
     print(f"[save] {len(records)} chunks -> {OUT.name}")
     print(f"       lane A (knowledge)   {len(knowledge):5}")
-    print(f"       lane C (institution) {len(institution):5}")
+    print(f"       lane C — STARS answers   {len(institution):5}")
+    print(f"       lane C — evidence docs   {len(documents):5}")
 
     if skipped:
         print(f"\n--- skipped {len(skipped)} document(s) ---")
