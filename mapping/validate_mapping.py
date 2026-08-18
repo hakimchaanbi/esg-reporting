@@ -145,10 +145,37 @@ def validate(mapping, gri, master):
     return errors, warnings
 
 
-def report_ready(mapping: pd.DataFrame) -> pd.DataFrame:
-    """The ONLY mapping rows Phase 5 may cite. Confirmed, non-gap rows."""
-    return mapping[(mapping.review_status.str.strip() == "confirmed")
-                   & (~mapping.relationship.isin(GAP_RELATIONSHIPS))]
+def report_ready(mapping: pd.DataFrame,
+                 include_partial: bool = False) -> pd.DataFrame:
+    """The ONLY mapping rows Phase 5 may cite.
+
+    Confirmed, non-gap, and — by default — NOT 'partial'.
+
+    Excluding partials is the point. A partial row overlaps the disclosure but
+    does not satisfy it: STARS' living-wage coverage is not GRI 202-1's
+    minimum-wage ratio, and non-hazardous waste is not GRI 306-3's total waste.
+    Handing those to a generator with no signal is how a report ends up
+    claiming compliance it does not have.
+
+    Pass include_partial=True only for a section that will print the row's
+    caveat alongside the figure. Every partial is asserted to HAVE a caveat,
+    so that promise is at least possible to keep.
+    """
+    ok = mapping.review_status.astype(str).str.strip() == "confirmed"
+    usable = ok & ~mapping.relationship.isin(GAP_RELATIONSHIPS)
+
+    if not include_partial:
+        return mapping[usable & (mapping.relationship != "partial")]
+
+    rows = mapping[usable]
+    uncaveated = rows[(rows.relationship == "partial")
+                      & rows.caveat.map(blank)]
+    if len(uncaveated):
+        raise ValueError(
+            f"{len(uncaveated)} confirmed 'partial' row(s) have no caveat and "
+            f"cannot be published: lines "
+            f"{[i + 2 for i in uncaveated.index]}")
+    return rows
 
 
 def review(mapping, master):
@@ -268,11 +295,21 @@ def main():
     for rel, n in mapping.relationship.value_counts().items():
         print(f"  {rel:16} {n:4}")
 
-    ready = report_ready(mapping)
-    print(f"\n--- report-ready rows: {len(ready)} ---")
-    if ready.empty:
-        print("  NONE. Nothing has been human-confirmed yet, so Phase 5 must not")
-        print("  cite any GRI mapping. This is the correct state before review.")
+    strict = report_ready(mapping)
+    with_partial = report_ready(mapping, include_partial=True)
+    print(f"\n--- report-ready ---")
+    print(f"  directly citable (equivalent/component/intensity): {len(strict)}")
+    print(f"  + partial, only with their caveat printed         : "
+          f"{len(with_partial) - len(strict)}")
+    if strict.empty:
+        print("  NONE directly citable. Phase 5 must not cite any GRI mapping.")
+
+    print("\n--- who reviewed ---")
+    if "reviewed_by" in mapping.columns:
+        for who, n in mapping.reviewed_by.fillna("(nobody)").value_counts().items():
+            flag = ("   <-- LLM-assisted; §3 expects a human to re-check"
+                    if str(who).strip() == "claude" else "")
+            print(f"  {str(who):12} {n:4}{flag}")
 
     # ---------- the research finding ----------
     gaps_gri = mapping[mapping.relationship == "gap_gri_side"]
