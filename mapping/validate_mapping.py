@@ -37,6 +37,7 @@ RUN
     python validate_mapping.py            (from mapping/)
 """
 
+import argparse
 import json
 import pathlib
 import sys
@@ -46,6 +47,7 @@ import pandas as pd
 HERE = pathlib.Path(__file__).parent
 MAPPING = HERE / "stars_gri_mapping.csv"
 GRI_JSON = HERE.parent / "standards" / "gri_disclosures.json"
+GRI_REQUIREMENTS = HERE.parent / "standards" / "gri_requirements.json"
 MASTER = HERE.parent / "Combined_universities_data" / "esg_master_dataset.csv"
 
 VALID_RELATIONSHIPS = {
@@ -149,8 +151,95 @@ def report_ready(mapping: pd.DataFrame) -> pd.DataFrame:
                    & (~mapping.relationship.isin(GAP_RELATIONSHIPS))]
 
 
+def review(mapping, master):
+    """Print each unreviewed row with the GRI requirement beside the STARS data.
+
+    This is the bottleneck the whole project is waiting on: 55 rows, 0
+    confirmed, and Phase 5 cannot cite a single one until a human checks them.
+    Doing that used to mean opening a PDF and hunting for the disclosure, 55
+    times. With the requirement text extracted, the comparison fits on screen.
+
+    It does NOT decide anything. It lays the two sides side by side and leaves
+    the judgement where §3 requires it — with a person.
+    """
+    if not GRI_REQUIREMENTS.exists():
+        print(f"[stop] {GRI_REQUIREMENTS.name} not found — run "
+              f"python standards/fetch_gri.py")
+        return
+
+    reqs = json.loads(GRI_REQUIREMENTS.read_text(encoding="utf-8"))["requirements"]
+    todo = mapping[mapping.review_status.str.strip() == "proposed"]
+
+    print(f"\n{len(todo)} row(s) awaiting review. For each: does the STARS "
+          f"field satisfy what GRI asks?\n")
+
+    for i, r in todo.iterrows():
+        line = i + 2
+        rel = str(r.relationship).strip()
+        print("=" * 78)
+        print(f"line {line}  [{rel}]  confidence={r.confidence}")
+
+        if rel == "gap_stars_side":
+            print(f"  STARS {r.stars_credit}: {r.rationale}")
+            print(f"  GRI has no home for it. {r.caveat if not blank(r.caveat) else ''}")
+            continue
+
+        num = str(r.gri_disclosure).strip()
+        req = reqs.get(num)
+        print(f"  GRI {num} — {req['title'] if req else '?'}")
+        if req:
+            for ln in req["text"].split("\n")[:9]:
+                print(f"      {ln[:88]}")
+            extra = len(req["text"].split("\n")) - 9
+            if extra > 0:
+                print(f"      ... {extra} more line(s)")
+
+        if rel == "gap_gri_side":
+            print(f"  STARS: NOTHING. {r.caveat}")
+            continue
+
+        field = str(r.stars_field).strip()
+        print(f"\n  STARS {r.stars_credit} — {field[:70]}")
+        vals = master[(master.credit_code == str(r.stars_credit).strip())
+                      & (master.field == field)]
+        reported = 0
+        for _, v in vals.iterrows():
+            unit = f" {v.units}" if pd.notna(v.units) and v.units else ""
+            has = pd.notna(v.value) and str(v.value).strip() != ""
+            reported += has
+            shown = str(v.value)[:60] if has else "«not reported»"
+            print(f"      {str(v.institution)[:32]:34} {shown}{unit}")
+
+        # Availability is a first-class review input, not a detail. A mapping
+        # can be perfectly correct and still useless if the universities left
+        # the field blank — e.g. "Annual scope 1 GHG emissions" is populated by
+        # exactly one of the three, because the other two report only the
+        # stationary/mobile/fugitive components.
+        if reported < len(vals):
+            print(f"      ^ ONLY {reported} OF {len(vals)} INSTITUTIONS "
+                  f"REPORT THIS")
+
+        if not blank(r.caveat):
+            print(f"\n  ⚠ {str(r.caveat)[:200]}")
+
+    print("=" * 78)
+    print("\nSet review_status to 'confirmed' or 'rejected' in "
+          "stars_gri_mapping.csv, then re-run.")
+
+
 def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--review", action="store_true",
+                    help="print each unreviewed row with the GRI requirement "
+                         "beside the STARS data, ready to judge")
+    args = ap.parse_args()
+
     mapping, gri, master = load()
+
+    if args.review:
+        review(mapping, master)
+        return
+
     print(f"[load] {len(mapping)} mapping rows")
     print(f"[load] {sum(len(s['disclosures']) for s in gri['standards'].values())} "
           f"GRI disclosures across {len(gri['standards'])} standards "
