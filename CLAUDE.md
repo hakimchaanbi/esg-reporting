@@ -29,9 +29,9 @@ is in French — do not let French leak into outputs).
 | 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | ✅ done |
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
-| 4 | **Map** — STARS credits → **GRI only** (§9) | 🔶 56 rows, 54 confirmed / 2 rejected — but `reviewed_by=claude`, **no human pass yet** |
+| 4 | **Map** — STARS credits → **GRI only** (§9) | 🔶 137 rows covering all 75 disclosures (§16) — but `reviewed_by=claude`, **no human pass yet** |
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 RAG layer done (§13); generation not started |
-| 6 | **Output** — ESG report + BI dashboard | pending |
+| 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15); narrative and dashboard pending |
 
 ### THREE inputs (the A/B split predates Phase 4 and was incomplete)
 
@@ -479,10 +479,15 @@ secondary sources **matched GRI's own pages exactly.**
   `CO2`, but headings use a separator, or
   `Disclosure 302-4Reduction of energy consumption` fails the heading regex.
   Different rules for different elements, on purpose.
-- `mapping/stars_gri_mapping.csv` — **55 rows**: 7 equivalent · 25 component ·
-  4 intensity · 8 partial · 8 gap_gri_side · 3 gap_stars_side.
+- `mapping/stars_gri_mapping.csv` — **137 rows** after the second pass (§16):
+  6 equivalent · 62 component · 4 intensity · 26 partial · 34 gap_gri_side ·
+  3 gap_stars_side. Every one of the 75 GRI disclosures now has a judgement.
 - `mapping/validate_mapping.py` — the integrity gate.
 - `mapping/test_validator_catches_fabrication.py` — negative test.
+- `mapping/find_candidates.py` — the search aid that made the second pass
+  possible (§16). Proposes nothing and writes nothing.
+- `mapping/add_pass2_rows.py` — the 81 second-pass rows as reviewable source,
+  each with its rationale and caveat. Idempotent; re-running adds nothing.
 
 ### The review is now a screen, not a PDF hunt
 ```bash
@@ -572,13 +577,16 @@ disclosure number, right disclosure under the wrong standard, invented STARS
 field, invented credit) and asserting each is rejected. **Run it after any
 schema change** — the integrity claim is only worth what the test proves.
 
-**Two findings already visible in the gap rows:**
-- *GRI asks, STARS cannot answer (8):* 305-6 ODS, 305-7 NOx/SOx, 403-9 injuries,
+**Two findings already visible in the gap rows** (counts as of the first pass;
+the second pass took gap_gri_side from 8 to 34 — see §16):
+- *GRI asks, STARS cannot answer:* 305-6 ODS, 305-7 NOx/SOx, 403-9 injuries,
   403-10 ill health, 401-1 hires/turnover, 405-2 gender pay ratio, 202-2 local
-  senior hires, 2-21 compensation ratio. Note **PA-13 is named "Pay Equity" but
-  still cannot satisfy GRI 405-2** — it has living-wage coverage, not a gender
-  pay ratio. PA-11 "Health, Safety and Wellbeing" has *no* numeric health data
-  at all; its only numbers are STARS scoring artefacts.
+  senior hires. Note **PA-13 is named "Pay Equity" but still cannot satisfy
+  GRI 405-2** — it has living-wage coverage, not a gender pay ratio. PA-11
+  "Health, Safety and Wellbeing" has *no* numeric health data at all; its only
+  numbers are STARS scoring artefacts. (**2-21 was on this list and should not
+  have been** — IL-62 does carry a compensation ratio, just a different one.
+  Corrected in the second pass; see §16.)
 - *STARS collects, GRI has no slot (3 so far):* AC-1 courses taught, AC-6
   research, EN-1 outreach. Teaching and research have no corporate analogue.
 
@@ -596,27 +604,28 @@ schema change** — the integrity claim is only worth what the test proves.
   carries the specific difference in its `caveat` column, and the validator
   warns if a `partial` row has an empty caveat.
 
-### Why the table has 56 rows
+### Why the table has 137 rows
 
-**45 are an actual link; 11 record an absence** (8 gap_gri_side, 3
+**100 are an actual link; 37 record an absence** (34 gap_gri_side, 3
 gap_stars_side). The links are many-to-one — STARS splits a figure into parts
-where GRI wants one number — so 45 distinct STARS fields reach only **15 GRI
+where GRI wants one number — so 97 distinct STARS fields reach **41 GRI
 disclosures**. GRI 305-1 alone takes six rows (the scope 1 total, its four
 combustion components, biogenic).
 
-| Reach | Count |
-|---|---|
-| STARS credits in the dataset | 86 |
-| STARS credits the mapping touches | **7** |
-| Distinct non-scoring numeric STARS fields | 257 |
-| …mapped to GRI | 45 (18%) |
-| GRI disclosures reached | 15 |
+| Reach | First pass | After §16 |
+|---|---|---|
+| STARS credits in the dataset | 86 | 86 |
+| STARS credits the mapping touches | 7 | **19** |
+| Distinct STARS fields mapped | 45 | **97** |
+| GRI disclosures reached by a link | 15 | **41** |
+| GRI disclosures with a judgement | 23 of 67 | **75 of 75** |
 
-**Seven credits of eighty-six is the finding, not a shortfall.** GRI has
-vocabulary for emissions, energy, water, waste and workforce diversity; it has
-none for the other 79 credits — courses taught, research produced, community
-engagement, campus life. The mapped seven are OP-3, OP-5, OP-6, OP-12, PA-7,
-PA-8, PA-13.
+**Nineteen credits of eighty-six is still the finding, not a shortfall.** GRI
+has vocabulary for emissions, energy, water, waste, workforce and governance;
+it has none for the other 67 credits — courses taught, research produced,
+community engagement, campus life. The mapped nineteen are PRE-1, PRE-3, PRE-4,
+OP-3, OP-5, OP-6, OP-9, OP-11, OP-12, PA-1, PA-2, PA-3, PA-7, PA-8, PA-11,
+PA-12, PA-13, EN-3, IL-62.
 
 The Phase 3 `pillar` column is the **first half of this mapping already done** —
 GRI topics group into environmental (300s), social (400s), governance.
@@ -678,15 +687,23 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
    guard dropping a second field. **Resolve before deleting the txt files** —
    they are the only other copy of that text.
 
-2. **Links and attachments are not extracted.** 1,249 links live inside answer
-   wells. 828 have link text identical to the URL and survive; **421 keep only
-   their label and lose the `href`**, including all document attachments.
-   Breakdown: 1,195 external (tudublin.ie 332, ucc.ie 274), 54 AASHE uploads
-   needing `AASHE_SESSIONID`, and 188 document links (164 pdf / 19 xlsx /
-   5 docx). Fix is an `href` column plus a re-parse of the cache — no
-   re-scraping.
+2. ~~Links and attachments are not extracted~~ **DONE** — `links` column added,
+   120 documents downloaded and 74 indexed. The 1,061 links to university
+   websites are deliberately left unfetched (deferred by Hakim).
 
 3. ~~Lane C~~ **DONE 2026-08-17** — see §13.
+
+4. **Human re-review of the mapping.** All 137 rows are `reviewed_by=claude`.
+   §3 says the table must be checked against the standards by a person before it
+   is defended. `python mapping/validate_mapping.py --review` puts GRI's
+   requirement text beside the real STARS values on one screen; the §16 rows
+   also carry their reasoning in `mapping/add_pass2_rows.py`, which reads faster
+   than the CSV.
+
+5. **Narrative generation (Phase 5) is not started.** The content index (§15)
+   is the skeleton — every disclosure with its status, values and caveats. What
+   is missing is the prose around it, which is where the LLM finally does its
+   job: writing the sentences and leaving `{PLACEHOLDER}` where numbers go.
 
 ---
 
@@ -825,3 +842,170 @@ Corpus ceiling, honestly: strong on framing and framework comparison
 living wage (0.274). **That is information, not a bug** — it marks topics Phase
 5 must not ask the corpus to ground. Re-run `eval_retrieval.py` after any
 corpus change.
+
+---
+
+## 15. Phase 6a — the GRI content index (built 2026-08-20)
+
+A GRI report is two things: the narrative, and the **content index**. The index
+is what makes it *a GRI report* rather than a sustainability brochure — one row
+per disclosure, saying where the answer is or why there isn't one.
+
+```bash
+python -m report.build_content_index          # all three
+python -m report.build_content_index cork
+python tests/test_content_index.py            # verify it afterwards
+```
+
+**No LLM is involved.** Every row is derived mechanically from three files you
+can open: `standards/gri_disclosures.json` (the questions),
+`mapping/stars_gri_mapping.csv` (which STARS field answers which) and
+`esg_master_dataset.csv` (the values). Output:
+
+- `report/output/<key>_gri_index.md` — the index itself
+- `report/output/index_provenance.csv` — **292 rows**, every printed figure with
+  the exact STARS credit and field it came from
+
+**Four statuses, all standard in real GRI indexes:**
+
+| Status | Meaning |
+|---|---|
+| Reported | confirmed equivalent/component/intensity mapping, at least one populated value |
+| Partially reported | confirmed `partial` mapping — the caveat prints beside it |
+| Not reported | GRI asks, STARS cannot answer, **or** a candidate mapping was assessed and rejected |
+| Not assessed | no mapping row exists — **now zero** |
+
+Current state, all three institutions: **23 reported · 15–16 partial · 36–37
+not reported · 0 not assessed.**
+
+⚠️ **"Not reported" and "Not assessed" are different claims and the difference
+matters.** *Not reported* means we looked and the data does not exist — a
+finding. *Not assessed* means we never looked — unfinished work wearing the
+costume of a finding. Before §16 the index showed 46 "Not assessed" and it read
+as if the universities were silent, when in fact **we** were. Getting that to
+zero was the point of the second mapping pass.
+
+A **rejected** mapping row now renders as *Not reported*, not *Not assessed* —
+303-4 and 303-5 were examined and turned down, and hiding that review understated
+what the project knows. The rejected candidate is named in the cell.
+
+`tests/test_content_index.py` re-derives every printed figure from
+`esg_master_dataset.csv` **without reusing the generator's logic**, so a bug in
+`build_content_index.py` cannot also silence the test.
+
+**Trap, found by the test failing:** long prose values are truncated to 87
+characters, so the printed text is a *prefix* of the dataset value. The test's
+containment check ran the other way round. It passed for the whole numeric
+mapping and broke the instant prose disclosures were mapped — a test that only
+works on short values is not testing the thing that is hard. Also `format_value`
+now escapes `|`: one pipe inside an institution's prose would end the table cell
+and shift every column after it.
+
+---
+
+## 16. Phase 4 second pass — the prose disclosures (2026-08-20)
+
+The first mapping pass was **numeric-biased**. It went looking for tonnes and
+megawatt-hours, found them, and covered GRI 302/303/305/306 well. It never
+looked at GRI 2, whose 30 mandatory General Disclosures are answered in prose.
+Result: 46 of 67 disclosures "Not assessed", several of them questions the
+universities had in fact answered in full.
+
+Lane C (§13) had been built for exactly this material and the mapping was not
+using it.
+
+### The vocabulary file was missing 8 mandatory disclosures
+
+`gri_disclosures.json` listed GRI 2 as **2-7 … 2-30**. GRI 2 actually runs
+**2-1 … 2-30**. Absent: 2-1 organizational details, 2-2 entities included,
+2-3 reporting period, 2-4 restatements, 2-5 external assurance, 2-6 activities
+and value chain, 2-25 remediation, 2-26 raising concerns.
+
+The content index was not reporting them as unanswered — **it was omitting the
+questions.** `standards/gri_requirements.json` had all 75 the whole time; the
+extractor cross-checked *our* titles against GRI's but never the reverse, so a
+disclosure our vocabulary never named could not be missed by anything
+downstream. `fetch_gri.py` now emits a `_unlisted` warning for exactly this, and
+the vocabulary holds all 75.
+
+**Lesson, and it generalises:** a completeness check that only walks your own
+list can never find what your list forgot.
+
+### How the candidates were found
+
+```bash
+python -m mapping.find_candidates            # unmapped disclosures only
+python -m mapping.find_candidates 2-9 2-23   # specific ones
+```
+
+Embeds each disclosure's **verbatim requirement text** and each of the 1,069
+populated STARS fields (`credit_name. field. sample_answer`) with the same
+MiniLM model the RAG layer uses, then ranks by cosine similarity. It
+**proposes nothing and writes nothing** — the score chose what to *look at*,
+never what to accept, and each row was then read against the requirement text
+and the real values (§13: a score means "closest", never "correct").
+
+The rows themselves live in `mapping/add_pass2_rows.py` with their reasoning
+attached, so the second pass is reviewable as prose rather than as 81 CSV lines.
+It is idempotent — re-running adds nothing.
+
+### What it found
+
+**81 new rows: 37 component · 27 gap_gri_side · 17 partial.** All 75 disclosures
+now judged; "Not assessed" went 46 → 0.
+
+The strongest finds, all previously invisible:
+
+| GRI | STARS | Why it holds |
+|---|---|---|
+| 2-9 governance composition | PA-3 academic-staff / non-managerial-worker / student representation on the highest decision-making body | 2-9-c-v is representation of stakeholders, asked of the same body, answered 3/3 |
+| 2-13 delegated responsibility | PA-1 sustainability officers + institution-wide remit | 2-13-a is precisely "senior executives with responsibility for managing impacts" |
+| 403-4 worker consultation on H&S | PA-11 institution-wide joint worker–management H&S committee | 403-4-b in almost the same words |
+| 403-6 promotion of worker health | PA-11 physical / behavioural / fitness / smoke-free / contemplative | five separate 403-6 components |
+| 306-2 waste management | OP-11 surplus, reuse, single-use plastic, hazardous, composting | 306-2-a names circularity measures explicitly |
+| 2-23 policy commitments | PA-2 public commitment + external commitments narrative | 2-23-a and 2-23-b-ii |
+| 2-29 stakeholder engagement | PA-3 consultation mechanisms for students, academic staff, local community | 2-29-a |
+| 2-5 external assurance | PRE-4 assurance yes/no + narrative | asked of the same body of reported information |
+| 2-2 entities included | PRE-3 institutional-boundary narrative | 2-2-a verbatim |
+
+**A correction to the first pass.** 2-21 annual total compensation ratio was
+recorded as a blank gap with the note *"STARS 3.0 collects none of this at any
+credit."* **That was wrong.** IL-62 Pay Scale Equity reports *"the factor by
+which the compensation of the highest compensated senior administrator exceeds
+that of the lowest compensated full-time employee"* — 8.08 at TU Dublin. It is
+a genuinely different statistic (GRI divides by the **median** of all other
+employees; STARS by the **lowest** paid), so the row is now `partial` with that
+difference stated, not a blank. IL-62 is also an IL bonus credit, so only one of
+the three reports it.
+
+**Two new numeric components the first pass missed:** OP-5 `Total heating and
+cooling from off-site sources` → 302-1-c (purchased heating/cooling) and
+`On-site renewable electricity exported` → 302-1-d (energy sold).
+
+### New gap findings worth the report
+
+- **GRI 301 Materials has no subject here.** 301-1/2/3 all concern materials
+  used to produce and package *products*. A university produces none. Same
+  family of finding as AC-1/EN-1 on the STARS side, pointing the other way.
+  Likewise 302-5 (energy of sold products).
+- **GRI 2-3 cannot be answered honestly.** STARS states a performance year
+  **per credit**, and they diverge inside one submission: Cork runs 2023
+  (construction waste) to 2025 (living wage, investment), Berkeley 2023–2024.
+  Only TU Dublin is uniform. Any single reporting period stated for a GRI report
+  built on this data would be wrong for some of its figures.
+- **Governance of the governing body is entirely absent.** 2-10 nomination,
+  2-11 chair, 2-12 oversight of impacts, 2-15 conflicts of interest, 2-16
+  critical concerns, 2-17 collective knowledge, 2-18 performance evaluation,
+  2-19/2-20 remuneration — eight consecutive disclosures with no STARS field.
+  STARS asks *who sits on* the governing body; GRI asks *how it behaves*.
+- **PA-11 is named "Health, Safety and Wellbeing" and contains no health or
+  safety numbers.** It now supplies eight qualitative components (403-1, 403-3,
+  403-4, 403-6) and still cannot answer 403-8 (workers covered), 403-9
+  (injuries) or 403-10 (ill health).
+- **204-1 rejected on definition.** OP-9 measures spend with *social impact*
+  suppliers; GRI 204-1 wants spend with *local* suppliers. Social purpose and
+  locality are different criteria and neither implies the other, so this is
+  recorded as a gap rather than stretched into a partial.
+
+⚠️ Every one of these 137 rows is `reviewed_by=claude`. §3 still expects a human
+pass before the viva; the column exists so they can be found.

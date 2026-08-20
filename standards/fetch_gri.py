@@ -304,10 +304,21 @@ def build_requirements() -> dict:
         if num not in out:
             missing.append(f"{num} ({std}) {title[:40]}")
 
+    # The reverse check, and the more dangerous one. `missing` catches a
+    # disclosure we list that GRI's page does not explain. `unlisted` catches a
+    # disclosure GRI *defines* that our vocabulary never names — and that one is
+    # silent, because nothing downstream can miss what it was never told about.
+    # It found 8 mandatory General Disclosures (2-1..2-6, 2-25, 2-26) absent
+    # from gri_disclosures.json, so the content index was not reporting them as
+    # unanswered; it was omitting the questions.
+    unlisted = [f"{num} ({rec['standard']}) {rec['title'][:40]}"
+                for num, rec in out.items() if num not in known]
+
     return {"retrieved": DATE_STAMP,
             "requirements": out,
             "_mismatches": mismatches,
-            "_missing": missing}
+            "_missing": missing,
+            "_unlisted": unlisted}
 
 
 def main():
@@ -367,6 +378,13 @@ def main():
               f"requirement text extracted:")
         for m in result["_missing"]:
             print(f"   {m}")
+
+    if result["_unlisted"]:
+        print(f"\n[WARN] {len(result['_unlisted'])} disclosure(s) GRI defines "
+              f"are NOT in gri_disclosures.json — the content index cannot "
+              f"even list them as unanswered. Add them:")
+        for u in result["_unlisted"]:
+            print(f"   {u}")
 
 
 if __name__ == "__main__":
