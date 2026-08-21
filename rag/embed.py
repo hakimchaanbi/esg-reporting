@@ -4,15 +4,18 @@ Phase 5a — embedding backends
 
 WHY THERE ARE TWO, AND WHY THERE IS NO CHROMADB
 
-    The plan (CLAUDE.md §11) said ChromaDB + sentence-transformers. Neither
-    survived contact with this environment:
+    The plan (CLAUDE.md §11) said ChromaDB + sentence-transformers. Neither is
+    used, but for one good reason and one that turned out to be false:
 
-    * ChromaDB hard-requires grpcio (via its OpenTelemetry exporter), and
-      grpcio resolves to "from versions: none" here -- it is blocked at the
-      package-index level. Not a platform problem: onnxruntime cp312 wheels
-      resolve fine from the same index.
-    * sentence-transformers needs PyTorch, ~2 GB over a PyPI connection that
-      was read-timing-out during this build.
+    * ChromaDB: an earlier version of this docstring said grpcio "is blocked at
+      the package-index level" because pip reported "from versions: none".
+      THAT WAS WRONG. It was a badly degraded network: pip could not read the
+      index and reported that as the package not existing. On a healthy
+      connection chromadb and grpcio install without incident, and both are
+      now installed. Corrected here and in CLAUDE.md §13 — re-test an
+      environment claim before writing it down as fact.
+    * sentence-transformers needs PyTorch, ~2 GB. This one still holds: the
+      same model is reachable through ONNX Runtime at 23 MB.
 
     That turned out not to matter, because a vector DATABASE was never the
     right tool here. The corpus is 226 chunks. 226 x 384 floats is 347 KB --
