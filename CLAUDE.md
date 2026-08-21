@@ -29,7 +29,7 @@ is in French — do not let French leak into outputs).
 | 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | ✅ done |
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
-| 4 | **Map** — STARS credits → **GRI only** (§9) | 🔶 137 rows covering all 75 disclosures (§16) — but `reviewed_by=claude`, **no human pass yet** |
+| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 137 rows, all 75 disclosures judged (§16); `reviewed_by=claude`, accepted by Hakim (§14.4) |
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 RAG layer done (§13); generation not started |
 | 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15); narrative and dashboard pending |
 
@@ -520,9 +520,9 @@ review input. It decides nothing; it puts both sides on one screen.
 **56 rows: 54 `confirmed`, 2 `rejected`.** Every row carries `reviewed_by` and
 `reviewed_date`, plus `claude_verdict` / `claude_note` recording the reasoning.
 
-⚠️ **`reviewed_by = claude` on all of them.** Hakim asked for this explicitly
-after being told the risk; §3 still expects a human pass, and the column exists
-so those rows can be found and re-checked. Filter on it before the viva.
+**`reviewed_by = claude` on all of them.** Hakim asked for this explicitly after
+being told the risk, and on 2026-08-21 accepted the result as the final review
+(§14.4). The column stays so the rows remain identifiable.
 
 Outcome of the review against the extracted requirement text:
 
@@ -693,12 +693,20 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
 
 3. ~~Lane C~~ **DONE 2026-08-17** — see §13.
 
-4. **Human re-review of the mapping.** All 137 rows are `reviewed_by=claude`.
-   §3 says the table must be checked against the standards by a person before it
-   is defended. `python mapping/validate_mapping.py --review` puts GRI's
-   requirement text beside the real STARS values on one screen; the §16 rows
-   also carry their reasoning in `mapping/add_pass2_rows.py`, which reads faster
-   than the CSV.
+4. ~~Human re-review of the mapping~~ **CLOSED 2026-08-21 by Hakim's decision.**
+   All 137 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
+   re-raise this as a blocker. The risk was stated and accepted; the column is
+   kept so the rows remain identifiable if the supervisor asks.
+
+   **What this does NOT waive:** the mechanical integrity gates in §10 still
+   run and must keep passing — every GRI disclosure must exist in
+   `gri_disclosures.json`, every STARS field must exist in
+   `esg_master_dataset.csv`, and `test_validator_catches_fabrication.py` must
+   still reject invented rows. Those catch a *fabricated* mapping, which is
+   what §3 is actually about. Human re-review was a second, softer layer.
+
+   The review screen still exists if it is ever wanted:
+   `python mapping/validate_mapping.py --review`.
 
 5. **Narrative generation (Phase 5) is not started.** The content index (§15)
    is the skeleton — every disclosure with its status, values and caveats. What
@@ -1007,5 +1015,6 @@ cooling from off-site sources` → 302-1-c (purchased heating/cooling) and
   locality are different criteria and neither implies the other, so this is
   recorded as a gap rather than stretched into a partial.
 
-⚠️ Every one of these 137 rows is `reviewed_by=claude`. §3 still expects a human
-pass before the viva; the column exists so they can be found.
+All 137 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
+2026-08-21** after the risk was stated — see §14 item 4. The column stays so the
+rows are identifiable, but this is no longer an open action.
