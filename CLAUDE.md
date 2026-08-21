@@ -30,8 +30,8 @@ is in French — do not let French leak into outputs).
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
 | 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 137 rows, all 75 disclosures judged (§16); `reviewed_by=claude`, accepted by Hakim (§14.4) |
-| 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 RAG layer done (§13); generation not started |
-| 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15); narrative and dashboard pending |
+| 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 built and tested offline (§17); needs a `GEMINI_API_KEY` to write real prose |
+| 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15), narrative pipeline done (§17); **dashboard pending** |
 
 ### THREE inputs (the A/B split predates Phase 4 and was incomplete)
 
@@ -1018,3 +1018,125 @@ cooling from off-site sources` → 302-1-c (purchased heating/cooling) and
 All 137 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
 2026-08-21** after the risk was stated — see §14 item 4. The column stays so the
 rows are identifiable, but this is no longer an open action.
+
+---
+
+## 17. Phase 5b — the narrative generator (built 2026-08-21)
+
+The content index says *which* GRI question each STARS field answers. This
+writes the prose around it. It is the first and only place a language model
+produces text that reaches the report.
+
+```bash
+python -m report.build_narrative                  # all three, auto backend
+python -m report.build_narrative cork
+python -m report.build_narrative --backend stub   # offline, no key needed
+python tests/test_narrative_safety.py             # the proof
+```
+
+Output: `report/output/<key>_gri_report.md` plus
+`report/output/narrative_audit.csv` — per section, how many figures were
+offered, how many the model used, and every digit that needs a human glance.
+
+### The LLM is Gemini, and why
+
+Hakim chose Google Gemini. Google AI Studio issues **free API keys with no card**,
+which is what a student project needs; `freellm.net`, the free-API directory
+Hiba recommended, lists Gemini among its providers, so this is consistent with
+her suggestion rather than a departure from it.
+
+- Package: `google-genai` (the old `google-generativeai` is deprecated).
+- Call: `client.models.generate_content(...)`, **not** `client.interactions.create(...)`.
+  Both exist in the SDK. Google's published Python reference documents
+  `system_instruction` and `temperature` against `generate_content`, and this
+  job needs both. Verified against the docs on 2026-08-21, not recalled (§12).
+- Key: `GEMINI_API_KEY` in `.env`. **Not set yet** — everything below was built
+  and tested against the offline stub, which is the point of having one.
+- Model ID lives in one constant, `report/llm.py: DEFAULT_GEMINI_MODEL`. Google
+  renames these often; a rejected model prints the list the key can actually
+  see rather than a bare 404.
+
+### THREE mechanisms, because a prompt is a request, not a guarantee
+
+§3 says the LLM never touches a number it could alter. Until now that was one
+line in a prompt. It is now three independent controls:
+
+1. **The model is never shown a value.** A numeric fact reaches it only as
+   `{{ op_6_annual_scope_1_ghg_emissions }}`. Proven by test: none of the 39
+   figure values for Cork's environmental section appear anywhere in the prompt.
+2. **Jinja2 renders with `StrictUndefined`.** A placeholder the model *invented*
+   raises instead of rendering as an empty string. A hallucinated token is a
+   crash, never a silent hole in a sentence.
+3. **`audit_digits()` scans the finished prose.** Every number-like string must
+   trace to a substituted value, to the source material for that section, or to
+   a GRI reference. Anything else fails the build.
+
+Mechanism 3 is the one that counts, because it trusts neither the model nor
+mechanisms 1 and 2.
+
+**The `rogue` backend exists to prove 3 fires.** It writes *"reduced emissions by
+42,000 metric tons, a fall of 17 percent"* on purpose, and the test asserts both
+figures are caught — the same discipline as
+`mapping/test_validator_catches_fabrication.py`. A guarantee nobody has tried to
+break is not a guarantee.
+
+### Where the numbers/prose line is drawn
+
+| `value_type` | Treatment |
+|---|---|
+| `number`, `year` | **Token.** The model never sees the value. |
+| everything else | **Source material.** Shown to the model, which may paraphrase. |
+
+Paraphrasing a boolean "Yes" into *"the institution does operate such a
+committee"* is the model doing its job, not a §3 breach. §3 protects **numbers**.
+Any digit lifted out of prose source material is still caught by the audit — as
+tier 2, `review`, not `ok`.
+
+### Three tiers, on purpose
+
+```
+ok        the digit came from a value the code substituted in
+review    it appears verbatim in this section's source material, so it traces
+          to the dataset — but the model retyped it and could have attached it
+          to the wrong claim. Listed in narrative_audit.csv.
+INVENTED  it appears nowhere. Hard failure, build stops.
+```
+
+### ⚠️ The contamination the caveats were carrying
+
+Found by the test failing, and it is the §13 Toronto problem wearing a new coat.
+
+Several `caveat` and `rationale` cells in the mapping table quote real figures to
+make their argument — *"Berkeley 18,173 MWh"*, *"0.21 MWh for TU Dublin"*,
+*"45 at TU Dublin, 240 at Berkeley"*. Those strings go into the prompt verbatim,
+so **Cork's prompt contained Berkeley's numbers.** Exactly the cross-institution
+leak the RAG layer is careful about, arriving through a door nobody had locked
+because the caveats are *our* editorial text, not retrieved content.
+
+`redact_figures()` now blanks figures out of caveats and gap rationales before
+they reach the prompt, preserving GRI references and Scope 1/2/3 so the caveat
+can still name what it qualifies. The argument survives; the numbers do not.
+The test asserts no figure survives in any of the 64 live caveats.
+
+**Institution prose is deliberately NOT redacted** — it is that university's own
+words about itself, and the audit's `review` tier covers it.
+
+### Two bookkeeping bugs worth remembering
+
+- **Do not detect token use by string-matching `"{{ token }}"`.** A line wrap
+  inside the braces silently misses it, and every figure in that sentence then
+  reads as unaccounted-for. Use `jinja2.meta.find_undeclared_variables` on the
+  parsed template.
+- **Strip trailing punctuation from matched numbers.** `6,215.78.` at the end of
+  a sentence otherwise never matches the substituted `6,215.78`.
+
+### Honest limits
+
+- **Spelled-out numbers are not caught mechanically.** The prompt forbids them
+  and the audit lists any it finds (`two`…`billion`) as a warning, but *"three
+  campuses"* is not a hard failure. Digits are; words are a flag for review.
+- **Section order is hand-written**, in `SECTIONS`. The order of a GRI report is
+  a reporting convention, not something to ask a model to invent.
+- **The stub's prose is meaningless by design.** It exists so the whole pipeline
+  is testable with no key and no network; nobody should mistake its output for a
+  report. Current runs are all stub output.
