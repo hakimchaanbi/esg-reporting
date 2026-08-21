@@ -54,21 +54,66 @@ WHY models.generate_content AND NOT interactions.create
 
 from __future__ import annotations
 
+import logging
 import os
+import pathlib
+import random
+import time
 
-# Gemini's free tier covers the Flash models; Pro sits behind billing. This is
-# the one string to change when Google renames things — and they do, often. If
-# it is wrong the backend says so and lists what the key can actually see,
-# rather than failing with a bare 404.
-DEFAULT_GEMINI_MODEL = "gemini-3.7-flash"
+# The key lives in .env, which is gitignored (§6.1: secrets go in the
+# environment, never in a tracked file). Nothing else in the project reads .env,
+# so load it here rather than making every caller remember to export the
+# variable first. An absent .env is normal — the stub backend needs no key.
+try:
+    from dotenv import load_dotenv
+    load_dotenv(pathlib.Path(__file__).resolve().parent.parent / ".env")
+except ImportError:                                      # pragma: no cover
+    pass
+
+# Gemini's free tier covers the Flash models; Pro sits behind billing.
+#
+# ⚠️ THE FREE DAILY QUOTA IS PER MODEL AND IS SMALL. gemini-3.7-flash allows 20
+# requests/day, and a full run of three institutions needs 21. Google no longer
+# publishes per-model free limits in the docs — read yours at
+# https://aistudio.google.com/rate-limit — so the model is settable from the
+# environment, because finding a workable one is trial and error and should not
+# require a code edit:
+#
+#     GEMINI_MODEL=gemini-2.5-flash python -m report.build_narrative
+#
+# Newer models tend to have the tightest allowances; an older Flash or a
+# Flash-Lite usually has more room.
+DEFAULT_GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.7-flash")
 
 # Low but not zero. Zero makes the prose mechanical and repetitive across the
 # eight sections; this keeps it readable while staying close to reproducible.
 TEMPERATURE = 0.3
 
+# The free tier is rate-limited per minute, and Flash models return 503 when
+# Google is busy — which on a free key is often. A whole report is ~7 calls per
+# institution, 21 in total, so both limits are reachable in one run and a bare
+# failure would throw away the sections already generated.
+MAX_ATTEMPTS = 5
+BASE_BACKOFF = 4.0        # seconds; doubles each attempt, plus jitter
+PACE_SECONDS = 6.0        # between successful calls: free tier allows ~10/min
+
+# The SDK logs an automatic-function-calling advisory on every generate_content
+# call. We pass no tools, so it does not apply, and it buries the real output.
+logging.getLogger("google_genai.models").setLevel(logging.ERROR)
+
+_RETRYABLE = ("503", "429", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
+              "overloaded", "high demand", "deadline", "timeout")
+
 
 class WriterError(RuntimeError):
     """Raised when a backend cannot produce text. Never returns empty prose."""
+
+
+class QuotaExhausted(WriterError):
+    """The daily free-tier allowance is gone. Distinct from a WriterError
+    because it is not worth retrying and not worth trying the next section
+    either — every remaining call would fail the same way. The caller stops the
+    whole run on this and keeps what it already has."""
 
 
 class StubWriter:
@@ -135,6 +180,7 @@ class GeminiWriter:
         self._types = types
         self._client = genai.Client(api_key=key)
         self.model = model
+        self._last_call = 0.0
 
     def available_models(self) -> list[str]:
         """What this key can actually reach. Used to explain a bad model ID."""
@@ -145,25 +191,61 @@ class GeminiWriter:
             return []
 
     def write(self, system: str, prompt: str, tokens: list[str]) -> str:
-        try:
-            response = self._client.models.generate_content(
-                model=self.model,
-                contents=prompt,
-                config=self._types.GenerateContentConfig(
-                    system_instruction=system,
-                    temperature=TEMPERATURE,
-                ),
-            )
-        except Exception as exc:
-            hint = ""
-            if "not found" in str(exc).lower() or "404" in str(exc):
-                seen = self.available_models()
-                flash = [m for m in seen if "flash" in m]
-                hint = (f"\n\nModel '{self.model}' was rejected. Models this key "
-                        f"can see:\n  " + "\n  ".join(flash or seen[:20]) +
+        config = self._types.GenerateContentConfig(
+            system_instruction=system, temperature=TEMPERATURE)
+
+        # Pace ourselves rather than discovering the per-minute limit by
+        # tripping it: a 429 partway through costs more time than the waits.
+        gap = time.monotonic() - self._last_call
+        if self._last_call and gap < PACE_SECONDS:
+            time.sleep(PACE_SECONDS - gap)
+
+        last_error = None
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            try:
+                response = self._client.models.generate_content(
+                    model=self.model, contents=prompt, config=config)
+                self._last_call = time.monotonic()
+                break
+            except Exception as exc:
+                last_error, message = exc, str(exc)
+
+                # A PER-DAY quota is not a transient rate limit and retrying it
+                # is actively harmful: every retry is another request counted
+                # against the very allowance that just ran out. The first run
+                # burned roughly 28 requests from a 20/day budget discovering
+                # this. Fail immediately and let the caller resume tomorrow.
+                if "PerDay" in message or "per day" in message.lower():
+                    raise QuotaExhausted(
+                        f"Daily free-tier quota exhausted for {self.model!r}.\n"
+                        "  Options: wait for the reset (midnight Pacific), set "
+                        "GEMINI_MODEL to a different model (the quota is per "
+                        "model, so another one has its own allowance), or check "
+                        "your real limits at "
+                        "https://aistudio.google.com/rate-limit\n"
+                        "  Sections already written are cached — re-running "
+                        "resumes rather than starting over.") from exc
+
+                if "not found" in message.lower() or "404" in message:
+                    seen = self.available_models()
+                    flash = [m for m in seen if "flash" in m]
+                    raise WriterError(
+                        f"Model {self.model!r} was rejected. Models this key "
+                        "can see:\n  " + "\n  ".join(flash or seen[:20]) +
                         "\n\nSet a working one in report/llm.py "
-                        "(DEFAULT_GEMINI_MODEL).")
-            raise WriterError(f"Gemini call failed: {exc}{hint}") from exc
+                        "(DEFAULT_GEMINI_MODEL).") from exc
+
+                if not any(s in message for s in _RETRYABLE) \
+                        or attempt == MAX_ATTEMPTS:
+                    raise WriterError(f"Gemini call failed: {exc}") from exc
+
+                wait = BASE_BACKOFF * (2 ** (attempt - 1)) + random.uniform(0, 2)
+                reason = "rate limit" if "429" in message else "model busy"
+                print(f"       {reason}, retrying in {wait:.0f}s "
+                      f"(attempt {attempt}/{MAX_ATTEMPTS})")
+                time.sleep(wait)
+        else:                                            # pragma: no cover
+            raise WriterError(f"Gemini call failed: {last_error}")
 
         text = (response.text or "").strip()
         if not text:

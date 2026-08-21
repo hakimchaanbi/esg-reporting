@@ -50,7 +50,9 @@ RUN
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import pathlib
 import re
 import sys
 
@@ -59,13 +61,14 @@ from jinja2 import Environment, StrictUndefined, TemplateError, meta
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent.parent))
 
-from report.llm import WriterError, get_writer            # noqa: E402
+from report.llm import QuotaExhausted, WriterError, get_writer            # noqa: E402
 from scrapers.institutions import PROJECT_ROOT, resolve   # noqa: E402
 
 GRI_JSON = PROJECT_ROOT / "standards" / "gri_disclosures.json"
 MAPPING = PROJECT_ROOT / "mapping" / "stars_gri_mapping.csv"
 MASTER = PROJECT_ROOT / "Combined_universities_data" / "esg_master_dataset.csv"
 OUT_DIR = PROJECT_ROOT / "report" / "output"
+CACHE_DIR = PROJECT_ROOT / "report" / "cache_narrative"
 
 TOKENISED_TYPES = {"number", "year"}
 USABLE = {"equivalent", "component", "intensity", "partial"}
@@ -210,13 +213,20 @@ def gather(institution, section, gri, mapping, master) -> dict:
 
 SYSTEM = """You write sections of GRI sustainability reports for universities.
 
-THE ABSOLUTE RULE: NEVER WRITE A NUMBER.
+THE ABSOLUTE RULE: NEVER WRITE A FIGURE.
 You will be given figures as named placeholders, like {{ op5_total_annual_energy_consumption }}.
 When a figure belongs in a sentence, write its placeholder exactly as given,
-including both pairs of braces. Never write a digit yourself — not a value, not
-a percentage, not a count, not a year. Never spell a number out as a word
-either. If you cannot express something without inventing a number, leave it
-out and say the source does not report it.
+including both pairs of braces. Never write a measured value yourself — not a
+quantity, not a percentage, not a count, not a year. Never spell one out as a
+word either. If you cannot express something without inventing a figure, leave
+it out and say the source does not report it.
+
+TWO KINDS OF DIGIT ARE NOT FIGURES, AND YOU MUST WRITE THEM NORMALLY:
+  - GRI references: write "GRI 305", "Disclosure 305-1", "GRI 2-9".
+  - Greenhouse gas scopes: write "Scope 1", "Scope 2", "Scope 3" — always with
+    the numeral. Never "scope one" or "scope two"; that is not how the standard
+    is written and it reads as an error.
+These are terminology, not data, and spelling them out is wrong.
 
 Background passages may themselves contain figures. Do not reproduce them.
 Summarise what they say; the placeholders are the only route a figure may take
@@ -230,6 +240,10 @@ Other rules:
 - Never claim the institution did something the material does not state.
 - Where the material shows a gap, report the gap plainly. Unanswered questions
   are a legitimate and expected part of a GRI report.
+- Keep limitations SHORT. This is a report about the institution, not a review
+  of the source framework. Gather what is unavailable into one brief passage
+  near the end of the section rather than qualifying every paragraph, and never
+  spend more words on what is missing than on what is reported.
 - Write flowing prose in Markdown. Use ### for sub-headings. No bullet lists of
   raw figures — this is a report, not a table; the tables come separately.
 - Do not write a section heading; one is added for you.
@@ -388,22 +402,60 @@ def render(prose: str, figures: dict) -> tuple[str, list[str]]:
     return out, used
 
 
-def write_section(writer, institution, section, facts) -> dict:
+def cache_path(writer, institution, section, prompt) -> pathlib.Path:
+    """Where one generated section lives between runs.
+
+    Keyed on the model, the system rule and the prompt, so changing any of them
+    regenerates. Note what is NOT in the key: the figure VALUES. They never
+    reach the prompt (that is the whole design), so a corrected number in
+    esg_master_dataset.csv flows into the report on the next run without
+    spending an API call — substitution happens fresh every time against live
+    data, and only the sentences are cached.
+    """
+    digest = hashlib.sha256(
+        f"{getattr(writer, 'model', writer.name)}\0{SYSTEM}\0{prompt}"
+        .encode("utf-8")).hexdigest()[:8]
+    return CACHE_DIR / f"{institution.key}__{section['key']}__{digest}.md"
+
+
+def write_section(writer, institution, section, facts, use_cache=True) -> dict:
     prompt = build_prompt(institution, section, facts)
     tokens = list(facts["figures"])
-    prose = writer.write(SYSTEM, prompt, tokens)
+
+    # The free tier allows very few calls a day, so never pay twice for the
+    # same section. A run that dies halfway resumes instead of restarting.
+    path = cache_path(writer, institution, section, prompt)
+    cached = use_cache and path.exists()
+    if cached:
+        prose = path.read_text(encoding="utf-8")
+    else:
+        prose = writer.write(SYSTEM, prompt, tokens)
+        if use_cache:
+            CACHE_DIR.mkdir(parents=True, exist_ok=True)
+            path.write_text(prose, encoding="utf-8")
+
     rendered, used = render(prose, facts["figures"])
     context_texts = [c["text"] for c in facts["context"]]
     audit = audit_digits(rendered, used, context_texts)
     return {"prose": rendered, "audit": audit, "tokens_offered": len(tokens),
-            "tokens_used": len(used)}
+            "tokens_used": len(used), "cached": cached}
 
 
 def main():
+    # A full run is ~21 paced API calls and takes minutes. Without this, stdout
+    # is block-buffered whenever output is piped or redirected and the progress
+    # lines all appear at the end — which looks exactly like a hang.
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except AttributeError:                               # pragma: no cover
+        pass
+
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("institutions", nargs="*")
     ap.add_argument("--backend", choices=["gemini", "stub", "rogue"])
     ap.add_argument("--section", help="build only this section key")
+    ap.add_argument("--no-cache", action="store_true",
+                    help="regenerate every section, ignoring cached prose")
     args = ap.parse_args()
 
     for path in (GRI_JSON, MAPPING, MASTER):
@@ -426,29 +478,41 @@ def main():
         sys.exit(f"[stop] no section named {args.section!r}. "
                  f"Choose from {[s['key'] for s in SECTIONS]}")
 
-    audit_rows, failed = [], False
+    audit_rows, failed, out_of_quota = [], False, False
 
     for institution in resolve(args.institutions):
+        if out_of_quota:
+            break
         print(f"\n[{institution.key}] {institution.name}")
         parts = [f"# Sustainability report — {institution.name}", "",
                  "Prepared **with reference to** the GRI Standards. Source "
                  f"data: [{institution.name} STARS Report]"
                  f"({institution.report_url}), AASHE. STARS data is used with "
                  "attribution to AASHE.", ""]
+        incomplete = []
 
         for section in sections:
             facts = gather(institution, section, gri, mapping, master)
             try:
-                result = write_section(writer, institution, section, facts)
+                result = write_section(writer, institution, section, facts,
+                                       use_cache=not args.no_cache)
+            except QuotaExhausted as exc:
+                print(f"  [quota] {exc}")
+                incomplete.append(section["title"])
+                out_of_quota = failed = True
+                break
             except WriterError as exc:
                 print(f"  [FAIL] {section['title']}: {exc}")
+                incomplete.append(section["title"])
                 failed = True
                 continue
 
             a = result["audit"]
-            status = "FAIL" if a["invented"] else "ok"
+            status = "FAIL" if a["invented"] else ("hit " if result["cached"]
+                                                   else "ok  ")
             if a["invented"]:
                 failed = True
+                incomplete.append(section["title"])
             print(f"  [{status:4}] {section['title']:38} "
                   f"{result['tokens_used']}/{result['tokens_offered']} figures"
                   + (f"  INVENTED: {a['invented'][:6]}" if a["invented"] else "")
@@ -467,9 +531,24 @@ def main():
             })
             parts += [f"## {section['title']}", "", result["prose"], ""]
 
+        # Never leave a file that looks like a report but is not one. The first
+        # real run wrote a 323-byte tudublin report containing a title and zero
+        # sections, because every section had failed on quota — the build said
+        # STOP and wrote the file anyway. Anyone opening the directory later,
+        # including a reviewer, would have found three plausible-looking
+        # reports of which one was empty.
         out = OUT_DIR / f"{institution.key}_gri_report.md"
-        out.write_text("\n".join(parts), encoding="utf-8")
-        print(f"  -> {out.relative_to(PROJECT_ROOT)}")
+        if incomplete:
+            print(f"  [skip] not written — {len(incomplete)} section(s) "
+                  f"incomplete: {', '.join(incomplete[:3])}")
+            if out.exists():
+                stale = out.with_suffix(".md.incomplete")
+                out.rename(stale)
+                print(f"         moved the previous file to "
+                      f"{stale.name} so it cannot be mistaken for finished")
+        else:
+            out.write_text("\n".join(parts), encoding="utf-8")
+            print(f"  -> {out.relative_to(PROJECT_ROOT)}")
 
     if audit_rows:
         audit_path = OUT_DIR / "narrative_audit.csv"
