@@ -55,3 +55,7 @@ rag/index/
 # Windows artifacts
 *.zip
 *:Zone.Identifier
+
+# generated narrative cache (LLM output, rebuildable)
+report/cache_narrative/
+report/output/*.md.incomplete

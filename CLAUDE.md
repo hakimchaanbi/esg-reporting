@@ -1140,3 +1140,70 @@ words about itself, and the audit's `review` tier covers it.
 - **The stub's prose is meaningless by design.** It exists so the whole pipeline
   is testable with no key and no network; nobody should mistake its output for a
   report. Current runs are all stub output.
+
+### ⚠️ The free Gemini quota is far smaller than the blogs say (learned 2026-08-21)
+
+A web search said Gemini 3 Flash allows **1,500 requests/day** on the free tier.
+The API says otherwise, in the 429 body:
+
+```
+Quota exceeded for metric: generate_content_free_tier_requests,
+limit: 20, model: gemini-3.7-flash
+quotaId: GenerateRequestsPerDayPerProjectPerModel-FreeTier
+```
+
+**Twenty requests per day.** A full run is 7 sections × 3 institutions = **21**.
+The quota is **per project per model**, so switching model gets a fresh
+allowance; Google no longer publishes per-model free limits in the docs, so read
+your own at <https://aistudio.google.com/rate-limit>. Set the model without
+editing code:
+
+```bash
+GEMINI_MODEL=gemini-2.5-flash python -m report.build_narrative
+```
+
+**Retries count against the quota.** The first real run had 5-attempt backoff on
+every error, so seven failing sections spent ~28 requests against a 20/day
+budget — the retry logic actively deepened the hole it was digging out of.
+`QuotaExhausted` is now a distinct exception: a `PerDay` error is never retried
+and stops the whole run immediately, because every remaining section would fail
+identically.
+
+**Sections are cached** in `report/cache_narrative/` (gitignored), keyed on the
+model, the system rule and the prompt. A run that dies halfway resumes instead
+of restarting, which is what makes a 20/day allowance usable at all.
+
+Note what is deliberately **not** in the cache key: the figure values. They never
+reach the prompt, so a corrected number in `esg_master_dataset.csv` flows into
+the report on the next run **without spending an API call** — substitution runs
+fresh against live data every time and only the sentences are cached. `--no-cache`
+forces regeneration.
+
+### A failed build must not leave something that looks finished
+
+That same run wrote `tudublin_gri_report.md` at **323 bytes** — a title, a source
+line, and zero sections — because all seven sections had failed. The build
+printed `[STOP] nothing above is safe to hand in` and wrote the file anyway.
+Three files sat in `report/output/` looking like reports; one was empty and two
+were partial.
+
+A report is now written **only when every one of its sections succeeded**. If an
+older file is present and the new run is incomplete, it is renamed to
+`.md.incomplete` rather than left in place, so nothing in `report/output/` can be
+mistaken for a finished deliverable.
+
+### Reading the prose quality
+
+The one section that did generate before the quota ran out was good, and two of
+its factual claims were checked by hand against the dataset: the Sustineo
+assurance is genuinely Cork's (Berkeley and TU Dublin both answer "No") and the
+2024 performance year is Cork's (the other two are 2023).
+
+Two prompt faults it exposed, both fixed:
+- **"Scope one and scope two."** The instruction said *never write a digit*, so
+  the model spelled out GRI terminology. The prompt now explicitly requires
+  numerals for `Scope 1/2/3` and GRI references — the audit always allowed them;
+  only the prompt disagreed.
+- **Limitation bloat.** The draft spent two paragraphs reviewing STARS' gaps
+  before saying much about Cork. Caveats must be stated, not dwelt on; the
+  prompt now asks for them gathered briefly near the end of a section.
