@@ -142,7 +142,9 @@ Items 6–10 are **fixed**, and the failure modes are written up in `CLAUDE.md`
 - `--section` overwriting a whole report with one section
 - the `section` column, blank on 2,768 rows and wrong on 63
 
-Open, worst first (`CLAUDE.md` §14 items 11–13): GRI 405-1-b employee categories
-are answerable and unmapped, GRI 303-3's megalitre/cubic-metre mismatch is
+- GRI 405-1-b, where four populated employee-category fields were unmapped
+  because the disclosure's second half had never been checked
+
+Open (`CLAUDE.md` §14 items 12–13): GRI 303-3's megalitre/cubic-metre mismatch is
 uncaveated, and 306-4/306-5 keep `equivalent` under the limitation that
 downgraded 306-3.

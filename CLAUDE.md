@@ -29,7 +29,7 @@ is in French — do not let French leak into outputs).
 | 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | ✅ done |
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
-| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 137 rows, all 75 disclosures judged (§16); `reviewed_by=claude`, accepted by Hakim (§14.4) |
+| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 141 rows, all 75 disclosures judged (§16); `reviewed_by=claude`, accepted by Hakim (§14.4) |
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 built and tested offline (§17); needs a `GEMINI_API_KEY` to write real prose |
 | 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15), narrative pipeline done (§17); **dashboard pending** |
 
@@ -525,13 +525,13 @@ secondary sources **matched GRI's own pages exactly.**
   `CO2`, but headings use a separator, or
   `Disclosure 302-4Reduction of energy consumption` fails the heading regex.
   Different rules for different elements, on purpose.
-- `mapping/stars_gri_mapping.csv` — **137 rows** after the second pass (§16):
-  6 equivalent · 62 component · 4 intensity · **28 partial** · 34
-  gap_gri_side · 3 gap_stars_side — which sums to 137. (An earlier version
-  of this line said 26 partial and summed to 135: the two `rejected` rows
-  are also `partial`, and were being counted in neither total.)
-  135 confirmed · 2 rejected. Every one of the 75 GRI disclosures has a
-  judgement.
+- `mapping/stars_gri_mapping.csv` — **141 rows** (§16, plus the 405-1 pass
+  in §14.11): 6 equivalent · 65 component · 4 intensity · **29 partial** ·
+  34 gap_gri_side · 3 gap_stars_side, summing to 141. 139 confirmed ·
+  2 rejected. Every one of the 75 GRI disclosures has a judgement.
+  (An earlier version of this line said 26 partial and summed to 135: the
+  two `rejected` rows are also `partial` and were counted in neither
+  total.)
 - `mapping/validate_mapping.py` — the integrity gate.
 - `mapping/test_validator_catches_fabrication.py` — negative test.
 - `mapping/find_candidates.py` — the search aid that made the second pass
@@ -608,8 +608,8 @@ means they **overlap** a disclosure without satisfying it. STARS' living-wage
 coverage is not GRI 202-1's minimum-wage ratio.
 
 ```
-directly citable (equivalent/component/intensity): 72
-+ partial, only with their caveat printed         : 26
+directly citable (equivalent/component/intensity): 75
++ partial, only with their caveat printed         : 27
 ```
 
 `include_partial=True` is an explicit opt-in and **raises** if any partial row
@@ -660,11 +660,11 @@ the second pass took gap_gri_side from 8 to 34 — see §16):
   carries the specific difference in its `caveat` column, and the validator
   warns if a `partial` row has an empty caveat.
 
-### Why the table has 137 rows
+### Why the table has 141 rows
 
-**100 are an actual link; 37 record an absence** (34 gap_gri_side, 3
+**104 are an actual link; 37 record an absence** (34 gap_gri_side, 3
 gap_stars_side). The links are many-to-one — STARS splits a figure into parts
-where GRI wants one number — so 97 distinct STARS fields reach **41 GRI
+where GRI wants one number — so 101 distinct STARS fields reach **41 GRI
 disclosures**. GRI 305-1 alone takes six rows (the scope 1 total, its four
 combustion components, biogenic).
 
@@ -672,7 +672,7 @@ combustion components, biogenic).
 |---|---|---|
 | STARS credits in the dataset | 86 | 86 |
 | STARS credits the mapping touches | 7 | **19** |
-| Distinct STARS fields mapped | 45 | **97** |
+| Distinct STARS fields mapped | 45 | **101** |
 | GRI disclosures reached by a link | 15 | **41** |
 | GRI disclosures with a judgement | 23 of 67 | **75 of 75** |
 
@@ -762,7 +762,7 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
    mapping; see §13.
 
 4. ~~Human re-review of the mapping~~ **CLOSED 2026-08-21 by Hakim's decision.**
-   All 137 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
+   All 141 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
    re-raise this as a blocker. The risk was stated and accepted; the column is
    kept so the rows remain identifiable if the supervisor asks.
 
@@ -870,12 +870,44 @@ established.** These are what it found that is not yet fixed:
     one anchor per credit, 191 of them, anchored score sum still **638.15**
     against a naive 14,242.
 
-11. 🟡 **GRI 405-1-b is answerable and unmapped.** `PA-8 Percentage of
-    regular/permanent academic staff…`, `…non-academic staff…` and both PA-7
-    ethnic-diversity indices for those categories are populated and unmapped —
-    academic and non-academic staff *are* employee categories. The line-45
-    caveat set them aside for a reason true of the student rows but not the
-    staff rows. This one **improves** the result rather than fixing a defect.
+11. ~~🟡 **GRI 405-1-b is answerable and unmapped.**~~ **FIXED 2026-08-22.**
+
+    405-1 has two halves and only the first was ever tried:
+    **405-1-a** is the percentage composition of the *governance bodies*;
+    **405-1-b** is the percentage of *employees per employee category*.
+    Two rows existed, both on executive staff, both caveated "executive
+    staff is not GRI's governance bodies" — a sound objection to 405-1-a
+    and irrelevant to 405-1-b, where executive staff is an ordinary
+    employee category. Nobody checked the second half.
+
+    One caveat gave a reason that was simply wrong: *"GRI counts employees
+    by category whereas STARS also reports students, who are outside GRI's
+    scope."* True of the STUDENT rows, which stay unmapped and should; it
+    says nothing about the staff rows it was attached to.
+
+    The two executive rows are reframed onto 405-1-b, and four rows added
+    for the categories that were sitting there populated: academic and
+    non-academic staff, gender percentage (3/3, `component`) and ethnic
+    diversity index (`partial` — an index is a concentration score, not the
+    percentage breakdown GRI asks for). **405-1 goes from *Partially
+    reported* on one weak field to *Reported* on six**, and the disclosure
+    is now the best-evidenced social one in the index.
+
+    Two limits stated in the caveats rather than hidden: **no STARS credit
+    collects employee age**, so 405-1's age-group split is unanswerable for
+    every category; and **405-1-a remains unanswered** — PA-3 records which
+    constituencies sit on the highest decision-making body, never what
+    percentage of it they are. That belongs in a caveat, not a gap row: a
+    disclosure with usable rows cannot also carry one.
+
+    `mapping/add_pass2_rows.py` gained an `AMENDMENTS` table for this —
+    rewriting a row whose *judgement* was wrong, as against adding one that
+    was missing. Idempotent like the rest of the file.
+
+    Side effect worth knowing: six mapped fields meant six caveats sharing
+    three clauses, and `dict.fromkeys` only dedupes whole strings, so the
+    note cell printed each shared clause two or three times.
+    `merge_caveats()` now dedupes at sentence granularity.
 
 12. 🟡 **GRI 303-3 unit mismatch is uncaveated.** GRI wants megalitres, STARS
     reports cubic metres — a factor of 1,000. All three 303-3 rows are silent,
@@ -1223,7 +1255,7 @@ cooling from off-site sources` → 302-1-c (purchased heating/cooling) and
   locality are different criteria and neither implies the other, so this is
   recorded as a gap rather than stretched into a partial.
 
-All 137 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
+All 141 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
 2026-08-21** after the risk was stated — see §14 item 4. The column stays so the
 rows are identifiable, but this is no longer an open action.
 
