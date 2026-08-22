@@ -825,16 +825,37 @@ established.** These are what it found that is not yet fixed:
    written imported the flaw it was testing. A test must not share code with
    the thing it guards.
 
-8. 🟠 **Two more tests are structurally unfailable.**
-   `test_parse_credits.py`'s unit-leak check filters on `value_type == "number"`
-   and then looks for letters — `NUMERIC_RE` cannot match letters, so the filter
-   is necessarily empty. `test_content_index.py`'s "Reported always has a value"
-   regex only matches a `Reported` row with an empty detail cell, which
-   `build_content_index.py` cannot produce.
+8. ~~🟠 **Two more tests are structurally unfailable.**~~ **FIXED 2026-08-22.**
 
-9. 🟠 **`--section X` overwrites the whole report file** with just that section.
-   `parts` is rebuilt per run; if the one section succeeds, `incomplete` is
-   empty and a one-section file is written over a complete one.
+   *Unit leak.* The old filter required `value_type == "number"` **and** a
+   unit word in the value. `value_type` is `number` only when `NUMERIC_RE`
+   matched, and that regex cannot match a letter, so the two conditions were
+   mutually exclusive. It also looked in the wrong place: a real leak reads
+   `"134,957 Metric tons of CO2 equivalent"`, which `NUMERIC_RE` rejects, so
+   it lands in `text` — exactly where the check was not looking. Now scans
+   every row for a value that is *entirely* number-plus-unit.
+
+   *Reported.* The old regex looked for a `Reported` row with an empty detail
+   cell; `status = "Reported"` is set only in the branch where `values` is
+   non-empty, so that is unreachable. It was testing the generator's control
+   flow against itself. Now each `Reported` disclosure is re-checked against
+   the mapping and `esg_master_dataset.csv` directly — 23 per institution.
+
+   **Both now carry a positive control**, which is the part that was missing
+   before: the leak detector is asserted to fire on four real leak shapes and
+   stay quiet on four clean ones, and the Reported check is asserted to
+   report no value for a declared gap. Verified by injection too — a
+   fabricated `Reported` row for 305-6 and a value with its unit left in both
+   make their test exit non-zero.
+
+9. ~~🟠 **`--section X` overwrites the whole report file.**~~
+   **FIXED 2026-08-22.** `--section` exists to iterate on one section's
+   prompt without spending seven API calls, so it must never touch the real
+   report — `parts` holds only the section built, and writing it over a
+   complete file destroyed the other six. It now writes
+   `report/output/<key>_<section>_preview.md` (gitignored) and leaves the
+   report alone. The full report is only ever written by a full run, which is
+   cheap because the other sections come from cache.
 
 10. ~~🟠 **The `section` column is blank or wrong for most rows.**~~
     **FIXED 2026-08-22** — see §6.5 for the corrected extraction rule. `h4`

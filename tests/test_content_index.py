@@ -108,14 +108,57 @@ def main():
               not unrecorded,
               f"unrecorded: {unrecorded[:3]}")
 
-    print("\n3. 'Reported' always means a real value exists\n")
+    print("\n3. 'Reported' always means a real value exists in the dataset\n")
+
+    # This check used to look for a `Reported` row with an empty detail cell.
+    # build_content_index.py sets status = "Reported" only inside the branch
+    # where `values` is non-empty, and detail is those same values joined — so
+    # an empty Reported cell is structurally impossible and the regex could
+    # never match. It tested the generator's control flow against itself.
+    #
+    # The claim worth testing is different and stronger: a disclosure marked
+    # Reported must have a populated value FOR THAT INSTITUTION IN THE MASTER
+    # DATASET. That is checked here against the mapping and the CSV, without
+    # consulting the generator or its provenance output.
+    key_to_name = {"berkeley": "berkeley", "cork": "cork", "tudublin": "dublin"}
+    mapping = pd.read_csv(PROJECT_ROOT / "mapping" / "stars_gri_mapping.csv")
+    usable = mapping[(mapping.review_status == "confirmed")
+                     & (~mapping.relationship.isin(
+                         ["gap_gri_side", "gap_stars_side", "partial"]))]
+
+    def has_real_value(institution_name: str, disclosure: str) -> bool:
+        rows = usable[usable.gri_disclosure.astype(str).str.strip() == disclosure]
+        for r in rows.itertuples(index=False):
+            hit = master[(master.institution == institution_name)
+                         & (master.credit_code == str(r.stars_credit).strip())
+                         & (master.field == str(r.stars_field).strip())]
+            if len(hit) and pd.notna(hit.iloc[0].value) \
+                    and str(hit.iloc[0].value).strip():
+                return True
+        return False
+
+    reported_re = re.compile(r"^\| \*\*([\d-]+)\*\*[^|]*\| Reported \|",
+                             re.MULTILINE)
 
     for md in sorted(OUT_DIR.glob("*_gri_index.md")):
         text = md.read_text(encoding="utf-8")
-        empty_reported = re.findall(
-            r"\| \*\*([\d-]+)\*\*[^|]*\| Reported \| *(?:—)? *\|", text)
-        check(f"{md.name}: no empty 'Reported' rows",
-              not empty_reported, f"empty: {empty_reported[:5]}")
+        fragment = key_to_name[md.stem.replace("_gri_index", "")]
+        name = next(n for n in master.institution.unique()
+                    if fragment in n.lower())
+
+        claimed = reported_re.findall(text)
+        hollow = [d for d in claimed if not has_real_value(name, d)]
+        check(f"{md.name}: all {len(claimed)} 'Reported' rows have a real value",
+              not hollow and len(claimed) > 15, f"hollow: {hollow[:5]}")
+
+    # POSITIVE CONTROL — the detector must fire on a disclosure that is mapped
+    # only to a gap, so "Reported" would be a lie.
+    berkeley = next(n for n in master.institution.unique() if "Berkeley" in n)
+    gap_only = mapping[mapping.relationship == "gap_gri_side"] \
+        .gri_disclosure.astype(str).str.strip().iloc[0]
+    check("the check would catch a fabricated 'Reported' row",
+          not has_real_value(berkeley, gap_only),
+          f"{gap_only} is a declared gap and must not read as having a value")
 
     print("\n4. Every GRI disclosure appears exactly once\n")
 

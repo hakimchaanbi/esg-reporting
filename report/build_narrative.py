@@ -676,6 +676,22 @@ def main():
             })
             parts += [f"## {section['title']}", "", result["prose"], ""]
 
+        # --section is for iterating on one section's prompt without spending
+        # seven API calls. It must NEVER touch the real report: `parts` holds
+        # only the section that was built, so writing it over a complete file
+        # would silently destroy the other six. It goes to its own preview file
+        # instead, and the full report is only ever written by a full run —
+        # which is cheap anyway, because the other sections come from cache.
+        if args.section:
+            preview = OUT_DIR / f"{institution.key}_{args.section}_preview.md"
+            if incomplete:
+                print(f"  [skip] {args.section} incomplete, nothing written")
+            else:
+                preview.write_text("\n".join(parts), encoding="utf-8")
+                print(f"  -> {preview.relative_to(PROJECT_ROOT)}  "
+                      f"(preview only — the full report is untouched)")
+            continue
+
         # Never leave a file that looks like a report but is not one. The first
         # real run wrote a 323-byte tudublin report containing a title and zero
         # sections, because every section had failed on quota — the build said
