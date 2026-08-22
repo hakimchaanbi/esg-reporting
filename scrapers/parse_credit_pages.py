@@ -172,17 +172,38 @@ def parse_page(html: str, code: str):
         tag.decompose()
 
     name = credit_title(soup)
-    section = ""
+    indicator = section = ""
     seen_wells = set()
 
-    # Walk in document order so a section heading applies to the fields that
-    # follow it. find_previous() would be wrong: most field-headers carry no
-    # <h5>, and the ones that do mark the start of a run.
+    # Walk in document order so a heading applies to the fields that follow it.
+    # find_previous() would be wrong: most field-headers carry no heading at all
+    # (2,647 of 3,197 are bare guidance wrappers), and the ones that do mark the
+    # start of a run.
+    #
+    # STARS uses TWO heading levels and this parser used to read only the inner
+    # one:
+    #
+    #   <div class="field-header"><h4>6.1 GHG emissions inventory and disclosure</h4>
+    #                             <h5>Scope 1 and 2 GHG emissions inventory</h5></div>
+    #   ...
+    #   <div class="field-header"><h4>6.2 GHG emissions per square meter</h4></div>
+    #
+    # h4 is the numbered INDICATOR, h5 an optional sub-section inside it. Reading
+    # only h5 discarded every h4 (499 of them) AND, worse, let the last h5 leak
+    # past the h4 that ended it — `Gross floor area of building space` came out
+    # labelled "Scope 3 GHG emissions", which is 6.2 data wearing 6.1's heading.
+    # A new h4 therefore RESETS the sub-section: entering indicator 6.2 means we
+    # are no longer inside "Scope 3 GHG emissions" and do not yet know what we
+    # are inside.
     for el in soup.find_all(["div", "span"]):
         classes = el.get("class") or []
 
         if "field-header" in classes:
+            h4 = el.find("h4")
             h5 = el.find("h5")
+            if h4:
+                indicator = clean(h4.get_text())
+                section = ""
             if h5:
                 section = clean(h5.get_text())
             continue
@@ -207,6 +228,7 @@ def parse_page(html: str, code: str):
             "category": code.split("-")[0],
             "pillar": pillar_for(code),
             "credit_name": name,
+            "indicator": indicator,
             "section": section,
             "field": field,
             "value": value,

@@ -164,8 +164,14 @@ the caches for no benefit.
 > `*_qa.csv` files it wrote have been deleted. The `*_credits.txt` files remain
 > pending a check that nothing unique is left in them — see §14.
 
-Columns: `institution, credit_code, category, pillar, credit_name, section,
-field, value, units, value_numeric, value_type`
+Columns: `institution, credit_code, category, pillar, credit_name,
+indicator, section, field, value, units, value_numeric, value_type, links`
+
+`indicator` is the STARS numbered indicator (`6.2 Greenhouse gas emissions
+per square meter`); `section` is the optional sub-heading inside it
+(`Scope 1 GHG emissions`). Two heading levels, two columns — see §6.5.
+**Group the dashboard on `indicator`**, which is populated for 2,957 of
+3,197 rows; `section` exists on only 366 and is genuinely absent elsewhere.
 
 `value_type` ∈ `number | year | boolean | url | date | text | text_long |
 not_reported` — so the BI layer can filter to the numeric subset without
@@ -284,8 +290,39 @@ each**, repeated 118× — Overall Rating, Overall Score, Submission Date. That 
 ```
 Extraction rule: `span.scorecardFieldTitle` = question, the **next**
 `div.well` = answer, the trailing `<i>` inside it = **units** (keep units in
-their own column — they matter for the report). Nearest preceding
-`div.field-header h5` = the section the field belongs to.
+their own column — they matter for the report).
+
+⚠️ **THE HEADING HALF OF THIS RULE WAS WRONG UNTIL 2026-08-22.** It said
+"nearest preceding `div.field-header h5` = the section". STARS uses **two**
+heading levels:
+
+```html
+<div class="field-header"><h4>6.1 GHG emissions inventory and disclosure</h4>
+                          <h5>Scope 1 and 2 GHG emissions inventory</h5></div>
+...
+<div class="field-header"><h4>6.2 GHG emissions per square meter</h4></div>
+```
+
+`h4` is the numbered **indicator**, `h5` an optional sub-section inside it.
+Reading only `h5` threw away all 499 `h4`s and — worse — let the last `h5`
+leak past the `h4` that ended it, because an `h4`-only header reset nothing.
+`Gross floor area of building space` came out labelled *"Scope 3 GHG
+emissions"*: indicator 6.2 data wearing 6.1's heading. 2,768 rows had no
+section at all and 63 had a wrong one.
+
+Corrected rule: **`h4` sets `indicator` AND clears `section`; `h5` sets
+`section`.** Entering a new indicator means we are no longer inside the old
+sub-section and do not yet know what we are inside. Of the 3,197 field
+headers, 2,647 carry no heading at all — they are per-field guidance
+wrappers and must leave both values untouched.
+
+No value, unit or field name changed: `tests/test_parse_credits.py` check 6
+re-walks all 354 cached pages with its **own** heading tracker and matches
+all 3,197 `(field, indicator, section)` triples as a multiset. A multiset,
+not a lookup — PA-9 asks *"Does the institution have the required data…"*
+under both 9.1 and 9.2, and keying by field name compares the second
+occurrence against the first one's heading. That mistake made the new test
+fail against a correct parser before it was fixed.
 
 **Measured yield of this rule against the existing cache:**
 
@@ -799,15 +836,18 @@ established.** These are what it found that is not yet fixed:
    `parts` is rebuilt per run; if the one section succeeds, `incomplete` is
    empty and a one-section file is written over a complete one.
 
-10. 🟠 **The `section` column is blank or wrong for most rows.**
-    `parse_credit_pages.py` reads only `<h5>` inside `div.field-header`; STARS
-    pages also carry `<h4>` for the indicator. Result: 2,768 of 3,197 rows have
-    no section, and a stale `<h5>` carries across the boundary on 63 —
-    `OP-6 / Gross floor area of building space` is labelled *"Scope 3 GHG
-    emissions"*. Nothing in the report depends on it (the mapping keys on
-    `(credit, field)`), but it is in the dataset and is the natural grouping
-    column for the pending dashboard. It also means §6.5's extraction rule,
-    presented as verified, is incomplete.
+10. ~~🟠 **The `section` column is blank or wrong for most rows.**~~
+    **FIXED 2026-08-22** — see §6.5 for the corrected extraction rule. `h4`
+    now populates a new `indicator` column and clears `section`; `h5` sets
+    `section`. Coverage went from 429 rows with any heading to **2,957 with
+    an indicator**, and the 63 stale sections are gone.
+
+    Verified as metadata-only: the master dataset is 3,199 rows before and
+    after, and every column except `section`, the new `indicator` and
+    `credit_row_anchor` is byte-identical. The anchor moved row within three
+    OP-6 credits because `section` participates in the sort — still exactly
+    one anchor per credit, 191 of them, anchored score sum still **638.15**
+    against a naive 14,242.
 
 11. 🟡 **GRI 405-1-b is answerable and unmapped.** `PA-8 Percentage of
     regular/permanent academic staff…`, `…non-academic staff…` and both PA-7

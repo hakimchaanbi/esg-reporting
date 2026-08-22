@@ -69,8 +69,13 @@ COLUMN_ORDER = [
     # True on exactly one row per credit — see the trap warning above
     "credit_row_anchor",
     # field level (from the credit detail pages)
-    "has_detail", "section", "field", "value", "units", "value_numeric",
-    "value_type",
+    # `indicator` is the STARS numbered indicator (the <h4>, e.g. "6.2 GHG
+    # emissions per square meter"); `section` is the optional sub-heading
+    # inside it (the <h5>). Two levels, two columns — squashing them is what
+    # produced "Gross floor area of building space" filed under "Scope 3 GHG
+    # emissions". Group the dashboard on `indicator`.
+    "has_detail", "indicator", "section", "field", "value", "units",
+    "value_numeric", "value_type",
     # every URL cited in the answer; documents/manifest.csv says which of them
     # were retrievable
     "links",
