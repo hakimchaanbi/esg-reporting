@@ -22,6 +22,7 @@ RUN
 
 import json
 import pathlib
+import re
 import sys
 
 import pandas as pd
@@ -128,23 +129,68 @@ def main():
 
     print("\n3b. Caveats do not smuggle another university's figures in\n")
 
-    # Several caveats quote real values to make their point. Unredacted, Cork's
-    # prompt would carry Berkeley's numbers.
+    # ⚠️ This block deliberately does NOT use numbers_in().
+    #
+    # It used to. numbers_in() and redact_figures() share GRI_REF, so the test
+    # was asking the redactor to mark its own homework: anything GRI_REF wrongly
+    # exempted, redact_figures kept AND numbers_in ignored, and the test
+    # reported zero survivors. It could not fail. That is how "40-50" survived
+    # in caveat text undetected for as long as it did.
+    #
+    # Instead: find EVERY digit run with a scanner that knows nothing about GRI,
+    # then clear survivors against the disclosure list read straight from
+    # gri_disclosures.json. If GRI_REF is wrong, this list is still right.
     from report.build_narrative import redact_figures            # noqa: E402
+
+    naive_digits = re.compile(r"\d[\d,.]*")
+    vocabulary = {n for s in gri["standards"].values() for n in s["disclosures"]}
+    vocabulary |= {s.split()[-1] for s in gri["standards"]}
+
+    def unexplained(text: str) -> list[str]:
+        """Digit runs not accounted for by a real GRI reference in the text."""
+        out = []
+        for m in naive_digits.finditer(text):
+            window = text[max(0, m.start() - 12):m.end() + 6]
+            if any(ref in window for ref in vocabulary if "-" in ref):
+                continue                       # part of e.g. "GRI 305-1"
+            if re.search(r"(?i)\bGRI\s+%s\b" % re.escape(m.group()), window):
+                continue                       # a standard number, prefixed
+            if re.search(r"(?i)\bScope\s+%s\b" % re.escape(m.group()), window):
+                continue
+            out.append(m.group().rstrip(".,"))
+        return [x for x in out if x]
+
     sample = ("GRI 302-1-b is broader here: this STARS field also includes "
-              "renewable electricity (Berkeley 18,173 MWh), and it reads "
-              "0.21 MWh for TU Dublin.")
+              "renewable electricity (Berkeley 18,173 MWh), it reads "
+              "0.21 MWh for TU Dublin, and coverage ran 40-50 per cent.")
     redacted = redact_figures(sample)
-    check("figures are stripped from caveat text",
-          numbers_in(redacted) == [], f"survived: {numbers_in(redacted)}")
+    check("figures are stripped from caveat text, including ranges",
+          unexplained(redacted) == [], f"survived: {unexplained(redacted)}")
     check("the GRI reference survives redaction",
-          "302-1" in redacted, redacted[:80])
+          "302-1" in redacted, redacted[:90])
 
     all_caveats = [c for s in SECTIONS
                    for c in gather(cork, s, gri, mapping, master)["caveats"]]
-    surviving = sorted({n for c in all_caveats for n in numbers_in(c)})
+    surviving = sorted({n for c in all_caveats for n in unexplained(c)})
     check(f"no figure survives in any of {len(all_caveats)} live caveats",
           not surviving, f"survived: {surviving[:5]}")
+
+    print("\n3e. REGRESSION — a fabricated range is not mistaken for a "
+          "GRI reference\n")
+
+    # The exact defect: GRI_REF's prefix used to be optional, so any N-M string
+    # was deleted before the audit could see it.
+    rogue_range = ("The university cut emissions by 40-50 metric tons and "
+                   "renewables supplied 61-70 per cent of demand.")
+    caught = audit_digits(rogue_range, [], [])["invented"]
+    check("40-50 and 61-70 are audited as invented",
+          {"40", "50", "61", "70"} <= set(caught), f"caught: {caught}")
+
+    real_refs = ("Disclosure 305-1 under GRI 305 covers Scope 1 emissions, "
+                 "GRI 2-9 governance, and 403-10 work-related ill health.")
+    check("real disclosure numbers are still exempt",
+          not audit_digits(real_refs, [], [])["invented"],
+          f"wrongly flagged: {audit_digits(real_refs, [], [])['invented']}")
 
     print("\n3c. Retrieved passages carry no figures into the prompt\n")
 

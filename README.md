@@ -129,6 +129,15 @@ Phase 4 and 5 are built and tested; the BI dashboard is not started.
 
 An independent review on 2026-08-22 verified the extraction end to end — all
 3,197 pairs re-derived from the cached HTML by a separate extractor with zero
-disagreements — and found several defects in the safety and documentation
-layers. They are listed as open items 6–13 in `CLAUDE.md` §14, worst first.
-**Read those before trusting the number-safety claim.**
+disagreements, and 45 derived figures reproduced exactly for all three
+universities — and found several defects in the safety and documentation
+layers.
+
+The two serious ones are **fixed**: a regex hole that let any number written as
+`40-50` walk past the number audit, and the test that should have caught it but
+shared the same flawed pattern. Both are described in `CLAUDE.md` §14 items 6–7,
+because the failure mode is worth remembering.
+
+The rest — items 8–13 — are open and listed worst first: two more tests that
+cannot fail, `--section` overwriting a whole report, a `section` column that is
+blank or wrong for most rows, and three mapping improvements.

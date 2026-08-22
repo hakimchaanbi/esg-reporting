@@ -751,20 +751,42 @@ figures (scope totals, intensities, FTE sums, % reductions) exactly for all
 three universities. **The extraction is sound and that is now independently
 established.** These are what it found that is not yet fixed:
 
-6. 🔴 **`GRI_REF` lets any `N-M` number through the audit.** The `GRI` prefix in
-   the pattern is optional, so `\d{1,3}-\d{1,2}` matches bare ranges: `40-50`,
-   `61-70`, `999-99` are all stripped before `numbers_in()` looks, and land in
-   the report as fabricated figures with `invented: []`. **This falsifies "non-
-   hallucinable by construction" as currently written.** Fix by building the
-   pattern from the disclosure list in `gri_disclosures.json` rather than a
-   loose regex, then add a case asserting `40-50` is caught. **Highest priority.**
+6. ~~🔴 **`GRI_REF` lets any `N-M` number through the audit.**~~
+   **FIXED 2026-08-22.** The `GRI` prefix was optional, so `\d{1,3}-\d{1,2}`
+   matched bare ranges — `40-50`, `61-70`, `999-99` were deleted before
+   `numbers_in()` looked, and fabricated figures rendered with `invented: []`.
+   It falsified "non-hallucinable by construction", and it was reachable in
+   ordinary use: STARS answers are full of ranges ("50 to 100") that a model
+   naturally rewrites as "50-100".
 
-7. 🔴 **`tests/test_narrative_safety.py`'s caveat check cannot fail.** It calls
-   `numbers_in()` on the output of `redact_figures()`, and the two share
-   `GRI_REF` — so the test is blind to exactly what the redactor misses.
-   A test must not import the flaw it is testing. `test_content_index.py` gets
-   this right on purpose and the reasoning is written down there; it was then
-   violated in the next test written.
+   `_gri_reference_pattern()` now **enumerates the vocabulary instead of
+   matching its shape** — the 75 disclosure numbers and 12 standard numbers,
+   read from `gri_disclosures.json`. `40-50` is not a disclosure, so it is data,
+   so it is audited. Longest-first alternation so `403-10` is consumed before
+   `403-1`; a bare standard number still requires the `GRI` prefix, since `305`
+   on its own is a plausible measurement. If the vocabulary cannot be read the
+   pattern exempts almost nothing — noisy and safe, where the old failure was
+   silent and unsafe.
+
+7. ~~🔴 **The caveat check in `test_narrative_safety.py` cannot fail.**~~
+   **FIXED 2026-08-22, and it is the more instructive half of item 6.** The test
+   called `numbers_in()` on the output of `redact_figures()` — the two share
+   `GRI_REF`, so it asked the redactor to mark its own homework. Anything the
+   pattern wrongly exempted, the redactor kept *and* the checker ignored, and
+   the test reported zero survivors. It could not fail, which is why the bug
+   above lived as long as it did.
+
+   It now scans with a naive `\d[\d,.]*` that knows nothing about GRI and clears
+   survivors against the disclosure list read straight from
+   `gri_disclosures.json`. If `GRI_REF` is wrong, that list is still right.
+   Verified by reintroducing the old pattern in memory: both checks **fail**
+   with it and pass without it.
+
+   **The lesson generalises and this project has now learned it twice.**
+   `test_content_index.py` re-derives values without reusing the generator's
+   logic *on purpose*, and says so in its docstring — then the very next test
+   written imported the flaw it was testing. A test must not share code with
+   the thing it guards.
 
 8. 🟠 **Two more tests are structurally unfailable.**
    `test_parse_credits.py`'s unit-leak check filters on `value_type == "number"`
