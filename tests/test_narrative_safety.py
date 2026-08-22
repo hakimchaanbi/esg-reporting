@@ -146,6 +146,37 @@ def main():
     check(f"no figure survives in any of {len(all_caveats)} live caveats",
           not surviving, f"survived: {surviving[:5]}")
 
+    print("\n3c. Retrieved passages carry no figures into the prompt\n")
+
+    # Lane A style extracts and the institution's own evidence PDFs are the one
+    # input not verified field-by-field against the dataset. A document can be
+    # from a different year or boundary than the STARS submission, so a figure
+    # lifted from one would trace to a real PDF and still be wrong for the
+    # sentence. Both are redacted; this proves it on live retrieval output.
+    checked, dirty = 0, []
+    for s in SECTIONS:
+        f = gather(cork, s, gri, mapping, master)
+        for passage in f["style"] + f["evidence"]:
+            checked += 1
+            found = numbers_in(passage["text"])
+            if found:
+                dirty.append(f"{passage['source'][:30]}: {found[:3]}")
+    check(f"no figure survives in any of {checked} retrieved passages",
+          not dirty, "; ".join(dirty[:3]))
+    check("retrieval is actually returning passages (not vacuous)",
+          checked > 20, f"{checked} passages across {len(SECTIONS)} sections")
+
+    print("\n3d. Evidence is scoped to the institution being written about\n")
+
+    others = [i for i in ("berkeley", "tudublin")]
+    foreign = []
+    for s in SECTIONS:
+        for passage in gather(cork, s, gri, mapping, master)["evidence"]:
+            if not passage["cite"].startswith(cork.name):
+                foreign.append(passage["cite"][:60])
+    check("every evidence passage in Cork's prompt is Cork's own",
+          not foreign, f"foreign: {foreign[:3]}")
+
     print("\n4. GRI references are not mistaken for data\n")
 
     refs = ("Disclosure 305-1 under GRI 305 covers Scope 1 emissions, "
