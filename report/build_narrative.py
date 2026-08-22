@@ -396,8 +396,62 @@ def build_prompt(institution, section, facts) -> str:
 # The audit. This is the part that does not trust anything above it.
 # --------------------------------------------------------------------------
 NUMBERISH = re.compile(r"\d[\d,.]*")
-GRI_REF = re.compile(r"\b(?:GRI\s+)?\d{1,3}-\d{1,2}\b|\bGRI\s+\d{1,3}\b"
-                     r"|\bScope\s+[123]\b", re.IGNORECASE)
+
+
+def _gri_reference_pattern() -> re.Pattern:
+    """Digits that are GRI vocabulary rather than data, and must not be audited.
+
+    ⚠️ THIS WAS THE WORST BUG IN THE PROJECT. The pattern used to be:
+
+        r"\\b(?:GRI\\s+)?\\d{1,3}-\\d{1,2}\\b|\\bGRI\\s+\\d{1,3}\\b|\\bScope\\s+[123]\\b"
+
+    The `(?:GRI\\s+)?` is optional, so the first alternative matched ANY short
+    number-hyphen-number: `40-50`, `61-70`, `999-99`, `123-45`. `numbers_in()`
+    deletes every match before scanning, so a fabricated figure written as a
+    range was invisible — four of them rendered into a report section with the
+    audit reporting `invented: []`. It made "non-hallucinable by construction"
+    false, and it is reachable in ordinary use because STARS answers are full of
+    ranges ("50 to 100") that a model will naturally rewrite as "50-100".
+
+    The fix is to stop pattern-matching the SHAPE of a reference and enumerate
+    the actual vocabulary: the 75 disclosure numbers and 12 standard numbers
+    from gri_disclosures.json. `40-50` is not a disclosure, so it is data, so it
+    gets audited. Anything GRI later adds arrives by regenerating that file
+    rather than by loosening a regex.
+
+    Failure direction matters: if the vocabulary cannot be read, this returns a
+    pattern that exempts almost nothing. Real GRI references then get flagged as
+    unaccounted-for, which is noisy and safe. The old failure was silent and
+    unsafe.
+    """
+    numbers, standards = set(), set()
+    try:
+        gri = json.loads(GRI_JSON.read_text(encoding="utf-8"))
+        for standard, body in gri["standards"].items():
+            standards.add(standard.split()[-1])        # "GRI 305" -> "305"
+            numbers.update(body["disclosures"])        # "305-1", "403-10", ...
+    except Exception as exc:                            # pragma: no cover
+        print(f"[warn] could not read the GRI vocabulary ({exc}); every "
+              f"disclosure reference will be audited as if it were data.")
+
+    parts = []
+    if numbers:
+        # Longest first so 403-10 is consumed before 403-1 can match its prefix.
+        alt = "|".join(re.escape(n)
+                       for n in sorted(numbers, key=len, reverse=True))
+        parts.append(rf"\b(?:GRI\s+|Disclosure\s+)?(?:{alt})\b")
+    if standards:
+        # A bare "305" is a plausible measurement, so the prefix is REQUIRED
+        # here — unlike for disclosure numbers, where the hyphenated form is
+        # distinctive enough on its own.
+        alt = "|".join(re.escape(s)
+                       for s in sorted(standards, key=len, reverse=True))
+        parts.append(rf"\bGRI\s+(?:{alt})\b")
+    parts.append(r"\bScope\s+[123]\b")
+    return re.compile("|".join(parts), re.IGNORECASE)
+
+
+GRI_REF = _gri_reference_pattern()
 SPELLED = re.compile(
     r"\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|twenty|"
     r"thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|"
