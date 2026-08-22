@@ -39,7 +39,8 @@ What separates them is not only their content but **how each may be read**:
 
 - **A — Knowledge:** reference websites (IBM, MSCI, Cambridge…). Teaches the
   LLM the *language* of ESG. No facts about our universities. → **fuzzy
-  retrieval** (`rag/`, 226 chunks).
+  retrieval** (`rag/`, 226 knowledge chunks + 4,729 evidence-document
+  chunks — §13).
 - **B — STARS data:** AASHE reports for the 3 universities. The *facts*. →
   **exact lookup** from `esg_master_dataset.csv` + Jinja2 injection (§3).
 - **C — GRI standards:** the target vocabulary — which questions the report must
@@ -223,16 +224,22 @@ Auth is via session cookie in an **environment variable — never hard-code it**
 ```bash
 export AASHE_SESSIONID="<sessionid cookie value from browser devtools>"
 ```
-The `_v2` deep scrapers run a **preflight**: they test one page and abort with
-instructions if blocked, instead of wasting 118 requests.
+`scrapers/credit_pages.py` runs a **preflight**: it tests one page and aborts
+with instructions if blocked, instead of wasting 118 requests. (The `_v2`
+scripts this used to name were consolidated away on 2026-08-17 — §5.)
 
 ### 6.2 Poisoned cache
-If a run was blocked, the cache holds login pages. Delete before retrying:
+If a run was blocked, the cache holds login pages. The live caches sit under
+each institution's folder — delete before retrying:
 ```bash
-rm -rf cache_credits cache_credits_cork cache_credits_tudublin
+rm -rf Berkley/cache_credits Cork/cache_credits_cork Dublin/cache_credits_tudublin
 ```
-The `_v2` scripts auto-detect and drop poisoned cache entries, but a manual
-clear is safest.
+`credit_pages.py` auto-detects and drops poisoned entries, but a manual clear
+is safest.
+
+⚠️ A stale **`cache_credits/` at the repo root** is left over from before the
+2026-08-17 restructure. It holds login pages (0 field titles) and nothing
+reads it. Gitignored and harmless, but do not mistake it for a live cache.
 
 ### 6.3 Encoding / mojibake
 `requests` defaults to latin-1 and mangles UTF-8 (`617,090â`). Always:
@@ -333,7 +340,9 @@ don't inflate pillar totals.
 **Berkeley deep:** 118 credit pages, ~381 KB. The 354 Q&A rows are **entirely
 boilerplate** — see §6.5. Real yield after the parser fix: ~1,114 pairs.
 
-**Knowledge corpus:** 18/20 sources clean, **21,654 words, 13/14 English**.
+**Knowledge corpus:** 18/20 sources clean, **21,835 words across 19 files,
+14 of them English** (recomputed 2026-08-22; this line previously said
+21,654).
 Two known failures, both already covered by other files:
 - `gri-standards` (globalreporting.org is JS-heavy) → covered by `ibm-gri` (1,037w)
 - `stars-terminology` (returned 0) → covered by `stars-technical-manual`, which
@@ -480,8 +489,12 @@ secondary sources **matched GRI's own pages exactly.**
   `Disclosure 302-4Reduction of energy consumption` fails the heading regex.
   Different rules for different elements, on purpose.
 - `mapping/stars_gri_mapping.csv` — **137 rows** after the second pass (§16):
-  6 equivalent · 62 component · 4 intensity · 26 partial · 34 gap_gri_side ·
-  3 gap_stars_side. Every one of the 75 GRI disclosures now has a judgement.
+  6 equivalent · 62 component · 4 intensity · **28 partial** · 34
+  gap_gri_side · 3 gap_stars_side — which sums to 137. (An earlier version
+  of this line said 26 partial and summed to 135: the two `rejected` rows
+  are also `partial`, and were being counted in neither total.)
+  135 confirmed · 2 rejected. Every one of the 75 GRI disclosures has a
+  judgement.
 - `mapping/validate_mapping.py` — the integrity gate.
 - `mapping/test_validator_catches_fabrication.py` — negative test.
 - `mapping/find_candidates.py` — the search aid that made the second pass
@@ -558,8 +571,8 @@ means they **overlap** a disclosure without satisfying it. STARS' living-wage
 coverage is not GRI 202-1's minimum-wage ratio.
 
 ```
-directly citable (equivalent/component/intensity): 35
-+ partial, only with their caveat printed         :  8
+directly citable (equivalent/component/intensity): 72
++ partial, only with their caveat printed         : 26
 ```
 
 `include_partial=True` is an explicit opt-in and **raises** if any partial row
@@ -570,7 +583,13 @@ has an empty caveat — so the promise to footnote it is at least keepable.
    disclosure number is a hard error.
 2. Every `stars_credit` / `stars_field` must exist in `esg_master_dataset.csv`
    → a mapping to a field that was never scraped is a hard error.
-3. `report_ready()` filters to `confirmed` only → Phase 5 must call it.
+3. `report_ready()` filters to `confirmed` only.
+   ⚠️ **Nothing actually calls it.** `build_content_index.py` and
+   `build_narrative.py` both re-implement the `confirmed` filter inline.
+   No live breach — all 26 confirmed partials do carry caveats — but the
+   guarantee is duplicated rather than shared, which is exactly the
+   `pillar_for()` drift this project already fixed once (§8). Worth
+   collapsing to one caller.
 
 The negative test proves 1 and 2 by injecting four fabricated rows (bad
 disclosure number, right disclosure under the wrong standard, invented STARS
@@ -677,7 +696,17 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
 
 ## 14. OPEN ITEMS
 
-1. **`*_credits.txt` — safe to delete?** Not yet established. A comparison
+1. ~~**`*_credits.txt` — safe to delete?**~~ **CLOSED 2026-08-22.** An
+   independent review re-derived all 3,197 title→well pairs from the cached
+   HTML and found every one captured; the ~118 extra wells per institution
+   are one per page and are the sidebar navigation tree. Both items sampled
+   below as "should have been captured" are in fact present in
+   `*_fields.csv` ("Seeds of Change" ✓, Berkeley's impervious-surface
+   figures ✓). The files can be deleted. Original note kept below.
+
+   <details><summary>original open question</summary>
+
+   A comparison
    against `*_fields.csv` leaves ~270 lines per institution unaccounted for.
    Most are STARS form guidance (`span.help_text` — correctly excluded), but
    three sampled items of real institutional content (Berkeley's impervious-
@@ -686,12 +715,14 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
    sections outside the title→well pairing, or the parser's duplicate-well
    guard dropping a second field. **Resolve before deleting the txt files** —
    they are the only other copy of that text.
+   </details>
 
 2. ~~Links and attachments are not extracted~~ **DONE** — `links` column added,
    120 documents downloaded and 74 indexed. The 1,061 links to university
    websites are deliberately left unfetched (deferred by Hakim).
 
-3. ~~Lane C~~ **DONE 2026-08-17** — see §13.
+3. ~~Lane C~~ **REMOVED 2026-08-22** — superseded by the field-level
+   mapping; see §13.
 
 4. ~~Human re-review of the mapping~~ **CLOSED 2026-08-21 by Hakim's decision.**
    All 137 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
@@ -708,14 +739,72 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
    The review screen still exists if it is ever wanted:
    `python mapping/validate_mapping.py --review`.
 
-5. **Narrative generation (Phase 5) is not started.** The content index (§15)
-   is the skeleton — every disclosure with its status, values and caveats. What
-   is missing is the prose around it, which is where the LLM finally does its
-   job: writing the sentences and leaving `{PLACEHOLDER}` where numbers go.
+5. ~~**Narrative generation (Phase 5) is not started.**~~ **BUILT 2026-08-21**
+   — see §17.
+
+### Open from the external review (2026-08-22)
+
+An independent session audited the repo cold. It verified the data layer
+thoroughly — it re-derived all 3,197 field/value pairs from the cached HTML with
+its own extractor and found zero disagreements, and reproduced 45 derived
+figures (scope totals, intensities, FTE sums, % reductions) exactly for all
+three universities. **The extraction is sound and that is now independently
+established.** These are what it found that is not yet fixed:
+
+6. 🔴 **`GRI_REF` lets any `N-M` number through the audit.** The `GRI` prefix in
+   the pattern is optional, so `\d{1,3}-\d{1,2}` matches bare ranges: `40-50`,
+   `61-70`, `999-99` are all stripped before `numbers_in()` looks, and land in
+   the report as fabricated figures with `invented: []`. **This falsifies "non-
+   hallucinable by construction" as currently written.** Fix by building the
+   pattern from the disclosure list in `gri_disclosures.json` rather than a
+   loose regex, then add a case asserting `40-50` is caught. **Highest priority.**
+
+7. 🔴 **`tests/test_narrative_safety.py`'s caveat check cannot fail.** It calls
+   `numbers_in()` on the output of `redact_figures()`, and the two share
+   `GRI_REF` — so the test is blind to exactly what the redactor misses.
+   A test must not import the flaw it is testing. `test_content_index.py` gets
+   this right on purpose and the reasoning is written down there; it was then
+   violated in the next test written.
+
+8. 🟠 **Two more tests are structurally unfailable.**
+   `test_parse_credits.py`'s unit-leak check filters on `value_type == "number"`
+   and then looks for letters — `NUMERIC_RE` cannot match letters, so the filter
+   is necessarily empty. `test_content_index.py`'s "Reported always has a value"
+   regex only matches a `Reported` row with an empty detail cell, which
+   `build_content_index.py` cannot produce.
+
+9. 🟠 **`--section X` overwrites the whole report file** with just that section.
+   `parts` is rebuilt per run; if the one section succeeds, `incomplete` is
+   empty and a one-section file is written over a complete one.
+
+10. 🟠 **The `section` column is blank or wrong for most rows.**
+    `parse_credit_pages.py` reads only `<h5>` inside `div.field-header`; STARS
+    pages also carry `<h4>` for the indicator. Result: 2,768 of 3,197 rows have
+    no section, and a stale `<h5>` carries across the boundary on 63 —
+    `OP-6 / Gross floor area of building space` is labelled *"Scope 3 GHG
+    emissions"*. Nothing in the report depends on it (the mapping keys on
+    `(credit, field)`), but it is in the dataset and is the natural grouping
+    column for the pending dashboard. It also means §6.5's extraction rule,
+    presented as verified, is incomplete.
+
+11. 🟡 **GRI 405-1-b is answerable and unmapped.** `PA-8 Percentage of
+    regular/permanent academic staff…`, `…non-academic staff…` and both PA-7
+    ethnic-diversity indices for those categories are populated and unmapped —
+    academic and non-academic staff *are* employee categories. The line-45
+    caveat set them aside for a reason true of the student rows but not the
+    staff rows. This one **improves** the result rather than fixing a defect.
+
+12. 🟡 **GRI 303-3 unit mismatch is uncaveated.** GRI wants megalitres, STARS
+    reports cubic metres — a factor of 1,000. All three 303-3 rows are silent,
+    while the analogous 302-1 MWh-vs-joules mismatch *is* flagged. Three cells.
+
+13. 🟡 **`306-4`/`306-5` keep `equivalent`** under the same non-hazardous-only
+    limitation that correctly downgraded `306-3` to `partial`. Defensible
+    (306-4-c is literally non-hazardous) but inconsistent; expect the question.
 
 ---
 
-## 13. Phase 5a — the RAG layer over the knowledge corpus (built 2026-08-17)
+## 13. Phase 5a — the retrieval layer (built 2026-08-17, restructured 2026-08-22)
 
 Branch A teaches the model the **language** of ESG reporting. It is never a
 source of facts about our three universities — those come from
@@ -797,47 +886,83 @@ Enforced in the test suite.
 The backend name is written into `index.json` and checked at load, so vectors
 from different embedders can never be silently compared.
 
-### THREE LANES (lane C added 2026-08-17)
+### TWO LANES (was three — the prose lane was removed 2026-08-22)
 
 ```
-Lane A  knowledge      HOW to write        general ESG explainers, no facts
-                                           about our universities
-Lane B  master numbers WHAT the values are exact lookup + Jinja2; the model
-                                           never sees a number  (§3)
-Lane C  master prose   WHAT this uni did   838 rows / 733,500 chars of the
-                                           universities' own narrative
+knowledge lane    HOW to write        226 chunks of general ESG explainers.
+                                      No facts about our universities.
+institution lane  SUPPORTING DETAIL   4,729 chunks from the evidence PDFs each
+                                      university uploaded to STARS. Requires
+                                      institution=; enforced, not defaulted.
+(not a lane)      WHAT the values are exact lookup from the mapping +
+                                      esg_master_dataset.csv. No retrieval
+                                      involved. (§3)
 ```
 
-**Lane C exists because the pillars invert.** Environmental is measurements
-(~214 numeric fields each); Social and Governance are almost entirely prose.
-Chunk counts bear it out: Social 172, Governance 158, Environmental 125. Without
-lane C the S and G sections of the report would have nearly nothing to say.
+**Corpus: 4,955 chunks.** Knowledge 226 · documents 4,729. Default knowledge
+pool is **171 of 226** (41 peer-report and 14 French chunks held back). 242
+chunks carry a figure and can be dropped with `drop_quantities=True`.
 
-Built from `esg_master_dataset.csv` rows where `value_type ∈ {text, text_long}`
-→ **1,049 chunks** (Berkeley 384 / Cork 341 / TU Dublin 324). The field name is
-prepended to each chunk — *"Yes, and here is how"* is meaningless without the
-question it answers.
+#### Why the prose lane was removed
+
+There used to be a third lane: 1,049 chunks of the universities' own STARS
+narrative answers, built 2026-08-17 so that Phase 5 could *search* for the prose
+answering a given GRI question.
+
+Phase 4's second pass (§16) then built the thing that search was approximating —
+a field-level index naming exactly which STARS field answers which disclosure.
+`report/build_narrative.py:gather()` reads those fields straight out of
+`esg_master_dataset.csv`.
+
+So the prose lane became a fuzzy route to material an exact lookup already had.
+**Retrieval can return the wrong passage; a lookup keyed on `(credit, field)`
+cannot.** Keeping both meant maintaining two paths to the same text, one
+strictly worse and unused. Removed; recoverable from git history if the
+dashboard ever wants free-text search over the answers, which is a different
+job from grounding a report.
+
+The **lane machinery stayed**, because the evidence documents live in the same
+lane and carry the same risk.
 
 ⚠️ **`retrieve(lane="institution")` RAISES without `institution=`.** Not a
 default that can be overridden — a required argument, enforced by `LaneMisuse`.
-Berkeley's prose in Cork's section is the Toronto contamination failure again,
-internal and 20× larger (1,049 chunks vs 41). Also raises on an unknown
-institution rather than silently returning nothing.
+One university's evidence appearing in another's report is the Toronto
+contamination failure again, internal and 100× larger (4,729 chunks vs 41). Also
+raises on an unknown institution rather than silently returning nothing.
 
 `lane="all"` **splits k between the lanes** instead of taking one top-k. Without
-that the institution lane simply wins — 1,049 chunks to 226, and on any campus
-question its prose is the closer match. A plain top-12 returned twelve
-institution chunks and zero style guidance, which is useless for generation.
-Odd k favours the facts.
-
-**Use the pillar filter — it matters a lot.** *"who is responsible for
-sustainability governance"* unfiltered returns AC-5 literacy-assessment prose;
-with `--pillar Governance` it returns PA-1 and the actual sustainability
-officer job description at 0.632. Phase 5 should pass the pillar it is writing
-about.
+that the institution lane simply wins — 4,729 chunks to 226, and on any campus
+question a document is the closer match. Odd k favours the documents.
 
 CLI accepts the short key or a name fragment: `-i tudublin` works, and must —
 "tudublin" is not a substring of "Technological University Dublin".
+
+### How Phase 5 uses retrieval (wired 2026-08-22)
+
+Until this date **nothing outside `rag/` imported the retriever** — the whole
+layer was built and then not called, while this section claimed `retrieve.py`
+was "the only API Phase 5 may call". Found by an external review. Now:
+
+| Block in the prompt | Lane | Job |
+|---|---|---|
+| `HOUSE STYLE` | knowledge, `drop_quantities=True`, k=3 | register and vocabulary of ESG reporting |
+| `SUPPORTING EVIDENCE` | institution, scoped, k=4 | detail from this university's own PDFs |
+
+`min_score=0.35`, so a section with no good match simply gets no passages rather
+than the least-bad ones — a score means "closest", never "relevant".
+
+⚠️ **BOTH BLOCKS ARE FIGURE-REDACTED** by `redact_figures()` before they reach
+the model. Retrieved passages are the one input not verified field-by-field
+against the dataset: a PDF may cover a different year or reporting boundary than
+the STARS submission, so a figure lifted from one would trace to a real document
+and still be wrong for the sentence it lands in. Redaction keeps the roles
+clean — **retrieval supplies language and argument, the mapped dataset supplies
+every number** — and leaves the §3 guarantee exactly as strong: every digit in
+the finished report still traces to `esg_master_dataset.csv`.
+
+`tests/test_narrative_safety.py` proves it on live retrieval output: 47
+passages across the seven sections, zero surviving figures, and every evidence
+passage in Cork's prompt belonging to Cork.
 
 ### Measured quality (`eval_retrieval.py`)
 Moving tfidf → minilm took *"what does GRI require about greenhouse gas
@@ -848,8 +973,8 @@ gas").
 Corpus ceiling, honestly: strong on framing and framework comparison
 (emissions narrative 0.696, GRI-vs-SASB 0.524), weak-to-absent on pay equity /
 living wage (0.274). **That is information, not a bug** — it marks topics Phase
-5 must not ask the corpus to ground. Re-run `eval_retrieval.py` after any
-corpus change.
+5 must not ask the corpus to ground. ⚠️ These scores predate the 2026-08-22
+corpus change and have not been re-measured. Re-run `eval_retrieval.py`.
 
 ---
 
@@ -1050,8 +1175,9 @@ her suggestion rather than a departure from it.
   Both exist in the SDK. Google's published Python reference documents
   `system_instruction` and `temperature` against `generate_content`, and this
   job needs both. Verified against the docs on 2026-08-21, not recalled (§12).
-- Key: `GEMINI_API_KEY` in `.env`. **Not set yet** — everything below was built
-  and tested against the offline stub, which is the point of having one.
+- Key: `GEMINI_API_KEY` in `.env` (gitignored). **Set 2026-08-21**; real
+  prose has been generated. The offline stub still exists so the pipeline
+  is testable with no key and no network.
 - Model ID lives in one constant, `report/llm.py: DEFAULT_GEMINI_MODEL`. Google
   renames these often; a rejected model prints the list the key can actually
   see rather than a bare 404.
@@ -1132,6 +1258,18 @@ words about itself, and the audit's `review` tier covers it.
 
 ### Honest limits
 
+- ⚠️ **The audit checks a digit's PROVENANCE, not its CLAIM.** This is the
+  real edge of "non-hallucinable by construction" and it is worth stating
+  before someone finds it. `Total water withdrawal was
+  {{ op_6_annual_scope_1_and_2_ghg_emissions }}` substitutes a genuine
+  dataset value against the wrong label and audits as `ok`, because the
+  figure did come from the dataset. The construction makes a figure
+  impossible to *fabricate*; it does not make it impossible to *misplace*.
+- ⚠️ **Qualitative claims have no mechanical check at all.** If the model
+  writes "the university operates a research ethics committee" and no source
+  said so, nothing catches it. Prose is guarded by feeding the model only
+  real material and by the prompt — meaningfully safer than nothing, but a
+  prompt is a request, not a guarantee. Only FIGURES are guaranteed.
 - **Spelled-out numbers are not caught mechanically.** The prompt forbids them
   and the audit lists any it finds (`two`…`billion`) as a warning, but *"three
   campuses"* is not a hard failure. Digits are; words are a flag for review.
@@ -1139,7 +1277,9 @@ words about itself, and the audit's `review` tier covers it.
   a reporting convention, not something to ask a model to invent.
 - **The stub's prose is meaningless by design.** It exists so the whole pipeline
   is testable with no key and no network; nobody should mistake its output for a
-  report. Current runs are all stub output.
+  report. Whether `report/output/*_gri_report.md` is stub or real depends on
+  the last run — `report/output/narrative_audit.csv` records the `backend`
+  per section, so check there rather than guessing.
 
 ### ⚠️ The free Gemini quota is far smaller than the blogs say (learned 2026-08-21)
 

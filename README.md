@@ -1,42 +1,134 @@
 # ESG Report Automation (ESPRIT Project #45)
 
-Automated ESG reporting system for universities: scrape public sustainability
-data → structure it → map it onto international reporting frameworks →
-generate a report with an LLM → feed a BI dashboard.
+An automated ESG reporting system for universities: scrape public
+sustainability data → structure it → map it onto the GRI Standards → generate a
+report with an LLM → feed a BI dashboard.
 
 Built as a 4th-year engineering project at ESPRIT School of Engineering
 (Tunisia), supervised by Hiba Maalaoui.
+
+**`CLAUDE.md` is the real documentation.** It carries the design decisions, the
+methodology caveats, the gotchas and the open problems. This file is the map.
 
 ## Pipeline
 
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | done |
-| 2 | **Extraction** — scrape AASHE STARS reports (scores + detail) | done |
+| 1 | **Knowledge** — scrape ESG reference sites → retrieval corpus | done |
+| 2 | **Extraction** — scrape AASHE STARS reports (scores + credit detail) | done |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | done |
-| 4 | **Map** — STARS credits → GRI / TCFD / ESRS disclosures | next |
-| 5 | **Generate** — LLM writes prose, code injects numbers | pending |
-| 6 | **Output** — ESG report + BI dashboard | pending |
+| 4 | **Map** — STARS fields → GRI disclosures | done |
+| 5 | **Generate** — LLM writes prose, code injects the numbers | done |
+| 6 | **Output** — GRI content index done · narrative done · **dashboard pending** | in progress |
 
-Target frameworks: GRI, ISSB, CSRD/ESRS, TCFD, SASB.
+### Scope: GRI only
 
-Data sources: STARS 3.0 reports for UC Berkeley, University College Cork, and
-Technological University Dublin. See `CLAUDE.md` for the full reasoning
-behind institution selection, methodology caveats, and the non-hallucinable
-number-injection design.
+The supervisor settled this on 2026-08-14. **ISSB, CSRD/ESRS, TCFD and SASB are
+out of scope.** The mapping is one hand-built, cited STARS→GRI table rather than
+five shallow ones; the report notes that the approach extends to the others.
+
+## The design decision everything rests on
+
+**The LLM never writes a number.** It produces prose containing placeholders —
+`{{ op_6_annual_scope_1_ghg_emissions }}` — and code substitutes the real value
+from the dataset. The model is never shown a figure, so it cannot copy one
+wrongly, and a scan of the finished prose fails the build if any digit cannot be
+traced back to the data.
+
+The mapping table is likewise built by hand against GRI's own published
+requirement text, never generated. A fabricated mapping in an ESG tool is an
+integrity failure, not a bug.
+
+Limits of that claim are stated honestly in `CLAUDE.md` §17 — read them before
+repeating the phrase "non-hallucinable by construction" anywhere it matters.
+
+## Data
+
+STARS 3.0 reports for **UC Berkeley**, **University College Cork** and
+**Technological University Dublin** — 3,197 extracted field/value pairs across
+118 credit pages each.
+
+STARS data is © AASHE, publicly accessible and usable in research **with
+attribution**. It is not openly licensed. Cite as:
+*[Institution] STARS Report. AASHE. [Date published]. Retrieved from [URL].*
+
+`CLAUDE.md` §4 explains why these three institutions and not others — including
+why none of the ten European universities originally suggested could be used.
 
 ## Setup
 
 ```bash
 uv sync
-export AASHE_SESSIONID="<sessionid cookie value from browser devtools>"  # required for deep scrapers only
 ```
+
+Two secrets, both environment variables, never committed:
+
+```bash
+export AASHE_SESSIONID="<sessionid cookie from browser devtools>"  # credit-detail scraping only
+echo 'GEMINI_API_KEY=<key from https://aistudio.google.com/apikey>' >> .env   # report generation only
+```
+
+Everything except scraping and generation runs offline with no credentials.
+
+## Running it
+
+```bash
+# Phase 2-3 — extract and combine  (scraping needs AASHE_SESSIONID)
+python -m scrapers.scorecard
+python -m scrapers.credit_pages          # download only
+python -m scrapers.parse_credit_pages    # parse only, offline
+python -m pipeline.combine_scores
+python -m pipeline.build_master          # -> esg_master_dataset.csv
+
+# Phase 4 — the mapping
+python mapping/validate_mapping.py           # integrity gate
+python mapping/validate_mapping.py --review  # GRI text beside real values
+
+# Phase 5-6 — the report
+python -m report.build_content_index     # the GRI index (no LLM)
+python -m report.build_narrative         # the prose (needs GEMINI_API_KEY)
+python -m report.build_narrative --backend stub   # offline, no key
+
+# Tests
+python tests/test_parse_credits.py
+python tests/test_gri_requirements.py
+python tests/test_content_index.py
+python tests/test_narrative_safety.py
+python mapping/test_validator_catches_fabrication.py
+python rag/test_retrieval_safety.py
+```
+
+⚠️ Gemini's free tier allows very few requests per day and the limit is **per
+model**. Set `GEMINI_MODEL` to switch. Generated sections are cached, so an
+interrupted run resumes rather than restarting. See `CLAUDE.md` §17.
 
 ## Repo layout
 
-- `scrape_*.py` — Branch B scrapers (STARS scorecards + credit detail) and
-  Branch A scraper (knowledge corpus)
-- `combine_universities.py` — Phase 3 dataset merge
-- `Berkley/`, `Cork/`, `Dublin/` — per-institution scraped output
-- `knowledge_sources/` — RAG corpus text
-- `Combined_universities_data/` — merged Phase 3 dataset
+```
+scrapers/          STARS scraping. institutions.py holds ALL per-university
+                   config; download and parse are separate modules on purpose
+pipeline/          combine_scores.py, build_master.py -> esg_master_dataset.csv
+standards/         GRI vocabulary + verbatim requirement text (fetch_gri.py)
+mapping/           stars_gri_mapping.csv, its validator, and the negative test
+rag/               chunking, embeddings, retrieval + its safety tests
+report/            build_content_index.py, build_narrative.py, llm.py, output/
+tests/             cross-cutting verification
+scrape_knowledge.py            Branch A corpus scraper
+Berkley/ Cork/ Dublin/         per-institution scraped output and HTML caches
+knowledge_sources/             Branch A corpus text
+Combined_universities_data/    esg_master_dataset.csv — what everything reads
+documents/                     evidence PDFs cited by STARS answers (gitignored)
+```
+
+Berkeley's folder is spelled `Berkley` on disk. Left alone deliberately —
+renaming breaks the caches for no benefit.
+
+## Status and known problems
+
+Phase 4 and 5 are built and tested; the BI dashboard is not started.
+
+An independent review on 2026-08-22 verified the extraction end to end — all
+3,197 pairs re-derived from the cached HTML by a separate extractor with zero
+disagreements — and found several defects in the safety and documentation
+layers. They are listed as open items 6–13 in `CLAUDE.md` §14, worst first.
+**Read those before trusting the number-safety claim.**

@@ -64,6 +64,13 @@ sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent.par
 from report.llm import QuotaExhausted, WriterError, get_writer            # noqa: E402
 from scrapers.institutions import PROJECT_ROOT, resolve   # noqa: E402
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "rag"))
+try:
+    from retrieve import LaneMisuse, retrieve             # noqa: E402
+except Exception:                                         # pragma: no cover
+    retrieve = None                                       # index not built yet
+    LaneMisuse = RuntimeError
+
 GRI_JSON = PROJECT_ROOT / "standards" / "gri_disclosures.json"
 MAPPING = PROJECT_ROOT / "mapping" / "stars_gri_mapping.csv"
 MASTER = PROJECT_ROOT / "Combined_universities_data" / "esg_master_dataset.csv"
@@ -76,6 +83,12 @@ USABLE = {"equivalent", "component", "intensity", "partial"}
 # Long source passages are trimmed before they go in the prompt. The model needs
 # enough to paraphrase, not the whole 4,000-character answer.
 CONTEXT_CHARS = 700
+
+# How many retrieved passages each section gets, and how tight the match must be.
+STYLE_K = 3          # lane A — general ESG explainers. HOW to write.
+EVIDENCE_K = 4       # institution lane — this university's own evidence PDFs.
+RETRIEVAL_MIN_SCORE = 0.35
+EVIDENCE_CHARS = 600
 
 
 # --------------------------------------------------------------------------
@@ -207,8 +220,65 @@ def gather(institution, section, gri, mapping, master) -> dict:
                                 "label": field, "text": text,
                                 "gri_title": titles.get(number, "")})
 
+    support = retrieve_support(institution, section)
+
     return {"figures": figures, "context": context, "gaps": gaps,
-            "caveats": sorted(set(caveats)), "unavailable": sorted(set(unavailable))}
+            "caveats": sorted(set(caveats)),
+            "unavailable": sorted(set(unavailable)),
+            "style": support["style"], "evidence": support["evidence"]}
+
+
+def retrieve_support(institution, section) -> dict:
+    """Two kinds of retrieved help, with very different jobs.
+
+    STYLE (lane A) — general ESG explainers, no facts about our universities.
+    This is what the knowledge corpus was built for: the register and vocabulary
+    of ESG reporting. peer_report chunks are excluded by retrieve()'s default,
+    which is the guard that keeps Toronto's carbon figure out of Berkeley's
+    report (§13).
+
+    EVIDENCE (institution lane) — this university's own uploaded PDFs: climate
+    plans, policies, pay-gap reports. Material that exists nowhere else in the
+    pipeline; esg_master_dataset.csv holds the STARS answers, not the documents
+    those answers cite. `institution=` is mandatory and enforced by LaneMisuse.
+
+    ⚠️ BOTH ARE FIGURE-REDACTED before they reach the prompt.
+        Retrieved passages are the one input here that is NOT verified
+        field-by-field against the dataset. A document may be from a different
+        year or a different reporting boundary than the STARS submission, so a
+        figure lifted out of one would be traceable to a real PDF and still
+        wrong for the sentence it lands in. Redacting keeps the roles clean:
+        retrieval supplies language and argument, the mapped dataset supplies
+        every number. The §3 guarantee is unchanged — every digit in the
+        finished report still traces to esg_master_dataset.csv.
+    """
+    if retrieve is None:
+        return {"style": [], "evidence": []}
+
+    query = f"{section['title']}. {section['brief']}"
+    style, evidence = [], []
+
+    try:
+        for hit in retrieve(query, k=STYLE_K, lane="knowledge",
+                            drop_quantities=True,
+                            min_score=RETRIEVAL_MIN_SCORE):
+            style.append({"source": hit.source, "cite": hit.cite(),
+                          "text": redact_figures(hit.text[:CONTEXT_CHARS])})
+    except Exception as exc:                             # pragma: no cover
+        print(f"       [warn] style retrieval unavailable: {exc}")
+
+    try:
+        for hit in retrieve(query, k=EVIDENCE_K, lane="institution",
+                            institution=institution.name,
+                            min_score=RETRIEVAL_MIN_SCORE):
+            evidence.append({"source": hit.source, "cite": hit.cite(),
+                             "text": redact_figures(hit.text[:EVIDENCE_CHARS])})
+    except LaneMisuse:                                   # pragma: no cover
+        raise
+    except Exception as exc:                             # pragma: no cover
+        print(f"       [warn] evidence retrieval unavailable: {exc}")
+
+    return {"style": style, "evidence": evidence}
 
 
 SYSTEM = """You write sections of GRI sustainability reports for universities.
@@ -274,6 +344,27 @@ def build_prompt(institution, section, facts) -> str:
         for c in facts["context"]:
             lines.append(f"  [GRI {c['disclosure']} — {c['gri_title']}] "
                          f"{c['label']}: {c['text']}")
+        lines.append("")
+
+    if facts.get("evidence"):
+        lines.append("SUPPORTING EVIDENCE — passages from this institution's "
+                     "own published documents, retrieved for this section. "
+                     "Figures have been removed from them on purpose: use them "
+                     "for context and detail, never as a source of numbers. "
+                     "Do not cite a claim from here that the STARS material "
+                     "above contradicts:")
+        for e in facts["evidence"]:
+            lines.append(f"  [{e['source']}] {e['text']}")
+        lines.append("")
+
+    if facts.get("style"):
+        lines.append("HOUSE STYLE — extracts from professional ESG reporting "
+                     "guidance, included to show the expected register and "
+                     "vocabulary. These are about OTHER organisations and "
+                     "reporting in general. Take the WRITING STYLE from them "
+                     "and nothing else: no facts, no claims, no figures:")
+        for s in facts["style"]:
+            lines.append(f"  [{s['source']}] {s['text']}")
         lines.append("")
 
     if facts["caveats"]:

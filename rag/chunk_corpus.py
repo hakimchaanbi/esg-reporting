@@ -230,85 +230,31 @@ def chunk_knowledge() -> tuple[list[dict], list[tuple[str, str]]]:
 # ----------------------------------------------------------------------
 # Lane C — what OUR universities actually said about themselves
 # ----------------------------------------------------------------------
-def chunk_institution_prose() -> list[dict]:
-    """The narrative answers inside esg_master_dataset.csv.
-
-    838 rows, ~733,500 chars — 4.9x the entire knowledge corpus, and until now
-    nothing read a word of it. It matters most where numbers are scarcest:
-    PA-6 Institutional Climate (79,928 chars), AC-8 Responsible Research
-    (50,105), EN-2 Co-Curricular Activities (46,908). The Environmental pillar
-    is measurements; Social and Governance are almost entirely prose. Without
-    this lane those sections of the report have nothing to say.
-
-    EVERY chunk is stamped with its institution, and retrieve() refuses to
-    search this lane without one. Berkeley's prose appearing in Cork's section
-    is the Toronto contamination failure again — internal this time, and twenty
-    times larger.
-    """
-    if not MASTER.exists():
-        print(f"[warn] {MASTER.name} not found — skipping lane C. "
-              f"Run: python -m pipeline.build_master")
-        return []
-
-    df = pd.read_csv(MASTER)
-    prose = df[df.value_type.isin(("text", "text_long"))
-               & df.value.notna()].copy()
-
-    by_name = {i.name: i for i in INSTITUTIONS.values()}
-    records = []
-
-    for row in prose.itertuples(index=False):
-        institution = by_name.get(row.institution)
-        if institution is None:
-            print(f"[warn] unknown institution {row.institution!r} — skipped")
-            continue
-
-        # Answers are already one-per-question, so short ones stay whole and
-        # only the long ones get split. Splitting on paragraphs keeps the
-        # question's answer readable on its own.
-        pieces = (chunk_paragraphs(split_paragraphs(str(row.value)))
-                  if len(str(row.value)) > TARGET_CHARS
-                  else [str(row.value).strip()])
-
-        field = str(row.field) if pd.notna(row.field) else ""
-        section = str(row.section) if pd.notna(row.section) else ""
-
-        for i, text in enumerate(pieces):
-            if len(text) < MIN_CHUNK_CHARS:
-                continue
-            records.append({
-                "id": f"{institution.key}::{row.credit_code}::"
-                      f"{abs(hash(field)) % 10**6:06d}::{i:02d}",
-                # Prepending the question makes a chunk answerable on its own —
-                # "Yes, and here is how" is meaningless without knowing what
-                # was asked.
-                "text": f"{field}\n{text}" if field else text,
-                "lane": "institution",
-                "institution": institution.name,
-                "institution_key": institution.key,
-                "source": f"STARS {row.credit_code}",
-                "url": f"{institution.report_url}{row.category_code}/"
-                       f"{row.credit_code}/",
-                "source_type": "institution_prose",
-                "language": "en",
-                "has_quantity": bool(QUANTITY_RE.search(text)),
-                "chunk_index": i,
-                "chars": len(text),
-                "words": len(text.split()),
-                "scraper_flags": "",
-                # extra Lane C context, useful as retrieval filters
-                "credit_code": str(row.credit_code),
-                "credit_name": str(row.credit_name) if pd.notna(row.credit_name) else "",
-                "pillar": str(row.pillar) if pd.notna(row.pillar) else "",
-                "section": section,
-                "field": field,
-            })
-
-    return records
+# ----------------------------------------------------------------------
+# REMOVED 2026-08-22 — the STARS narrative answers used to be chunked here.
+#
+# They were embedded so that Phase 5 could SEARCH for the prose answering a
+# given GRI question. Phase 4's second pass (CLAUDE.md §16) then built the
+# thing that search was approximating: a field-level index saying exactly which
+# STARS field answers which disclosure. report/build_narrative.py:gather()
+# reads those fields straight out of esg_master_dataset.csv.
+#
+# So the 1,049 prose chunks were a fuzzy route to material an exact lookup
+# already had. Retrieval can return the wrong passage; a lookup keyed on
+# (credit, field) cannot. Keeping both meant maintaining two paths to the same
+# text, one of them strictly worse and unused.
+#
+# The `institution` LANE ITSELF STAYS — the evidence documents below live in
+# it, they are institution-scoped, and they carry the same contamination risk
+# that `LaneMisuse` exists to prevent. Only this source_type is gone.
+#
+# Recoverable from git history if the dashboard ever wants free-text search
+# over the answers, which is a different job from grounding the report.
+# ----------------------------------------------------------------------
 
 
 # ----------------------------------------------------------------------
-# Lane C, part two — the evidence documents STARS answers link to
+# The institution lane — the evidence documents STARS answers link to
 # ----------------------------------------------------------------------
 MANIFEST = PROJECT_ROOT / "documents" / "manifest.csv"
 DOC_TEXT = PROJECT_ROOT / "documents" / "text"
@@ -415,9 +361,8 @@ def chunk_documents() -> list[dict]:
 
 def main():
     knowledge, skipped = chunk_knowledge()
-    institution = chunk_institution_prose()
     documents = chunk_documents()
-    records = knowledge + institution + documents
+    records = knowledge + documents
 
     # Lane A rows have no Lane C fields and vice versa; fill so every row in
     # chunks.jsonl has the same shape and the index builder stays simple.
@@ -431,9 +376,8 @@ def main():
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
     print(f"[save] {len(records)} chunks -> {OUT.name}")
-    print(f"       lane A (knowledge)   {len(knowledge):5}")
-    print(f"       lane C — STARS answers   {len(institution):5}")
-    print(f"       lane C — evidence docs   {len(documents):5}")
+    print(f"       knowledge lane   (how to write)  {len(knowledge):5}")
+    print(f"       institution lane (evidence docs) {len(documents):5}")
 
     if skipped:
         print(f"\n--- skipped {len(skipped)} document(s) ---")
@@ -451,21 +395,13 @@ def main():
     fr = [r for r in knowledge if r["language"] != "en"]
     print(f"  {'french':12} {len(fr):4} chunks  <-- excluded by default")
 
-    print("\n--- lane C: chunks per institution ---")
-    for inst in sorted({r["institution"] for r in institution}):
-        rows = [r for r in institution if r["institution"] == inst]
+    print("\n--- institution lane: chunks per institution ---")
+    for inst in sorted({r["institution"] for r in documents}):
+        rows = [r for r in documents if r["institution"] == inst]
         quant = sum(r["has_quantity"] for r in rows)
         print(f"  {inst[:34]:36} {len(rows):4} chunks  "
               f"{sum(r['chars'] for r in rows):>7,} chars  "
               f"{quant:3} with a figure")
-
-    print("\n--- lane C: pillars covered (the reason this lane exists) ---")
-    by_pillar = {}
-    for r in institution:
-        by_pillar.setdefault(r["pillar"], 0)
-        by_pillar[r["pillar"]] += 1
-    for p, n in sorted(by_pillar.items(), key=lambda kv: -kv[1]):
-        print(f"  {p or '(none)':16} {n:4} chunks")
 
     quantity = [r for r in records if r["has_quantity"]]
     print(f"\n--- chunks containing a figure: {len(quantity)} "
