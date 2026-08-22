@@ -59,3 +59,6 @@ rag/index/
 # generated narrative cache (LLM output, rebuildable)
 report/cache_narrative/
 report/output/*.md.incomplete
+
+# generated section previews
+report/output/*_preview.md

@@ -14,6 +14,7 @@ RUN
 """
 
 import collections
+import re
 import pathlib
 import sys
 
@@ -65,11 +66,41 @@ def main():
           f"{parts:,.0f} vs {total:,.0f}" if total else "total not found")
 
     print("\n3. Units are in their own column, never left inside the value\n")
-    leaked = df[df.value.astype(str).str.contains(
-        "Metric tons|Megawatt|Cubic meters", na=False)
-        & (df.value_type == "number")]
-    check("no numeric value contains its units", len(leaked) == 0,
-          f"{len(leaked)} leaked")
+
+    # This check used to filter on `value_type == "number"` AND `value` matching
+    # a unit word. value_type is "number" only when NUMERIC_RE matched, and
+    # NUMERIC_RE cannot match a letter — so the two conditions were mutually
+    # exclusive and the filter was necessarily empty. It could not fail.
+    #
+    # A real leak does not look like that. If the unit were left in, the value
+    # would be "134,957 Metric tons of CO2 equivalent", NUMERIC_RE would reject
+    # it and value_type would be `text` — precisely where the old check did not
+    # look. So: scan every row, and match a value that is ENTIRELY a number
+    # followed by a unit.
+    UNITS = (r"Metric tons(?: of CO2 equivalent)?|Megawatt-hours|Kilowatt-hours"
+             r"|Cubic meters|MMBtu|Gallons|Square (?:meters|feet)|Liters"
+             r"|Kilograms(?: of CO2 equivalent)?|Tons|Hectares|Acres")
+    leak_re = re.compile(rf"^-?[\d,]+(?:\.\d+)?\s+(?:{UNITS})\s*$", re.IGNORECASE)
+
+    leaked = [f"{r.credit_code}/{str(r.field)[:34]}: {str(r.value)[:44]!r}"
+              for r in df.itertuples(index=False)
+              if pd.notna(r.value) and leak_re.match(str(r.value).strip())]
+    check("no value is left as 'number + unit'", not leaked,
+          "; ".join(leaked[:3]))
+
+    # POSITIVE CONTROL. The check above is worthless unless the detector
+    # actually fires, which is the mistake the old version made.
+    must_catch = ["134,957 Metric tons of CO2 equivalent", "38,391 Megawatt-hours",
+                  "56,570 Cubic meters", "1,244.08 Metric tons"]
+    must_ignore = ["134,957", "Yes",
+                   "15,444 Megawatt-hours via UC Berkeley Direct Access: EBCE",
+                   "Doctoral universities and research institutions"]
+    check("the leak detector fires on real leak shapes",
+          all(leak_re.match(v) for v in must_catch),
+          f"missed: {[v for v in must_catch if not leak_re.match(v)]}")
+    check("and does not fire on clean values or prose that cites a figure",
+          not any(leak_re.match(v) for v in must_ignore),
+          f"false positives: {[v for v in must_ignore if leak_re.match(v)]}")
 
     print("\n4. The boilerplate bug has not returned\n")
     for inst, g in df.groupby("institution"):

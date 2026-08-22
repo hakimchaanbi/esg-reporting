@@ -133,11 +133,16 @@ disagreements, and 45 derived figures reproduced exactly for all three
 universities — and found several defects in the safety and documentation
 layers.
 
-The two serious ones are **fixed**: a regex hole that let any number written as
-`40-50` walk past the number audit, and the test that should have caught it but
-shared the same flawed pattern. Both are described in `CLAUDE.md` §14 items 6–7,
-because the failure mode is worth remembering.
+Items 6–10 are **fixed**, and the failure modes are written up in `CLAUDE.md`
+§14 because they are worth remembering:
 
-The rest — items 8–13 — are open and listed worst first: two more tests that
-cannot fail, `--section` overwriting a whole report, a `section` column that is
-blank or wrong for most rows, and three mapping improvements.
+- a regex hole that let any number written as `40-50` walk past the number audit
+- the test that should have caught it, which shared the same flawed pattern
+- three further tests that could not fail, now each with a positive control
+- `--section` overwriting a whole report with one section
+- the `section` column, blank on 2,768 rows and wrong on 63
+
+Open, worst first (`CLAUDE.md` §14 items 11–13): GRI 405-1-b employee categories
+are answerable and unmapped, GRI 303-3's megalitre/cubic-metre mismatch is
+uncaveated, and 306-4/306-5 keep `equivalent` under the limitation that
+downgraded 306-3.
