@@ -781,8 +781,84 @@ ML_CONVERSION = ("UNITS: GRI 303-3 requires megaliters and STARS reports cubic "
                  "303-3 value, and state the conversion — the same treatment "
                  "GRI 302-1 gets for megawatt-hours against joules.")
 
+# GRI 306-3/4/5 all rest on the same limitation — STARS collects non-hazardous
+# waste only, and holds no hazardous TONNAGE anywhere (OP-11 has a programme
+# boolean and narratives, nothing weighed). But the three disclosures are not
+# structured alike, which is why they do not all take the same label:
+#
+#   306-3-a  Total weight of waste generated.        <- one requirement, ALL waste.
+#            There is no non-hazardous sub-requirement, so the STARS figure
+#            answers nothing exactly -> `partial`, and it stays that way.
+#
+#   306-4-c  Total weight of NON-HAZARDOUS waste diverted from disposal,
+#            broken down by preparation for reuse / recycling / other recovery.
+#            Word for word the STARS field, and STARS supplies all three
+#            recovery operations -> a required PART is answered exactly.
+#
+#   306-5-c  Same shape for waste directed to disposal.
+#
+# So `equivalent` overclaimed — it means "answers the disclosure as written",
+# and neither 306-4 nor 306-5 is answered while the hazardous half is missing.
+# `partial` would underclaim, because 306-4-c IS satisfied. `component` is the
+# project's own word for "supplies one required part of a multi-part
+# disclosure", which is precisely the situation. Chosen by Hakim 2026-08-22
+# after the three options were laid out.
+HAZARDOUS_GAP = ("NOT THE WHOLE DISCLOSURE: the hazardous half is absent. STARS "
+                 "weighs no hazardous waste anywhere — OP-11 records only "
+                 "whether a hazardous-waste programme exists and describes it "
+                 "in prose. For a research university that is a materially "
+                 "significant stream going unreported, and it is a finding "
+                 "about STARS rather than about these institutions.")
+
 # (stars_credit, stars_field, gri_disclosure) -> the columns to overwrite.
 AMENDMENTS = {
+    ("OP-12", "Total non-hazardous waste diverted from disposal", "306-4"): {
+        "relationship": "component",
+        "confidence": "high",
+        "rationale":
+            "GRI 306-4-c is literally 'Total weight of non-hazardous waste "
+            "diverted from disposal'. STARS supplies that figure and all three "
+            "of the recovery operations GRI names for it, so one required part "
+            "of 306-4 is answered exactly.",
+        "caveat":
+            "Exact scope match on GRI 306-4-c, including its split by recovery "
+            "operation (reuse / recycling / other) from the rows below. GRI "
+            "306-4-d additionally wants each operation split on-site vs "
+            f"off-site, which STARS does not collect. {HAZARDOUS_GAP}",
+        "claude_verdict": "amend",
+        "claude_note":
+            "Downgraded equivalent -> component 2026-08-22. `equivalent` means "
+            "'answers the disclosure as written' and 306-4 is not answered "
+            "while 306-4-b is empty. `partial` would have been wrong in the "
+            "other direction — 306-4-c is satisfied exactly. `component` is the "
+            "defined word for a required part. 306-3 stays `partial` because "
+            "GRI 306-3 has no non-hazardous sub-requirement to satisfy, which "
+            "is what makes the two labels different rather than inconsistent.",
+        "reviewed_date": REVIEWED,
+    },
+    ("OP-12", "Non-hazardous waste disposed of to a landfill or incinerator",
+     "306-5"): {
+        "relationship": "component",
+        "confidence": "medium",
+        "rationale":
+            "GRI 306-5-c is the total weight of non-hazardous waste directed to "
+            "disposal. STARS supplies that total, so one required part of "
+            "306-5 is answered.",
+        "caveat":
+            "WEAKER THAN THE 306-4 EQUIVALENT: GRI 306-5-c also requires the "
+            "total split across four disposal operations — incineration with "
+            "energy recovery, incineration without, landfilling, other — and "
+            "STARS merges landfill and incineration into a single figure. The "
+            "waste-to-energy percentage field would separate incineration with "
+            "recovery, but only two of the three institutions report it, so "
+            f"the split cannot be derived consistently. {HAZARDOUS_GAP}",
+        "claude_verdict": "amend",
+        "claude_note":
+            "Downgraded equivalent -> component 2026-08-22, same reasoning as "
+            "306-4. Weaker than that row: 306-4-c's recovery-operation split IS "
+            "available from STARS, 306-5-c's disposal-operation split is not.",
+        "reviewed_date": REVIEWED,
+    },
     ("OP-3", "Total water withdrawal", "303-3"): {
         "caveat":
             "GRI 303-3 requires a breakdown by source AND a separate figure for "
