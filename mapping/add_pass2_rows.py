@@ -771,8 +771,51 @@ TUD_UNPARSEABLE = ("DATA QUALITY: TU Dublin's value is the string '0 Revised on 
                    "figure — so the field is typed `text`, not `number`, and "
                    "will not parse. Cork and Berkeley are clean.")
 
+# GRI 303-3 says "megaliters" three times in its requirement text. STARS reports
+# cubic meters — a factor of 1,000. The project already flags the identical
+# problem on GRI 302-1 ("STARS reports megawatt-hours - convertible, but state
+# the conversion"), so the omission here was inconsistency rather than a
+# judgement. No figure is wrong; the disclosure is simply not in GRI's unit.
+ML_CONVERSION = ("UNITS: GRI 303-3 requires megaliters and STARS reports cubic "
+                 "meters. Divide by 1,000 before citing the figure as a GRI "
+                 "303-3 value, and state the conversion — the same treatment "
+                 "GRI 302-1 gets for megawatt-hours against joules.")
+
 # (stars_credit, stars_field, gri_disclosure) -> the columns to overwrite.
 AMENDMENTS = {
+    ("OP-3", "Total water withdrawal", "303-3"): {
+        "caveat":
+            "GRI 303-3 requires a breakdown by source AND a separate figure for "
+            "areas with water stress. STARS collects neither, so 303-3 cannot "
+            f"be fully satisfied from STARS alone. {ML_CONVERSION}",
+        "claude_verdict": "amend",
+        "claude_note":
+            "Unit caveat added 2026-08-22 after an external review noted that "
+            "all three 303-3 rows were silent on megaliters vs cubic meters "
+            "while the analogous 302-1 mismatch was flagged.",
+        "reviewed_date": REVIEWED,
+    },
+    ("OP-3", "Potable water from off-site sources", "303-3"): {
+        "caveat":
+            "Maps to the specific GRI 303-3-a-v category 'Third-party water'. "
+            "It is the ONLY withdrawal source these universities have — on-site "
+            "abstraction is zero for all three — so this equals the total. "
+            f"{ML_CONVERSION}",
+        "claude_verdict": "amend",
+        "claude_note": "Unit caveat added 2026-08-22; see the total-withdrawal row.",
+        "reviewed_date": REVIEWED,
+    },
+    ("OP-3", "Potable water from on-site sources", "303-3"): {
+        "caveat":
+            "Zero for all three institutions, which is itself the finding: "
+            "none of them abstracts its own water. Retained so the GRI 303-3 "
+            f"source breakdown is complete rather than silent. {ML_CONVERSION}",
+        "claude_verdict": "amend",
+        "claude_note":
+            "Had no caveat at all before 2026-08-22. Unit conversion added, "
+            "plus a note that the zero is meaningful rather than missing.",
+        "reviewed_date": REVIEWED,
+    },
     ("PA-8",
      "Percentage of executive staff that identify as women or other marginalized gender identities",
      "405-1"): {

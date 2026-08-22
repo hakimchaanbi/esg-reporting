@@ -909,9 +909,13 @@ established.** These are what it found that is not yet fixed:
     note cell printed each shared clause two or three times.
     `merge_caveats()` now dedupes at sentence granularity.
 
-12. 🟡 **GRI 303-3 unit mismatch is uncaveated.** GRI wants megalitres, STARS
-    reports cubic metres — a factor of 1,000. All three 303-3 rows are silent,
-    while the analogous 302-1 MWh-vs-joules mismatch *is* flagged. Three cells.
+12. ~~🟡 **GRI 303-3 unit mismatch is uncaveated.**~~ **FIXED 2026-08-22.**
+    GRI 303-3 says "megaliters" three times; STARS reports cubic metres, a
+    factor of 1,000. All three rows were silent while the identical 302-1
+    MWh-vs-joules mismatch was flagged — inconsistency, not judgement. All three
+    now carry the conversion. The third row (`Potable water from on-site
+    sources`) had no caveat at all; it now also records that its zero is the
+    finding, not missing data — none of the three abstracts its own water.
 
 13. 🟡 **`306-4`/`306-5` keep `equivalent`** under the same non-hazardous-only
     limitation that correctly downgraded `306-3` to `partial`. Defensible
