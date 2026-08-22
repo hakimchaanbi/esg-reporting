@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 
 import pandas as pd
@@ -72,6 +73,30 @@ def cell_safe(text: str) -> str:
     second mapping pass, most mapped values ARE prose.
     """
     return text.replace("|", "\\|")
+
+
+def merge_caveats(caveats: list[str]) -> str:
+    """Join several rows' caveats without repeating the shared parts.
+
+    Deduplicating whole caveat strings is not enough once a disclosure has
+    several mapped fields. GRI 405-1 draws on six STARS fields whose caveats
+    share three clauses — no age data, 405-1-a unanswered, TU Dublin's index
+    unparseable — but combine them differently, so no two strings are equal and
+    every shared clause printed two or three times. The note cell ran to a
+    paragraph of repeats.
+
+    So dedupe at sentence granularity instead, preserving order. Splitting after
+    a full stop is crude — "Nov. 24, 2025" splits into two fragments — but the
+    fragments are rejoined with a space in their original order, so the text is
+    reconstructed exactly; only fragments that genuinely repeat are dropped.
+    """
+    seen, out = set(), []
+    for fragment in (f.strip() for c in caveats
+                     for f in re.split(r"(?<=\.)\s+", c.strip()) if f.strip()):
+        if fragment not in seen:
+            seen.add(fragment)
+            out.append(fragment)
+    return " ".join(out)
 
 
 def format_value(row) -> str:
@@ -176,7 +201,7 @@ def build(institution, gri, mapping, master):
                 status = "Reported"
                 detail = "<br>".join(values)
 
-            note = " ".join(dict.fromkeys(caveats))
+            note = merge_caveats(caveats)
             if missing and values:
                 note = (note + " ").strip() + (
                     f"Not populated by this institution: {'; '.join(missing[:3])}.")

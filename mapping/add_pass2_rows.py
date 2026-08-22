@@ -726,7 +726,131 @@ TOPICS = [
         "health or safety data at all."),
 ]
 
-NEW_ROWS = GRI2 + TOPICS
+# --------------------------------------------------------------------------
+# Third pass, 2026-08-22 — GRI 405-1-b, found by the external review.
+#
+# 405-1 has two halves and the first pass only tried the first one:
+#
+#   405-1-a  percentage of individuals within the GOVERNANCE BODIES, by gender,
+#            age group, and other diversity indicators
+#   405-1-b  percentage of EMPLOYEES PER EMPLOYEE CATEGORY, same three splits
+#
+# Two rows existed, both pointing at executive staff, and both caveated as
+# "executive staff is not GRI's governance bodies". True — but that is an
+# objection to 405-1-a, and nobody checked 405-1-b, where "executive staff" is
+# a perfectly ordinary employee category. Meanwhile academic and non-academic
+# staff, which are also employee categories, sat unmapped with populated values
+# for all three universities.
+#
+# One caveat gave the wrong reason outright: "GRI counts employees by category
+# whereas STARS also reports students, who are outside GRI's scope." That is
+# true of the STUDENT rows, which are correctly left unmapped, and says nothing
+# about the staff rows it was attached to.
+#
+# 405-1-a remains genuinely unanswered: PA-3 records WHICH constituencies sit on
+# the highest decision-making body, never what percentage of it they are. That
+# belongs in the caveats, not in a gap row — a disclosure with usable rows
+# cannot also carry one.
+# --------------------------------------------------------------------------
+
+AGE_GAP = ("No STARS credit collects employee age at all, so GRI 405-1's "
+           "age-group split (under 30 / 30-50 / over 50) is unanswerable for "
+           "every employee category.")
+BODY_GAP = ("405-1-a is still not answered: STARS PA-3 records which "
+            "constituencies are represented on the highest decision-making "
+            "body, never what percentage of that body they make up.")
+GENDER_BUCKET = ("STARS reports one combined figure for 'women or other "
+                 "marginalized gender identities' rather than a percentage per "
+                 "gender, so the split GRI asks for is two buckets, not three.")
+INDEX_NOT_PERCENT = ("This is a diversity INDEX (a single 0-1 concentration "
+                     "score), not the percentage breakdown GRI 405-1-b asks "
+                     "for. It shows how mixed the group is, not what share each "
+                     "group holds.")
+TUD_UNPARSEABLE = ("DATA QUALITY: TU Dublin's value is the string '0 Revised on "
+                   "Nov. 24, 2025' — annotation text concatenated onto the "
+                   "figure — so the field is typed `text`, not `number`, and "
+                   "will not parse. Cork and Berkeley are clean.")
+
+# (stars_credit, stars_field, gri_disclosure) -> the columns to overwrite.
+AMENDMENTS = {
+    ("PA-8",
+     "Percentage of executive staff that identify as women or other marginalized gender identities",
+     "405-1"): {
+        "relationship": "component",
+        "confidence": "high",
+        "rationale":
+            "GRI 405-1-b requires the percentage of employees per employee "
+            "category by gender. Executive staff is an employee category and "
+            "this is that percentage for it.",
+        "caveat": f"{GENDER_BUCKET} {AGE_GAP} {BODY_GAP}",
+        "claude_verdict": "amend",
+        "claude_note":
+            "REFRAMED 2026-08-22. Was `partial` against 405-1-a with the caveat "
+            "'executive staff is not GRI governance bodies'. That objection is "
+            "sound for 405-1-a and irrelevant to 405-1-b, which is the half "
+            "this field actually answers. The old caveat also blamed STARS for "
+            "reporting students — true of the student row, which stays "
+            "unmapped, and nothing to do with this one.",
+        "reviewed_date": REVIEWED,
+    },
+    ("PA-7", "Ethnic diversity index for executive staff", "405-1"): {
+        "relationship": "partial",
+        "confidence": "medium",
+        "rationale":
+            "GRI 405-1-b-iii asks for other indicators of diversity per "
+            "employee category. STARS supplies an ethnic diversity index for "
+            "executive staff.",
+        "caveat": f"{INDEX_NOT_PERCENT} {AGE_GAP} {BODY_GAP} {TUD_UNPARSEABLE}",
+        "claude_verdict": "amend",
+        "claude_note":
+            "REFRAMED 2026-08-22 from 405-1-a to 405-1-b, same reasoning as the "
+            "PA-8 executive row. Stays `partial`, but now for the right reason: "
+            "an index is not a percentage breakdown.",
+        "reviewed_date": REVIEWED,
+    },
+}
+
+EMPLOYEE_CATEGORIES = [
+    row("PA-8",
+        "Percentage of regular/permanent academic staff that identify as women or other marginalized gender identities",
+        "GRI 405", "405-1", "component", "high",
+        "GRI 405-1-b requires the percentage of employees per employee "
+        "category by gender. Academic staff is the largest employee category "
+        "at a university, and all three institutions populate this.",
+        f"{GENDER_BUCKET} {AGE_GAP} {BODY_GAP}",
+        "Found by the external review of 2026-08-22. Populated 3/3 and "
+        "unmapped: the first pass looked only at executive staff."),
+
+    row("PA-8",
+        "Percentage of regular/permanent non-academic staff that identify as women or other marginalized gender identities",
+        "GRI 405", "405-1", "component", "high",
+        "GRI 405-1-b, for the professional-services employee category. "
+        "Reporting it beside academic staff is what makes the disclosure "
+        "meaningful — the two categories differ by roughly fifteen points at "
+        "every institution.",
+        f"{GENDER_BUCKET} {AGE_GAP} {BODY_GAP}",
+        "Populated 3/3, unmapped before 2026-08-22."),
+
+    row("PA-7", "Ethnic diversity index for academic staff",
+        "GRI 405", "405-1", "partial", "medium",
+        "GRI 405-1-b-iii, other indicators of diversity for the academic "
+        "employee category.",
+        f"{INDEX_NOT_PERCENT} {AGE_GAP} {BODY_GAP} {TUD_UNPARSEABLE}",
+        "Cork 0.44, Berkeley 0.50; TU Dublin unparseable."),
+
+    row("PA-7", "Ethnic diversity index for non-academic staff",
+        "GRI 405", "405-1", "partial", "medium",
+        "GRI 405-1-b-iii, for the professional-services employee category.",
+        f"{INDEX_NOT_PERCENT} {AGE_GAP} {BODY_GAP} {TUD_UNPARSEABLE}",
+        "Cork 0.34, Berkeley 0.69; TU Dublin unparseable."),
+]
+
+# Deliberately NOT mapped: `Ethnic diversity index for students` and
+# `Percentage of students that identify as women…`. Students are not employees
+# and not a governance body, so they fall outside 405-1 entirely. This is the
+# objection the old executive-staff caveat was reaching for and misapplied.
+
+NEW_ROWS = GRI2 + TOPICS + EMPLOYEE_CATEGORIES
 
 
 def main():
@@ -738,6 +862,30 @@ def main():
          str(r.gri_disclosure).strip())
         for r in mapping.itertuples(index=False)
     }
+
+    # Amendments come first: an existing row whose JUDGEMENT was wrong, as
+    # opposed to a row that was missing. Rewriting in place rather than adding a
+    # second row for the same (credit, field, disclosure) keeps the content
+    # index from reporting one field twice.
+    amended, already = 0, 0
+    for (credit, field, disclosure), columns in AMENDMENTS.items():
+        hit = ((mapping.stars_credit.astype(str).str.strip() == credit)
+               & (mapping.stars_field.astype(str).str.strip() == field)
+               & (mapping.gri_disclosure.astype(str).str.strip() == disclosure))
+        if not hit.any():
+            print(f"   [warn] amendment target not found: {credit} / "
+                  f"{field[:40]} -> {disclosure}")
+            continue
+        idx = mapping.index[hit][0]
+        if all(str(mapping.loc[idx, k]) == str(v) for k, v in columns.items()):
+            already += 1
+            continue
+        for k, v in columns.items():
+            mapping.loc[idx, k] = v
+        amended += 1
+    if amended or already:
+        print(f"{len(AMENDMENTS)} amendment(s): {amended} applied, "
+              f"{already} already current")
 
     fresh, skipped = [], 0
     for r in NEW_ROWS:
