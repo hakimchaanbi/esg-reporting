@@ -525,10 +525,10 @@ secondary sources **matched GRI's own pages exactly.**
   `CO2`, but headings use a separator, or
   `Disclosure 302-4Reduction of energy consumption` fails the heading regex.
   Different rules for different elements, on purpose.
-- `mapping/stars_gri_mapping.csv` — **141 rows** (§16, plus the 405-1 pass
-  in §14.11): 6 equivalent · 65 component · 4 intensity · **29 partial** ·
-  34 gap_gri_side · 3 gap_stars_side, summing to 141. 139 confirmed ·
-  2 rejected. Every one of the 75 GRI disclosures has a judgement.
+- `mapping/stars_gri_mapping.csv` — **141 rows** (§16, plus the 405-1 and
+  waste passes in §14.11 and §14.13): 4 equivalent · 67 component ·
+  4 intensity · **29 partial** · 34 gap_gri_side · 3 gap_stars_side,
+  summing to 141. 139 confirmed · 2 rejected. Every one of the 75 GRI disclosures has a judgement.
   (An earlier version of this line said 26 partial and summed to 135: the
   two `rejected` rows are also `partial` and were counted in neither
   total.)
@@ -917,9 +917,36 @@ established.** These are what it found that is not yet fixed:
     sources`) had no caveat at all; it now also records that its zero is the
     finding, not missing data — none of the three abstracts its own water.
 
-13. 🟡 **`306-4`/`306-5` keep `equivalent`** under the same non-hazardous-only
-    limitation that correctly downgraded `306-3` to `partial`. Defensible
-    (306-4-c is literally non-hazardous) but inconsistent; expect the question.
+13. ~~🟡 **`306-4`/`306-5` keep `equivalent`.**~~ **RESOLVED 2026-08-22,
+    Hakim's choice from three options: both are now `component`.**
+
+    The three waste disclosures share one limitation — STARS collects
+    non-hazardous waste only, and weighs **no hazardous waste anywhere**;
+    OP-11 has a programme boolean and narratives, nothing on a scale. But
+    GRI does not structure them alike, which is what makes the labels
+    differ rather than contradict:
+
+    | | GRI's structure | Label |
+    |---|---|---|
+    | 306-3 | one requirement, **all** waste generated — no non-hazardous slot to fill | `partial` |
+    | 306-4 | **306-4-c** is word-for-word the STARS field, and STARS supplies its three recovery operations | `component` |
+    | 306-5 | **306-5-c** exists, but STARS merges landfill and incineration where GRI wants four operations | `component` |
+
+    `equivalent` overclaimed: it means *answers the disclosure as written*,
+    and neither 306-4 nor 306-5 is answered while its hazardous half is
+    empty. `partial` would have underclaimed — 306-4-c is satisfied
+    exactly. `component`, *supplies one required part of a multi-part
+    disclosure*, is the word the vocabulary already had for this.
+
+    Nothing was lost: `component` is in `USABLE`, so both stay **Reported**
+    and citable, and all three institutions still read 24 · 14/15 · 36/37 ·
+    0. What changed is that the viva answer is now one sentence about GRI's
+    sub-structure instead of a shrug.
+
+    **Surfaced while doing it:** no hazardous-waste tonnage exists in STARS
+    at all. For a research university that is a materially significant
+    stream going unreported, and it is a finding about the framework rather
+    than about these three institutions. It now says so in both caveats.
 
 ---
 

@@ -144,7 +144,15 @@ Items 6–10 are **fixed**, and the failure modes are written up in `CLAUDE.md`
 
 - GRI 405-1-b, where four populated employee-category fields were unmapped
   because the disclosure's second half had never been checked
+- GRI 303-3's megalitre/cubic-metre mismatch, uncaveated while the identical
+  302-1 mismatch was flagged
+- the waste disclosures, where `306-4`/`306-5` claimed `equivalent` under a
+  limitation that had downgraded `306-3` to `partial`
 
-Open (`CLAUDE.md` §14 items 12–13): GRI 303-3's megalitre/cubic-metre mismatch is
-uncaveated, and 306-4/306-5 keep `equivalent` under the limitation that
-downgraded 306-3.
+**Every item the review raised is now closed.** Its strongest positive result
+stands: an independently written extractor reproduced all 3,197 field/value
+pairs from the cached HTML with zero disagreements, and 45 derived figures —
+scope totals, intensities, FTE sums, percentage reductions — reproduced exactly
+for all three universities.
+
+Remaining work is the **BI dashboard**, which has not been started.

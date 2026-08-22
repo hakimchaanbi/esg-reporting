@@ -72,13 +72,13 @@ institution,gri_disclosure,gri_title,relationship,stars_credit,stars_field,value
 "University of California, Berkeley",306-2,Management of significant waste-related impacts,component,OP-12,Does the institution have sufficient data on construction and demolition waste to pursue this indicator?,Yes,,True
 "University of California, Berkeley",306-3,Waste generated,partial,OP-12,Annual non-hazardous waste generated,"7,732.13",Metric tons,True
 "University of California, Berkeley",306-3,Waste generated,component,OP-12,Annual construction and demolition waste generated,"4,753.09",Metric tons,True
-"University of California, Berkeley",306-4,Waste diverted from disposal,equivalent,OP-12,Total non-hazardous waste diverted from disposal,"4,254.13",Metric tons,True
+"University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Total non-hazardous waste diverted from disposal,"4,254.13",Metric tons,True
 "University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste recycled,"1,576",Metric tons,True
 "University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste composted,"2,554",Metric tons,True
 "University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste prepared for reuse,124.13,Metric tons,True
 "University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Total construction and demolition waste diverted from disposal,"3,452.02",Metric tons,True
 "University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste recycled,"2,858.23",Metric tons,True
-"University of California, Berkeley",306-5,Waste directed to disposal,equivalent,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,"3,478",Metric tons,True
+"University of California, Berkeley",306-5,Waste directed to disposal,component,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,"3,478",Metric tons,True
 "University of California, Berkeley",306-5,Waste directed to disposal,component,OP-12,Construction and demolition waste disposed of to a landfill or incinerator,"1,301.07",Metric tons,True
 "University of California, Berkeley",308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Does the institution’s supplier code of conduct include one or more expectations in regard to environmental impact that exceed or are additional to regulatory compliance?,Yes,,True
 "University of California, Berkeley",308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Percentage of bid solicitations that identify supplier sustainability considerations,100,,True
@@ -173,13 +173,13 @@ University College Cork,306-2,Management of significant waste-related impacts,co
 University College Cork,306-2,Management of significant waste-related impacts,component,OP-12,Does the institution have sufficient data on construction and demolition waste to pursue this indicator?,Yes,,True
 University College Cork,306-3,Waste generated,partial,OP-12,Annual non-hazardous waste generated,520,Metric tons,True
 University College Cork,306-3,Waste generated,component,OP-12,Annual construction and demolition waste generated,"6,914.08",Metric tons,True
-University College Cork,306-4,Waste diverted from disposal,equivalent,OP-12,Total non-hazardous waste diverted from disposal,242,Metric tons,True
+University College Cork,306-4,Waste diverted from disposal,component,OP-12,Total non-hazardous waste diverted from disposal,242,Metric tons,True
 University College Cork,306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste recycled,183,Metric tons,True
 University College Cork,306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste composted,59,Metric tons,True
 University College Cork,306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste prepared for reuse,0,Metric tons,True
 University College Cork,306-4,Waste diverted from disposal,component,OP-12,Total construction and demolition waste diverted from disposal,"6,837.95",Metric tons,True
 University College Cork,306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste recycled,"5,675.22",Metric tons,True
-University College Cork,306-5,Waste directed to disposal,equivalent,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,278,Metric tons,True
+University College Cork,306-5,Waste directed to disposal,component,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,278,Metric tons,True
 University College Cork,306-5,Waste directed to disposal,component,OP-12,Construction and demolition waste disposed of to a landfill or incinerator,76.13,Metric tons,True
 University College Cork,308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Does the institution’s supplier code of conduct include one or more expectations in regard to environmental impact that exceed or are additional to regulatory compliance?,No,,True
 University College Cork,308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Percentage of bid solicitations that identify supplier sustainability considerations,21,,True
@@ -275,13 +275,13 @@ Technological University Dublin,306-2,Management of significant waste-related im
 Technological University Dublin,306-2,Management of significant waste-related impacts,component,OP-12,Does the institution have sufficient data on construction and demolition waste to pursue this indicator?,Yes,,True
 Technological University Dublin,306-3,Waste generated,partial,OP-12,Annual non-hazardous waste generated,"1,768.85",Metric tons,True
 Technological University Dublin,306-3,Waste generated,component,OP-12,Annual construction and demolition waste generated,"1,244.08",Metric tons,True
-Technological University Dublin,306-4,Waste diverted from disposal,equivalent,OP-12,Total non-hazardous waste diverted from disposal,"1,452.64",Metric tons,True
+Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Total non-hazardous waste diverted from disposal,"1,452.64",Metric tons,True
 Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste recycled,691.73,Metric tons,True
 Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste composted,56.01,Metric tons,True
 Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste prepared for reuse,704.90,Metric tons,True
 Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Total construction and demolition waste diverted from disposal,"1,121.85",Metric tons,True
 Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste recycled,531.95,Metric tons,True
-Technological University Dublin,306-5,Waste directed to disposal,equivalent,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,316.21,Metric tons,True
+Technological University Dublin,306-5,Waste directed to disposal,component,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,316.21,Metric tons,True
 Technological University Dublin,306-5,Waste directed to disposal,component,OP-12,Construction and demolition waste disposed of to a landfill or incinerator,122.23,Metric tons,True
 Technological University Dublin,308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Does the institution’s supplier code of conduct include one or more expectations in regard to environmental impact that exceed or are additional to regulatory compliance?,Yes,,True
 Technological University Dublin,308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Percentage of bid solicitations that identify supplier sustainability considerations,0,,True
