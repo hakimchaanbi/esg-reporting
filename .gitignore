@@ -62,3 +62,4 @@ report/output/*.md.incomplete
 
 # generated section previews
 report/output/*_preview.md
+report/output/narrative_audit_*_preview.csv

@@ -253,7 +253,7 @@ def retrieve(query: str,
 
     # lane="all" splits k between the lanes instead of taking a single top-k.
     #
-    # Without this the institution lane simply wins: it has 1,049 chunks to the
+    # Without this the institution lane simply wins: it has 4,729 chunks to the
     # knowledge lane's 226, and on any campus-flavoured question its prose is a
     # closer match. A plain top-k returned twelve institution chunks and zero
     # style guidance — useless for generation, which needs both "how an ESG

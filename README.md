@@ -133,8 +133,8 @@ disagreements, and 45 derived figures reproduced exactly for all three
 universities — and found several defects in the safety and documentation
 layers.
 
-Items 6–10 are **fixed**, and the failure modes are written up in `CLAUDE.md`
-§14 because they are worth remembering:
+All thirteen are **fixed**, and the failure modes are written up in
+`CLAUDE.md` §14 because they are worth remembering:
 
 - a regex hole that let any number written as `40-50` walk past the number audit
 - the test that should have caught it, which shared the same flawed pattern

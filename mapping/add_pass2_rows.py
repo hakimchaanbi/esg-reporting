@@ -812,6 +812,33 @@ HAZARDOUS_GAP = ("NOT THE WHOLE DISCLOSURE: the hazardous half is absent. STARS 
 
 # (stars_credit, stars_field, gri_disclosure) -> the columns to overwrite.
 AMENDMENTS = {
+    # This caveat cross-referenced the two rows below and was not updated when
+    # they were downgraded on the same day. It shipped: the sentence "the 306-4
+    # and 306-5 rows ARE equivalent" printed verbatim in all three content
+    # indexes and went, redacted, into every narrative prompt — the deliverable
+    # telling its reader something false about the project's own mapping.
+    # Amending a row is not finished until you have grepped for rows that
+    # mention it.
+    ("OP-12", "Annual non-hazardous waste generated", "306-3"): {
+        "caveat":
+            "NOT EQUIVALENT - a subset. GRI 306-3-a is TOTAL waste generated "
+            "including hazardous, broken down by composition. STARS reports "
+            "non-hazardous only and collects no hazardous tonnage at any "
+            "credit, so 306-3 cannot be fully satisfied. Do not present "
+            "non-hazardous waste as the organisation's total waste. (Contrast "
+            "the 306-4 and 306-5 rows, which are `component`: GRI has explicit "
+            "non-hazardous lines at 306-4-c and 306-5-c for the STARS figures "
+            "to answer, whereas 306-3 has no non-hazardous sub-requirement at "
+            "all — which is why this row is weaker than those two, not equal "
+            "to them.)",
+        "claude_verdict": "amend",
+        "claude_note":
+            "Corrected 2026-08-23. The sentence still said 306-4 and 306-5 "
+            "'ARE equivalent' after commit 5070f0b downgraded both to "
+            "`component`. Found by the second external review; it had been "
+            "shipping in all three content indexes.",
+        "reviewed_date": "2026-08-23",
+    },
     ("OP-12", "Total non-hazardous waste diverted from disposal", "306-4"): {
         "relationship": "component",
         "confidence": "high",
