@@ -267,8 +267,8 @@ MAX_DOC_CHARS = 200_000
 def chunk_documents() -> list[dict]:
     """Climate plans, policies, pay-gap reports — the evidence behind the answers.
 
-    120 documents were downloaded and 109 yielded text, but only 81 are indexed.
-    The two exclusions are the point:
+    120 documents were downloaded and 109 yielded text, but only 74 are indexed.
+    Three exclusions, and the first two are the point:
 
     SPREADSHEETS ARE EXCLUDED (18 docs, 8.7M chars). A procurement ledger or a
     course inventory chunked into "12345 | Office Depot | 45.20" produces
@@ -283,9 +283,10 @@ def chunk_documents() -> list[dict]:
     standards, Ireland's national government review (not about UCC at all), and
     a duplicate. None is about a university's sustainability performance.
 
-    Duplicates are dropped by content hash: the same document is sometimes
-    linked from two credits under two URLs, and indexing it twice would give it
-    double weight in every search.
+    DUPLICATES ARE DROPPED by content hash (7 of them): the same document is
+    sometimes linked from two credits under two URLs, and indexing it twice
+    would give it double weight in every search. 109 - 18 spreadsheets -
+    10 oversized - 7 duplicates = 74.
     """
     if not MANIFEST.exists() or not DOC_TEXT.is_dir():
         print("[warn] no document manifest — skipping evidence documents. "

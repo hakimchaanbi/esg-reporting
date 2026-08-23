@@ -147,18 +147,31 @@ def main():
     vocabulary |= {s.split()[-1] for s in gri["standards"]}
 
     def unexplained(text: str) -> list[str]:
-        """Digit runs not accounted for by a real GRI reference in the text."""
+        """Digit runs not accounted for by a real GRI reference in the text.
+
+        ⚠️ The PREFIX IS REQUIRED here too. An earlier version cleared any digit
+        sitting near a vocabulary entry, so `2-30 per cent` cleared itself —
+        `2-30` is a real disclosure number. Independence from GRI_REF was not
+        enough; the scanner has to be independent of the assumption GRI_REF got
+        wrong, which was that a disclosure-shaped string is self-identifying.
+        """
         out = []
         for m in naive_digits.finditer(text):
-            window = text[max(0, m.start() - 12):m.end() + 6]
-            if any(ref in window for ref in vocabulary if "-" in ref):
-                continue                       # part of e.g. "GRI 305-1"
-            if re.search(r"(?i)\bGRI\s+%s\b" % re.escape(m.group()), window):
-                continue                       # a standard number, prefixed
-            if re.search(r"(?i)\bScope\s+%s\b" % re.escape(m.group()), window):
+            # Strip trailing punctuation BEFORE testing, not after. `\d[\d,.]*`
+            # swallows the comma in "Scope 1, Scope 2", so the exemption check
+            # became \bScope\s+1,\b — which cannot match, and the scanner
+            # reported a legitimate Scope reference as an unexplained figure.
+            digit = m.group().rstrip(".,")
+            if not digit:
                 continue
-            out.append(m.group().rstrip(".,"))
-        return [x for x in out if x]
+            window = text[max(0, m.start() - 14):m.end() + 6]
+            if any(re.search(r"(?i)\b(?:GRI|Disclosure)\s+%s\b" % re.escape(ref),
+                             window) for ref in vocabulary):
+                continue                       # part of e.g. "GRI 305-1"
+            if re.search(r"(?i)\bScope\s+%s\b" % re.escape(digit), window):
+                continue
+            out.append(digit)
+        return out
 
     sample = ("GRI 302-1-b is broader here: this STARS field also includes "
               "renewable electricity (Berkeley 18,173 MWh), it reads "
@@ -175,20 +188,43 @@ def main():
     check(f"no figure survives in any of {len(all_caveats)} live caveats",
           not surviving, f"survived: {surviving[:5]}")
 
-    print("\n3e. REGRESSION — a fabricated range is not mistaken for a "
-          "GRI reference\n")
+    print("\n3e. PROPERTY — an UNPREFIXED number is data, whatever it "
+          "looks like\n")
 
-    # The exact defect: GRI_REF's prefix used to be optional, so any N-M string
-    # was deleted before the audit could see it.
-    rogue_range = ("The university cut emissions by 40-50 metric tons and "
-                   "renewables supplied 61-70 per cent of demand.")
-    caught = audit_digits(rogue_range, [], [])["invented"]
-    check("40-50 and 61-70 are audited as invented",
-          {"40", "50", "61", "70"} <= set(caught), f"caught: {caught}")
+    # ⚠️ This check used to assert exactly "40-50" and "61-70" — the two strings
+    # from the bug report. Testing the instance instead of the property is why
+    # the second hole survived the first fix: the prefix stayed optional for
+    # disclosure numbers, the vocabulary contains 2-1 … 2-30, and `2-3 percent`
+    # sailed through while `40-50` was caught.
+    #
+    # So sweep the WHOLE vocabulary. For every disclosure GRI defines, the bare
+    # form must be audited as data and the prefixed form must not. That is the
+    # actual rule, and it cannot be satisfied by special-casing a bug report.
+    every = sorted({n for s in gri["standards"].values() for n in s["disclosures"]})
+
+    leaked_bare, lost_prefixed = [], []
+    for number in every:
+        if not audit_digits(f"It fell by {number} per cent.", [], [])["invented"]:
+            leaked_bare.append(number)
+        if audit_digits(f"See Disclosure {number} for detail.", [], [])["invented"]:
+            lost_prefixed.append(number)
+
+    check(f"all {len(every)} disclosure numbers are audited when UNPREFIXED",
+          not leaked_bare, f"still invisible: {leaked_bare[:8]}")
+    check(f"all {len(every)} are exempt when written 'Disclosure N' / 'GRI N'",
+          not lost_prefixed, f"wrongly flagged: {lost_prefixed[:8]}")
+
+    # The originally reported shapes, kept so the specific regression is named.
+    for rogue, want in [("cut emissions by 40-50 metric tons", {"40", "50"}),
+                        ("fell 2-3 percent last year", {"2", "3"}),
+                        ("diverted 2-30 per cent more waste", {"2", "30"}),
+                        ("a cost of 306-5 million euro", {"306", "5"})]:
+        got = set(audit_digits(rogue, [], [])["invented"])
+        check(f"{rogue[:38]!r} -> audited", want <= got, f"caught: {sorted(got)}")
 
     real_refs = ("Disclosure 305-1 under GRI 305 covers Scope 1 emissions, "
-                 "GRI 2-9 governance, and 403-10 work-related ill health.")
-    check("real disclosure numbers are still exempt",
+                 "GRI 2-9 governance, and GRI 403-10 work-related ill health.")
+    check("prefixed references are still exempt",
           not audit_digits(real_refs, [], [])["invented"],
           f"wrongly flagged: {audit_digits(real_refs, [], [])['invented']}")
 
@@ -199,12 +235,16 @@ def main():
     # from a different year or boundary than the STARS submission, so a figure
     # lifted from one would trace to a real PDF and still be wrong for the
     # sentence. Both are redacted; this proves it on live retrieval output.
+    # Uses unexplained(), NOT numbers_in(). numbers_in shares GRI_REF with
+    # redact_figures, so checking redaction with it asks the redactor to mark
+    # its own homework — the exact mistake 3b was rewritten to avoid, which was
+    # then reintroduced twelve lines below it.
     checked, dirty = 0, []
     for s in SECTIONS:
         f = gather(cork, s, gri, mapping, master)
         for passage in f["style"] + f["evidence"]:
             checked += 1
-            found = numbers_in(passage["text"])
+            found = unexplained(passage["text"])
             if found:
                 dirty.append(f"{passage['source'][:30]}: {found[:3]}")
     check(f"no figure survives in any of {checked} retrieved passages",

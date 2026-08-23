@@ -23,7 +23,8 @@ WHERE THE DATA ACTUALLY IS
     so:  span.scorecardFieldTitle  = the question
          the next div.well         = the answer
          a trailing <i> inside it  = the units
-         the last field-header h5  = the section the field sits in
+         the last field-header h4  = the numbered INDICATOR it sits in
+         the last field-header h5  = the sub-section, cleared by a new h4
 
     A section heading applies to every field after it until the next heading.
 

@@ -197,7 +197,7 @@ def gather(institution, section, gri, mapping, master) -> dict:
             match = inst[(inst.credit_code == credit) & (inst.field == field)]
             if match.empty or pd.isna(match.iloc[0].value) or \
                     not str(match.iloc[0].value).strip():
-                unavailable.append(f"{number} ({credit} / {field})")
+                unavailable.append(f"GRI {number} ({credit} / {field})")
                 continue
 
             v = match.iloc[0]
@@ -205,7 +205,12 @@ def gather(institution, section, gri, mapping, master) -> dict:
                 str(v.units).strip() if pd.notna(v.units) else "")
 
             if pd.notna(r.caveat) and str(r.caveat).strip():
-                caveats.append(f"{number}: {redact_figures(str(r.caveat).strip())}")
+                # "GRI 2-13:", never a bare "2-13:". Since 2026-08-23 an
+                # unprefixed disclosure number is audited as data, so a bare
+                # label here would put "2-13" in the prompt, invite the model to
+                # echo it, and then fail the build for a reference we supplied.
+                caveats.append(
+                    f"GRI {number}: {redact_figures(str(r.caveat).strip())}")
 
             if str(v.value_type) in TOKENISED_TYPES:
                 figures[slug(credit, field)] = {
@@ -292,7 +297,9 @@ word either. If you cannot express something without inventing a figure, leave
 it out and say the source does not report it.
 
 TWO KINDS OF DIGIT ARE NOT FIGURES, AND YOU MUST WRITE THEM NORMALLY:
-  - GRI references: write "GRI 305", "Disclosure 305-1", "GRI 2-9".
+  - GRI references. ALWAYS prefix them with "GRI" or "Disclosure": write
+    "GRI 305", "Disclosure 305-1", "GRI 2-9". Never a bare "305-1" or "2-9" —
+    an unprefixed number is treated as data and will fail the build.
   - Greenhouse gas scopes: write "Scope 1", "Scope 2", "Scope 3" — always with
     the numeral. Never "scope one" or "scope two"; that is not how the standard
     is written and it reads as an error.
@@ -434,19 +441,34 @@ def _gri_reference_pattern() -> re.Pattern:
         print(f"[warn] could not read the GRI vocabulary ({exc}); every "
               f"disclosure reference will be audited as if it were data.")
 
+    # ⚠️ SECOND FIX, 2026-08-23. The first one enumerated the vocabulary but
+    # left the GRI/Disclosure prefix OPTIONAL for disclosure numbers, and the
+    # vocabulary contains 2-1 … 2-30. So `2-3 percent`, `2-30 per cent`,
+    # `2-9 years` and `306-5 million` were all still deleted before the audit
+    # looked — four fabricated figures went into a finished report while the
+    # build printed "Every digit in every section traced to the dataset".
+    #
+    # The galling part is that the comment right here already contained the
+    # correct reasoning — "a bare 305 is a plausible measurement, so the prefix
+    # is REQUIRED" — and did not apply it to disclosures, where `2-3` is a far
+    # more plausible measurement than `305` ever was.
+    #
+    # THE PREFIX IS NOW MANDATORY EVERYWHERE. A bare `305-1` in the prose is
+    # audited as data and will fail the build. That is the safe direction: the
+    # cost is a false positive on an unprefixed reference, which is loud, and
+    # the system prompt tells the model to always write "GRI 305-1" or
+    # "Disclosure 305-1" — which is what it does unprompted anyway.
+    prefix = r"(?:GRI|Disclosure)\s+"
     parts = []
     if numbers:
         # Longest first so 403-10 is consumed before 403-1 can match its prefix.
         alt = "|".join(re.escape(n)
                        for n in sorted(numbers, key=len, reverse=True))
-        parts.append(rf"\b(?:GRI\s+|Disclosure\s+)?(?:{alt})\b")
+        parts.append(rf"\b{prefix}(?:{alt})\b")
     if standards:
-        # A bare "305" is a plausible measurement, so the prefix is REQUIRED
-        # here — unlike for disclosure numbers, where the hyphenated form is
-        # distinctive enough on its own.
         alt = "|".join(re.escape(s)
                        for s in sorted(standards, key=len, reverse=True))
-        parts.append(rf"\bGRI\s+(?:{alt})\b")
+        parts.append(rf"\b{prefix}(?:{alt})\b")
     parts.append(r"\bScope\s+[123]\b")
     return re.compile("|".join(parts), re.IGNORECASE)
 
@@ -712,7 +734,15 @@ def main():
             print(f"  -> {out.relative_to(PROJECT_ROOT)}")
 
     if audit_rows:
-        audit_path = OUT_DIR / "narrative_audit.csv"
+        # The --section guard above protected the report .md and stopped one
+        # file short. This CSV is the only record of which digits need human
+        # review, and §17 names it as the way to tell stub output from real —
+        # and a one-section preview run was overwriting all 21 rows with 1.
+        # Same bug, same command, the file next door.
+        if args.section:
+            audit_path = OUT_DIR / f"narrative_audit_{args.section}_preview.csv"
+        else:
+            audit_path = OUT_DIR / "narrative_audit.csv"
         pd.DataFrame(audit_rows).to_csv(audit_path, index=False)
         print(f"\n[save] number audit -> {audit_path.relative_to(PROJECT_ROOT)}")
 

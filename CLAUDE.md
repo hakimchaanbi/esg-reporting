@@ -1154,8 +1154,9 @@ can open: `standards/gri_disclosures.json` (the questions),
 | Not reported | GRI asks, STARS cannot answer, **or** a candidate mapping was assessed and rejected |
 | Not assessed | no mapping row exists — **now zero** |
 
-Current state, all three institutions: **23 reported · 15–16 partial · 36–37
-not reported · 0 not assessed.**
+Current state, all three institutions: **24 reported · 14–15 partial ·
+36–37 not reported · 0 not assessed.** (Was 23/15–16 before GRI 405-1 was
+properly mapped — §14.11.)
 
 ⚠️ **"Not reported" and "Not assessed" are different claims and the difference
 matters.** *Not reported* means we looked and the data does not exist — a
