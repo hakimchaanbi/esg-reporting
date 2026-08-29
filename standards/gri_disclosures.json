@@ -60,6 +60,16 @@
         "2-30": "Collective bargaining agreements"
       }
     },
+    "GRI 3": {
+      "title": "Material Topics 2021",
+      "family": "Universal",
+      "source_url": "https://www.globalreporting.org/publications/documents/english/gri-3-material-topics-2021/",
+      "disclosures": {
+        "3-1": "Process to determine material topics",
+        "3-2": "List of material topics",
+        "3-3": "Management of material topics"
+      }
+    },
     "GRI 202": {
       "title": "Market Presence 2016",
       "family": "Topic / Economic",

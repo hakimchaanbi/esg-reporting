@@ -996,7 +996,104 @@ EMPLOYEE_CATEGORIES = [
 # and not a governance body, so they fall outside 405-1 entirely. This is the
 # objection the old executive-staff caveat was reaching for and misapplied.
 
-NEW_ROWS = GRI2 + TOPICS + EMPLOYEE_CATEGORIES
+# --------------------------------------------------------------------------
+# Fourth pass, 2026-08-29 — GRI 3: Material Topics, found by the second review.
+#
+# GRI 3 is UNIVERSAL: every GRI report answers 3-1/3-2/3-3 whatever its topics,
+# because they are the disclosures that decide which topic standards apply. It
+# was absent from the vocabulary entirely, so a content index headed "with
+# reference to the GRI Standards" never listed the questions that govern its own
+# scope. §16's lesson one level up — that pass fixed the disclosures missing
+# from the chosen standards and never asked whether the set of standards was
+# complete.
+#
+# THE FINDING THIS PRODUCES IS THE POINT, and it is a good one for the report:
+# **AASHE determined materiality for the higher-education sector; the
+# institutions did not determine it for themselves.** A STARS submission answers
+# a fixed credit set decided by the framework. GRI assumes the organisation
+# identifies its own impacts, prioritises them, and says who informed that
+# process. Neither the process (3-1) nor a declared list (3-2) exists in STARS,
+# and no amount of data extraction will produce them — this is a structural
+# difference between a scoring scheme and a disclosure standard, the same family
+# of finding as GRI having no vocabulary for courses taught.
+# --------------------------------------------------------------------------
+
+NO_TOPIC_LIST = ("Asked per material topic, and no material-topics list exists "
+                 "(see GRI 3-2) — so these are institution-wide answers to a "
+                 "question GRI asks topic by topic.")
+
+MATERIAL_TOPICS = [
+    gap("GRI 3", "3-1",
+        "GRI 3-1 requires the organisation to describe the process by which it "
+        "determined its material topics: how it identified actual and potential "
+        "impacts on the economy, environment and people, how it prioritised "
+        "them, and which stakeholders and experts informed that. STARS contains "
+        "no materiality assessment of any kind.",
+        "This is a structural difference, not missing data. AASHE determined "
+        "materiality for the whole higher-education sector when it designed the "
+        "STARS credit set; the institution answers that fixed set rather than "
+        "identifying its own impacts. PA-2 records a climate-vulnerability "
+        "assessment and PA-3 records stakeholder consultation, but neither is a "
+        "materiality process and neither should be presented as one."),
+
+    row("PA-2", "Has the institution adopted one or more measurable sustainability objectives that address campus operations?",
+        "GRI 3", "3-2", "partial", "low",
+        "GRI 3-2 requires a list of material topics. STARS has no such list, "
+        "but the five areas in which an institution declares measurable "
+        "sustainability objectives are the closest thing to a declared topic "
+        "set that it publishes.",
+        "NOT A MATERIALITY DETERMINATION. These five areas are fixed by STARS "
+        "and identical for every institution, so they say where an institution "
+        "has set objectives, not which impacts it judged significant and why. "
+        "GRI 3-2-b also requires changes against the previous reporting period, "
+        "which a single STARS submission cannot show. Presenting these as "
+        "material topics would overstate what the institution actually did.",
+        "The five objective areas are the nearest declared topic set in STARS."),
+
+    row("PA-2", "Has the institution adopted one or more measurable sustainability objectives that address teaching, learning, and/or research?",
+        "GRI 3", "3-2", "partial", "low",
+        "GRI 3-2, for the teaching and research area — the one with no "
+        "corporate analogue, and the reason a university's topic list cannot "
+        "look like a company's.",
+        "See the campus-operations row: fixed areas, not a materiality "
+        "determination.",
+        "Pairs with the AC-1 / AC-6 / EN-1 gap_stars_side rows: STARS collects "
+        "teaching and research, GRI has no topic standard for either."),
+
+    row("PA-2", "Has the institution adopted one or more measurable sustainability objectives that address racial equity and/or social justice?",
+        "GRI 3", "3-2", "partial", "low",
+        "GRI 3-2, for the racial-equity and social-justice area.",
+        "See the campus-operations row: fixed areas, not a materiality "
+        "determination."),
+
+    row("PA-2", "Narrative listing the institution’s measurable sustainability objectives that address campus operations",
+        "GRI 3", "3-3", "partial", "medium",
+        "GRI 3-3-e-ii requires the goals, targets and indicators used to "
+        "evaluate progress on a material topic. This narrative is exactly "
+        "that, for the operations area.",
+        f"{NO_TOPIC_LIST} GRI 3-3 also requires the impacts themselves "
+        "(3-3-a), whether the organisation is involved through its own "
+        "activities or its business relationships (3-3-b), and lessons learned "
+        "(3-3-e-iv). STARS collects none of those."),
+
+    row("PA-1", "Narrative outlining the activities and substantive accomplishments of the institution-wide coordinating body or officer during the previous three years",
+        "GRI 3", "3-3", "partial", "medium",
+        "GRI 3-3-d requires the actions taken to manage a topic and its "
+        "impacts. This narrative reports what the coordinating body actually "
+        "did over three years, which is that content.",
+        f"{NO_TOPIC_LIST} It reports outcomes rather than distinguishing "
+        "actions that prevent potential harm from actions that remediate "
+        "actual harm, which is the split GRI 3-3-d asks for."),
+
+    row("PA-2", "Has the institution made a public commitment to sustainability, as evidenced by an external commitment or a published plan?",
+        "GRI 3", "3-3", "partial", "medium",
+        "GRI 3-3-c requires the policies or commitments regarding the material "
+        "topic. A public sustainability commitment evidenced by a published "
+        "plan is that, at the institutional level.",
+        NO_TOPIC_LIST),
+]
+
+NEW_ROWS = GRI2 + TOPICS + EMPLOYEE_CATEGORIES + MATERIAL_TOPICS
 
 
 def main():

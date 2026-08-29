@@ -65,6 +65,14 @@ REQUIREMENTS_JSON = HERE / "gri_requirements.json"
 # GRI 301/308 no longer need the secondary source they were first cited from.
 PUBLICATION_SLUGS = {
     "GRI 2": "gri-2-general-disclosures-2021",
+    # GRI 3 is UNIVERSAL — every GRI report answers 3-1/3-2/3-3, whatever its
+    # topics. It was missing here until 2026-08-29, so the content index headed
+    # "with reference to the GRI Standards" did not list the disclosures that
+    # decide which standards apply. §16's lesson one level up: a completeness
+    # check that only walks your own list cannot find what your list forgot —
+    # and that was applied to disclosures within the chosen standards, never to
+    # the set of standards itself.
+    "GRI 3": "gri-3-material-topics-2021",
     "GRI 202": "gri-202-market-presence-2016",
     "GRI 204": "gri-204-procurement-practices-2016",
     "GRI 301": "gri-301-materials-2016",
