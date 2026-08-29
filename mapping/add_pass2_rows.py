@@ -810,8 +810,46 @@ HAZARDOUS_GAP = ("NOT THE WHOLE DISCLOSURE: the hazardous half is absent. STARS 
                  "significant stream going unreported, and it is a finding "
                  "about STARS rather than about these institutions.")
 
+# The two original 202-1 caveats both asserted "The GRI ratio cannot be derived
+# from STARS at all." That is overstated, and the second review was right to
+# call it: PA-13's wage floor IS the standard entry-level wage, so the numerator
+# is present. What is absent is the local statutory minimum wage — an external
+# figure STARS never collects — and the gender split, which is genuinely
+# unanswerable. Saying "impossible" when the honest answer is "one external
+# constant away, plus an unfixable gender gap" understates the project's own
+# data and is the kind of claim an examiner can disprove in one grep.
+WAGE_RATIO_TRUTH = (
+    "DOES NOT SATISFY GRI 202-1. GRI wants the RATIO of standard entry-level "
+    "wage to the local MINIMUM wage, BY GENDER. STARS benchmarks against a "
+    "LIVING wage instead and has no gender split. Precisely: the NUMERATOR "
+    "exists — PA-13's `Wage floor for regular/permanent employees` is the "
+    "entry-level wage — but the local statutory minimum wage is not in STARS at "
+    "any credit, and the gender split is not collected anywhere. Report only as "
+    "a higher-education sector variant, stating plainly that 202-1 is "
+    "unsatisfied. Values are bare numbers with no currency - EUR for the Irish "
+    "universities, USD for Berkeley - and are not comparable across them "
+    "without saying so.")
+
 # (stars_credit, stars_field, gri_disclosure) -> the columns to overwrite.
 AMENDMENTS = {
+    ("PA-13",
+     "Percentage of employees that receive remuneration equivalent to at least a living wage",
+     "202-1"): {
+        "caveat": WAGE_RATIO_TRUTH,
+        "claude_verdict": "amend",
+        "claude_note":
+            "Corrected 2026-08-29. The caveat said the GRI ratio 'cannot be "
+            "derived from STARS at all'; the numerator is present and only the "
+            "minimum-wage denominator and the gender split are missing.",
+        "reviewed_date": "2026-08-29",
+    },
+    ("PA-13", "Living wage", "202-1"): {
+        "caveat": WAGE_RATIO_TRUTH,
+        "claude_verdict": "amend",
+        "claude_note":
+            "Corrected 2026-08-29, same as the coverage-percentage row.",
+        "reviewed_date": "2026-08-29",
+    },
     # This caveat cross-referenced the two rows below and was not updated when
     # they were downgraded on the same day. It shipped: the sentence "the 306-4
     # and 306-5 rows ARE equivalent" printed verbatim in all three content
@@ -1093,7 +1131,139 @@ MATERIAL_TOPICS = [
         NO_TOPIC_LIST),
 ]
 
-NEW_ROWS = GRI2 + TOPICS + EMPLOYEE_CATEGORIES + MATERIAL_TOPICS
+# --------------------------------------------------------------------------
+# Fifth pass, 2026-08-29 — the GRI 305 sub-requirements, found by the second
+# review. Exactly the failure the FIRST review predicted would recur: 405-1's
+# second half had gone unexamined, and it said a full read of the remaining rows
+# would turn up more of the same. It did, in the most important disclosure in
+# the report.
+#
+# GRI 305-1 asks for seven things. The first pass mapped 305-1-a (the gross
+# figure) and its components, and never looked at d through g — the base year,
+# the emissions in it, the rationale, the methodology. All four are in OP-6,
+# populated for all three institutions, and were sitting unmapped. The 305-5 row
+# even said in its own note that the baseline figure "is in the dataset", so
+# whoever wrote it saw the field and mapped neither.
+#
+# A base year is not decoration. Without it an emissions section is a snapshot;
+# with it the reader can see direction of travel, and 305-5-a's absolute
+# reduction becomes derivable.
+# --------------------------------------------------------------------------
+
+COMBINED_SCOPES = ("STARS reports ONE baseline covering scope 1 and scope 2 "
+                   "together. GRI states the base year separately for 305-1 and "
+                   "305-2, so this figure serves both jointly and neither "
+                   "alone — it cannot be split.")
+
+GHG_305 = []
+for _disc, _label in (("305-1", "Direct (Scope 1)"),
+                      ("305-2", "Energy indirect (Scope 2)")):
+    GHG_305 += [
+        row("OP-6", "Baseline year for scope 1 and 2 GHG emissions",
+            "GRI 305", _disc, "component", "high",
+            f"GRI {_disc}-d requires the base year for the calculation. STARS "
+            f"states it directly. ({_label} emissions.)",
+            COMBINED_SCOPES,
+            "Populated 3/3 — TU Dublin 2018, Cork 2017, Berkeley 2019 — and "
+            "unmapped until 2026-08-29."),
+
+        row("OP-6", "Baseline scope 1 and 2 GHG emissions",
+            "GRI 305", _disc, "partial", "high",
+            f"GRI {_disc}-d-ii requires the emissions in the base year. This is "
+            f"that figure.",
+            f"{COMBINED_SCOPES} So it answers 305-1-d-ii and 305-2-d-ii only as "
+            "a combined total, which is weaker than either disclosure asks for "
+            "on its own."),
+
+        row("OP-6", "Narrative outlining when and why the GHG emissions baseline was adopted",
+            "GRI 305", _disc, "component", "high",
+            f"GRI {_disc}-d-i requires the rationale for choosing the base "
+            "year, and -d-iii the context for any change that triggered a "
+            "recalculation. This narrative is written to answer exactly that.",
+            COMBINED_SCOPES),
+
+        row("OP-6", "Description of the methodology or calculator used to conduct the scope 1 and 2 GHG emissions inventory",
+            "GRI 305", _disc, "component", "high",
+            f"GRI {_disc}-g requires the standards, methodologies, assumptions "
+            "and calculation tools used. All three institutions name theirs — "
+            "the GHG Protocol Corporate Standard, or a named contractor.",
+            f"{COMBINED_SCOPES} GRI additionally requires the source of the "
+            f"emission factors and GWP rates ({_disc}-e) and the consolidation "
+            f"approach ({_disc}-f); STARS collects neither."),
+    ]
+
+GHG_305 += [
+    row("OP-6", "Baseline scope 1 and 2 GHG emissions",
+        "GRI 305", "305-5", "component", "high",
+        "GRI 305-5-a requires the absolute reduction in metric tons of CO2 "
+        "equivalent. STARS gives only a percentage — but with the baseline "
+        "figure and the current total both in the dataset, THE ABSOLUTE "
+        "REDUCTION IS DERIVABLE: baseline minus annual scope 1 and 2. That is a "
+        "code-side subtraction of two verified values, not an LLM estimate.",
+        "Derive it; do not present the baseline itself as a reduction. The "
+        "subtraction is only valid because both figures cover the same combined "
+        "scope 1 + 2 boundary."),
+
+    row("OP-6", "Baseline year for scope 1 and 2 GHG emissions",
+        "GRI 305", "305-5", "component", "high",
+        "GRI 305-5-c requires the base year or baseline against which the "
+        "reduction is measured.",
+        COMBINED_SCOPES),
+
+    row("OP-6", "Narrative outlining when and why the GHG emissions baseline was adopted",
+        "GRI 305", "305-5", "component", "medium",
+        "GRI 305-5-c also requires the rationale for choosing that baseline.",
+        "GRI 305-5-b (gases included) and 305-5-d (which scopes the reductions "
+        "occurred in) remain unanswered — STARS reports the reduction against "
+        "the combined scope 1 + 2 total without attributing it to either."),
+
+    # --- 302-1-a: "including fuel types used" ------------------------------
+    row("OP-5", "Natural gas", "GRI 302", "302-1", "component", "high",
+        "GRI 302-1-a requires non-renewable fuel consumption 'including fuel "
+        "types used'. `Total stationary fuel consumption` is already mapped as "
+        "the total; this is the type breakdown GRI asks for alongside it, and "
+        "it is the dominant fuel at all three institutions.",
+        "GRI 302-1 expects joules; STARS reports MWh — convertible, but state "
+        "the conversion."),
+
+    row("OP-5", "Heating oil", "GRI 302", "302-1", "component", "high",
+        "GRI 302-1-a, fuel type breakdown.",
+        "Zero at Cork; a small residual at TU Dublin and Berkeley. Units are "
+        "MWh, not joules."),
+
+    row("OP-5", "Coal/coke", "GRI 302", "302-1", "component", "medium",
+        "GRI 302-1-a, fuel type breakdown. Zero for all three, which is the "
+        "finding: none of these universities still burns coal.",
+        "A reported zero, not missing data. Units are MWh, not joules."),
+
+    row("OP-5", "Propane/LPG", "GRI 302", "302-1", "component", "medium",
+        "GRI 302-1-a, fuel type breakdown. Zero for all three.",
+        "A reported zero, not missing data. STARS also carries an `Other "
+        "stationary fuels` catch-all, also zero everywhere, which is what makes "
+        "this list of fuel types complete rather than merely partial. Units are "
+        "MWh, not joules."),
+
+    # --- 202-1: the numerator exists after all ------------------------------
+    row("PA-13", "Wage floor for regular/permanent employees",
+        "GRI 202", "202-1", "partial", "medium",
+        "GRI 202-1-a is a RATIO: standard entry-level wage divided by the local "
+        "minimum wage. The wage floor for regular/permanent employees IS the "
+        "standard entry-level wage — the numerator of that ratio.",
+        "The DENOMINATOR is what is missing, not the numerator. STARS "
+        "benchmarks against a LIVING wage, not the local statutory MINIMUM "
+        "wage, and carries no minimum-wage figure at all. Supplying one would "
+        "mean introducing an external constant, which is outside this "
+        "project's verified-data pipeline. GRI also requires the ratio BY "
+        "GENDER, which STARS does not collect at any credit — that half is "
+        "unanswerable, not merely unsupplied. STARS additionally reports "
+        "separate floors for short-term/casual academic and non-academic "
+        "staff. Values are bare numbers: EUR for the Irish universities, USD "
+        "for Berkeley, and not comparable without saying so.",
+        "Found by the second external review, which correctly noted the old "
+        "rationale overstated the gap."),
+]
+
+NEW_ROWS = (GRI2 + TOPICS + EMPLOYEE_CATEGORIES + MATERIAL_TOPICS + GHG_305)
 
 
 def main():

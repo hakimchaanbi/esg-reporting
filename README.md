@@ -167,8 +167,13 @@ extractor reproduced all 3,197 field/value pairs from the cached HTML with zero
 disagreements, and 45 derived figures — scope totals, intensities, FTE sums,
 percentage reductions — reproduced exactly for all three universities.
 
-Still open (`CLAUDE.md` §14 items 18, 19, 21): four `equivalent` rows that no
-longer meet their own definition, ~8 answerable GRI 305 sub-requirements still
-unmapped, and the question of which topic standards to cover.
+GRI 305 has since been completed too — the base year, the baseline emissions,
+the rationale and the methodology were all present and unmapped, which is what
+turns an emissions section from a snapshot into a trend and makes the absolute
+reduction derivable.
+
+Still open (`CLAUDE.md` §14 items 18 and 21): four `equivalent` rows that no
+longer meet their own definition, and the question of which topic standards to
+cover.
 
 Remaining work is the **BI dashboard**, which has not been started.
