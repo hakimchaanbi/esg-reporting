@@ -112,6 +112,18 @@ SECTIONS = [
                  "explicit about what the source data cannot tell us.",
     },
     {
+        "key": "material_topics",
+        "title": "Material topics",
+        "disclosures": ["3-1", "3-2", "3-3"],
+        "brief": "Explain which sustainability topics this report covers and "
+                 "how they were arrived at. Be direct about the limitation: "
+                 "the topics come from the STARS credit set, which AASHE "
+                 "designed for the higher-education sector as a whole, so the "
+                 "institution did not run its own materiality assessment and "
+                 "cannot describe one. Say that plainly rather than implying "
+                 "an assessment took place.",
+    },
+    {
         "key": "governance",
         "title": "Governance",
         "disclosures": ["2-9", "2-10", "2-11", "2-12", "2-13", "2-14", "2-15",
@@ -633,6 +645,25 @@ def main():
     mapping = pd.read_csv(MAPPING)
     master = pd.read_csv(MASTER)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # SECTIONS is a hand-written list of disclosure numbers, and a hand-written
+    # list goes stale the moment the vocabulary grows. This has now happened
+    # three times in this project: gri_disclosures.json missed 8 of GRI 2, then
+    # missed GRI 3 entirely, and then SECTIONS missed GRI 3 in turn — each time
+    # silently, because nothing walked the other list. So walk it. A disclosure
+    # the vocabulary defines and no section claims would be dropped from every
+    # report without a word.
+    listed = {d for s in SECTIONS for d in s["disclosures"]}
+    known = {n for s in gri["standards"].values() for n in s["disclosures"]}
+    if known - listed:
+        sys.exit(f"[stop] {len(known - listed)} disclosure(s) belong to no "
+                 f"section in SECTIONS and would be silently omitted from "
+                 f"every report: {sorted(known - listed)}\n"
+                 f"       Add them to report/build_narrative.py:SECTIONS.")
+    if listed - known:
+        sys.exit(f"[stop] SECTIONS names {sorted(listed - known)}, which the "
+                 f"GRI vocabulary does not define. Typo, or a disclosure "
+                 f"removed from standards/gri_disclosures.json.")
 
     try:
         writer = get_writer(args.backend)

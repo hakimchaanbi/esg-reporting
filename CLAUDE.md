@@ -29,7 +29,7 @@ is in French — do not let French leak into outputs).
 | 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | ✅ done |
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
-| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 141 rows, all 75 disclosures judged (§16); `reviewed_by=claude`, accepted by Hakim (§14.4) |
+| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 148 rows, all 78 disclosures judged (§16, §14.7); `reviewed_by=claude`, accepted by Hakim (§14.4) |
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 built and tested offline (§17); needs a `GEMINI_API_KEY` to write real prose |
 | 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15), narrative pipeline done (§17); **dashboard pending** |
 
@@ -525,10 +525,10 @@ secondary sources **matched GRI's own pages exactly.**
   `CO2`, but headings use a separator, or
   `Disclosure 302-4Reduction of energy consumption` fails the heading regex.
   Different rules for different elements, on purpose.
-- `mapping/stars_gri_mapping.csv` — **141 rows** (§16, plus the 405-1 and
-  waste passes in §14.11 and §14.13): 4 equivalent · 67 component ·
-  4 intensity · **29 partial** · 34 gap_gri_side · 3 gap_stars_side,
-  summing to 141. 139 confirmed · 2 rejected. Every one of the 75 GRI disclosures has a judgement.
+- `mapping/stars_gri_mapping.csv` — **148 rows** (§16, plus the 405-1,
+  waste and GRI 3 passes in §14.11, §14.13 and §14.7): 4 equivalent ·
+  67 component · 4 intensity · **35 partial** · 35 gap_gri_side ·
+  3 gap_stars_side, summing to 148. 146 confirmed · 2 rejected. Every one of the 75 GRI disclosures has a judgement.
   (An earlier version of this line said 26 partial and summed to 135: the
   two `rejected` rows are also `partial` and were counted in neither
   total.)
@@ -609,7 +609,7 @@ coverage is not GRI 202-1's minimum-wage ratio.
 
 ```
 directly citable (equivalent/component/intensity): 75
-+ partial, only with their caveat printed         : 27
++ partial, only with their caveat printed         : 33
 ```
 
 `include_partial=True` is an explicit opt-in and **raises** if any partial row
@@ -660,11 +660,11 @@ the second pass took gap_gri_side from 8 to 34 — see §16):
   carries the specific difference in its `caveat` column, and the validator
   warns if a `partial` row has an empty caveat.
 
-### Why the table has 141 rows
+### Why the table has 148 rows
 
-**104 are an actual link; 37 record an absence** (34 gap_gri_side, 3
+**110 are an actual link; 38 record an absence** (35 gap_gri_side, 3
 gap_stars_side). The links are many-to-one — STARS splits a figure into parts
-where GRI wants one number — so 101 distinct STARS fields reach **41 GRI
+where GRI wants one number — so 105 distinct STARS fields reach **43 GRI
 disclosures**. GRI 305-1 alone takes six rows (the scope 1 total, its four
 combustion components, biogenic).
 
@@ -672,9 +672,9 @@ combustion components, biogenic).
 |---|---|---|
 | STARS credits in the dataset | 86 | 86 |
 | STARS credits the mapping touches | 7 | **19** |
-| Distinct STARS fields mapped | 45 | **101** |
-| GRI disclosures reached by a link | 15 | **41** |
-| GRI disclosures with a judgement | 23 of 67 | **75 of 75** |
+| Distinct STARS fields mapped | 45 | **105** |
+| GRI disclosures reached by a link | 15 | **43** |
+| GRI disclosures with a judgement | 23 of 67 | **78 of 78** |
 
 **Nineteen credits of eighty-six is still the finding, not a shortfall.** GRI
 has vocabulary for emissions, energy, water, waste, workforce and governance;
@@ -762,7 +762,7 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
    mapping; see §13.
 
 4. ~~Human re-review of the mapping~~ **CLOSED 2026-08-21 by Hakim's decision.**
-   All 141 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
+   All 148 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
    re-raise this as a blocker. The risk was stated and accepted; the column is
    kept so the rows remain identifiable if the supervisor asks.
 
@@ -947,6 +947,124 @@ established.** These are what it found that is not yet fixed:
     at all. For a research university that is a materially significant
     stream going unreported, and it is a finding about the framework rather
     than about these three institutions. It now says so in both caveats.
+
+### Open from the SECOND external review (2026-08-23)
+
+A second cold audit, told that the first thirteen fixes were made by the same
+author as the bugs and should not be trusted. It confirmed the extraction again
+independently, read **all** the previously-unread mapping rows, and found that
+two of the thirteen fixes were incomplete. Numbering continues.
+
+14. ~~🔴 **The `GRI_REF` fix narrowed the hole instead of closing it.**~~
+    **FIXED 2026-08-23.** The pattern enumerated the vocabulary but left the
+    prefix OPTIONAL for disclosure numbers, and the vocabulary contains
+    **2-1 … 2-30**. So `fell 2-3 percent`, `2-30 per cent`, `over 2-9 years`
+    and `306-5 million` were all still deleted before the audit looked. The
+    reviewer put four fabricated figures into a finished report while the build
+    printed *"Every digit in every section traced to the dataset"*.
+
+    Only the two literal strings from the first bug report were caught, because
+    **the regression test asserted those two strings** rather than the property.
+    The prefix is now mandatory everywhere and the test sweeps all 78
+    disclosures: bare form must be audited, prefixed form must not.
+
+    The reasoning was already sitting in that function's own comment — *"a bare
+    305 is a plausible measurement, so the prefix is REQUIRED"* — and had not
+    been applied to disclosures, where `2-3` is far more plausible than `305`.
+
+15. ~~🔴 **Check 3c re-committed the mistake §14.7 exists to record.**~~
+    **FIXED 2026-08-23.** It validated redaction with `numbers_in()`, which
+    shares `GRI_REF` with `redact_figures()` — twelve lines below the comment
+    explaining why not to. The independent scanner had the same blind spot in
+    weaker form (it cleared any digit *near* a vocabulary entry, so `2-30 per
+    cent` cleared itself). Being independent of the implementation was not
+    enough; it had to be independent of the assumption the implementation got
+    wrong.
+
+16. ~~🟠 **`--section` still clobbered `narrative_audit.csv`.**~~
+    **FIXED 2026-08-23.** §14.9 protected the report `.md` and stopped one file
+    short. That CSV is the only record of which digits need human review and
+    the documented way to tell stub output from real; one preview run replaced
+    21 rows with 1.
+
+17. ~~🟠 **A caveat shipped a statement the same day's fix had falsified.**~~
+    **FIXED 2026-08-23.** The 306-3 caveat still told the reader that 306-4 and
+    306-5 *"ARE equivalent"* after both were downgraded to `component`. It
+    printed verbatim in all three content indexes and went into every narrative
+    prompt. **Amending a row is not finished until you have grepped for rows
+    that mention it.**
+
+18. 🟡 **Four `equivalent` rows fail the definition set on 2026-08-22.**
+    `equivalent` means *answers the disclosure as written* — the reason 306-4
+    and 306-5 were downgraded. These four do not meet it: 303-3 (answers
+    303-3-a only, and its own caveat says the disclosure "cannot be fully
+    satisfied"), 305-1 (305-1-a of seven sub-requirements), 305-2, and 302-1
+    (302-1-e of seven). **They are the only four `equivalent` rows left**, so
+    downgrading them empties the category — which is itself the finding worth
+    stating: *no STARS field fully answers any GRI disclosure.* If that is
+    accepted, `equivalent` should be retired rather than kept with no members.
+    No functional impact; both labels sit in `USABLE`.
+
+19. 🟡 **The 405-1 pattern repeats at GRI 305.** Populated 3/3 and unmapped,
+    with named GRI sub-requirements waiting for them: `Baseline scope 1 and 2
+    GHG emissions`, `Baseline year…`, `Narrative outlining when and why the GHG
+    emissions baseline was adopted` (305-1-d, 305-2-d, 305-5-c), `Description
+    of the methodology or calculator used…` (305-1-g, 305-2-g), and the
+    individual fuel types — `Natural gas`, `Heating oil`, `Coal/coke`,
+    `Propane/LPG` (302-1-a *"including fuel types used"*). Also: the 202-1
+    rationale claims the ratio *"cannot be derived from STARS at all"*, but
+    PA-13's wage floors are the numerator — only the local-minimum-wage
+    denominator is absent, so the claim is overstated. ~8 rows, half a day.
+
+20. ~~🟡 **The vocabulary omitted GRI 3: Material Topics entirely.**~~
+    **FIXED 2026-08-29 — and it produced the best finding of either review.**
+
+    GRI 3 is **universal**: every GRI report answers 3-1/3-2/3-3 whatever its
+    topics, because those are the disclosures that decide which topic standards
+    apply. A content index headed *"with reference to the GRI Standards"* was
+    never listing them. This is §16's lesson one level up — that pass fixed the
+    disclosures missing from the chosen standards and never asked whether the
+    **set of standards** was complete.
+
+    Vocabulary is now 13 standards / **78 disclosures**, all judged. GRI 3 is
+    inserted after GRI 2 rather than appended, because both are Universal and
+    the content index walks the dict in order.
+
+    **THE FINDING, which belongs in the report:** *AASHE determined materiality
+    for the higher-education sector; the institutions did not determine it for
+    themselves.* A STARS submission answers a fixed credit set designed by the
+    framework. GRI assumes the organisation identifies its own impacts,
+    prioritises them, and names who informed that process. So **3-1 is a
+    gap** — and not for want of data. No amount of extraction produces a
+    materiality process that was never run. It is a structural difference
+    between a scoring scheme and a disclosure standard, the same family as GRI
+    having no vocabulary for courses taught.
+
+    3-2 and 3-3 are `partial`. The five areas in which STARS asks whether an
+    institution has *measurable sustainability objectives* are the nearest thing
+    to a declared topic list, and PA-1/PA-2 narratives carry the policies,
+    actions and targets 3-3 asks for — but institution-wide, where GRI asks
+    topic by topic. Both caveats say so rather than implying an assessment
+    happened.
+
+    **A third instance of the same silent-omission bug, caught immediately:**
+    `SECTIONS` in `build_narrative.py` is its own hand-written disclosure list,
+    and it did not know about GRI 3 either — the narrative would have dropped
+    all three without a word. `main()` now walks the vocabulary against
+    `SECTIONS` and **stops the build** if either side has an entry the other
+    lacks. Verified by deleting `3-3` from a copy: the build halts. Three
+    hand-written lists have now gone stale this way; this is the first one with
+    a guard.
+
+21. 🟡 **GRI 404 Training is absent from the vocabulary**, and EN-3 carries
+    staff-training data for it. Left open deliberately: unlike GRI 3, 404 is a
+    *topic* standard, and adding topic standards one at a time by where data
+    happens to exist is the wrong order — GRI's model is to determine material
+    topics first, then report the standards for them. The 12 topic standards
+    currently covered were chosen by where STARS data existed, which is a
+    defensible *"with reference to"* approach but should be stated rather than
+    implied. That question is now at least visible in the report, because GRI 3
+    is listed. **Decide the topic set, then add.**
 
 ---
 
@@ -1154,9 +1272,10 @@ can open: `standards/gri_disclosures.json` (the questions),
 | Not reported | GRI asks, STARS cannot answer, **or** a candidate mapping was assessed and rejected |
 | Not assessed | no mapping row exists — **now zero** |
 
-Current state, all three institutions: **24 reported · 14–15 partial ·
-36–37 not reported · 0 not assessed.** (Was 23/15–16 before GRI 405-1 was
-properly mapped — §14.11.)
+Current state, all three institutions: **24 reported · 16–17 partial ·
+37–38 not reported · 0 not assessed**, over 78 disclosures. (Was 23/15–16
+over 75 before GRI 405-1 was properly mapped and GRI 3 was added — §14.11,
+§14.7.)
 
 ⚠️ **"Not reported" and "Not assessed" are different claims and the difference
 matters.** *Not reported* means we looked and the data does not exist — a
@@ -1287,7 +1406,7 @@ cooling from off-site sources` → 302-1-c (purchased heating/cooling) and
   locality are different criteria and neither implies the other, so this is
   recorded as a gap rather than stretched into a partial.
 
-All 141 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
+All 148 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
 2026-08-21** after the risk was stated — see §14 item 4. The column stays so the
 rows are identifiable, but this is no longer an open action.
 

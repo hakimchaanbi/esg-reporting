@@ -149,10 +149,26 @@ All thirteen are **fixed**, and the failure modes are written up in
 - the waste disclosures, where `306-4`/`306-5` claimed `equivalent` under a
   limitation that had downgraded `306-3` to `partial`
 
-**Every item the review raised is now closed.** Its strongest positive result
-stands: an independently written extractor reproduced all 3,197 field/value
-pairs from the cached HTML with zero disagreements, and 45 derived figures —
-scope totals, intensities, FTE sums, percentage reductions — reproduced exactly
-for all three universities.
+A **second** review on 2026-08-23, told to distrust those fixes because the same
+author made them, found that two were incomplete — the number audit still let a
+figure written as `2-3` through, and one caveat shipped a statement the same
+day's fix had falsified. Both are fixed, along with the biggest structural gap
+either review found: **GRI 3: Material Topics was missing from the vocabulary
+altogether**, so a report claiming to follow the GRI Standards never listed the
+disclosures that decide which standards apply.
+
+That produced the finding most worth carrying into the defence: **AASHE
+determined materiality for the higher-education sector; the institutions did not
+determine it for themselves.** GRI 3-1 is therefore a gap that no amount of
+data extraction can fill — see `CLAUDE.md` §14.20.
+
+Both reviews' strongest positive result stands: an independently written
+extractor reproduced all 3,197 field/value pairs from the cached HTML with zero
+disagreements, and 45 derived figures — scope totals, intensities, FTE sums,
+percentage reductions — reproduced exactly for all three universities.
+
+Still open (`CLAUDE.md` §14 items 18, 19, 21): four `equivalent` rows that no
+longer meet their own definition, ~8 answerable GRI 305 sub-requirements still
+unmapped, and the question of which topic standards to cover.
 
 Remaining work is the **BI dashboard**, which has not been started.
