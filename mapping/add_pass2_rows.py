@@ -1104,6 +1104,32 @@ MATERIAL_TOPICS = [
         "See the campus-operations row: fixed areas, not a materiality "
         "determination."),
 
+    # ⚠️ ADDED 2026-08-29 AFTER THE FIRST REAL GENERATION RUN, and the reason is
+    # worth keeping. STARS asks about FIVE objective areas; the first version of
+    # this block mapped three. Berkeley answers Yes to all five, but its
+    # generated report said the university "has adopted measurable
+    # sustainability objectives across THREE main areas" — because three is what
+    # the prompt showed it.
+    #
+    # The model was accurate about the material it was given. The material was
+    # incomplete, and that turned a mapping gap into a false statement about the
+    # institution in the deliverable. An omission is not always silent: where a
+    # field family is homogeneous, mapping a subset of it invites the model to
+    # count the subset and present it as the whole. Map the family or none of it.
+    row("PA-2", "Has the institution adopted one or more measurable sustainability objectives that address administration and/or finance?",
+        "GRI 3", "3-2", "partial", "low",
+        "GRI 3-2, for the administration and finance area. The fifth of five "
+        "areas STARS asks about; all five are mapped so a reader — or the "
+        "generating model — cannot mistake a partial list for the whole.",
+        "See the campus-operations row: fixed areas, not a materiality "
+        "determination."),
+
+    row("PA-2", "Has the institution adopted one or more measurable sustainability objectives that address campus and/or community engagement?",
+        "GRI 3", "3-2", "partial", "low",
+        "GRI 3-2, for the campus and community engagement area.",
+        "See the campus-operations row: fixed areas, not a materiality "
+        "determination."),
+
     row("PA-2", "Narrative listing the institution’s measurable sustainability objectives that address campus operations",
         "GRI 3", "3-3", "partial", "medium",
         "GRI 3-3-e-ii requires the goals, targets and indicators used to "

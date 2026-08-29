@@ -29,7 +29,7 @@ is in French — do not let French leak into outputs).
 | 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | ✅ done |
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
-| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 164 rows, all 78 disclosures judged (§16, §14.20, §14.19); `reviewed_by=claude`, accepted by Hakim (§14.4) |
+| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 166 rows, all 78 disclosures judged (§16, §14.20, §14.19); `reviewed_by=claude`, accepted by Hakim (§14.4) |
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 built and tested offline (§17); needs a `GEMINI_API_KEY` to write real prose |
 | 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15), narrative pipeline done (§17); **dashboard pending** |
 
@@ -527,8 +527,8 @@ secondary sources **matched GRI's own pages exactly.**
   Different rules for different elements, on purpose.
 - `mapping/stars_gri_mapping.csv` — **164 rows** (§16, plus the 405-1,
   waste, GRI 3 and GRI 305 passes in §14.11, §14.13, §14.20 and §14.19):
-  4 equivalent · 80 component · 4 intensity · **38 partial** ·
-  35 gap_gri_side · 3 gap_stars_side, summing to 164. 162 confirmed ·
+  4 equivalent · 80 component · 4 intensity · **40 partial** ·
+  35 gap_gri_side · 3 gap_stars_side, summing to 166. 164 confirmed ·
   2 rejected. Every one of the 75 GRI disclosures has a judgement.
   (An earlier version of this line said 26 partial and summed to 135: the
   two `rejected` rows are also `partial` and were counted in neither
@@ -610,7 +610,7 @@ coverage is not GRI 202-1's minimum-wage ratio.
 
 ```
 directly citable (equivalent/component/intensity): 88
-+ partial, only with their caveat printed         : 36
++ partial, only with their caveat printed         : 38
 ```
 
 `include_partial=True` is an explicit opt-in and **raises** if any partial row
@@ -661,11 +661,11 @@ the second pass took gap_gri_side from 8 to 34 — see §16):
   carries the specific difference in its `caveat` column, and the validator
   warns if a `partial` row has an empty caveat.
 
-### Why the table has 164 rows
+### Why the table has 166 rows
 
-**126 are an actual link; 38 record an absence** (35 gap_gri_side, 3
+**128 are an actual link; 38 record an absence** (35 gap_gri_side, 3
 gap_stars_side). The links are many-to-one — STARS splits a figure into parts
-where GRI wants one number — so 114 distinct STARS fields reach **43 GRI
+where GRI wants one number — so 116 distinct STARS fields reach **43 GRI
 disclosures**. GRI 305-1 alone takes six rows (the scope 1 total, its four
 combustion components, biogenic).
 
@@ -673,7 +673,7 @@ combustion components, biogenic).
 |---|---|---|
 | STARS credits in the dataset | 86 | 86 |
 | STARS credits the mapping touches | 7 | **19** |
-| Distinct STARS fields mapped | 45 | **114** |
+| Distinct STARS fields mapped | 45 | **116** |
 | GRI disclosures reached by a link | 15 | **43** |
 | GRI disclosures with a judgement | 23 of 67 | **78 of 78** |
 
@@ -763,7 +763,7 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
    mapping; see §13.
 
 4. ~~Human re-review of the mapping~~ **CLOSED 2026-08-21 by Hakim's decision.**
-   All 164 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
+   All 166 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
    re-raise this as a blocker. The risk was stated and accepted; the column is
    kept so the rows remain identifiable if the supervisor asks.
 
@@ -1434,7 +1434,7 @@ cooling from off-site sources` → 302-1-c (purchased heating/cooling) and
   locality are different criteria and neither implies the other, so this is
   recorded as a gap rather than stretched into a partial.
 
-All 164 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
+All 166 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
 2026-08-21** after the risk was stated — see §14 item 4. The column stays so the
 rows are identifiable, but this is no longer an open action.
 
@@ -1552,6 +1552,18 @@ words about itself, and the audit's `review` tier covers it.
 
 ### Honest limits
 
+- ⚠️ **AN INCOMPLETE MAPPING DOES NOT ONLY OMIT — IT CAN MISLEAD.** Found
+  in the first real generation run, 2026-08-29. STARS asks about five
+  areas in which an institution may hold measurable sustainability
+  objectives; GRI 3-2 had been mapped to three of them. Berkeley answers
+  *Yes* to all five, and its generated report said the university *"has
+  adopted measurable sustainability objectives across **three** main
+  areas"*. The model was accurate about the material it was given; the
+  material was a subset, and it counted the subset and presented it as the
+  whole. **Where a field family is homogeneous, map all of it or none of
+  it** — a half-mapped family invites exactly this. All five are now
+  mapped. Caught by the spelled-number warning, which is only a soft flag
+  and still earned its place.
 - ⚠️ **The audit checks a digit's PROVENANCE, not its CLAIM.** This is the
   real edge of "non-hallucinable by construction" and it is worth stating
   before someone finds it. `Total water withdrawal was
