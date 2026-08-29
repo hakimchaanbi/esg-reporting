@@ -19,7 +19,7 @@ methodology caveats, the gotchas and the open problems. This file is the map.
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | done |
 | 4 | **Map** — STARS fields → GRI disclosures | done |
 | 5 | **Generate** — LLM writes prose, code injects the numbers | done |
-| 6 | **Output** — GRI content index done · narrative done · **dashboard pending** | in progress |
+| 6 | **Output** — GRI content index · narrative · BI dashboard | done |
 
 ### Scope: GRI only
 
@@ -89,11 +89,16 @@ python -m report.build_content_index     # the GRI index (no LLM)
 python -m report.build_narrative         # the prose (needs GEMINI_API_KEY)
 python -m report.build_narrative --backend stub   # offline, no key
 
+# Phase 6b — the dashboard (no key, no network)
+python -m report.build_bi_table          # three tidy CSVs
+streamlit run report/dashboard.py
+
 # Tests
 python tests/test_parse_credits.py
 python tests/test_gri_requirements.py
 python tests/test_content_index.py
 python tests/test_narrative_safety.py
+python tests/test_bi_table.py
 python mapping/test_validator_catches_fabrication.py
 python rag/test_retrieval_safety.py
 ```
@@ -176,4 +181,14 @@ Still open (`CLAUDE.md` §14 items 18 and 21): four `equivalent` rows that no
 longer meet their own definition, and the question of which topic standards to
 cover.
 
-Remaining work is the **BI dashboard**, which has not been started.
+The **BI dashboard** is built (`CLAUDE.md` §18). It deliberately refuses to
+chart absolute totals across the three universities — Berkeley withdraws
+2,092,006 m³ of water a year and Cork 54,153, so a raw-totals chart would say
+Berkeley is worst at everything, which is false. Comparison is restricted to the
+eight normalised metrics all three report, which surfaces the more interesting
+result: **Berkeley has the highest water use per person and the lowest energy
+use per square metre**, so the ranking inverts with the denominator.
+
+Outstanding: TU Dublin's narrative is five sections short — the daily Gemini
+quota ran out mid-run, and the build correctly refused to write a partial
+report. One run of 8 calls finishes it.

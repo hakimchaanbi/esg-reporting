@@ -31,7 +31,7 @@ is in French — do not let French leak into outputs).
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
 | 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 166 rows, all 78 disclosures judged (§16, §14.20, §14.19); `reviewed_by=claude`, accepted by Hakim (§14.4) |
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 built and tested offline (§17); needs a `GEMINI_API_KEY` to write real prose |
-| 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15), narrative pipeline done (§17); **dashboard pending** |
+| 6 | **Output** — ESG report + BI dashboard | ✅ content index (§15), narrative (§17), dashboard (§18) all built |
 
 ### THREE inputs (the A/B split predates Phase 4 and was incomplete)
 
@@ -1653,3 +1653,89 @@ Two prompt faults it exposed, both fixed:
 - **Limitation bloat.** The draft spent two paragraphs reviewing STARS' gaps
   before saying much about Cork. Caveats must be stated, not dwelt on; the
   prompt now asks for them gathered briefly near the end of a section.
+
+---
+
+## 18. Phase 6b — the BI dashboard (built 2026-08-29)
+
+The last unbuilt piece of the pipeline. Needs no API quota and no network.
+
+```bash
+python -m report.build_bi_table      # three tidy CSVs
+streamlit run report/dashboard.py    # the dashboard
+python tests/test_bi_table.py        # verify both
+```
+
+### Three tables, three grains
+
+`esg_master_dataset.csv` is right for provenance and wrong for charting — 3,199
+rows at mixed grain, where a credit score repeats on every field row and prose
+sits beside measurements. `report/build_bi_table.py` splits it:
+
+| File | Grain | Rows |
+|---|---|---|
+| `bi_scores.csv` | one per (institution, credit) | 191 |
+| `bi_metrics.csv` | one per numeric measurement | 710 |
+| `bi_coverage.csv` | one per (institution, GRI disclosure) | 234 |
+
+Both traps from §5 and §10 are closed **in the data** rather than left for a
+dashboard author to remember: `bi_scores` filters on `credit_row_anchor`, so
+`SUM(score)` is 638.15 and cannot be the 14,242 overcount; and `Points earned
+for indicator …` rows — STARS bookkeeping, not ESG metrics — never reach
+`bi_metrics`. 331 of them exist in the master table, so that filter is doing
+real work.
+
+### ⚠️ The dashboard refuses to chart absolute totals across institutions
+
+Berkeley withdraws **2,092,006 m³** of water a year; Cork withdraws **54,153**.
+Berkeley is roughly ten times the size. A bar chart of raw totals reads
+*"Berkeley is worst at everything"*, which is false and is the first thing a
+supervisor would challenge.
+
+Cross-institution comparison is therefore restricted to the **eight intensity
+metrics** — per person and per unit of floor area — that all three report.
+Absolute figures remain available, one institution at a time. `is_intensity` and
+`comparable` are columns in `bi_metrics.csv`, so the restriction survives export
+into any other tool.
+
+**And the restriction surfaces the most interesting thing in the data: the two
+denominators disagree.**
+
+| | per person | per m² |
+|---|---|---|
+| Berkeley water | **35,911 L** — highest | 1,392 L |
+| Berkeley energy | 1,346 kWh | **52 kWh — lowest of the three** |
+| Cork energy | 2,139 kWh | 195 kWh |
+
+Berkeley looks worst per person and best per square metre. Which university
+"performs best" depends on whether you divide by people or by floor area, and a
+dashboard showing one headline number would be lying by omission. The comparison
+tab has a toggle and says so.
+
+### The fourth tab is the point
+
+Scores and metrics are what STARS already publishes. The contribution is the GRI
+view — how much of an international disclosure standard a university can
+actually answer (25 of 78 fully) and what it structurally cannot: 35
+`gap_gri_side` rows where GRI asks and STARS is silent, 3 `gap_stars_side` rows
+where STARS collects something GRI has no vocabulary for. Both directions get a
+tab rather than a footnote.
+
+### Verification
+
+`tests/test_bi_table.py` re-derives all three tables from the master dataset
+without reusing `build_bi_table.py`'s logic, and **executes the dashboard** via
+`streamlit.testing.v1.AppTest`.
+
+That last part matters: an HTTP 200 from the Streamlit server proves only that
+the server booted. Streamlit renders over a WebSocket *after* the page loads, so
+a Python error inside the app never reaches that first response. Checking the
+port would have been a sixth unfailable test.
+
+**A test bug worth remembering.** The check comparing `bi_coverage.csv` against
+the rendered content index counted `"| Reported |"` anywhere in the file, and
+came out one too high for every status on every institution — because each index
+opens with a summary table whose header cells contain exactly those strings. The
+data was right; the test was wrong. It now matches disclosure rows specifically
+and asserts all 78 were found, so a regex that silently matches nothing cannot
+pass.

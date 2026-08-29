@@ -1,0 +1,192 @@
+institution,credit_code,credit_name,category,category_code,pillar,status,score,max,institution_key,pct_of_max
+Technological University Dublin,AC-1,Sustainability Course Offerings,Academics,AC,Context,Complete,14.0,14.0,tudublin,100.0
+Technological University Dublin,AC-2,Undergraduate Programs,Academics,AC,Context,Complete,13.28,15.0,tudublin,88.5
+Technological University Dublin,AC-3,Graduate Programs,Academics,AC,Context,Complete,8.0,8.0,tudublin,100.0
+Technological University Dublin,AC-4,Applied Learning,Academics,AC,Context,Complete,4.0,4.0,tudublin,100.0
+Technological University Dublin,AC-5,Sustainability Literacy Assessment,Academics,AC,Context,Complete,1.58,4.0,tudublin,39.5
+Technological University Dublin,AC-6,Sustainability Research,Academics,AC,Context,Complete,10.0,10.0,tudublin,100.0
+Technological University Dublin,AC-7,Center for Sustainability Research,Academics,AC,Context,Complete,6.0,6.0,tudublin,100.0
+Technological University Dublin,AC-8,Responsible Research and Innovation,Academics,AC,Context,Complete,7.0,7.0,tudublin,100.0
+Technological University Dublin,EN-1,Outreach and Communications,Engagement,EN,Context,Complete,5.0,5.0,tudublin,100.0
+Technological University Dublin,EN-2,Co-Curricular Activities,Engagement,EN,Context,Complete,9.0,9.0,tudublin,100.0
+Technological University Dublin,EN-3,Staff Engagement and Training,Engagement,EN,Context,Complete,8.0,8.0,tudublin,100.0
+Technological University Dublin,EN-4,Sustainability Culture Assessment,Engagement,EN,Context,Complete,2.0,3.0,tudublin,66.7
+Technological University Dublin,EN-5,Civic Engagement,Engagement,EN,Context,Complete,4.5,8.0,tudublin,56.2
+Technological University Dublin,EN-6,Community Partnerships,Engagement,EN,Context,Complete,7.0,9.0,tudublin,77.8
+Technological University Dublin,EN-7,Continuing Education,Engagement,EN,Context,Complete,3.0,3.0,tudublin,100.0
+Technological University Dublin,EN-8,Shared Facilities,Engagement,EN,Context,Complete,2.0,2.0,tudublin,100.0
+Technological University Dublin,EN-9,Inter-Campus Collaboration,Engagement,EN,Context,Complete,3.0,3.0,tudublin,100.0
+Technological University Dublin,IL-11,Green Events Program,Innovation & Leadership,IL,Bonus,Complete,0.0,1.0,tudublin,0.0
+Technological University Dublin,IL-12,Green Laboratory Program,Innovation & Leadership,IL,Bonus,Complete,0.5,1.0,tudublin,50.0
+Technological University Dublin,IL-18,Continuing Education Inventory,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-3,Sustainability Course Inventory,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-30,Energy System Certification,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-31,GHG Verification,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-48,Shared Mobility Program,Innovation & Leadership,IL,Bonus,Complete,0.5,1.0,tudublin,50.0
+Technological University Dublin,IL-52,Sustainability-Equity Coordination,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-56,Open and Shared Course Materials,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-58,Universal Design,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-6,Sustainability Research Inventory,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-62,Pay Scale Equity,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,IL-8,Open Access Journal Hosting,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,OP-1,Building Design and Construction,Operations,OP,Environmental,Complete,1.38,3.0,tudublin,46.0
+Technological University Dublin,OP-10,Purchased Goods,Operations,OP,Environmental,Complete,2.75,4.0,tudublin,68.8
+Technological University Dublin,OP-11,Materials Management,Operations,OP,Environmental,Complete,2.25,4.0,tudublin,56.2
+Technological University Dublin,OP-12,Waste Generation and Recovery,Operations,OP,Environmental,Complete,3.94,5.0,tudublin,78.8
+Technological University Dublin,OP-13,Vehicle Fleet,Operations,OP,Environmental,Complete,2.0,2.0,tudublin,100.0
+Technological University Dublin,OP-14,Commute Modal Split,Operations,OP,Environmental,Complete,5.39,6.0,tudublin,89.8
+Technological University Dublin,OP-15,Air Travel,Operations,OP,Environmental,Complete,0.0,2.0,tudublin,0.0
+Technological University Dublin,OP-2,Building Operations and Maintenance,Operations,OP,Environmental,Complete,1.97,5.0,tudublin,39.4
+Technological University Dublin,OP-3,Water Use,Operations,OP,Environmental,Complete,4.33,6.0,tudublin,72.2
+Technological University Dublin,OP-4,Ecologically Managed Grounds,Operations,OP,Environmental,Complete,0.69,5.0,tudublin,13.8
+Technological University Dublin,OP-5,Energy Use,Operations,OP,Environmental,Complete,6.34,10.0,tudublin,63.4
+Technological University Dublin,OP-6,Greenhouse Gas Emissions,Operations,OP,Environmental,Complete,10.79,16.0,tudublin,67.4
+Technological University Dublin,OP-7,Dining Service Procurement,Operations,OP,Environmental,Complete,4.54,8.0,tudublin,56.8
+Technological University Dublin,OP-8,Food Recovery,Operations,OP,Environmental,Complete,2.0,2.0,tudublin,100.0
+Technological University Dublin,OP-9,Sustainable Procurement System,Operations,OP,Environmental,Complete,2.4,7.0,tudublin,34.3
+Technological University Dublin,PA-1,Sustainability Coordination,Planning & Administration,PA,Governance,Complete,1.0,1.0,tudublin,100.0
+Technological University Dublin,PA-10,Student Success,Planning & Administration,PA,Social,Complete,2.91,3.0,tudublin,97.0
+Technological University Dublin,PA-11,"Health, Safety and Wellbeing",Planning & Administration,PA,Social,Complete,3.0,3.0,tudublin,100.0
+Technological University Dublin,PA-12,Employee Rights,Planning & Administration,PA,Social,Complete,3.0,3.0,tudublin,100.0
+Technological University Dublin,PA-13,Pay Equity and Living Wage,Planning & Administration,PA,Social,Complete,4.8,5.0,tudublin,96.0
+Technological University Dublin,PA-2,Commitments and Planning,Planning & Administration,PA,Governance,Complete,5.67,6.0,tudublin,94.5
+Technological University Dublin,PA-3,Institutional Governance,Planning & Administration,PA,Governance,Complete,4.0,4.0,tudublin,100.0
+Technological University Dublin,PA-4,Sustainable Investment Program,Planning & Administration,PA,Governance,Not Applicable,,,tudublin,
+Technological University Dublin,PA-5,Investment Holdings,Planning & Administration,PA,Governance,Not Applicable,,,tudublin,
+Technological University Dublin,PA-6,Institutional Climate,Planning & Administration,PA,Social,Complete,3.0,3.0,tudublin,100.0
+Technological University Dublin,PA-7,Racial and Ethnic Representation,Planning & Administration,PA,Social,Complete,0.86,3.0,tudublin,28.7
+Technological University Dublin,PA-8,Gender Parity,Planning & Administration,PA,Social,Complete,0.33,2.0,tudublin,16.5
+Technological University Dublin,PA-9,Affordability and Access,Planning & Administration,PA,Social,Complete,2.5,3.0,tudublin,83.3
+Technological University Dublin,PRE-1,Executive Letter,Report Preface,PRE,Preface,Complete,,,tudublin,
+Technological University Dublin,PRE-2,Points of Distinction,Report Preface,PRE,Preface,Complete,,,tudublin,
+Technological University Dublin,PRE-3,Institutional Characteristics,Report Preface,PRE,Preface,Complete,,,tudublin,
+Technological University Dublin,PRE-4,Reporting Methodologies,Report Preface,PRE,Preface,Complete,,,tudublin,
+University College Cork,AC-1,Sustainability Course Offerings,Academics,AC,Context,Complete,14.0,14.0,cork,100.0
+University College Cork,AC-2,Undergraduate Programs,Academics,AC,Context,Complete,14.69,15.0,cork,97.9
+University College Cork,AC-3,Graduate Programs,Academics,AC,Context,Complete,7.09,8.0,cork,88.6
+University College Cork,AC-4,Applied Learning,Academics,AC,Context,Complete,4.0,4.0,cork,100.0
+University College Cork,AC-5,Sustainability Literacy Assessment,Academics,AC,Context,Complete,2.25,4.0,cork,56.2
+University College Cork,AC-6,Sustainability Research,Academics,AC,Context,Complete,10.0,10.0,cork,100.0
+University College Cork,AC-7,Center for Sustainability Research,Academics,AC,Context,Complete,6.0,6.0,cork,100.0
+University College Cork,AC-8,Responsible Research and Innovation,Academics,AC,Context,Complete,7.0,7.0,cork,100.0
+University College Cork,EN-1,Outreach and Communications,Engagement,EN,Context,Complete,5.0,5.0,cork,100.0
+University College Cork,EN-2,Co-Curricular Activities,Engagement,EN,Context,Complete,9.0,9.0,cork,100.0
+University College Cork,EN-3,Staff Engagement and Training,Engagement,EN,Context,Complete,8.0,8.0,cork,100.0
+University College Cork,EN-4,Sustainability Culture Assessment,Engagement,EN,Context,Complete,1.5,3.0,cork,50.0
+University College Cork,EN-5,Civic Engagement,Engagement,EN,Context,Complete,7.0,8.0,cork,87.5
+University College Cork,EN-6,Community Partnerships,Engagement,EN,Context,Complete,8.0,9.0,cork,88.9
+University College Cork,EN-7,Continuing Education,Engagement,EN,Context,Complete,3.0,3.0,cork,100.0
+University College Cork,EN-8,Shared Facilities,Engagement,EN,Context,Complete,2.0,2.0,cork,100.0
+University College Cork,EN-9,Inter-Campus Collaboration,Engagement,EN,Context,Complete,3.0,3.0,cork,100.0
+University College Cork,IL-24,Biodiversity Assessment,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-29,Zero Emission Grounds Equipment,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-30,Energy System Certification,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-5,Open Online Sustainability Course,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-58,Universal Design,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-65,Innovation A,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-66,Innovation B,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-67,Innovation C,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-68,Innovation D,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,IL-69,Innovation E,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,cork,100.0
+University College Cork,OP-1,Building Design and Construction,Operations,OP,Environmental,Complete,2.95,3.0,cork,98.3
+University College Cork,OP-10,Purchased Goods,Operations,OP,Environmental,Complete,1.13,4.0,cork,28.2
+University College Cork,OP-11,Materials Management,Operations,OP,Environmental,Complete,3.0,4.0,cork,75.0
+University College Cork,OP-12,Waste Generation and Recovery,Operations,OP,Environmental,Complete,3.99,5.0,cork,79.8
+University College Cork,OP-13,Vehicle Fleet,Operations,OP,Environmental,Complete,0.67,2.0,cork,33.5
+University College Cork,OP-14,Commute Modal Split,Operations,OP,Environmental,Complete,4.83,6.0,cork,80.5
+University College Cork,OP-15,Air Travel,Operations,OP,Environmental,Complete,0.0,2.0,cork,0.0
+University College Cork,OP-2,Building Operations and Maintenance,Operations,OP,Environmental,Complete,2.08,5.0,cork,41.6
+University College Cork,OP-3,Water Use,Operations,OP,Environmental,Complete,4.67,6.0,cork,77.8
+University College Cork,OP-4,Ecologically Managed Grounds,Operations,OP,Environmental,Complete,4.06,5.0,cork,81.2
+University College Cork,OP-5,Energy Use,Operations,OP,Environmental,Complete,5.62,10.0,cork,56.2
+University College Cork,OP-6,Greenhouse Gas Emissions,Operations,OP,Environmental,Complete,10.63,16.0,cork,66.4
+University College Cork,OP-7,Dining Service Procurement,Operations,OP,Environmental,Complete,5.8,8.0,cork,72.5
+University College Cork,OP-8,Food Recovery,Operations,OP,Environmental,Complete,2.0,2.0,cork,100.0
+University College Cork,OP-9,Sustainable Procurement System,Operations,OP,Environmental,Complete,2.15,7.0,cork,30.7
+University College Cork,PA-1,Sustainability Coordination,Planning & Administration,PA,Governance,Complete,1.0,1.0,cork,100.0
+University College Cork,PA-10,Student Success,Planning & Administration,PA,Social,Complete,2.5,3.0,cork,83.3
+University College Cork,PA-11,"Health, Safety and Wellbeing",Planning & Administration,PA,Social,Complete,3.0,3.0,cork,100.0
+University College Cork,PA-12,Employee Rights,Planning & Administration,PA,Social,Complete,3.0,3.0,cork,100.0
+University College Cork,PA-13,Pay Equity and Living Wage,Planning & Administration,PA,Social,Complete,3.8,5.0,cork,76.0
+University College Cork,PA-2,Commitments and Planning,Planning & Administration,PA,Governance,Complete,5.67,6.0,cork,94.5
+University College Cork,PA-3,Institutional Governance,Planning & Administration,PA,Governance,Complete,4.0,4.0,cork,100.0
+University College Cork,PA-4,Sustainable Investment Program,Planning & Administration,PA,Governance,Complete,3.33,4.0,cork,83.2
+University College Cork,PA-5,Investment Holdings,Planning & Administration,PA,Governance,Complete,1.93,3.0,cork,64.3
+University College Cork,PA-6,Institutional Climate,Planning & Administration,PA,Social,Complete,3.0,3.0,cork,100.0
+University College Cork,PA-7,Racial and Ethnic Representation,Planning & Administration,PA,Social,Complete,1.2,3.0,cork,40.0
+University College Cork,PA-8,Gender Parity,Planning & Administration,PA,Social,Complete,2.0,2.0,cork,100.0
+University College Cork,PA-9,Affordability and Access,Planning & Administration,PA,Social,Complete,2.0,3.0,cork,66.7
+University College Cork,PRE-1,Executive Letter,Report Preface,PRE,Preface,Complete,,,cork,
+University College Cork,PRE-2,Points of Distinction,Report Preface,PRE,Preface,Complete,,,cork,
+University College Cork,PRE-3,Institutional Characteristics,Report Preface,PRE,Preface,Complete,,,cork,
+University College Cork,PRE-4,Reporting Methodologies,Report Preface,PRE,Preface,Complete,,,cork,
+"University of California, Berkeley",AC-1,Sustainability Course Offerings,Academics,AC,Context,Complete,13.01,14.0,berkeley,92.9
+"University of California, Berkeley",AC-2,Undergraduate Programs,Academics,AC,Context,Complete,10.22,15.0,berkeley,68.1
+"University of California, Berkeley",AC-3,Graduate Programs,Academics,AC,Context,Complete,8.0,8.0,berkeley,100.0
+"University of California, Berkeley",AC-4,Applied Learning,Academics,AC,Context,Complete,4.0,4.0,berkeley,100.0
+"University of California, Berkeley",AC-5,Sustainability Literacy Assessment,Academics,AC,Context,Complete,4.0,4.0,berkeley,100.0
+"University of California, Berkeley",AC-6,Sustainability Research,Academics,AC,Context,Complete,7.35,10.0,berkeley,73.5
+"University of California, Berkeley",AC-7,Center for Sustainability Research,Academics,AC,Context,Complete,6.0,6.0,berkeley,100.0
+"University of California, Berkeley",AC-8,Responsible Research and Innovation,Academics,AC,Context,Complete,7.0,7.0,berkeley,100.0
+"University of California, Berkeley",EN-1,Outreach and Communications,Engagement,EN,Context,Complete,5.0,5.0,berkeley,100.0
+"University of California, Berkeley",EN-2,Co-Curricular Activities,Engagement,EN,Context,Complete,9.0,9.0,berkeley,100.0
+"University of California, Berkeley",EN-3,Staff Engagement and Training,Engagement,EN,Context,Complete,8.0,8.0,berkeley,100.0
+"University of California, Berkeley",EN-4,Sustainability Culture Assessment,Engagement,EN,Context,Complete,1.25,3.0,berkeley,41.7
+"University of California, Berkeley",EN-5,Civic Engagement,Engagement,EN,Context,Complete,8.0,8.0,berkeley,100.0
+"University of California, Berkeley",EN-6,Community Partnerships,Engagement,EN,Context,Complete,9.0,9.0,berkeley,100.0
+"University of California, Berkeley",EN-7,Continuing Education,Engagement,EN,Context,Complete,3.0,3.0,berkeley,100.0
+"University of California, Berkeley",EN-8,Shared Facilities,Engagement,EN,Context,Complete,2.0,2.0,berkeley,100.0
+"University of California, Berkeley",EN-9,Inter-Campus Collaboration,Engagement,EN,Context,Complete,3.0,3.0,berkeley,100.0
+"University of California, Berkeley",IL-1,Reporting Assurance,Innovation & Leadership,IL,Bonus,Complete,0.5,1.0,berkeley,50.0
+"University of California, Berkeley",IL-10,Green Athletics Program,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-11,Green Events Program,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-12,Green Laboratory Program,Innovation & Leadership,IL,Bonus,Complete,0.5,1.0,berkeley,50.0
+"University of California, Berkeley",IL-14,Addressing Historic Injustices,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-2,Data Quality Certificate,Innovation & Leadership,IL,Bonus,Complete,0.5,1.0,berkeley,50.0
+"University of California, Berkeley",IL-22,Trademark Licensing Monitoring and Verification,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-24,Biodiversity Assessment,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-25,Grounds Certification,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-26,High Performance Building Certification,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-37,Sustainable Dining Recognition,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-4,Sustainability Course Designation,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-43,Sustainable Procurement Recognition,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-44,Zero Waste Certification,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-45,Bicycle Friendly Recognition,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-48,Shared Mobility Program,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-51,Sustainability Projects Fund,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-54,Sustainable Retirement Plan,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-56,Open and Shared Course Materials,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-63,Wellness Recognition,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",IL-64,Workplace Recognition,Innovation & Leadership,IL,Bonus,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",OP-1,Building Design and Construction,Operations,OP,Environmental,Complete,2.91,3.0,berkeley,97.0
+"University of California, Berkeley",OP-10,Purchased Goods,Operations,OP,Environmental,Complete,2.8,4.0,berkeley,70.0
+"University of California, Berkeley",OP-11,Materials Management,Operations,OP,Environmental,Complete,3.75,4.0,berkeley,93.8
+"University of California, Berkeley",OP-12,Waste Generation and Recovery,Operations,OP,Environmental,Complete,3.27,5.0,berkeley,65.4
+"University of California, Berkeley",OP-13,Vehicle Fleet,Operations,OP,Environmental,Complete,0.28,2.0,berkeley,14.0
+"University of California, Berkeley",OP-14,Commute Modal Split,Operations,OP,Environmental,Complete,4.89,6.0,berkeley,81.5
+"University of California, Berkeley",OP-15,Air Travel,Operations,OP,Environmental,Complete,2.0,2.0,berkeley,100.0
+"University of California, Berkeley",OP-2,Building Operations and Maintenance,Operations,OP,Environmental,Complete,4.0,5.0,berkeley,80.0
+"University of California, Berkeley",OP-3,Water Use,Operations,OP,Environmental,Complete,2.43,7.0,berkeley,34.7
+"University of California, Berkeley",OP-4,Ecologically Managed Grounds,Operations,OP,Environmental,Complete,5.0,5.0,berkeley,100.0
+"University of California, Berkeley",OP-5,Energy Use,Operations,OP,Environmental,Complete,6.87,10.0,berkeley,68.7
+"University of California, Berkeley",OP-6,Greenhouse Gas Emissions,Operations,OP,Environmental,Complete,8.01,16.0,berkeley,50.1
+"University of California, Berkeley",OP-7,Dining Service Procurement,Operations,OP,Environmental,Complete,5.46,8.0,berkeley,68.2
+"University of California, Berkeley",OP-8,Food Recovery,Operations,OP,Environmental,Complete,2.0,2.0,berkeley,100.0
+"University of California, Berkeley",OP-9,Sustainable Procurement System,Operations,OP,Environmental,Complete,7.0,7.0,berkeley,100.0
+"University of California, Berkeley",PA-1,Sustainability Coordination,Planning & Administration,PA,Governance,Complete,1.0,1.0,berkeley,100.0
+"University of California, Berkeley",PA-10,Student Success,Planning & Administration,PA,Social,Complete,2.8,3.0,berkeley,93.3
+"University of California, Berkeley",PA-11,"Health, Safety and Wellbeing",Planning & Administration,PA,Social,Complete,3.0,3.0,berkeley,100.0
+"University of California, Berkeley",PA-12,Employee Rights,Planning & Administration,PA,Social,Complete,2.5,3.0,berkeley,83.3
+"University of California, Berkeley",PA-13,Pay Equity and Living Wage,Planning & Administration,PA,Social,Complete,4.34,5.0,berkeley,86.8
+"University of California, Berkeley",PA-2,Commitments and Planning,Planning & Administration,PA,Governance,Complete,6.0,6.0,berkeley,100.0
+"University of California, Berkeley",PA-3,Institutional Governance,Planning & Administration,PA,Governance,Complete,3.5,4.0,berkeley,87.5
+"University of California, Berkeley",PA-4,Sustainable Investment Program,Planning & Administration,PA,Governance,Complete,4.0,4.0,berkeley,100.0
+"University of California, Berkeley",PA-5,Investment Holdings,Planning & Administration,PA,Governance,Complete,2.51,6.0,berkeley,41.8
+"University of California, Berkeley",PA-6,Institutional Climate,Planning & Administration,PA,Social,Complete,3.0,3.0,berkeley,100.0
+"University of California, Berkeley",PA-7,Racial and Ethnic Representation,Planning & Administration,PA,Social,Complete,1.59,3.0,berkeley,53.0
+"University of California, Berkeley",PA-8,Gender Parity,Planning & Administration,PA,Social,Complete,1.67,2.0,berkeley,83.5
+"University of California, Berkeley",PA-9,Affordability and Access,Planning & Administration,PA,Social,Complete,2.5,3.0,berkeley,83.3
+"University of California, Berkeley",PRE-1,Executive Letter,Report Preface,PRE,Preface,Complete,,,berkeley,
+"University of California, Berkeley",PRE-2,Points of Distinction,Report Preface,PRE,Preface,Complete,,,berkeley,
+"University of California, Berkeley",PRE-3,Institutional Characteristics,Report Preface,PRE,Preface,Complete,,,berkeley,
+"University of California, Berkeley",PRE-4,Reporting Methodologies,Report Preface,PRE,Preface,Complete,,,berkeley,
