@@ -58,6 +58,7 @@ import logging
 import os
 import pathlib
 import random
+import re
 import time
 
 # The key lives in .env, which is gitignored (§6.1: secrets go in the
@@ -96,6 +97,9 @@ TEMPERATURE = 0.3
 MAX_ATTEMPTS = 5
 BASE_BACKOFF = 4.0        # seconds; doubles each attempt, plus jitter
 PACE_SECONDS = 6.0        # between successful calls: free tier allows ~10/min
+# Google states a retryDelay on quota errors. Anything up to this we wait out;
+# beyond it the allowance is genuinely gone and the run should stop.
+MAX_QUOTA_WAIT = 120      # seconds
 
 # The SDK logs an automatic-function-calling advisory on every generate_content
 # call. We pass no tools, so it does not apply, and it buries the real output.
@@ -215,7 +219,35 @@ class GeminiWriter:
                 # against the very allowance that just ran out. The first run
                 # burned roughly 28 requests from a 20/day budget discovering
                 # this. Fail immediately and let the caller resume tomorrow.
+                # ⚠️ A `PerDay` quota error is NOT automatically terminal, and
+                # treating it as one cost a whole run. Google returns
+                # `retryDelay` alongside it, and on the free tier that delay is
+                # often SECONDS — it is throttling the rate at which the daily
+                # bucket is drawn down, not reporting the bucket empty. A run
+                # stopped at 18 of a 20/day allowance while the response said
+                # `retryDelay: 17s`, and two further calls succeeded minutes
+                # later. Honour the delay Google actually states: wait it out
+                # when it is short, give up only when it is long.
+                delay_match = re.search(r"'retryDelay':\s*'(\d+)s'", message)
+                stated_delay = int(delay_match.group(1)) if delay_match else None
+                if stated_delay is not None and stated_delay <= MAX_QUOTA_WAIT \
+                        and attempt < MAX_ATTEMPTS:
+                    wait = stated_delay + 2
+                    print(f"       daily-quota throttle, Google says retry in "
+                          f"{stated_delay}s — waiting "
+                          f"(attempt {attempt}/{MAX_ATTEMPTS})")
+                    time.sleep(wait)
+                    continue
+
                 if "PerDay" in message or "per day" in message.lower():
+                    # KEEP THE RAW ERROR. An earlier version of this raised a
+                    # hand-written message only, and the logs then could not
+                    # answer why a run stopped at 18 generations when the limit
+                    # is 20 and two more succeeded minutes later. Google's
+                    # response carries quotaId, quotaValue and retryDelay —
+                    # exactly the fields needed — and they were being discarded.
+                    # An error handler that destroys the evidence is worse than
+                    # no handler.
                     raise QuotaExhausted(
                         f"Daily free-tier quota exhausted for {self.model!r}.\n"
                         "  Options: wait for the reset (midnight Pacific), set "
@@ -224,7 +256,8 @@ class GeminiWriter:
                         "your real limits at "
                         "https://aistudio.google.com/rate-limit\n"
                         "  Sections already written are cached — re-running "
-                        "resumes rather than starting over.") from exc
+                        f"resumes rather than starting over.\n"
+                        f"  Raw response: {message}") from exc
 
                 if "not found" in message.lower() or "404" in message:
                     seen = self.available_models()

@@ -43,31 +43,30 @@ Furthermore, data required under GRI 2-8 regarding workers who are not employees
 
 ## Material topics
 
-### Approach to Sustainability Topics
+The sustainability topics covered in this report are aligned with the framework established by the Sustainability Tracking, Assessment & Rating System (STARS), developed by the Association for the Advancement of Sustainability in Higher Education for the higher-education sector. University College Cork did not run an independent materiality assessment to identify or prioritize institution-specific topics. Consequently, the topics reported reflect the standardized STARS structure rather than a bespoke materiality determination.
 
-University College Cork addresses sustainability disclosures by drawing upon the Sustainability Tracking, Assessment & Rating System (STARS), a framework developed by the Association for the Advancement of Sustainability in Higher Education for the higher education sector. 
+### Operational and Institutional Objectives
 
-Because the topics reported correspond to the standard credit areas defined by the STARS framework, the University did not conduct its own bespoke materiality assessment. Consequently, the institution cannot describe an internal materiality determination process, nor can it present an internally generated list of material topics derived from specific stakeholder consultations on economic, environmental, and social impacts. 
+Under GRI 3-2, the reporting scope encompasses standard sector areas where University College Cork has adopted measurable sustainability objectives:
+* Campus operations
+* Teaching, learning, and research
+* Equity and social justice
+* Administration and finance
+* Campus and community engagement
 
-### Institutional Commitments and Management
+Within campus operations, the University maintains measurable targets set out in its Sustainability and Climate Action Plan. These include commitments to exceed national reduction targets for Scope 1 and Scope 2 greenhouse gas emissions, as well as achieving net zero total greenhouse gas emissions. Operational objectives also cover adapting estate management policies and infrastructure for climate resilience, securing funding for carbon reduction programmes, applying a Living Laboratory model to campus sustainability solutions, and preserving green spaces in accordance with the campus masterplan.
 
-The University has adopted measurable sustainability objectives across several core areas, including campus operations; teaching, learning, and research; and racial equity and social justice. These commitments are formally established through a published strategic plan and public commitments.
+### Governance and Management
 
-Within campus operations, institutional objectives encompass:
-- Exceeding national targets for reducing Scope 1 and Scope 2 greenhouse gas emissions and achieving net zero total emissions;
-- Adapting estate management policies and campus infrastructure to mitigate climate change impacts;
-- Securing funding opportunities for carbon reduction initiatives and using the campus as a living laboratory for climate solutions;
-- Protecting and restoring campus green spaces in accordance with the university masterplan.
+Institutional management under GRI 3-3 is led by the Head of Sustainability and Climate Action within the Office of Sustainability and Climate Action. This office oversees governance bodies including the Green Campus Committee, the Green Forum, and a University Leadership Team subcommittee focused on sustainability and climate action. 
 
-Operational governance and coordination are overseen by the Head of Sustainability and Climate Action within the Office of Sustainability and Climate Action. This office coordinates several governing and advisory bodies across the institution, including the Green Campus Committee, the Green Forum, and the University Leadership Team Subcommittee on Sustainability and Climate Action. Recent operational outputs coordinated through this structure include the publication of the institutional sustainability plan, repeated international environmental accreditation under the Green Flag scheme managed by the Foundation for Environmental Education, ongoing participation in global university sustainability rankings, and administration of a dedicated living laboratory fund.
+Key outcomes coordinated through this structure include the publication of the institutional Sustainability and Climate Action Plan, securing external Green Flag accreditation, maintaining international university sustainability rankings, and managing the Green Campus Living Laboratory Fund. The institution maintains public commitments to sustainability through published strategic plans and external charter participation.
 
-### Limitations and Unreported Disclosures
+### Data Limitations and Omissions
 
-Because the topics covered are determined by an external framework, this report has specific limitations regarding GRI standard requirements:
-
-- **GRI 3-1 (Process to determine material topics):** Not reported. The institution did not execute a formal process to identify, prioritised, or consult stakeholders on specific impacts, as topic selection relies on the predefined STARS structure.
-- **GRI 3-2 (List of material topics):** The listed topic areas reflect standard framework categories rather than an institution-specific impact assessment. Additionally, disclosures from a single framework submission do not show topic changes relative to previous reporting periods.
-- **GRI 3-3 (Management of material topics):** Institutional management information is collected at an overall organizational level rather than topic by topic. The available data does not differentiate between direct impacts and those linked via business relationships, does not separate actions taken to prevent potential harm from actions taking to remediate actual harm, and does not record explicit lessons learned.
+* **GRI 3-1 Process to determine material topics:** Not reported. The University does not carry out a dedicated materiality assessment. Process details regarding how actual and potential impacts on the economy, environment, and people were identified, prioritised, or informed by stakeholder engagement are therefore unavailable.
+* **GRI 3-2 List of material topics:** The reported topic areas represent fixed STARS credit categories rather than an institution-specific impact evaluation, and historical comparisons against previous reporting periods are not captured by this dataset.
+* **GRI 3-3 Management of material topics:** Management mechanisms are reported institution-wide rather than on a topic-by-topic basis. The source framework does not record specific positive or negative impacts, does not differentiate direct operational involvement from business relationships, does not separate harm prevention from remediation, and does not report lessons learned.
 
 ## Governance
 
