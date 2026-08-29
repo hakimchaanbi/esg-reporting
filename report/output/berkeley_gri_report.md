@@ -32,19 +32,23 @@ Furthermore, regarding GRI 2-8, the university does not track or disclose the to
 
 ## Material topics
 
-### Sustainability Objectives and Framework Alignment
+The University of California, Berkeley structures its sustainability disclosures around the framework provided by the Sustainability Tracking, Assessment & Rating System (STARS), administered by the Association for the Advancement of Sustainability in Higher Education (AASHE). Because the topics covered correspond to predefined credit categories established by AASHE for the higher-education sector as a whole, the institution did not conduct a separate internal materiality assessment to identify or prioritise its specific sustainability impacts. Consequently, the selection of topics reflects external sector standardisation rather than an institutional determination of material impacts.
 
-The University of California, Berkeley structures its sustainability reporting around the credit categories of the Sustainability Tracking, Assessment & Rating System (STARS), developed by the Association for the Advancement of Sustainability in Higher Education (AASHE). The sustainability topics covered in this report are derived directly from this sector-wide framework rather than an institutional materiality assessment.
+### Adopted Sustainability Objectives and Management Approach
 
-The University has adopted measurable sustainability objectives across three main areas: campus operations, teaching and research, and racial equity and social justice. Operational objectives are guided by the systemwide University of California Sustainable Practices Policy, which establishes requirements for emissions reductions, clean energy adoption, and waste reduction across all campuses. These targets are implemented locally through UC Berkeley's Sustainability Plan and overseen by the campus Office of Sustainability. The Office coordinates administrative, operational, and academic efforts to advance clean energy transition projects, waste diversion strategies, and broader sustainability integration.
+While the institution has not executed a dedicated materiality assessment process, it maintains public commitments and measurable objectives across the core operational and functional areas defined within the STARS reporting structure. These areas encompass campus operations; teaching, learning, and research; racial equity and social justice; administration and finance; and campus and community engagement.
 
-### Materiality Assessment Limitations
+To address these areas, UC Berkeley aligns its governance with the systemwide Sustainable Practices Policy of the University of California alongside its own Sustainability Plan. Within campus operations, the university has established target goals for greenhouse gas emissions reduction, zero waste, and energy transition. The institution's Climate & Resiliency strategy focuses on accelerating a just and equitable transition towards clean energy, zero-carbon operations, and campus resilience.
 
-Because the reporting topics are fixed by the STARS credit set, the institution did not execute an internal process to assess or prioritize its material impacts. The report therefore contains specific disclosures and limitations under GRI Standards:
+Governance and implementation of these objectives are coordinated by the UC Berkeley Office of Sustainability. Led by the Sustainability Officer, the office provides campus leadership by setting institutional targets, developing strategic partnerships, and facilitating project implementation across academic, operational, and community dimensions.
 
-- **GRI 3-1 (Process to determine material topics):** Not reported. The institution did not conduct a dedicated materiality assessment to identify actual or potential impacts on the environment, economy, or people, nor did it engage stakeholders to prioritize topics.
-- **GRI 3-2 (List of material topics):** The areas described correspond to universal STARS credit categories rather than an institution-specific list of material topics. Consequently, topic-by-topic selection rationales and comparative changes against prior reporting periods are not provided.
-- **GRI 3-3 (Management of material topics):** Information on management approaches is provided at an institution-wide level rather than topic by topic. The underlying data framework does not record specific actual and potential impacts, involvement through business relationships, lessons learned, or the distinction between preventative measures and remediation activities.
+### Reporting Limitations and Framework Framework Differences
+
+Reporting against Disclosure 3-1, Disclosure 3-2, and Disclosure 3-3 involves several limitations due to reliance on the standardised STARS framework:
+
+- Process to determine material topics (GRI 3-1): The university does not report on an internal process for identifying, prioritising, or consulting stakeholders regarding actual and potential impacts on the economy, environment, and people, as STARS contains no internal materiality assessment mechanism.
+- List of material topics (GRI 3-2): The reported objective areas reflect fixed STARS credit categories rather than topics selected through an internal evaluation of significant impacts. Furthermore, changes in material topics compared to previous reporting periods required under Disclosure 3-2-b are not detailed.
+- Management of material topics (GRI 3-3): Management approaches are reported on an institution-wide basis rather than topic by topic. The framework does not collect data required by Disclosure 3-3 regarding specific actual and potential impacts, involvement through business relationships, distinctions between preventive and remediating actions, or lessons learned.
 
 ## Governance
 
