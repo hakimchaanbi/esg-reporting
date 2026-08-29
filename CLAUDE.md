@@ -29,7 +29,7 @@ is in French — do not let French leak into outputs).
 | 1 | **Knowledge** — scrape ESG reference sites → RAG corpus | ✅ done |
 | 2 | **Extraction** — scrape STARS reports (scores + detail) | ✅ done — deep parse fixed 2026-08-14, 3,197 fields (§6.5) |
 | 3 | **Structure** — combine into one schema, tag E/S/G pillars | ✅ done — `esg_master_dataset.csv`, 3,199 rows |
-| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 148 rows, all 78 disclosures judged (§16, §14.7); `reviewed_by=claude`, accepted by Hakim (§14.4) |
+| 4 | **Map** — STARS credits → **GRI only** (§9) | ✅ done — 164 rows, all 78 disclosures judged (§16, §14.20, §14.19); `reviewed_by=claude`, accepted by Hakim (§14.4) |
 | 5 | **Generate** — LLM writes prose, code injects numbers | 🔶 built and tested offline (§17); needs a `GEMINI_API_KEY` to write real prose |
 | 6 | **Output** — ESG report + BI dashboard | 🔶 GRI content index done (§15), narrative pipeline done (§17); **dashboard pending** |
 
@@ -525,10 +525,11 @@ secondary sources **matched GRI's own pages exactly.**
   `CO2`, but headings use a separator, or
   `Disclosure 302-4Reduction of energy consumption` fails the heading regex.
   Different rules for different elements, on purpose.
-- `mapping/stars_gri_mapping.csv` — **148 rows** (§16, plus the 405-1,
-  waste and GRI 3 passes in §14.11, §14.13 and §14.7): 4 equivalent ·
-  67 component · 4 intensity · **35 partial** · 35 gap_gri_side ·
-  3 gap_stars_side, summing to 148. 146 confirmed · 2 rejected. Every one of the 75 GRI disclosures has a judgement.
+- `mapping/stars_gri_mapping.csv` — **164 rows** (§16, plus the 405-1,
+  waste, GRI 3 and GRI 305 passes in §14.11, §14.13, §14.20 and §14.19):
+  4 equivalent · 80 component · 4 intensity · **38 partial** ·
+  35 gap_gri_side · 3 gap_stars_side, summing to 164. 162 confirmed ·
+  2 rejected. Every one of the 75 GRI disclosures has a judgement.
   (An earlier version of this line said 26 partial and summed to 135: the
   two `rejected` rows are also `partial` and were counted in neither
   total.)
@@ -608,8 +609,8 @@ means they **overlap** a disclosure without satisfying it. STARS' living-wage
 coverage is not GRI 202-1's minimum-wage ratio.
 
 ```
-directly citable (equivalent/component/intensity): 75
-+ partial, only with their caveat printed         : 33
+directly citable (equivalent/component/intensity): 88
++ partial, only with their caveat printed         : 36
 ```
 
 `include_partial=True` is an explicit opt-in and **raises** if any partial row
@@ -660,11 +661,11 @@ the second pass took gap_gri_side from 8 to 34 — see §16):
   carries the specific difference in its `caveat` column, and the validator
   warns if a `partial` row has an empty caveat.
 
-### Why the table has 148 rows
+### Why the table has 164 rows
 
-**110 are an actual link; 38 record an absence** (35 gap_gri_side, 3
+**126 are an actual link; 38 record an absence** (35 gap_gri_side, 3
 gap_stars_side). The links are many-to-one — STARS splits a figure into parts
-where GRI wants one number — so 105 distinct STARS fields reach **43 GRI
+where GRI wants one number — so 114 distinct STARS fields reach **43 GRI
 disclosures**. GRI 305-1 alone takes six rows (the scope 1 total, its four
 combustion components, biogenic).
 
@@ -672,7 +673,7 @@ combustion components, biogenic).
 |---|---|---|
 | STARS credits in the dataset | 86 | 86 |
 | STARS credits the mapping touches | 7 | **19** |
-| Distinct STARS fields mapped | 45 | **105** |
+| Distinct STARS fields mapped | 45 | **114** |
 | GRI disclosures reached by a link | 15 | **43** |
 | GRI disclosures with a judgement | 23 of 67 | **78 of 78** |
 
@@ -762,7 +763,7 @@ phase once the shape is locked. This is deliberate sequencing, not a shortcut.
    mapping; see §13.
 
 4. ~~Human re-review of the mapping~~ **CLOSED 2026-08-21 by Hakim's decision.**
-   All 148 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
+   All 164 rows stay `reviewed_by=claude` and are accepted as reviewed. Do not
    re-raise this as a blocker. The risk was stated and accepted; the column is
    kept so the rows remain identifiable if the supervisor asks.
 
@@ -1005,16 +1006,43 @@ two of the thirteen fixes were incomplete. Numbering continues.
     accepted, `equivalent` should be retired rather than kept with no members.
     No functional impact; both labels sit in `USABLE`.
 
-19. 🟡 **The 405-1 pattern repeats at GRI 305.** Populated 3/3 and unmapped,
-    with named GRI sub-requirements waiting for them: `Baseline scope 1 and 2
-    GHG emissions`, `Baseline year…`, `Narrative outlining when and why the GHG
-    emissions baseline was adopted` (305-1-d, 305-2-d, 305-5-c), `Description
-    of the methodology or calculator used…` (305-1-g, 305-2-g), and the
-    individual fuel types — `Natural gas`, `Heating oil`, `Coal/coke`,
-    `Propane/LPG` (302-1-a *"including fuel types used"*). Also: the 202-1
-    rationale claims the ratio *"cannot be derived from STARS at all"*, but
-    PA-13's wage floors are the numerator — only the local-minimum-wage
-    denominator is absent, so the claim is overstated. ~8 rows, half a day.
+19. ~~🟡 **The 405-1 pattern repeats at GRI 305.**~~ **FIXED 2026-08-29.**
+    16 rows added. GRI 305-1 asks for seven things; the first pass mapped
+    305-1-a and its components and never looked at d through g. The base
+    year, the emissions in it, the rationale and the methodology were all
+    in OP-6, populated 3/3, unmapped — and the 305-5 row's own note said
+    the baseline figure *"is in the dataset"*, so whoever wrote it saw the
+    field and mapped neither.
+
+    **A base year is not decoration.** Without it an emissions section is a
+    snapshot; with it the reader sees direction of travel — Berkeley
+    2019 → now, Cork 2017, TU Dublin 2018 — and **305-5-a's absolute
+    reduction becomes derivable** as baseline minus current, a code-side
+    subtraction of two verified values rather than an LLM estimate. 305-5
+    moves from *Partially reported* to *Reported*.
+
+    ⚠️ STARS states ONE baseline covering scope 1 and 2 together, where GRI
+    states the base year separately for 305-1 and 305-2. The figure serves
+    both jointly and neither alone, so `Baseline scope 1 and 2 GHG
+    emissions` is `partial` on those two and `component` only on 305-5,
+    where the combined boundary is what the reduction is measured against.
+
+    Also mapped: the four non-renewable fuel types (`Natural gas`,
+    `Heating oil`, `Coal/coke`, `Propane/LPG`) for GRI 302-1-a's *"including
+    fuel types used"*. Three are zero at every institution, which is the
+    finding rather than missing data — none of them still burns coal — and
+    the `Other stationary fuels` catch-all being zero too is what makes the
+    list complete rather than merely partial.
+
+    **202-1's rationale was overstated and is corrected.** It said the GRI
+    ratio *"cannot be derived from STARS at all"*. The NUMERATOR is present
+    — PA-13's `Wage floor for regular/permanent employees` is the standard
+    entry-level wage, now mapped. What is absent is the local statutory
+    minimum wage, which STARS never collects and which would have to come
+    from outside the verified pipeline, and the gender split, which is
+    genuinely unanswerable. "Impossible" when the truth is "one external
+    constant away, plus an unfixable gender gap" understates the project's
+    own data and is disprovable in one grep.
 
 20. ~~🟡 **The vocabulary omitted GRI 3: Material Topics entirely.**~~
     **FIXED 2026-08-29 — and it produced the best finding of either review.**
@@ -1260,7 +1288,7 @@ can open: `standards/gri_disclosures.json` (the questions),
 `esg_master_dataset.csv` (the values). Output:
 
 - `report/output/<key>_gri_index.md` — the index itself
-- `report/output/index_provenance.csv` — **292 rows**, every printed figure with
+- `report/output/index_provenance.csv` — **370 rows**, every printed figure with
   the exact STARS credit and field it came from
 
 **Four statuses, all standard in real GRI indexes:**
@@ -1272,7 +1300,7 @@ can open: `standards/gri_disclosures.json` (the questions),
 | Not reported | GRI asks, STARS cannot answer, **or** a candidate mapping was assessed and rejected |
 | Not assessed | no mapping row exists — **now zero** |
 
-Current state, all three institutions: **24 reported · 16–17 partial ·
+Current state, all three institutions: **25 reported · 15–16 partial ·
 37–38 not reported · 0 not assessed**, over 78 disclosures. (Was 23/15–16
 over 75 before GRI 405-1 was properly mapped and GRI 3 was added — §14.11,
 §14.7.)
@@ -1406,7 +1434,7 @@ cooling from off-site sources` → 302-1-c (purchased heating/cooling) and
   locality are different criteria and neither implies the other, so this is
   recorded as a gap rather than stretched into a partial.
 
-All 148 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
+All 164 rows are `reviewed_by=claude`. **Hakim accepted these as reviewed on
 2026-08-21** after the risk was stated — see §14 item 4. The column stays so the
 rows are identifiable, but this is no longer an open action.
 
