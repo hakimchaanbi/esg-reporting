@@ -56,8 +56,18 @@ rag/index/
 *.zip
 *:Zone.Identifier
 
-# generated narrative cache (LLM output, rebuildable)
-report/cache_narrative/
+# report/cache_narrative/ is deliberately COMMITTED, not ignored.
+#
+# It is LLM output and therefore "rebuildable" in principle — but rebuilding it
+# is not reproducible. Regenerating calls Gemini afresh, produces different
+# sentences, needs an API key, and burns a 20-request daily quota. Committing it
+# means anyone can clone this repo and rebuild a byte-identical report with no
+# key and no network.
+#
+# What was already reproducible without it: every figure, unit and GRI status,
+# because those are mechanical. What was not: the prose. This closes that gap.
+# ~250 KB. The cache is keyed on model + prompt, so a changed mapping still
+# forces regeneration of the affected sections — staleness cannot hide.
 report/output/*.md.incomplete
 
 # generated section previews

@@ -1,0 +1,1 @@
+The university reduced its emissions by 42,000 metric tons last year, a fall of 17 percent.

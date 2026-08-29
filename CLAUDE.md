@@ -1739,3 +1739,83 @@ opens with a summary table whose header cells contain exactly those strings. The
 data was right; the test was wrong. It now matches disclosure rows specifically
 and asserts all 78 were found, so a regex that silently matches nothing cannot
 pass.
+
+---
+
+## 19. Phase 6c — the assembled report (built 2026-08-29)
+
+Until now the deliverable was two files: `<key>_gri_report.md` (narrative) and
+`<key>_gri_index.md` (content index). A GRI report is both, in one document.
+
+```bash
+python -m report.build_full_report          # all three
+python -m report.build_full_report cork
+python -m report.build_full_report --no-pdf
+```
+
+Output per institution: `<key>_gri_full.md`, `.html`, `.pdf` — **31–32 pages**,
+via WeasyPrint with a print stylesheet (A4, page numbers, tables that do not
+split across a page break).
+
+### ⚠️ It writes a NEW file and never touches its inputs
+
+```
+<key>_gri_report.md   narrative       <- build_narrative.py, and only that
+<key>_gri_index.md    content index   <- build_content_index.py, and only that
+<key>_gri_full.md     both assembled  <- build_full_report.py, and only that
+```
+
+Merging in place would look tidier and is a trap: the next `build_narrative` run
+overwrites `<key>_gri_report.md` with narrative-only, and if that were the
+assembled document the content index would vanish **silently** — no error, no
+obvious moment of loss. One writer per file.
+
+An institution missing a narrative is **skipped with a reason**, not
+half-assembled. Same discipline as §17.
+
+### The front matter states the guarantee in plain English
+
+The assembled document opens with a methodology box that a supervisor can read
+without knowing the codebase: every number was copied by code from the dataset,
+the model wrote placeholders and never saw a figure, the finished text is scanned
+and the build fails on any untraceable number — **and** the honest limit, that
+this covers figures and not qualitative statements.
+
+### `report/cache_narrative/` is now COMMITTED, deliberately
+
+It is LLM output and "rebuildable" in principle. Rebuilding it is **not
+reproducible**: regenerating calls Gemini afresh, produces different sentences,
+needs an API key and burns a 20-request daily quota.
+
+| | Reproducible before? |
+|---|---|
+| Every figure, unit, GRI status | **yes** — mechanical |
+| The content index | **yes** |
+| The prose | **no** |
+
+Committing ~250 KB closes that gap: clone the repo, run the pipeline, get a
+byte-identical report **with no API key and no network**. For a viva that is the
+difference between "trust me" and "run it yourself".
+
+The cache is keyed on model + prompt, so a changed mapping still forces
+regeneration of the affected sections — staleness cannot hide behind it.
+
+⚠️ **Prune orphans before committing.** Every mapping change and model switch
+mints new keys and abandons the old ones; the directory had 53 entries of which
+19 were live. Dead entries ship confusion ("which of these is real?"). The
+current pipeline's live key set is computable — see the prune approach in the
+2026-08-29 session — and the invariant to check is
+`live == on_disk + still_to_generate`.
+
+### A mistake worth recording
+
+While pruning, `python -m report.build_narrative berkeley --backend stub` was run
+to confirm the cache still worked. It does — but `--backend stub` writes to the
+**same output path** as a real run, so it overwrote Berkeley's finished report
+with placeholder text and added 8 stub entries to the cache just pruned.
+
+Recovered at **zero API cost**, because the Gemini cache entries had survived —
+which is precisely the argument for committing the cache, demonstrated by
+accident. But the lesson stands: **`--backend stub` is not a read-only
+operation.** It is a full build that happens to use a fake model. Never run it
+to "just check something" against a directory holding real output.

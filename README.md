@@ -89,9 +89,10 @@ python -m report.build_content_index     # the GRI index (no LLM)
 python -m report.build_narrative         # the prose (needs GEMINI_API_KEY)
 python -m report.build_narrative --backend stub   # offline, no key
 
-# Phase 6b — the dashboard (no key, no network)
+# Phase 6b-c — dashboard and finished report (no key, no network)
 python -m report.build_bi_table          # three tidy CSVs
 streamlit run report/dashboard.py
+python -m report.build_full_report       # narrative + index -> md, html, pdf
 
 # Tests
 python tests/test_parse_credits.py
@@ -104,8 +105,12 @@ python rag/test_retrieval_safety.py
 ```
 
 ⚠️ Gemini's free tier allows very few requests per day and the limit is **per
-model**. Set `GEMINI_MODEL` to switch. Generated sections are cached, so an
-interrupted run resumes rather than restarting. See `CLAUDE.md` §17.
+model**. Set `GEMINI_MODEL` to switch. See `CLAUDE.md` §17.
+
+**You do not need an API key to reproduce the reports.** `report/cache_narrative/`
+is committed, so `build_narrative` reads the generated prose from disk and the
+whole pipeline runs offline. A key is only needed to generate *new* prose — after
+changing the mapping, or for TU Dublin's two unfinished sections.
 
 ## Repo layout
 
@@ -189,6 +194,10 @@ eight normalised metrics all three report, which surfaces the more interesting
 result: **Berkeley has the highest water use per person and the lowest energy
 use per square metre**, so the ranking inverts with the denominator.
 
-Outstanding: TU Dublin's narrative is five sections short — the daily Gemini
-quota ran out mid-run, and the build correctly refused to write a partial
-report. One run of 8 calls finishes it.
+The finished deliverable is one document per institution — narrative, GRI content
+index and a methodology statement — as Markdown, HTML and a 31-page PDF
+(`CLAUDE.md` §19). Berkeley's and Cork's are complete.
+
+Outstanding: TU Dublin's narrative is **two sections short**. The daily Gemini
+quota ran out mid-run and the build correctly refused to write a partial report;
+two calls finish it.

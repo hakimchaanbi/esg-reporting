@@ -1,4 +1,23 @@
 institution,section,backend,figures_offered,figures_used,digits_from_figures,digits_needing_review,digits_invented,spelled_numbers
+"University of California, Berkeley",organisation,gemini,1,1,1,,,
+"University of California, Berkeley",workforce,gemini,1,1,1,,,
+"University of California, Berkeley",material_topics,gemini,0,0,0,,,
+"University of California, Berkeley",governance,gemini,0,0,0,,,
+"University of California, Berkeley",strategy,gemini,0,0,0,,,
+"University of California, Berkeley",stakeholders,gemini,0,0,0,,,
+"University of California, Berkeley",environment,gemini,42,42,67,,,
+"University of California, Berkeley",social,gemini,11,11,11,,,
+University College Cork,organisation,gemini,1,1,1,,,
+University College Cork,workforce,gemini,1,1,1,,,two
+University College Cork,material_topics,gemini,0,0,0,,,
+University College Cork,governance,gemini,0,0,0,,,
+University College Cork,strategy,gemini,0,0,0,,,
+University College Cork,stakeholders,gemini,0,0,0,,,
+University College Cork,environment,gemini,45,45,76,,,
+University College Cork,social,gemini,11,11,11,,,
 Technological University Dublin,organisation,gemini,1,1,1,,,
 Technological University Dublin,workforce,gemini,1,1,1,,,
 Technological University Dublin,material_topics,gemini,0,0,0,,,
+Technological University Dublin,governance,gemini,1,1,1,,,four
+Technological University Dublin,strategy,gemini,0,0,0,,,
+Technological University Dublin,stakeholders,gemini,0,0,0,,,
