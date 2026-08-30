@@ -159,50 +159,45 @@ Regarding GRI 2-30, the institution does not report the percentage of total empl
 
 ## Environmental performance
 
-### Energy Consumption and Intensity
+### Energy consumption and intensity
 
-Total annual energy consumption within the University of California, Berkeley is 78,414.00 Megawatt-hours. Total electricity consumption accounts for 47,744.70 Megawatt-hours, whilst total stationary fuel consumption reaches 30,414 Megawatt-hours.
+Under GRI 302-1, total annual energy consumption at the University of California, Berkeley was 78,414.00 Megawatt-hours. Electricity consumption accounted for 47,744.70 Megawatt-hours, whilst total stationary fuel consumption comprised 30,414 Megawatt-hours. The stationary fuel portfolio included natural gas at 30,014 Megawatt-hours, heating oil at 400 Megawatt-hours, coal or coke at 0 Megawatt-hours, and propane or LPG at 0 Megawatt-hours. Annual renewable energy consumption across thermal and electric sources reached 18,173 Megawatt-hours, of which renewable stationary fuels represented 0 Megawatt-hours. Off-site heating and cooling sources delivered 255.30 Megawatt-hours, and on-site renewable electricity exported stood at 0 Megawatt-hours. To align with standard GRI reporting units, figures reported in megawatt-hours must be converted to gigajoules.
 
-Stationary fuel consumption comprises natural gas at 30,014 Megawatt-hours, heating oil at 400 Megawatt-hours, coal and coke at 0 Megawatt-hours, and propane/LPG at 0 Megawatt-hours. In accordance with GRI 302-1, energy metrics are reported in megawatt-hours within the STARS framework and require conversion to gigajoules for formal GRI standard presentation. Renewable fuel consumption is accounted for separately from purchased electricity: annual renewable energy consumption stands at 18,173 Megawatt-hours, renewable stationary fuels total 0 Megawatt-hours, and imported off-site heating and cooling accounts for 255.30 Megawatt-hours. On-site renewable electricity exported is 0 Megawatt-hours.
+Energy intensity evaluated under GRI 302-3 was 1,346.02 Kilowatt-hours per campus occupant, calculated using a combined denominator of full-time equivalent students and staff. Measured against gross floor space, energy intensity reached 52.17 Kilowatt-hours per square meter.
 
-Energy intensity under Disclosure 302-3 is calculated using two denominators: annual energy consumption per person (combining full-time equivalent students and operational staff) is 1,346.02 Kilowatt-hours, and annual energy consumption per unit of gross floor area is 52.17 Kilowatt-hours per square meter.
+### Water stewardship and withdrawal
 
-### Greenhouse Gas Emissions
+The institution's primary campus operates in an area designated as having a high level of physical water quantity risk. To mitigate reliance on external supplies, the university collects and stores rainwater on-site for operational use.
 
-Direct Scope 1 GHG emissions from stationary combustion total 134,957 Metric tons of CO2 equivalent, mobile combustion emissions equal 1,676 Metric tons of CO2 equivalent, and fugitive emissions account for 76 Metric tons of CO2 equivalent. Biogenic emissions stand at 0 Metric tons of CO2 equivalent, reported in carbon dioxide equivalent under STARS criteria.
+Under GRI 303-3, total water withdrawal reached 2,092,006 Cubic meters. Potable water sourced from off-site third-party utilities comprised 2,092,006 Cubic meters, while potable water derived from on-site sources totalled 0 Cubic meters. Reporting under GRI 303-3 standard units of megalitres requires dividing cubic metre volumes by one thousand.
 
-Energy indirect Scope 2 market-based emissions from off-site electricity generation equal 1,256 Metric tons of CO2 equivalent, while off-site heating and cooling sources account for 0 Metric tons of CO2 equivalent. Other indirect Scope 3 emissions encompass business travel at 19,913 Metric tons of CO2 equivalent, employee and student commuting at 12,836 Metric tons of CO2 equivalent, operational waste generation at 728 Metric tons of CO2 equivalent, and fuel- and energy-related activities at 22 Metric tons of CO2 equivalent. Greenhouse gas accounts are compiled adhering to protocols established by The Climate Registry and the California Air Resources Board.
+### Greenhouse gas emissions
 
-Emissions intensity under Disclosure 305-4 is 2,368.25 Kilograms of CO2 equivalent per full-time student and employee and 91.79 Kilograms per square meter per square metre of operational space. Combined Scope 1 and Scope 2 emissions for baseline year 2019 were 147,623 Metric tons of CO2 equivalent. The institution achieved a change of 9.83% against this pre-pandemic operational baseline.
+UC Berkeley compiles its greenhouse gas emissions inventory following The Climate Registry protocol, reporting data to both The Climate Registry and the California Air Resources Board. The baseline year for combined Scope 1 and Scope 2 GHG emissions is 2019, selected to capture standard operational activity prior to pandemic disruption. Baseline Scope 1 and Scope 2 emissions totaled 147,623 Metric tons of CO2 equivalent.
 
-### Water Withdrawal and Management
+In the current reporting year, direct Scope 1 emissions under Disclosure 305-1 comprised 134,957 Metric tons of CO2 equivalent from stationary combustion, 1,676 Metric tons of CO2 equivalent from fleet vehicles, and 76 Metric tons of CO2 equivalent from fugitive sources. Greenhouse gas emissions from biogenic sources were 0 Metric tons of CO2 equivalent. Indirect Scope 2 emissions under Disclosure 305-2 included 1,256 Metric tons of CO2 equivalent from off-site electricity (market-based) and 0 Metric tons of CO2 equivalent from off-site heating and cooling.
 
-The main university campus operates within an area designated with a high level of physical water risk. Operational management incorporates on-site rainwater harvesting for storage and functional use.
+Scope 3 emissions under Disclosure 305-3 included 19,913 Metric tons of CO2 equivalent from business travel, 12,836 Metric tons of CO2 equivalent from student and employee commuting, 728 Metric tons of CO2 equivalent from solid waste management, and 22 Metric tons of CO2 equivalent from fuel- and energy-related activities not included in Scope 1 or Scope 2.
 
-Total water withdrawal under GRI 303-3 is 2,092,006 Cubic meters. Third-party off-site municipal supply provides 2,092,006 Cubic meters, while potable water from on-site abstraction remains at 0 Cubic meters. GRI 303-3 reporting requires conversion from cubic metres to megalitres.
+GHG emissions intensity reported under GRI 305-4 was 2,368.25 Kilograms of CO2 equivalent per campus occupant (FTE students and staff) and 91.79 Kilograms per square meter per square metre of gross floor area.
 
-### Waste Diversion and Disposal
+Under Disclosure 305-5, the percentage reduction in Scope 1 and Scope 2 emissions relative to the baseline was 9.83%. Adjusted net Scope 1 and Scope 2 emissions stood at 133,106.95 Metric tons of CO2 equivalent, incorporating 4,858 Metric tons of CO2 equivalent of third-party certified carbon offsets.
 
-Annual operational non-hazardous waste generation is 7,732.13 Metric tons, alongside 4,753.09 Metric tons generated through construction and demolition projects.
+### Waste management and diversion
 
-Total non-hazardous operational waste diverted from disposal is 4,254.13 Metric tons, comprising 1,576 Metric tons recycled, 2,554 Metric tons processed via industrial composting, and 124.13 Metric tons prepared for reuse. Construction and demolition waste diverted from disposal equals 3,452.02 Metric tons, of which 2,858.23 Metric tons is recycled.
+Operational waste management prioritises reduction, reuse, recycling, and composting. The university operates a surplus program to reallocate unused institutional assets, maintains personal item reuse initiatives for staff and students, and has banned at least one category of single-use disposable plastic on campus. Campus composting systems route organic waste to commercial compost processing facilities. Hazardous materials are managed under a dedicated protocol designed to reduce usage and control exposure risk.
 
-Waste directed to final disposal includes 3,478 Metric tons of non-hazardous waste and 1,301.07 Metric tons of construction and demolition waste. Waste minimisation processes are supported by an institutional surplus programme, personal item reuse initiatives, campus composting, hazardous waste minimization protocols, and the elimination of selected single-use plastics.
+Under GRI 306-3, annual non-hazardous waste generated reached 7,732.13 Metric tons. Construction and demolition waste generated was 4,753.09 Metric tons.
 
-### Procurement Environmental Criteria
+Under Disclosure 306-4, non-hazardous waste diverted from disposal totalled 4,254.13 Metric tons, consisting of 1,576 Metric tons recycled, 2,554 Metric tons composted, and 124.13 Metric tons prepared for reuse. Construction and demolition waste diverted from disposal reached 3,452.02 Metric tons, of which 2,858.23 Metric tons was recycled.
 
-Under Disclosure 308-1, 100% of formal bid solicitations incorporate supplier sustainability requirements. The institutional supplier code of conduct establishes environmental standards exceeding baseline regulatory compliance.
+Under Disclosure 306-5, non-hazardous waste directed to disposal via landfill or incineration was 3,478 Metric tons. Construction and demolition waste sent to landfill or incineration totalled 1,301.07 Metric tons.
 
-### Reporting Limitations and Omissions
+### Sustainable procurement and reporting limitations
 
-Several disclosure items under standard GRI reporting frameworks cannot be provided from current data collections:
-- **Materials (GRI 301):** GRI 301-1, Disclosure 301-2, and Disclosure 301-3 are omitted as the institution does not manufacture physical products or primary packaging.
-- **Energy (GRI 302):** Value chain energy consumption outside the organization (GRI 302-2) and absolute energy reductions in joules (GRI 302-4) are unrecorded in STARS.
-- **Water (GRI 303):** Qualitative descriptions of shared water resource impacts (GRI 303-1) and effluent discharge standards (GRI 303-2) are absent.
-- **Emissions (GRI 305):** Absolute emissions of ozone-depleting substances (GRI 305-6) and NOx/SOx air emissions (GRI 305-7) are not reported.
-- **Waste (GRI 306):** Detailed process descriptions of waste creation (GRI 306-1) and tonnage metrics for hazardous waste streams (GRI 306-3) are uncollected.
-- **Supplier Environmental Assessment (GRI 308):** Specific counts of suppliers screened or remediated (GRI 308-2) are not tracked at vendor level.
-- **Unreported Mapped Fields:** Overall Scope 1 annual and process totals, location-based Scope 2 figures, and Scope 3 capital goods and purchased goods categories were left blank in reporting.
+The institution embeds sustainability expectations into procurement processes through a supplier code of conduct that exceeds statutory requirements. Under Disclosure 308-1, 100% of bid solicitations included explicit supplier sustainability criteria.
+
+A number of reporting limitations exist across the dataset. Standards GRI 301-1, GRI 301-2, GRI 301-3, and GRI 302-5 are omitted as the university produces no commercial physical products. Upstream and downstream energy consumption (GRI 302-2) and absolute energy reduction figures (GRI 302-4) are not recorded. Effluent discharge quality (GRI 303-2) and specific water withdrawal breakdowns for water-stressed regions (GRI 303-3) are unavailable. Emissions of ozone-depleting substances (GRI 305-6) and NOx/SOx air pollutants (GRI 305-7) are not reported. GHG baselines combine Scope 1 and Scope 2 emissions without individual attribution, and Scope 3 reporting omits capital goods and purchased goods. Hazardous waste quantities are unmeasured under GRI 306-3, and supplier environmental impact assessments (GRI 308-2) are not systematically tracked.
 
 ## Social and economic performance
 

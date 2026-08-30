@@ -832,6 +832,36 @@ WAGE_RATIO_TRUTH = (
 
 # (stars_credit, stars_field, gri_disclosure) -> the columns to overwrite.
 AMENDMENTS = {
+    # The old caveat said "derive the absolute figure from the baseline and
+    # current fields". Following that instruction on Berkeley gives 147,623 -
+    # 137,965 = 9,658 tCO2e, a 6.54% reduction — while the percentage printed
+    # beside it is 9.83%, because STARS computes that one from ADJUSTED NET
+    # emissions after deducting purchased offsets. So the caveat told the reader
+    # to perform a calculation that contradicts the figure in the same
+    # paragraph, and neither number was labelled as gross or net.
+    ("OP-6", "Percentage reduction in scope 1 and 2 GHG emissions from baseline",
+     "305-5"): {
+        "caveat":
+            "GRI 305-5 asks for reductions as an ABSOLUTE quantity in metric "
+            "tons CO2e; STARS gives a percentage. ⚠️ THAT PERCENTAGE IS NET OF "
+            "PURCHASED OFFSETS. STARS computes it from `Adjusted net scope 1 "
+            "and 2 GHG emissions`, not from the gross total printed alongside "
+            "it, so the two do not reconcile wherever an institution holds "
+            "offsets: Berkeley's reduction is 6.54% gross and 9.83% net, a "
+            "third of the headline figure being bought rather than achieved. "
+            "Cork and TU Dublin agree on both bases only because their offsets "
+            "are zero. Deriving the absolute reduction as baseline minus "
+            "current gives the GROSS figure — correct, but not the number "
+            "STARS prints. Say which basis is being quoted, and report the "
+            "offsets separately as GRI 305-5's compilation requirement 2.9.5 "
+            "demands.",
+        "claude_verdict": "amend",
+        "claude_note":
+            "Corrected 2026-08-30 after the third external review. The previous "
+            "caveat instructed a derivation that contradicts the printed "
+            "percentage, and neither figure was identified as gross or net.",
+        "reviewed_date": "2026-08-30",
+    },
     ("PA-13",
      "Percentage of employees that receive remuneration equivalent to at least a living wage",
      "202-1"): {
@@ -1242,6 +1272,47 @@ GHG_305 += [
         "GRI 305-5-b (gases included) and 305-5-d (which scopes the reductions "
         "occurred in) remain unanswered — STARS reports the reduction against "
         "the combined scope 1 + 2 total without attributing it to either."),
+
+    # --- 305-5 and OFFSETS. Found by the third external review. --------------
+    #
+    # STARS' headline "percentage reduction" is computed from ADJUSTED NET
+    # emissions, after purchased offsets are deducted — not from the gross
+    # figure the report prints beside it. For Berkeley:
+    #
+    #     baseline           147,623
+    #     gross current      137,965   -> a 6.54% reduction
+    #     deduction applied    4,858.05
+    #     adjusted net       133,106.95 -> the 9.83% STARS reports
+    #
+    # and 4,858.05 is `Third party certified carbon offsets` (4,858.0), not the
+    # separately-reported `Net carbon sinks` (4,766.26), which STARS caps and
+    # does not use here. So a third of the headline reduction was bought, and
+    # the report presented the whole of it as emissions performance.
+    #
+    # This is exactly what GRI 305-5's compilation requirement 2.9.5 exists to
+    # prevent: "report reductions from offsets separately". Cork and TU Dublin
+    # hid it — their offsets are zero, so gross and adjusted agree exactly and
+    # the discrepancy only appears at the one institution that buys offsets.
+    row("OP-6", "Adjusted net scope 1 and 2 GHG emissions",
+        "GRI 305", "305-5", "component", "high",
+        "This is the figure STARS actually computes its percentage reduction "
+        "from — gross scope 1 + 2 emissions after deducting purchased offsets "
+        "and on-site sinks. Reporting the percentage without it invites the "
+        "reader to attribute the whole reduction to operational performance.",
+        "GROSS AND NET DIVERGE WHERE OFFSETS EXIST. Berkeley's reduction is "
+        "6.54% gross and 9.83% net; Cork's and TU Dublin's are identical either "
+        "way because they hold no offsets. State which basis is being quoted."),
+
+    row("OP-6", "Third party certified carbon offsets",
+        "GRI 305", "305-5", "component", "high",
+        "GRI 305-5 compilation requirement 2.9.5 requires reductions from "
+        "offsets to be reported SEPARATELY from reductions achieved by the "
+        "organisation's own initiatives. This is that figure.",
+        "Berkeley holds 4,858 tCO2e of third-party certified offsets, which is "
+        "the entire difference between its gross and adjusted-net reduction — "
+        "about a third of the headline figure. STARS also reports a `Net carbon "
+        "sinks` field which is CAPPED and does NOT equal the deduction actually "
+        "applied, so do not use it to reconcile the two percentages."),
 
     # --- 302-1-a: "including fuel types used" ------------------------------
     row("OP-5", "Natural gas", "GRI 302", "302-1", "component", "high",
