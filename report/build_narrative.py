@@ -444,6 +444,10 @@ def build_prompt(institution, section, facts) -> str:
             "             -> renders the unit twice\n"
             "     WRONG:  \"{{ y }} of employees\"  when y is a percentage\n"
             "             -> the sign is already there\n"
+            "  This includes COMPOUND units. `Kilograms per square meter` and "
+            "`Kilowatt-hours per square meter` already contain their "
+            "denominator, so do not append \"per square metre of floor area\" "
+            "after one — it reads as \"per square meter per square metre\".\n"
             "  The unit shown in square brackets below is for YOUR "
             "understanding of what the figure means. Do not copy it into the "
             "sentence.")

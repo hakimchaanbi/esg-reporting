@@ -98,9 +98,9 @@ Technological University Dublin,tudublin,GRI 3,3-2,List of material topics,Parti
 "University of California, Berkeley",berkeley,GRI 3,3-3,Management of material topics,Partially reported,3,False
 University College Cork,cork,GRI 3,3-3,Management of material topics,Partially reported,3,False
 Technological University Dublin,tudublin,GRI 3,3-3,Management of material topics,Partially reported,3,False
-"University of California, Berkeley",berkeley,GRI 202,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,Partially reported,3,False
-University College Cork,cork,GRI 202,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,Partially reported,3,False
-Technological University Dublin,tudublin,GRI 202,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,Partially reported,3,False
+"University of California, Berkeley",berkeley,GRI 202,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,Reported,4,True
+University College Cork,cork,GRI 202,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,Reported,4,True
+Technological University Dublin,tudublin,GRI 202,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,Reported,4,True
 "University of California, Berkeley",berkeley,GRI 202,202-2,Proportion of senior management hired from the local community,Not reported,0,False
 University College Cork,cork,GRI 202,202-2,Proportion of senior management hired from the local community,Not reported,0,False
 Technological University Dublin,tudublin,GRI 202,202-2,Proportion of senior management hired from the local community,Not reported,0,False
@@ -158,9 +158,9 @@ Technological University Dublin,tudublin,GRI 305,305-3,Other indirect (Scope 3) 
 "University of California, Berkeley",berkeley,GRI 305,305-4,GHG emissions intensity,Reported,2,True
 University College Cork,cork,GRI 305,305-4,GHG emissions intensity,Reported,2,True
 Technological University Dublin,tudublin,GRI 305,305-4,GHG emissions intensity,Reported,2,True
-"University of California, Berkeley",berkeley,GRI 305,305-5,Reduction of GHG emissions,Reported,4,True
-University College Cork,cork,GRI 305,305-5,Reduction of GHG emissions,Reported,4,True
-Technological University Dublin,tudublin,GRI 305,305-5,Reduction of GHG emissions,Reported,4,True
+"University of California, Berkeley",berkeley,GRI 305,305-5,Reduction of GHG emissions,Reported,6,True
+University College Cork,cork,GRI 305,305-5,Reduction of GHG emissions,Reported,6,True
+Technological University Dublin,tudublin,GRI 305,305-5,Reduction of GHG emissions,Reported,6,True
 "University of California, Berkeley",berkeley,GRI 305,305-6,Emissions of ozone-depleting substances (ODS),Not reported,0,False
 University College Cork,cork,GRI 305,305-6,Emissions of ozone-depleting substances (ODS),Not reported,0,False
 Technological University Dublin,tudublin,GRI 305,305-6,Emissions of ozone-depleting substances (ODS),Not reported,0,False
@@ -176,9 +176,9 @@ Technological University Dublin,tudublin,GRI 306,306-2,Management of significant
 "University of California, Berkeley",berkeley,GRI 306,306-3,Waste generated,Reported,2,True
 University College Cork,cork,GRI 306,306-3,Waste generated,Reported,2,True
 Technological University Dublin,tudublin,GRI 306,306-3,Waste generated,Reported,2,True
-"University of California, Berkeley",berkeley,GRI 306,306-4,Waste diverted from disposal,Reported,6,True
-University College Cork,cork,GRI 306,306-4,Waste diverted from disposal,Reported,6,True
-Technological University Dublin,tudublin,GRI 306,306-4,Waste diverted from disposal,Reported,6,True
+"University of California, Berkeley",berkeley,GRI 306,306-4,Waste diverted from disposal,Reported,7,True
+University College Cork,cork,GRI 306,306-4,Waste diverted from disposal,Reported,7,True
+Technological University Dublin,tudublin,GRI 306,306-4,Waste diverted from disposal,Reported,7,True
 "University of California, Berkeley",berkeley,GRI 306,306-5,Waste directed to disposal,Reported,2,True
 University College Cork,cork,GRI 306,306-5,Waste directed to disposal,Reported,2,True
 Technological University Dublin,tudublin,GRI 306,306-5,Waste directed to disposal,Reported,2,True

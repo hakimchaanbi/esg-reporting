@@ -40,6 +40,7 @@ institution,gri_disclosure,gri_title,relationship,stars_credit,stars_field,value
 "University of California, Berkeley",202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Percentage of employees that receive remuneration equivalent to at least a living wage,96.20,,True
 "University of California, Berkeley",202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Living wage,39.62,,True
 "University of California, Berkeley",202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Wage floor for regular/permanent employees,22.54,,True
+"University of California, Berkeley",202-1,Ratios of standard entry level wage by gender compared to local minimum wage,component,PA-9,Local hourly minimum wage for students,16.99,,True
 "University of California, Berkeley",302-1,Energy consumption within the organization,equivalent,OP-5,Total annual energy consumption,"78,414.00",Megawatt-hours,True
 "University of California, Berkeley",302-1,Energy consumption within the organization,component,OP-5,Total electricity consumption,"47,744.70",Megawatt-hours,True
 "University of California, Berkeley",302-1,Energy consumption within the organization,component,OP-5,Total stationary fuel consumption,"30,414",Megawatt-hours,True
@@ -88,6 +89,8 @@ institution,gri_disclosure,gri_title,relationship,stars_credit,stars_field,value
 "University of California, Berkeley",305-5,Reduction of GHG emissions,component,OP-6,Baseline scope 1 and 2 GHG emissions,"147,623",Metric tons of CO2 equivalent,True
 "University of California, Berkeley",305-5,Reduction of GHG emissions,component,OP-6,Baseline year for scope 1 and 2 GHG emissions,2019,,True
 "University of California, Berkeley",305-5,Reduction of GHG emissions,component,OP-6,Narrative outlining when and why the GHG emissions baseline was adopted,"https://sustainability.berkeley.edu/carbon-solutions/greenhouse-gas-inventory 2019 was the last year that had ""Business As Usual"" Emissions before the global pandemic occurred.",,True
+"University of California, Berkeley",305-5,Reduction of GHG emissions,component,OP-6,Adjusted net scope 1 and 2 GHG emissions,"133,106.95",Metric tons of CO2 equivalent,True
+"University of California, Berkeley",305-5,Reduction of GHG emissions,component,OP-6,Third party certified carbon offsets,"4,858",Metric tons of CO2 equivalent,True
 "University of California, Berkeley",306-2,Management of significant waste-related impacts,component,OP-11,"Does the institution have a surplus program through which institution-owned items that are no longer needed are stored for eventual sale, donation, or reuse?",Yes,,True
 "University of California, Berkeley",306-2,Management of significant waste-related impacts,component,OP-11,Does the institution have or participate in a reuse program through which employees and/or students can donate personal items for redistribution?,Yes,,True
 "University of California, Berkeley",306-2,Management of significant waste-related impacts,component,OP-11,Has the institution eliminated the on-site use of at least one form of single-use disposable plastic?,Yes,,True
@@ -102,6 +105,7 @@ institution,gri_disclosure,gri_title,relationship,stars_credit,stars_field,value
 "University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste prepared for reuse,124.13,Metric tons,True
 "University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Total construction and demolition waste diverted from disposal,"3,452.02",Metric tons,True
 "University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste recycled,"2,858.23",Metric tons,True
+"University of California, Berkeley",306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste prepared for reuse,593.79,Metric tons,True
 "University of California, Berkeley",306-5,Waste directed to disposal,component,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,"3,478",Metric tons,True
 "University of California, Berkeley",306-5,Waste directed to disposal,component,OP-12,Construction and demolition waste disposed of to a landfill or incinerator,"1,301.07",Metric tons,True
 "University of California, Berkeley",308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Does the institution’s supplier code of conduct include one or more expectations in regard to environmental impact that exceed or are additional to regulatory compliance?,Yes,,True
@@ -165,6 +169,7 @@ University College Cork,3-3,Management of material topics,partial,PA-2,"Has the 
 University College Cork,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Percentage of employees that receive remuneration equivalent to at least a living wage,100,,True
 University College Cork,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Living wage,15.40,,True
 University College Cork,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Wage floor for regular/permanent employees,16.40,,True
+University College Cork,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,component,PA-9,Local hourly minimum wage for students,14.25,,True
 University College Cork,302-1,Energy consumption within the organization,equivalent,OP-5,Total annual energy consumption,"55,148.70",Megawatt-hours,True
 University College Cork,302-1,Energy consumption within the organization,component,OP-5,Total electricity consumption,"32,599.70",Megawatt-hours,True
 University College Cork,302-1,Energy consumption within the organization,component,OP-5,Total stationary fuel consumption,"22,549",Megawatt-hours,True
@@ -213,6 +218,8 @@ University College Cork,305-5,Reduction of GHG emissions,partial,OP-6,Percentage
 University College Cork,305-5,Reduction of GHG emissions,component,OP-6,Baseline scope 1 and 2 GHG emissions,"19,460",Metric tons of CO2 equivalent,True
 University College Cork,305-5,Reduction of GHG emissions,component,OP-6,Baseline year for scope 1 and 2 GHG emissions,2017,,True
 University College Cork,305-5,Reduction of GHG emissions,component,OP-6,Narrative outlining when and why the GHG emissions baseline was adopted,This is the emissions baseline that has been set by the government of Ireland for all public bodies in the country.,,True
+University College Cork,305-5,Reduction of GHG emissions,component,OP-6,Adjusted net scope 1 and 2 GHG emissions,"14,359.78",Metric tons of CO2 equivalent,True
+University College Cork,305-5,Reduction of GHG emissions,component,OP-6,Third party certified carbon offsets,0,Metric tons of CO2 equivalent,True
 University College Cork,306-2,Management of significant waste-related impacts,component,OP-11,"Does the institution have a surplus program through which institution-owned items that are no longer needed are stored for eventual sale, donation, or reuse?",Yes,,True
 University College Cork,306-2,Management of significant waste-related impacts,component,OP-11,Does the institution have or participate in a reuse program through which employees and/or students can donate personal items for redistribution?,Yes,,True
 University College Cork,306-2,Management of significant waste-related impacts,component,OP-11,Has the institution eliminated the on-site use of at least one form of single-use disposable plastic?,Yes,,True
@@ -227,6 +234,7 @@ University College Cork,306-4,Waste diverted from disposal,component,OP-12,Non-h
 University College Cork,306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste prepared for reuse,0,Metric tons,True
 University College Cork,306-4,Waste diverted from disposal,component,OP-12,Total construction and demolition waste diverted from disposal,"6,837.95",Metric tons,True
 University College Cork,306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste recycled,"5,675.22",Metric tons,True
+University College Cork,306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste prepared for reuse,"1,162.73",Metric tons,True
 University College Cork,306-5,Waste directed to disposal,component,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,278,Metric tons,True
 University College Cork,306-5,Waste directed to disposal,component,OP-12,Construction and demolition waste disposed of to a landfill or incinerator,76.13,Metric tons,True
 University College Cork,308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Does the institution’s supplier code of conduct include one or more expectations in regard to environmental impact that exceed or are additional to regulatory compliance?,No,,True
@@ -291,6 +299,7 @@ Technological University Dublin,3-3,Management of material topics,partial,PA-2,"
 Technological University Dublin,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Percentage of employees that receive remuneration equivalent to at least a living wage,100,,True
 Technological University Dublin,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Living wage,13.85,,True
 Technological University Dublin,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,partial,PA-13,Wage floor for regular/permanent employees,16.53,,True
+Technological University Dublin,202-1,Ratios of standard entry level wage by gender compared to local minimum wage,component,PA-9,Local hourly minimum wage for students,12.70,,True
 Technological University Dublin,302-1,Energy consumption within the organization,equivalent,OP-5,Total annual energy consumption,"38,391",Megawatt-hours,True
 Technological University Dublin,302-1,Energy consumption within the organization,component,OP-5,Total electricity consumption,"15,053",Megawatt-hours,True
 Technological University Dublin,302-1,Energy consumption within the organization,component,OP-5,Total stationary fuel consumption,"21,072",Megawatt-hours,True
@@ -339,6 +348,8 @@ Technological University Dublin,305-5,Reduction of GHG emissions,partial,OP-6,Pe
 Technological University Dublin,305-5,Reduction of GHG emissions,component,OP-6,Baseline scope 1 and 2 GHG emissions,"10,064",Metric tons of CO2 equivalent,True
 Technological University Dublin,305-5,Reduction of GHG emissions,component,OP-6,Baseline year for scope 1 and 2 GHG emissions,2018,,True
 Technological University Dublin,305-5,Reduction of GHG emissions,component,OP-6,Narrative outlining when and why the GHG emissions baseline was adopted,2016-2018 Period when electricity and gas data start to be consistent between bills and SEAI M&R platform. It's also a PRE-Covid period and a period when we have the same level of data granularity as today - thereby enabling us to compare like for like.,,True
+Technological University Dublin,305-5,Reduction of GHG emissions,component,OP-6,Adjusted net scope 1 and 2 GHG emissions,"8,958",Metric tons of CO2 equivalent,True
+Technological University Dublin,305-5,Reduction of GHG emissions,component,OP-6,Third party certified carbon offsets,0,Metric tons of CO2 equivalent,True
 Technological University Dublin,306-2,Management of significant waste-related impacts,component,OP-11,"Does the institution have a surplus program through which institution-owned items that are no longer needed are stored for eventual sale, donation, or reuse?",Yes,,True
 Technological University Dublin,306-2,Management of significant waste-related impacts,component,OP-11,Does the institution have or participate in a reuse program through which employees and/or students can donate personal items for redistribution?,Yes,,True
 Technological University Dublin,306-2,Management of significant waste-related impacts,component,OP-11,Has the institution eliminated the on-site use of at least one form of single-use disposable plastic?,Yes,,True
@@ -353,6 +364,7 @@ Technological University Dublin,306-4,Waste diverted from disposal,component,OP-
 Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Non-hazardous waste prepared for reuse,704.90,Metric tons,True
 Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Total construction and demolition waste diverted from disposal,"1,121.85",Metric tons,True
 Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste recycled,531.95,Metric tons,True
+Technological University Dublin,306-4,Waste diverted from disposal,component,OP-12,Construction and demolition waste prepared for reuse,589.89,Metric tons,True
 Technological University Dublin,306-5,Waste directed to disposal,component,OP-12,Non-hazardous waste disposed of to a landfill or incinerator,316.21,Metric tons,True
 Technological University Dublin,306-5,Waste directed to disposal,component,OP-12,Construction and demolition waste disposed of to a landfill or incinerator,122.23,Metric tons,True
 Technological University Dublin,308-1,New suppliers that were screened using environmental criteria,partial,OP-9,Does the institution’s supplier code of conduct include one or more expectations in regard to environmental impact that exceed or are additional to regulatory compliance?,Yes,,True
