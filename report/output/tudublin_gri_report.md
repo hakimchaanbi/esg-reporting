@@ -4,40 +4,35 @@ Prepared **with reference to** the GRI Standards. Source data: [Technological Un
 
 ## The organisation and its reporting
 
-### Organizational Profile and Reporting Boundary
+### Organisational Profile and Boundary
 
-Technological University Dublin (TU Dublin) is a public higher education institution based in Ireland. The institutional boundary defined for this sustainability report encompasses operations across the City, Tallaght, and Blanchardstown campuses. The City campus encompasses multiple sites, including Grangegorman, Bolton Street, Aungier Street, and other facilities situated in Dublin city centre.
+Technological University Dublin is a public higher education institution. Its organisational boundary for sustainability reporting covers three primary campus locations: the City campus—which includes Grangegorman, Bolton Street, Aungier Street, and additional Dublin city centre premises—alongside the Tallaght and Blanchardstown campuses. The operational scope covers all estates, university functions, staff, students, research hubs, and research outputs indexed in Scopus and Arrow. Specific campus features included within this operational footprint include an agricultural school.
 
-The reporting boundary covers all university estates, buildings, operational functions, academic and non-academic staff, students, research hubs, and institutional outputs captured in Scopus and the university repository, Arrow. Operational activities covered within this physical footprint include an agricultural school. Data collection and validation were coordinated across the institution under the leadership of the Head of Sustainability Intelligence, Dr Philippe Lemarchand, and Sustainability Intelligence Data Analyst, Dr Zeyan Zhao, with contributions from personnel across multiple university functions.
+Under GRI 2-1 and GRI 2-6, institutional details cover public operational activities; however, dataset fields do not capture the formal legal name, headquarters location, countries of operation, or full value chain and market details beyond physical campus activities. Regarding GRI 2-2, the reporting boundary incorporates all university facilities and functions, though the source framework does not state whether these entities differ from those in the university's financial statements or how any minority interests are consolidated.
 
-### Reporting Period and External Assurance
+### Reporting Period and Process
 
-The reporting period for Scope 1 and Scope 2 greenhouse gas emissions is defined by the performance year 2023.
+The reporting process was led by the Head of Sustainability Intelligence and a Data Analyst in Sustainability Intelligence, with data collection and validation involving contributors across university departments. For Scope 1 and Scope 2 greenhouse gas emissions accounted under GRI 305, data corresponds to the performance year 2023.
 
-In relation to Disclosure 2-5, no independent external assurance or external audit was conducted for the information presented in this report.
+In relation to GRI 2-3, reporting period dates vary by subject area within the source framework, and data collection does not specify a publication frequency, publication date, or a designated contact point for public enquiries. Under GRI 2-4, restatements of information from prior periods are not reported, as submissions function as independent snapshots without comparative links to historical data.
 
-### Reporting Limitations
+### External Assurance and Data Limitations
 
-Several disclosures required by the GRI Standards cannot be fully addressed due to the data boundaries of the primary data source:
-- **GRI 2-1**: Legal entity details, headquarters location, and specific countries of operation are omitted, as the primary data collection framework records submission metadata rather than these institutional fields.
-- **GRI 2-2**: The report does not clarify whether the entities included in sustainability reporting differ from those in the institution’s financial statements, nor how minority interests are consolidated.
-- **GRI 2-3**: Specific contact details for public enquiries, overall reporting frequency, and publication dates are not captured; named leads are recorded without direct contact information.
-- **GRI 2-4**: Restatements of information from prior reporting periods are not reported, as submissions operate as independent snapshots without comparative linkages to previous datasets.
-- **Disclosure 2-5**: Detailed metadata regarding external assurance—such as assurance standards, obtained levels of assurance, process limitations, and provider relationships—is omitted because external verification was not undertaken.
-- **GRI 2-6**: While physical campus features such as the agricultural school are noted, complete details regarding downstream value chains, service markets, and supply chain boundaries are not reported.
+In accordance with GRI 2-5, no independent external assurance or audit was undertaken for the preparation of this report. 
+
+Data limitations within the defined reporting boundary are primarily restricted to data access constraints concerning third-party food service providers operating across the campuses.
 
 ## Activities and workers
 
-### Workforce Size and Composition
+Technological University Dublin tracks its total staff footprint through institutional sustainability submissions. Under Disclosure 2-7, the overall size of the university's workforce is recorded as 2,404.
 
-Technological University Dublin records its total operational workforce using full-time equivalent (FTE) metrics. Under the STARS framework, the university reports a total workforce capacity of 2,404 FTE employees across its academic, administrative, and operational divisions.
+### Reporting Limitations and Missing Disclosures
 
-### Reporting Limitations and Exclusions
+The current data source presents specific limitations regarding the detailed composition of the workforce when evaluated against GRI Standards.
 
-The current data capture presents several limitations when benchmarked against GRI requirements:
+The figure reported under Disclosure 2-7 reflects full-time equivalent staff rather than a head count of individual employees. As a result, two half-time staff members are aggregated into a single unit. Furthermore, the reporting framework collects a single undifferentiated total and does not provide the breakdowns required by GRI 2-7, such as disaggregation by employment contract (permanent and temporary), employment type (full-time and part-time), gender, or region.
 
-- **GRI 2-7 (Employees):** The reported FTE figure does not constitute a total headcount, as part-time contracts are aggregated into full-time equivalents. Furthermore, the source framework provides a single undifferentiated figure and does not capture required disaggregations by gender, region, employment contract (permanent versus temporary), or employment type (full-time versus part-time).
-- **GRI 2-8 (Workers who are not employees):** The institution does not report data on non-employee workers whose work is directly controlled by the university, nor their contractual arrangements. Institutional records monitor direct employee FTE and student totals, alongside counts of contracting firms rather than the individual personnel working under those contracts.
+In relation to Disclosure 2-8, which requires information on workers who are not employees but whose work is controlled by the organisation, the institution does not collect individual worker numbers or details of their contractual relationships. Source tracking records the number of significant contractor firms rather than the individual personnel working under those agreements, leaving this disclosure unfulfilled.
 
 ## Material topics
 
@@ -69,37 +64,33 @@ For Disclosure 3-3, management approaches are documented at the institutional le
 
 ### Governance Structure and Composition
 
-The highest decision-making body at Technological University Dublin is the Governing Body. In accordance with GRI 2-9, representation on this body includes academic staff, non-managerial staff, and students. Academic staff representatives hold voting rights on the Governing Body.
+Technological University Dublin is governed by its Governing Body, which acts as the institution's highest decision-making body. The membership of the Governing Body includes representation from key university constituencies, specifically academic staff, non-managerial staff, and students. Two academic staff members sit on the Governing Body as voting members.
 
-### Delegation of Responsibility for Managing Impacts
+While constituency representation is established, the available data does not report the detailed numeric composition required under Disclosure 2-9. Information regarding the proportion of executive versus non-executive members, member independence, tenure, additional significant positions held, and demographic composition by gender or under-represented groups is not recorded.
 
-Under Disclosure 2-13, overall responsibility for managing sustainability impacts across the institution is delegated to executive and operational roles. Technological University Dublin maintains a Vice President of Sustainability, who provides strategic direction, governance, and management for campus-wide sustainability activities. 
+### Delegation of Responsibility for Sustainability
 
-Sustainability oversight is organized across four core functions: Sustainability Education, Decarbonisation, Sustainability Intelligence, and Societal Engagement, each led by a head of function. Institutional activities are further supported by a dedicated sustainability project group comprising project managers, innovation leads, and Green-Campus co-chairs. Operational departments, including Campus & Estates, collaborate with executive leadership to implement environmental policies, energy action plans, and sustainability standards.
+Responsibility for managing sustainability impacts across the institution is delegated to dedicated administrative leadership. Strategic oversight is held by a Vice President of Sustainability, who leads four core operational functions—Sustainability Education, Decarbonisation, Sustainability Intelligence, and Societal Engagement—alongside a dedicated group for Sustainability Action Research & Innovation Projects. Each function is managed by a head of function, supported by project managers, innovation leads, and Green-Campus Co-Chairs charged with coordinating sustainability initiatives across campus constituencies.
 
-### Role in Sustainability Reporting and Compensation
+With respect to governance oversight under GRI 2-13, the source material confirms the delegation of sustainability management but does not detail the exact reporting lines to the Governing Body or the frequency with which sustainability executives present to it. Regarding GRI 2-14, executive endorsement of sustainability reporting is evidenced by an executive letter, but this does not specify whether the Governing Body formally reviewed and approved the material topics or the reported content.
 
-In relation to GRI 2-14, executive endorsement of the institution's sustainability disclosures is documented through an executive letter accompanying the submission.
+### Remuneration Metrics
 
-Regarding executive compensation under GRI 2-21, the institution tracks the pay ratio between senior leadership and workers. The factor by which the compensation of the highest compensated senior administrator exceeds that of the lowest compensated full-time employee is 8.08.
+To address GRI 2-21, the institution reports that the factor by which the compensation of the highest compensated senior administrator exceeds that of the lowest compensated full-time employee is 8.08.
 
-### Reporting Limitations and Exclusions
+This figure represents a top-to-bottom compensation spread measured against the lowest-paid full-time worker. It differs from Disclosure 2-21, which calculates the ratio using the median compensation of all other employees, and is therefore not directly comparable to standard GRI 2-21 metrics published by other institutions.
 
-The institutional data source presents specific reporting limitations across several standard disclosures:
-- Under GRI 2-9, while constituency representation is documented, the dataset does not report numerical breakdowns for member independence, tenure, executive status, gender composition, or representation of under-represented social groups.
-- Under GRI 2-13, the source confirms executive sustainability oversight but does not record the formal reporting lines or the frequency of progress reports delivered to the Governing Body.
-- Under GRI 2-14, senior executive endorsement is recorded, but the data does not clarify whether the Governing Body directly reviewed, formally approved, or endorsed the material sustainability topics.
-- Under GRI 2-21, the ratio measures the difference between the highest-paid administrator and the lowest-paid full-time employee, whereas standard GRI 2-21 metrics compare executive compensation to the median pay of all other employees.
+### Governance Processes and Limitations
 
-The reporting source does not provide information to address the following governance disclosures:
-- GRI 2-10: Criteria and processes for nominating and selecting members of the highest governance body.
-- GRI 2-11: Whether the chair of the highest governance body is a senior executive, and how potential conflicts of interest are managed.
-- GRI 2-12: The role of the highest governance body in overseeing environmental and social due diligence, stakeholder engagement, and impact management.
-- GRI 2-15: Processes for preventing, mitigating, and disclosing conflicts of interest within governance structures.
-- GRI 2-16: Protocols for communicating critical concerns to the highest governance body, as well as the total number of concerns raised.
-- GRI 2-17: Measures taken to advance the collective sustainable development knowledge of the highest governance body.
-- GRI 2-18: Formal processes for evaluating the performance of the highest governance body in overseeing sustainability.
-- GRI 2-19 and GRI 2-20: Policies and formal decision-making processes governing remuneration for senior executives and members of the highest governance body.
+The primary data source focuses on governance representation and managerial structure rather than governance oversight processes. Consequently, information on the following standard GRI disclosures is not reported in the available source material:
+- The criteria and processes for nominating, selecting, and appointing members to the Governing Body (GRI 2-10).
+- Whether the Chair of the Governing Body is an executive officer, and how conflicts of interest for this role are managed (GRI 2-11).
+- The explicit oversight role and effectiveness reviews conducted by the Governing Body concerning environmental and social impacts (GRI 2-12).
+- Formal processes for preventing, mitigating, and disclosing conflicts of interest within the highest governance body (GRI 2-15).
+- The nature and total number of critical concerns communicated to the Governing Body (GRI 2-16).
+- Actions taken to advance the collective sustainability knowledge of Governing Body members (GRI 2-17).
+- Formal procedures for evaluating the performance of the Governing Body (GRI 2-18).
+- General remuneration policies and the governance processes used to determine executive pay and benefits (GRI 2-19 and GRI 2-20).
 
 ## Strategy, policies and practices
 
@@ -151,78 +142,89 @@ Regarding GRI 2-30, the institution does not report the percentage of total empl
 
 ## Environmental performance
 
-### Energy Consumption and Intensity
+### Energy Performance
 
-Under GRI 302-1, Technological University Dublin reports total annual energy consumption of 38,391 Megawatt-hours MWh. Grid electricity consumption accounts for 15,053 Megawatt-hours MWh, while total stationary fuel consumption is 21,072 Megawatt-hours MWh. Broken down by fuel type, stationary combustion comprises natural gas at 21,056 Megawatt-hours MWh, heating oil at 16 Megawatt-hours MWh, propane and LPG at 0 Megawatt-hours MWh, and coal or coke at 0 Megawatt-hours MWh. Disclosure 302-1 expects energy consumption in joules or multiples thereof, whereas these operational values are collected in megawatt-hours.
+Technological University Dublin records a total annual energy consumption of 38,391 Megawatt-hours. Electricity consumption accounts for 15,053 Megawatt-hours, while total stationary fuel consumption stands at 21,072 Megawatt-hours. The institution’s stationary fuel mix comprises natural gas at 21,056 Megawatt-hours, heating oil at 16 Megawatt-hours, coal or coke at 0 Megawatt-hours, and propane or LPG at 0 Megawatt-hours. Energy drawn from off-site heating and cooling sources amounts to 2,266 Megawatt-hours, which includes recovered water-waste heat supplied from a nearby data centre to the Tallaght campus.
 
-Annual renewable energy consumption across the university totals 8,397.21 Megawatt-hours MWh, with renewable stationary fuels contributing 0.21 Megawatt-hours MWh. On-site renewable electricity exported to the grid stands at 0 Megawatt-hours MWh. Imported thermal energy for heating and cooling totals 2,266 Megawatt-hours MWh.
+Annual renewable energy consumption totals 8,397.21 Megawatt-hours, of which renewable stationary fuels account for 0.21 Megawatt-hours. The volume of on-site renewable electricity exported is 0 Megawatt-hours. Expressed as intensity metrics, annual energy consumption is 1,520.74 Kilowatt-hours per full-time equivalent student and employee, and 182.05 Kilowatt-hours per square meter per square metre of gross floor area.
 
-Under Disclosure 302-3, energy intensity is reported relative to institutional population and gross floor space. Annual energy consumption per person (combining full-time equivalent students and staff) is 1,520.74 Kilowatt-hours kWh per person. Energy intensity per unit of gross building floor area is 182.05 Kilowatt-hours per square meter kWh per square metre.
+Under GRI 302-1, energy consumption must be disclosed in joules or multiples thereof; figures here are gathered in megawatt-hours and require mathematical conversion for direct standard alignment. In accordance with GRI 302-3, energy intensity ratios are reported using full-time headcount and gross floor area as respective denominators.
 
 ### Greenhouse Gas Emissions
 
-Under GRI 305-1, direct Scope 1 GHG emissions include 3,728 Metric tons of CO2 equivalent metric tons of CO2 equivalent (tCO2e) from stationary combustion, 2 Metric tons of CO2 equivalent tCO2e from mobile combustion, 55 Metric tons of CO2 equivalent tCO2e from fugitive emissions, and 0 Metric tons of CO2 equivalent tCO2e from process emissions.
+The university calculates its operational emissions inventory using the GHG Protocol Corporate Standard, drawing energy consumption data from utility bills, vehicle inventories, and the Sustainable Energy Authority of Ireland monitoring platform, alongside national conversion factors. Baseline Scope 1 and Scope 2 emissions were established in baseline year 2018 at 10,064 Metric tons of CO2 equivalent. This baseline period was selected to ensure data consistency between utility billing and national monitoring platforms prior to pandemic-related operational disruptions.
 
-Under GRI 305-2, market-based Scope 2 GHG emissions from off-site electricity generation are 4,992 Metric tons of CO2 equivalent tCO2e, while location-based Scope 2 emissions stand at 0 Metric tons of CO2 equivalent tCO2e. Scope 2 emissions from imported heating and cooling total 181 Metric tons of CO2 equivalent tCO2e, which incorporates waste-heat recovery from an Amazon Web Services data centre serving the Tallaght campus. GHG inventories were calculated using the GHG Protocol Corporate Standard, drawing on energy billing, national conversion factors, and SEAI Monitoring and Reporting platform data.
+Direct Scope 1 GHG emissions comprise 3,728 Metric tons of CO2 equivalent from stationary combustion, 2 Metric tons of CO2 equivalent from mobile combustion, 55 Metric tons of CO2 equivalent from fugitive sources, and 0 Metric tons of CO2 equivalent from process emissions. Overall aggregate Scope 1 and biogenic emissions totals were not recorded separately in the reporting tool.
 
-Under GRI 305-3, indirect Scope 3 GHG emissions encompass 410 Metric tons of CO2 equivalent tCO2e from business travel, 10,694 Metric tons of CO2 equivalent tCO2e from commuting, 26,269 Metric tons of CO2 equivalent tCO2e from purchased goods and services, 83 Metric tons of CO2 equivalent tCO2e from capital goods, 9 Metric tons of CO2 equivalent tCO2e from operational waste generation, and 0 Metric tons of CO2 equivalent tCO2e from fuel- and energy-related activities outside Scope 1 and Scope 2.
+Indirect Scope 2 GHG emissions include market-based off-site electricity emissions of 4,992 Metric tons of CO2 equivalent, location-based electricity emissions of 0 Metric tons of CO2 equivalent, and off-site heating and cooling emissions of 181 Metric tons of CO2 equivalent. Combined Scope 1 and Scope 2 emissions have achieved a reduction of 10.99% against the baseline year. Under GRI 305-5, absolute reduction amounts must be derived from baseline and operational year totals, as the reporting framework collects a combined percentage reduction across Scope 1 and Scope 2 without disaggregating by scope.
 
-Under Disclosure 305-4, annual Scope 1 and Scope 2 emissions intensity is 354.84 Kilograms of CO2 equivalent kg CO2e per full-time equivalent person and 42.48 Kilograms per square meter kg CO2e per square metre of gross floor area. Under Disclosure 305-5, baseline Scope 1 and Scope 2 emissions are established at 10,064 Metric tons of CO2 equivalent tCO2e for the baseline period 2018. This baseline period was selected due to consistent billing and SEAI data granularity prior to pandemic disruptions. The institution reports a 10.99 percent reduction in combined Scope 1 and Scope 2 emissions from the baseline.
+Reported Scope 3 GHG emissions encompass business travel at 410 Metric tons of CO2 equivalent, employee and student commuting at 10,694 Metric tons of CO2 equivalent, purchased goods and services at 26,269 Metric tons of CO2 equivalent, capital goods at 83 Metric tons of CO2 equivalent, waste generated in operations at 9 Metric tons of CO2 equivalent, and fuel- and energy-related activities at 0 Metric tons of CO2 equivalent.
 
-### Water Withdrawal and Stewardship
+Operational emissions intensity under GRI 305-4 stands at 354.84 Kilograms of CO2 equivalent per full-time equivalent person and 42.48 Kilograms per square meter per square metre of building floor area.
 
-Under GRI 303-3, total water withdrawal for TU Dublin is 56,570 Cubic meters cubic metres. Potable water supplied from off-site third-party municipal sources accounts for 56,570 Cubic meters cubic metres, while on-site potable abstraction is 0 Cubic meters cubic metres. Disclosure 303-3 specifies reporting in megalitres, whereas these figures are recorded in cubic metres.
+### Water Withdrawal and Management
 
-Under GRI 303-1, physical water quantity risk for the main campus is classified as medium-high. TU Dublin harvests rainwater on-site for storage and non-potable operational use.
+The main campus of Technological University Dublin is situated in an area rated as having medium-high physical water quantity risk. To manage water interactions, the institution maintains on-site rainwater harvesting systems for storage and operational use.
 
-### Waste Generation, Diversion, and Management
+Total annual water withdrawal across university facilities is 56,570 Cubic meters. Third-party off-site municipal supply provides 56,570 Cubic meters, while on-site water abstraction accounts for 0 Cubic meters. To meet GRI 303-3 reporting criteria fully, cubic metre figures must be converted to megalitres. The source framework does not break down withdrawal volumes by specific stress classification across secondary campus sites.
 
-Under GRI 306-3, annual non-hazardous operational waste generated totals 1,768.85 Metric tons metric tons, alongside 1,244.08 Metric tons metric tons of construction and demolition waste.
+### Waste Management and Resource Recovery
 
-Under GRI 306-4, non-hazardous waste diverted from disposal totals 1,452.64 Metric tons metric tons. This comprises 691.73 Metric tons metric tons recycled, 56.01 Metric tons metric tons composted, and 704.90 Metric tons metric tons prepared for reuse. Construction and demolition waste diverted from disposal totals 1,121.85 Metric tons metric tons, all of which is recycled (531.95 Metric tons metric tons).
+Waste management practices at the institution emphasize source reduction, materials reuse, and organic diversion. TU Dublin operates a surplus equipment programme to retain owned items for reuse, donation, or resale, alongside collection initiatives for personal items donated by students and staff. Single-use disposable plastics have been phased out in key catering operations, supported by compostable food service items certified to international standards, which enter the organic waste collection stream handled by contracted waste providers. Dry paper products are directed to designated recycling streams. A formal hazardous waste protocol is enforced to minimize chemical use and control hazardous handling.
 
-Under GRI 306-5, non-hazardous waste directed to disposal via landfill or incineration is 316.21 Metric tons metric tons, and construction and demolition waste directed to disposal is 122.23 Metric tons metric tons.
+Annual non-hazardous operational waste generation totals 1,768.85 Metric tons. Total non-hazardous waste diverted from disposal reaches 1,452.64 Metric tons, comprising 691.73 Metric tons recycled, 56.01 Metric tons composted, and 704.90 Metric tons prepared for reuse. Non-hazardous waste sent to landfill or incineration totals 316.21 Metric tons.
 
-Under Disclosure 306-2, waste management initiatives include operational surplus programmes for institutional equipment, donation and redistribution platforms for staff and student personal items, and a hazardous waste management protocol designed to minimise hazardous material use. Single-use disposable plastics have been partially eliminated on site, with catering services utilising certified compostable bioplastics processed through commercial organic waste collection.
+Construction and demolition projects generated 1,244.08 Metric tons of waste, with 1,121.85 Metric tons diverted from disposal (including 531.95 Metric tons recycled) and 122.23 Metric tons directed to landfill or incineration. 
+
+Under GRI 306-4 and GRI 306-5, waste metrics cover non-hazardous and construction streams; hazardous waste weights are not quantified by the reporting system. GRI 306-5 breakdown between landfilling and thermal incineration with or without energy recovery is consolidated into a single disposal total.
 
 ### Sustainable Procurement
 
-Under GRI 308-1, supplier environmental criteria are integrated into institutional procurement processes, with 0 percent of bid solicitations identifying supplier sustainability considerations. The university maintains a supplier code of conduct with environmental expectations exceeding baseline regulatory requirements.
+Environmental criteria are integrated into institutional purchasing policies. The university’s supplier code of conduct establishes environmental expectations that exceed baseline regulatory requirements. Currently, 0% of procurement bid solicitations explicitly incorporate supplier sustainability criteria. Disclosure 308-1 tracks tender solicitation requirements rather than the specific percentage of new suppliers screened post-award.
 
-### Data Limitations and Unreported Disclosures
+### Reporting Limitations and Data Gaps
 
-Several disclosures are incomplete or omitted based on available operational datasets:
-- Disclosure 301-1, Disclosure 301-2, and Disclosure 301-3 are not applicable because higher education institutions do not produce manufactured physical products or commercial packaging.
-- Disclosure 302-2 (value-chain energy consumption outside the organisation) and Disclosure 302-4 (absolute energy reductions in joules) are not monitored. Disclosure 302-5 is not applicable.
-- Disclosure 303-1 records main-campus physical water risk but omits detailed operational narratives on effluent quality, discharge impacts, and shared-resource stakeholder mechanisms. Disclosure 303-2 effluent quality metrics are uncollected. Disclosure 303-3 does not break down water withdrawal by water-stress classification.
-- Baseline disclosures under GRI 305-1, GRI 305-2, and GRI 305-5 report Scope 1 and Scope 2 as a combined aggregate rather than separate base years for each scope. Global warming potential sources and consolidation approaches are omitted. Total annual Scope 1, total annual Scope 2, biogenic emissions, Disclosure 305-6 (ODS), and Disclosure 305-7 (air emissions) are not reported.
-- Disclosure 306-1 material flow descriptions are omitted. Tonnage metrics under GRI 306-3, GRI 306-4, and GRI 306-5 cover non-hazardous and construction streams only, leaving hazardous waste unquantified, and aggregate landfilling and incineration into single disposal totals without on-site or off-site location splits.
-- Disclosure 308-1 tracks bid solicitations featuring sustainability criteria rather than the screening percentage of new suppliers, and Disclosure 308-2 supplier environmental impact assessments are unrecorded.
+Certain GRI disclosures cannot be reported due to framework boundaries or uncollected data:
+- **GRI 301-1, GRI 301-2, and GRI 301-3**: Not applicable as the institution does not manufacture physical products.
+- **GRI 302-2**: Off-site value chain energy consumption is not evaluated.
+- **GRI 302-4 and GRI 302-5**: Energy reductions are tracked via GHG emissions performance rather than standalone energy savings in joules; product energy reduction standard is non-applicable.
+- **GRI 303-2**: Effluent discharge quality standards and discharge-specific impacts are not monitored within the reporting tool.
+- **GRI 305-6 and GRI 305-7**: Production of ozone-depleting substances, NOx, SOx, and other localized air emissions are not tracked.
+- **GRI 306-1 and GRI 306-2**: Tonnage data for hazardous waste generation is unrecorded, and detailed upstream or downstream waste causal analysis is absent.
+- **GRI 308-2**: Post-assessment evaluations of supplier environmental impacts and formal remediation tracking are not recorded.
 
 ## Social and economic performance
 
-### Pay and Employment Conditions
+### Pay and Remuneration
 
-Technological University Dublin records a wage floor for regular and permanent employees of 16.53, set against a local living wage benchmark of 13.85. Overall, 100 of employees receive remuneration equivalent to or exceeding this living wage baseline. Figures are denominated in local currency (EUR). These metrics are reported as a higher-education sector variant; Disclosure 202-1 is not fully satisfied because entry-level wages are evaluated against a living wage benchmark rather than the local statutory minimum wage, and ratios broken down by gender are not collected.
+Technological University Dublin reports a wage floor for regular and permanent employees of 16.53, compared against a living wage benchmark of 13.85. The proportion of employees receiving remuneration equivalent to at least this living wage is 100%.
 
-Regarding employee leave and benefits, 100 of employees are eligible for paid all-gender family or medical leave. Under statutory protections, pregnant employees—inclusive of transgender males holding a gender recognition certificate—are entitled to 26 consecutive weeks of paid maternity leave. In terms of GRI reporting alignment, Disclosure 401-2 requires a contrast between benefits provided to full-time employees and those offered to temporary or part-time staff across operating locations, which is not captured in the aggregated eligibility percentage. Additionally, Disclosure 401-3 requires headcounts of parental leave entitlement, uptake, return, and retention rates disaggregated by gender, whereas available institutional data reflects policy eligibility rather than uptake statistics.
+This reporting represents a sector-specific variant of Disclosure 202-1. The standard requires calculating the ratio of entry-level wages to the statutory minimum wage disaggregated by gender, whereas the available data evaluates remuneration against a living wage without gender breakdowns.
+
+### Employment Conditions and Leave
+
+The proportion of employees eligible for paid all-gender family or medical leave is 100%. Under institutional policy, eligible staff commencing maternity leave receive 26 of paid maternity leave. Entitlements under the Maternity Protection Acts cover staff who are pregnant, have given birth, or are breastfeeding, and encompass transgender males holding a gender recognition certificate.
+
+Regarding Disclosure 401-2, the reported eligibility figure is provided as an institution-wide average rather than broken down between full-time, part-time, and temporary contract types. For Disclosure 401-3, data is confined to policy provision; specific headcounts for leave uptake, return-to-work, and retention rates by gender are not recorded.
 
 ### Occupational Health and Safety
 
-The institution manages workplace safety through an integrated governance structure. The University Safety, Health and Welfare Steering Committee, alongside campus-level safety committees and designated working groups, oversees compliance, policy implementation, and worker consultation.
+Occupational health and safety is administered through a safety management system overseen by the University Safety, Health and Welfare Steering Committee, dedicated Campus Committees, and specialized working groups. These joint management-worker structures enable consultation and policy development under Disclosure 403-1 and Disclosure 403-4.
 
-Physical and behavioural health services are accessible to employees. Broader health promotion initiatives include access to free or reduced-cost fitness facilities and contemplative spaces. Smoking and tobacco use are prohibited across campus grounds. 
+Physical and behavioural health services are made available to staff in accordance with Disclosure 403-3 and Disclosure 403-6. Additional health promotion initiatives include access to free or reduced-cost fitness facilities, contemplative and spiritual activities, and an institution-wide policy prohibiting smoking and tobacco use on campus.
 
-In relation to GRI standards, Disclosure 403-1 and Disclosure 403-4 are partially addressed; institutional reporting confirms safety committee existence and joint worker-management representation, but omits explicit management system standard certifications, meeting frequencies, and decision-making mandates. Physical and behavioural health offerings reported under Disclosure 403-3 and Disclosure 403-6 represent general employee wellness services rather than dedicated occupational hazard identification functions or health data confidentiality protocols.
+Several GRI occupational health and safety disclosures are not collected by the reporting framework, including Disclosure 403-2 (hazard identification and incident investigation), Disclosure 403-5 (worker health and safety training), Disclosure 403-7 (impact mitigation across supplier relationships), Disclosure 403-8 (headcounts covered by safety management systems), Disclosure 403-9 (work-related injuries), and Disclosure 403-10 (work-related ill health).
 
-### Diversity and Governance
+### Workforce Diversity
 
-Workforce diversity indicators show that women or individuals with other marginalised gender identities represent 41.09 of executive staff, 41.55 of regular and permanent academic staff, and 56.40 of regular and permanent non-academic staff. Diversity and inclusion measures include targeted leadership development opportunities and institutional alignment with the Athena SWAN framework.
+The proportion of staff identifying as women or other marginalised gender identities is 41.09% for executive staff, 41.55% for regular permanent academic staff, and 56.40% for regular permanent non-academic staff.
 
-Disclosure 405-1 is partially fulfilled. The reported gender metrics combine women and marginalised gender identities into a single proportion rather than distinct gender categories, and the percentage breakdown of governance body members is not reported. Employee age group distributions are also unrecorded across all staff categories. Institutional data for ethnic diversity indices contains formatting irregularities in the source reporting and is omitted.
+Reporting for Disclosure 405-1 combines female and marginalised gender identities into a single metric rather than individual gender categories, and age distributions across employee categories are uncollected. Ethnic diversity index records in the source data contain concatenated text notes and cannot be converted into percentage breakdowns.
 
-### Summary of Omissions and Limitations
+### Summary of Omitted Disclosures
 
-The university does not track or report data for several disclosures under the GRI Standards. On local economic impacts and procurement, GRI 202-2 (proportion of senior management hired from the local community) and GRI 204-1 (spend on local suppliers) are omitted; recorded metrics on social impact procurement assess social enterprise criteria rather than local geographical vendor status. 
-
-Regarding workforce dynamics, GRI 401-1 (new employee hires and turnover counts) and Disclosure 405-2 (ratio of basic salary and remuneration of women to men) are not reported. Within occupational health and safety, data is absent for GRI 403-2 (hazard identification, risk assessment, and incident investigation processes), GRI 403-5 (worker safety training), GRI 403-7 (prevention of safety impacts across supply relationships), GRI 403-8 (number of workers covered by audited or certified safety systems), GRI 403-9 (work-related injuries), and GRI 403-10 (work-related ill health).
+Information required for the following social disclosures is currently not reported:
+- GRI 202-2: Percentage of senior management recruited from the local community.
+- GRI 204-1: Proportion of procurement budget spent on local suppliers (procurement tracking focuses on social impact enterprise criteria rather than geographic location).
+- GRI 401-1: Total numbers and rates of new employee hires and employee turnover.
+- GRI 405-2: Ratio of basic salary and remuneration of women to men.
