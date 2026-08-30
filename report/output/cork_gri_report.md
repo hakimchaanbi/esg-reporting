@@ -143,60 +143,55 @@ Regarding Disclosure GRI 2-30, the university does not report the percentage of 
 
 ## Environmental performance
 
-### Energy Consumption and Efficiency
+### Energy Consumption and Intensity
 
-University College Cork's total annual energy consumption within the organisation under Disclosure 302-1 stands at 55,148.70 Megawatt-hours Megawatt-hours. Standard energy unit conversion factors apply when converting megawatt-hours to gigajoules for standard GRI reporting formats.
+Total annual energy consumption within University College Cork stands at 55,148.70 Megawatt-hours Megawatt-hours under Disclosure 302-1. Electricity consumption accounts for 32,599.70 Megawatt-hours Megawatt-hours, stationary fuel consumption contributes 22,549 Megawatt-hours Megawatt-hours, and off-site heating and cooling sources supply 0 Megawatt-hours Megawatt-hours. 
 
-This energy total comprises electricity consumption of 32,599.70 Megawatt-hours Megawatt-hours and total stationary fuel consumption of 22,549 Megawatt-hours Megawatt-hours, alongside 0 Megawatt-hours Megawatt-hours of heating and cooling from off-site sources. On-site renewable electricity exported to the grid accounts for 0 Megawatt-hours Megawatt-hours.
+The stationary fuel mix comprises natural gas at 22,549 Megawatt-hours Megawatt-hours, heating oil at 0 Megawatt-hours Megawatt-hours, coal and coke at 0 Megawatt-hours Megawatt-hours, and propane or LPG at 0 Megawatt-hours Megawatt-hours. Total annual renewable energy consumption reaches 0.70 Megawatt-hours Megawatt-hours, of which renewable stationary fuels supply 0 Megawatt-hours Megawatt-hours. On-site renewable electricity exported back to the grid totals 0 Megawatt-hours Megawatt-hours.
 
-The university's stationary fuel mix is dominated by natural gas at 22,549 Megawatt-hours Megawatt-hours. Heating oil contributes 0 Megawatt-hours Megawatt-hours, propane and LPG total 0 Megawatt-hours Megawatt-hours, and coal or coke consumption stands at 0 Megawatt-hours Megawatt-hours. Total annual renewable energy consumption across operations is 0.70 Megawatt-hours Megawatt-hours, of which renewable stationary fuels represent 0 Megawatt-hours Megawatt-hours.
-
-Under Disclosure 302-3, energy intensity per person is 2,139.20 Kilowatt-hours Kilowatt-hours, evaluated using the full-time equivalent campus population of students and employees as the denominator. Energy intensity per unit of floor area is 195.31 Kilowatt-hours per square meter Kilowatt-hours per square metre, calculated against gross internal floor area.
+Energy intensity evaluated under Disclosure 302-3 is 2,139.20 Kilowatt-hours Kilowatt-hours per person, calculated using a denominator of full-time equivalent student and employee headcount. Expressed by building area, energy intensity is 195.31 Kilowatt-hours per square meter Kilowatt-hours per square metre, using gross campus floor area as the denominator. Standard reporting under GRI 302-1 requires energy data in joules or multiples thereof, necessitating conversion from Megawatt-hours.
 
 ### Greenhouse Gas Emissions
 
-Greenhouse gas emissions inventories are conducted by contracted external consultants following the GHG Protocol Corporate Standard and ISO standards, utilizing top-down expenditure screening combined with bottom-up primary data collection. Data is reported annually to the Sustainable Energy Authority of Ireland under national climate mandate requirements.
+Direct Scope 1 GHG emissions under Disclosure 305-1 total 6,215.78 Metric tons of CO2 equivalent metric tons of CO2 equivalent. This includes 5,517 Metric tons of CO2 equivalent metric tons from stationary combustion, 62.78 Metric tons of CO2 equivalent metric tons from mobile combustion, and 636 Metric tons of CO2 equivalent metric tons of fugitive emissions. Biogenic greenhouse gas emissions account for 0 Metric tons of CO2 equivalent metric tons of CO2 equivalent. Scope 1 process emissions were unmapped for the reporting period.
 
-Under Disclosure 305-1, direct Scope 1 GHG emissions total 6,215.78 Metric tons of CO2 equivalent metric tons of CO2 equivalent. This includes 5,517 Metric tons of CO2 equivalent metric tons of CO2 equivalent from stationary combustion, 62.78 Metric tons of CO2 equivalent metric tons of CO2 equivalent from mobile combustion, and 636 Metric tons of CO2 equivalent metric tons of CO2 equivalent from fugitive sources. Direct GHG emissions from biogenic sources account for 0 Metric tons of CO2 equivalent metric tons of CO2 equivalent. Scope 1 process emissions were mapped but left blank in the inventory.
+Energy indirect Scope 2 GHG emissions under Disclosure 305-2 equal 8,144 Metric tons of CO2 equivalent metric tons of CO2 equivalent. Location-based emissions from off-site electricity sources stand at 8,144 Metric tons of CO2 equivalent metric tons, while market-based emissions from off-site electricity equal 8,144 Metric tons of CO2 equivalent metric tons. Off-site heating and cooling energy sources contribute 0 Metric tons of CO2 equivalent metric tons of CO2 equivalent.
 
-Under Disclosure 305-2, location-based Scope 2 GHG emissions from off-site electricity sources are 8,144 Metric tons of CO2 equivalent metric tons of CO2 equivalent, and off-site heating and cooling sources account for 0 Metric tons of CO2 equivalent metric tons of CO2 equivalent, bringing total Scope 2 GHG emissions to 8,144 Metric tons of CO2 equivalent metric tons of CO2 equivalent. Market-based Scope 2 emissions figures were unavailable at the time of publication.
+Other indirect Scope 3 GHG emissions reported under Disclosure 305-3 cover business travel at 3,565 Metric tons of CO2 equivalent metric tons, employee and student commuting at 20,991 Metric tons of CO2 equivalent metric tons, purchased goods and services at 1,572 Metric tons of CO2 equivalent metric tons, capital goods at 0 Metric tons of CO2 equivalent metric tons, and fuel- and energy-related activities not included in Scope 1 or Scope 2 at 3,318 Metric tons of CO2 equivalent metric tons. Scope 3 emissions arising from operational waste generation were unmapped.
 
-Under Disclosure 305-3, indirect Scope 3 GHG emissions encompass 3,565 Metric tons of CO2 equivalent metric tons of CO2 equivalent from business travel, 20,991 Metric tons of CO2 equivalent metric tons of CO2 equivalent from student and employee commuting, 1,572 Metric tons of CO2 equivalent metric tons of CO2 equivalent from purchased goods and services, 0 Metric tons of CO2 equivalent metric tons of CO2 equivalent from capital goods, and 3,318 Metric tons of CO2 equivalent metric tons of CO2 equivalent from fuel- and energy-related activities not included in Scope 1 or Scope 2. Scope 3 emissions from waste generated in operations were mapped but left blank.
+Under Disclosure 305-4, combined Scope 1 and Scope 2 emissions intensity is 557.01 Kilograms of CO2 equivalent kilograms of CO2 equivalent per person (denominated by full-time equivalent student and staff headcount) and 50.86 Kilograms per square meter kilograms per square metre of gross campus floor area. 
 
-Emissions intensity under Disclosure 305-4 is 557.01 Kilograms of CO2 equivalent Kilograms of CO2 equivalent per person (using total full-time equivalent campus population) and 50.86 Kilograms per square meter Kilograms of CO2 equivalent per square metre of gross floor area.
-
-Under Disclosure 305-5, progress is evaluated against baseline year 2017, which registered baseline Scope 1 and Scope 2 GHG emissions of 19,460 Metric tons of CO2 equivalent metric tons of CO2 equivalent. This joint baseline was established under public sector climate targets mandated by the Government of Ireland. The percentage reduction in Scope 1 and Scope 2 GHG emissions from the baseline year is 26.21 percent.
+In accordance with Ireland's public sector climate mandates, the baseline year for Scope 1 and Scope 2 GHG emissions is set to 2017, with baseline emissions recorded at 19,460 Metric tons of CO2 equivalent metric tons of CO2 equivalent. UCC has achieved a 26.21 percentage reduction in combined Scope 1 and Scope 2 emissions relative to this baseline under Disclosure 305-5. Carbon footprint accounting was compiled by Sustineo using top-down spend analysis and bottom-up operational data in accordance with the GHG Protocol standard, with figures submitted annually to the Sustainable Energy Authority of Ireland.
 
 ### Water Withdrawal and Management
 
-Under Disclosure 303-3, total water withdrawal is 54,153 Cubic meters cubic metres. Standard metric volumetric conversion factors apply when converting cubic metres to megalitres to match GRI reporting formats.
+Total water withdrawal under Disclosure 303-3 is 54,153 Cubic meters cubic metres. Potable water supplied from third-party off-site municipal utilities accounts for 54,153 Cubic meters cubic metres, whereas potable water drawn from on-site sources is 0 Cubic meters cubic metres. Reporting under Disclosure 303-3 requires converting cubic metres to megalitres by dividing by one thousand.
 
-All withdrawn water is municipal third-party supply, with potable water from off-site sources amounting to 54,153 Cubic meters cubic metres and potable water from on-site abstraction sources standing at 0 Cubic meters cubic metres. Under Disclosure 303-1, physical water quantity risk for the main campus is rated as low-medium. On-site rainwater harvesting infrastructure is operated to supplement water storage and use.
+The physical water quantity risk for the main university campus is rated as low-medium. UCC mitigates freshwater reliance through on-site rainwater harvesting systems utilized for non-potable storage and campus operations.
 
-### Waste and Circularity
+### Waste Generation and Diversion
 
-Under Disclosure 306-3, annual non-hazardous operational waste generation totals 520 Metric tons metric tons, while construction and demolition waste accounts for 6,914.08 Metric tons metric tons.
+Under Disclosure 306-3, annual non-hazardous waste generation amounts to 520 Metric tons metric tons, while construction and demolition activity generates 6,914.08 Metric tons metric tons of waste.
 
-Under Disclosure 306-4, non-hazardous operational waste diverted from disposal totals 242 Metric tons metric tons. This comprises 183 Metric tons metric tons of recycled materials, 59 Metric tons metric tons of composted organic waste, and 0 Metric tons metric tons prepared for reuse. Construction and demolition waste diverted from disposal totals 6,837.95 Metric tons metric tons, consisting entirely of recycled material (5,675.22 Metric tons metric tons).
+Waste diversion performance under Disclosure 306-4 includes 242 Metric tons metric tons of non-hazardous waste. Recovery paths comprise 183 Metric tons metric tons recycled, 59 Metric tons metric tons composted (supported by accepting compostable lunchboxes in campus organic waste streams), and 0 Metric tons metric tons prepared for reuse. Diversion of construction and demolition waste totals 6,837.95 Metric tons metric tons, of which 5,675.22 Metric tons metric tons is recycled.
 
-Under Disclosure 306-5, non-hazardous operational waste directed to disposal via landfill or incinerator is 278 Metric tons metric tons. Construction and demolition waste directed to disposal via landfill or incinerator is 76.13 Metric tons metric tons.
-
-Waste prevention and reduction measures include operational surplus and asset management programs for institutional property, redistribution programs for employee and student personal goods, composting programs accepting compostable lunchboxes in food waste bins, single-use disposable plastic reduction policies, and hazardous waste protocols to minimize hazardous material usage.
+Waste directed to disposal under Disclosure 306-5 includes 278 Metric tons metric tons of non-hazardous waste and 76.13 Metric tons metric tons of construction and demolition waste sent to landfill or incineration. Institutional waste management practices include an asset surplus program for campus property, a reuse program for personal items, single-use plastic elimination measures, and standard hazardous waste management protocols.
 
 ### Sustainable Procurement
 
-Under Disclosure 308-1, 21 percent of bid solicitations incorporate supplier sustainability considerations. The institution's supplier code of conduct does not contain environmental demands beyond statutory requirements.
+Under Disclosure 308-1, 21 percentage of formal bid solicitations incorporate supplier sustainability requirements. While environmental criteria are integrated into tender documentation, UCC’s institutional supplier code of conduct does not currently establish mandatory environmental performance targets beyond compliance with existing regulatory standards.
 
-### Limitations and Unreported Disclosures
+### Reporting Limitations and Omissions
 
-The following GRI standards and specific disclosures are not reported or are partially disclosed due to data availability boundaries:
-
-- **GRI 301 (Materials)**: Disclosures GRI 301-1, GRI 301-2, and GRI 301-3 are not reported because the university does not produce physical goods.
-- **GRI 302 (Energy)**: Energy consumption outside the organisation (GRI 302-2), absolute energy reductions in joules (GRI 302-4), and energy reductions of products and services (GRI 302-5) are not tracked or reported.
-- **GRI 303 (Water)**: Water discharge quality standards (GRI 303-2) and breakdown of withdrawals by water-stressed areas (GRI 303-3) are not monitored.
-- **GRI 305 (Emissions)**: Market-based Scope 2 emissions were unavailable at publication. Scope 1 process emissions (GRI 305-1) and Scope 3 waste emissions (GRI 305-3) were uncalculated. Ozone-depleting substances (GRI 305-6) and NOx/SOx emissions (GRI 305-7) are not tracked.
-- **GRI 306 (Waste)**: Hazardous waste tonnages are unquantified, and granular operational breakdown between landfilling and incineration without energy recovery (GRI 306-5) is aggregated. Upstream and downstream waste impacts (GRI 306-1) are not systematically detailed.
-- **GRI 308 (Supplier Assessment)**: Supplier screening counts and negative supply chain environmental impact assessments (GRI 308-2) are not recorded.
+The following limitations apply to the data available for this report:
+- GRI 301-1, GRI 301-2, and GRI 301-3: Not reported; UCC produces no physical goods or commercial packaging.
+- GRI 302-2 and GRI 302-5: Upstream and downstream value-chain energy consumption and product-related energy reductions are not tracked.
+- GRI 302-4: Energy reductions are evaluated via GHG emissions metrics rather than direct thermal and electrical energy units against a base year.
+- GRI 303-1 and GRI 303-2: Water risk assessments are limited to the main campus; effluent discharge standards and operational processes causing water impacts are not monitored. GRI 303-3 does not separate water withdrawals by water-stressed regions.
+- GRI 305-1, GRI 305-2, and GRI 305-5: Historical baseline figures combine Scope 1 and Scope 2 emissions into a single aggregate total. Absolute tonnage reductions by specific gas or individual scope are not disaggregated.
+- GRI 305-6 and GRI 305-7: Air emissions of ozone-depleting substances, NOx, SOx, and other localized air pollutants are not measured.
+- GRI 306-1, GRI 306-3, GRI 306-4, and GRI 306-5: Tonnage data excludes hazardous waste. Waste disposal metrics combine landfilling and incineration into a single total without distinguishing waste-to-energy recovery.
+- GRI 308-1 and GRI 308-2: Procurement metrics measure initial bid solicitation specifications rather than the percentage of new suppliers screened post-award, and supplier environmental impact assessments are not formally tracked.
 
 ## Social and economic performance
 

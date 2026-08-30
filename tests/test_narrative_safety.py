@@ -127,6 +127,55 @@ def main():
         check("some section's passages carry figures to test against", False,
               "no digits in any context — probe would be vacuous")
 
+    print("\n3a. Every mapped figure reaches the model — no token collisions\n")
+
+    # ⚠️ The guarantee is that a PRINTED figure is real. It was never that every
+    # REAL figure was offered, and that gap opened a hole: slug() truncates
+    # token names to 60 characters, STARS discriminates many fields in their
+    # suffix, and `figures[slug(...)] = ...` was a silent dict overwrite.
+    #
+    # "Scope 2 … electricity (market-based)" and "(location-based)" collapsed to
+    # one name, so TU Dublin's market-based 4,992 tCO2e — its own declared
+    # method — never reached the model. The model then wrote that the total was
+    # "left unstated" while the content index printed 4,992 in the same
+    # document. Nothing caught it: every digit still traced to the dataset.
+    from report.build_narrative import slug, unique_tokens   # noqa: E402
+
+    market = "Scope 2 GHG emissions from off-site sources of electricity (market-based)"
+    location = "Scope 2 GHG emissions from off-site sources of electricity (location-based)"
+    check("the raw slug for these two DOES still collide (the bug is real)",
+          slug("OP-6", market) == slug("OP-6", location),
+          f"both -> {slug('OP-6', market)}")
+
+    tokens = unique_tokens({("OP-6", market), ("OP-6", location)})
+    check("unique_tokens separates them",
+          tokens[("OP-6", market)] != tokens[("OP-6", location)],
+          f"{tokens[('OP-6', market)]} vs {tokens[('OP-6', location)]}")
+    check("and the naming is deterministic, not order-dependent",
+          unique_tokens({("OP-6", location), ("OP-6", market)}) == tokens)
+
+    # The property, across everything actually built: one token per field, and
+    # every mapped-and-populated numeric field present.
+    collisions, offered = [], 0
+    for inst in resolve([]):
+        for section in SECTIONS:
+            figures = gather(inst, section, gri, mapping, master)["figures"]
+            labels = [f["label"] for f in figures.values()]
+            offered += len(figures)
+            if len(set(labels)) != len(labels):
+                dupes = [x for x in labels if labels.count(x) > 1]
+                collisions.append(f"{inst.key}/{section['key']}: {dupes[:2]}")
+    check(f"{offered} figures across 24 sections, none sharing a token",
+          not collisions, "; ".join(collisions[:3]))
+
+    tud = next(i for i in resolve([]) if i.key == "tudublin")
+    env = next(s for s in SECTIONS if s["key"] == "environment")
+    env_figs = gather(tud, env, gri, mapping, master)["figures"]
+    by_label = {f["label"]: f["value"] for f in env_figs.values()}
+    check("TU Dublin's market-based scope 2 is offered, not overwritten",
+          by_label.get(market) == "4,992",
+          f"got {by_label.get(market)!r} — dataset says '4,992'")
+
     print("\n3b. Caveats do not smuggle another university's figures in\n")
 
     # ⚠️ This block deliberately does NOT use numbers_in().
