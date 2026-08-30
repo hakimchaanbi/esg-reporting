@@ -819,16 +819,21 @@ HAZARDOUS_GAP = ("NOT THE WHOLE DISCLOSURE: the hazardous half is absent. STARS 
 # constant away, plus an unfixable gender gap" understates the project's own
 # data and is the kind of claim an examiner can disprove in one grep.
 WAGE_RATIO_TRUTH = (
-    "DOES NOT SATISFY GRI 202-1. GRI wants the RATIO of standard entry-level "
-    "wage to the local MINIMUM wage, BY GENDER. STARS benchmarks against a "
-    "LIVING wage instead and has no gender split. Precisely: the NUMERATOR "
-    "exists — PA-13's `Wage floor for regular/permanent employees` is the "
-    "entry-level wage — but the local statutory minimum wage is not in STARS at "
-    "any credit, and the gender split is not collected anywhere. Report only as "
-    "a higher-education sector variant, stating plainly that 202-1 is "
-    "unsatisfied. Values are bare numbers with no currency - EUR for the Irish "
-    "universities, USD for Berkeley - and are not comparable across them "
-    "without saying so.")
+    "PARTIALLY SATISFIES GRI 202-1, AND THE RATIO IS DERIVABLE. Both terms are "
+    "in STARS: PA-13's `Wage floor for regular/permanent employees` is the "
+    "standard entry-level wage, and PA-9's `Local hourly minimum wage for "
+    "students` is the local statutory minimum. Berkeley 22.54/16.99 = 1.33, "
+    "Cork 16.40/14.25 = 1.15, TU Dublin 16.53/12.70 = 1.30. ⚠️ TWO LIMITS "
+    "REMAIN. The minimum-wage field sits in a student-employment credit, so it "
+    "is the minimum applying to student workers rather than one stated for the "
+    "workforce generally — in all three cases it matches the statutory local "
+    "minimum, but say which figure is being used. And GRI requires the ratio BY "
+    "GENDER, which STARS does not collect at any credit; that half is "
+    "unanswerable, not merely unsupplied. STARS separately benchmarks pay "
+    "against a LIVING wage, which is a different and higher threshold than the "
+    "minimum wage and must not be substituted for it. Values are bare numbers "
+    "with no currency - EUR for the Irish universities, USD for Berkeley - and "
+    "are not comparable across them without saying so.")
 
 # (stars_credit, stars_field, gri_disclosure) -> the columns to overwrite.
 AMENDMENTS = {
@@ -879,6 +884,26 @@ AMENDMENTS = {
         "claude_note":
             "Corrected 2026-08-29, same as the coverage-percentage row.",
         "reviewed_date": "2026-08-29",
+    },
+    # This row carried its own copy of the false claim and was missed when the
+    # other two were corrected, so the rendered note cell contradicted itself:
+    # "the ratio IS derivable" in one sentence and "carries no minimum-wage
+    # figure at all" a few lines later. Third time this project has shipped a
+    # caveat invalidated by a change made elsewhere. Amending a row is not
+    # finished until you grep for other rows making claims about it.
+    ("PA-13", "Wage floor for regular/permanent employees", "202-1"): {
+        "rationale":
+            "GRI 202-1-a is a RATIO: standard entry-level wage divided by the "
+            "local minimum wage. The wage floor for regular/permanent employees "
+            "IS the standard entry-level wage — the numerator. PA-9 supplies "
+            "the denominator.",
+        "caveat": WAGE_RATIO_TRUTH,
+        "claude_verdict": "amend",
+        "claude_note":
+            "Corrected 2026-08-30. Its caveat still asserted the minimum wage "
+            "was absent from STARS after the other two rows had been corrected, "
+            "so the disclosure's note printed both claims at once.",
+        "reviewed_date": "2026-08-30",
     },
     # This caveat cross-referenced the two rows below and was not updated when
     # they were downgraded on the same day. It shipped: the sentence "the 306-4
@@ -1340,7 +1365,44 @@ GHG_305 += [
         "this list of fuel types complete rather than merely partial. Units are "
         "MWh, not joules."),
 
+    # --- 306-4: the C&D diversion family, completed -------------------------
+    #
+    # `Construction and demolition waste recycled` was mapped and `…prepared for
+    # reuse` was not, so Cork's report said its diverted C&D waste consisted
+    # "entirely of recycled material (5,675.22)" — while 5,675.22 + 1,162.73
+    # reuse = 6,837.95, the total it had just quoted in the same sentence. The
+    # sentence disproved itself with its own two numbers.
+    #
+    # THIRD instance of the same pattern: half a homogeneous field family
+    # mapped, the model counting what it was shown and presenting it as the
+    # whole. GRI 306-4-c names preparation for reuse, recycling and other
+    # recovery as the three operations to break the total down by; mapping two
+    # of the three invites exactly this.
+    row("OP-12", "Construction and demolition waste prepared for reuse",
+        "GRI 306", "306-4", "component", "high",
+        "GRI 306-4-c requires non-hazardous waste diverted from disposal to be "
+        "broken down by recovery operation, and names 'preparation for reuse' "
+        "first. It is the second of the two operations that make up the "
+        "construction and demolition total, and it was the missing half.",
+        "Reuse is a higher-value recovery route than recycling under the waste "
+        "hierarchy, so omitting it understates the quality of diversion as well "
+        "as the arithmetic. Cork recovers 1,162.73 of 6,837.95 tonnes this way."),
+
     # --- 202-1: the numerator exists after all ------------------------------
+    row("PA-9", "Local hourly minimum wage for students",
+        "GRI 202", "202-1", "component", "high",
+        "GRI 202-1-a is a RATIO of entry-level wage to the local minimum wage. "
+        "This is the denominator, and it was claimed for weeks to be absent "
+        "from STARS entirely — a claim disprovable with one grep, in three "
+        "shipped reports and every 202-1 caveat.",
+        "It lives in PA-9, a student-employment credit, so it is the minimum "
+        "applying to student workers. In all three cases it matches the local "
+        "statutory minimum (Berkeley 16.99, the City of Berkeley rate; Cork "
+        "14.25; TU Dublin 12.70, Ireland's national minimum), but the scoping "
+        "should be stated rather than glossed.",
+        "Found by the third external review. §14.19 had corrected this same "
+        "rationale once and reasserted a weaker version of the same error."),
+
     row("PA-13", "Wage floor for regular/permanent employees",
         "GRI 202", "202-1", "partial", "medium",
         "GRI 202-1-a is a RATIO: standard entry-level wage divided by the local "
