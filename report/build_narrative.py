@@ -432,8 +432,20 @@ def build_prompt(institution, section, facts) -> str:
     ]
 
     if facts["figures"]:
-        lines.append("FIGURES — use the placeholder, never the value "
-                     "(you are not shown the values):")
+        lines.append(
+            "FIGURES — use the placeholder, never the value (you are not shown "
+            "the values).\n"
+            "  ⚠️ EACH PLACEHOLDER ALREADY CARRIES ITS OWN UNIT. It expands to "
+            "the number AND the unit together, and percentages expand with "
+            "their per-cent sign. So write the placeholder ALONE:\n"
+            "     right:  \"energy consumption was {{ x }}\"\n"
+            "     WRONG:  \"energy consumption was {{ x }} megawatt-hours\"\n"
+            "             -> renders the unit twice\n"
+            "     WRONG:  \"{{ y }} of employees\"  when y is a percentage\n"
+            "             -> the sign is already there\n"
+            "  The unit shown in square brackets below is for YOUR "
+            "understanding of what the figure means. Do not copy it into the "
+            "sentence.")
         for token, f in facts["figures"].items():
             unit = f" [{f['units']}]" if f["units"] else ""
             lines.append(f"  {{{{ {token} }}}}  =  {f['label']}{unit}   "
@@ -641,12 +653,33 @@ def audit_digits(rendered: str, substituted: list[str], context: list[str]):
             "invented": sorted(set(invented)), "spelled": spelled}
 
 
+PERCENT_FIELD = re.compile(r"(?i)\bpercentage\b|\bpercent\b")
+
+
+def substituted_value(f: dict) -> str:
+    """What a placeholder actually becomes in the finished text.
+
+    Units come from the dataset and are attached HERE, never written by the
+    model — a model-written unit is a factual claim nothing checks, and getting
+    m³ vs megalitres or MWh vs joules wrong would be worse than getting a digit
+    wrong. 124 of the 170 tokenised figures carry a unit.
+
+    Of the 46 that do not, 21 are percentages: STARS leaves `units` empty for
+    them, so `96.20` rendered bare and the model wrote "96.20 of employees",
+    with the per-cent sign nowhere. The remaining 25 are genuinely unitless —
+    baseline years, diversity indices, counts — and must stay bare.
+    """
+    if f["units"]:
+        return f"{f['value']} {f['units']}".strip()
+    if PERCENT_FIELD.search(f["label"]):
+        return f"{f['value']}%"
+    return f["value"]
+
+
 def render(prose: str, figures: dict) -> tuple[str, list[str]]:
     """Substitute the figures. StrictUndefined turns an invented token into a
     crash rather than a silent hole in a sentence."""
-    values = {t: (f"{f['value']} {f['units']}".strip() if f["units"]
-                  else f["value"])
-              for t, f in figures.items()}
+    values = {t: substituted_value(f) for t, f in figures.items()}
     env = Environment(undefined=StrictUndefined, autoescape=False)
     try:
         template_ast = env.parse(prose)

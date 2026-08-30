@@ -63,7 +63,12 @@ def main():
 
     print("1. A model that writes its own figure is caught\n")
 
-    result = write_section(RogueWriter(), cork, environment, facts)
+    # use_cache=False: the tests must not write into the production
+    # narrative cache. That cache is committed, so stub and rogue output
+    # landing in it is how meaningless placeholder text reaches the repo —
+    # it has happened twice already.
+    result = write_section(RogueWriter(), cork, environment, facts,
+                           use_cache=False)
     invented = result["audit"]["invented"]
     check("rogue backend's fabricated numbers are flagged",
           set(invented) >= {"42,000", "17"},
@@ -175,6 +180,50 @@ def main():
     check("TU Dublin's market-based scope 2 is offered, not overwritten",
           by_label.get(market) == "4,992",
           f"got {by_label.get(market)!r} — dataset says '4,992'")
+
+    print("\n3a2. Units are attached once, by code, and never by the model\n")
+
+    # Units are a factual claim nothing checks: a model-written "megalitres"
+    # where the data says cubic metres would be worse than a wrong digit, and
+    # invisible to the number audit. So code attaches them — which then means
+    # the model must not also write one. It did, 101 times across the three
+    # reports: "38,391 Megawatt-hours megawatt-hours". And STARS leaves `units`
+    # empty for percentages, so "96.20" rendered bare and the model wrote
+    # "96.20 of employees" with the sign nowhere.
+    from report.build_narrative import substituted_value       # noqa: E402
+
+    cases = [
+        ({"value": "38,391", "units": "Megawatt-hours",
+          "label": "Total annual energy consumption"}, "38,391 Megawatt-hours"),
+        ({"value": "96.20", "units": "",
+          "label": "Percentage of employees paid a living wage"}, "96.20%"),
+        ({"value": "2017", "units": "",
+          "label": "Baseline year for scope 1 and 2 GHG emissions"}, "2017"),
+        ({"value": "0.44", "units": "",
+          "label": "Ethnic diversity index for academic staff"}, "0.44"),
+    ]
+    wrong = [f"{c['label'][:34]}: {substituted_value(c)!r} != {want!r}"
+             for c, want in cases if substituted_value(c) != want]
+    check("unit attached, percent signed, genuinely-unitless left bare",
+          not wrong, "; ".join(wrong))
+
+    # The audit must still see the number inside the decorated value, or every
+    # figure would read as unaccounted-for.
+    unseen = [want for _, want in cases if not numbers_in(want)]
+    check("the number audit still finds the value inside", not unseen,
+          f"invisible: {unseen}")
+
+    # Property over the live data: no unitless figure that names itself a
+    # percentage escapes without its sign.
+    missing_pct = []
+    for inst in resolve([]):
+        for section in SECTIONS:
+            for f in gather(inst, section, gri, mapping, master)["figures"].values():
+                if not f["units"] and re.search(r"(?i)percent", f["label"]) \
+                        and not substituted_value(f).endswith("%"):
+                    missing_pct.append(f["label"][:40])
+    check("every percentage figure renders with its sign",
+          not missing_pct, f"bare: {missing_pct[:3]}")
 
     print("\n3b. Caveats do not smuggle another university's figures in\n")
 
@@ -335,7 +384,7 @@ def main():
     stub_failures = []
     for section in SECTIONS:
         f = gather(cork, section, gri, mapping, master)
-        r = write_section(StubWriter(), cork, section, f)
+        r = write_section(StubWriter(), cork, section, f, use_cache=False)
         if r["audit"]["invented"]:
             stub_failures.append(f"{section['key']}: {r['audit']['invented']}")
     check("every section passes with the stub backend",
