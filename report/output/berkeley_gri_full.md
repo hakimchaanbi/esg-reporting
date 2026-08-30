@@ -1,6 +1,6 @@
 # Sustainability Report — University of California, Berkeley
 
-Prepared **with reference to** the GRI Standards · compiled 2026-08-29
+Prepared **with reference to** the GRI Standards · compiled 2026-08-30
 
 <div class="frontmatter">
 
