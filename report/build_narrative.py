@@ -50,6 +50,7 @@ RUN
 from __future__ import annotations
 
 import argparse
+import collections
 import hashlib
 import json
 import pathlib
@@ -76,6 +77,10 @@ MAPPING = PROJECT_ROOT / "mapping" / "stars_gri_mapping.csv"
 MASTER = PROJECT_ROOT / "Combined_universities_data" / "esg_master_dataset.csv"
 OUT_DIR = PROJECT_ROOT / "report" / "output"
 CACHE_DIR = PROJECT_ROOT / "report" / "cache_narrative"
+
+# Long enough to stay readable, short enough for the model to retype without
+# slipping. Collisions at this length are handled by unique_tokens().
+SLUG_MAX = 60
 
 TOKENISED_TYPES = {"number", "year"}
 USABLE = {"equivalent", "component", "intensity", "partial"}
@@ -175,12 +180,67 @@ SECTIONS = [
 def slug(credit: str, field: str) -> str:
     """A Jinja-safe token name that a reader can still recognise.
 
-    The credit prefix is load-bearing: 'Full-time equivalent of employees'
-    appears under PRE-3, OP-3, OP-5, OP-6 and OP-12, and without the prefix
-    those five collapse into one token.
+    NOT UNIQUE ON ITS OWN — always go through unique_tokens(). See the warning
+    there. The credit prefix is load-bearing: 'Full-time equivalent of
+    employees' appears under PRE-3, OP-3, OP-5, OP-6 and OP-12, and without the
+    prefix those five collapse into one token.
     """
     base = re.sub(r"[^a-z0-9]+", "_", f"{credit} {field}".lower()).strip("_")
-    return base[:60].rstrip("_")
+    return base[:SLUG_MAX].rstrip("_")
+
+
+def unique_tokens(pairs) -> dict[tuple[str, str], str]:
+    """(credit, field) -> a token guaranteed distinct within this section.
+
+    ⚠️ THIS EXISTS BECAUSE TRUNCATION SILENTLY DESTROYED A FIGURE.
+
+    slug() truncates to 60 characters, and STARS discriminates many fields in
+    their SUFFIX — exactly the part truncation removes:
+
+        Scope 2 GHG emissions from off-site sources of electricity (market-based)
+        Scope 2 GHG emissions from off-site sources of electricity (location-based)
+
+    Both became `op_6_scope_2_ghg_emissions_from_off_site_sources_of_electric`.
+    The caller wrote them into a dict, so the second silently overwrote the
+    first, and TU Dublin's market-based figure — 4,992 tCO2e, its own declared
+    quantification method — was never offered to the model at all. The model
+    then wrote, accurately for what it had been given, that the total was "left
+    unstated", while the content index in the same document printed 4,992 a
+    hundred and sixty lines later.
+
+    Nothing caught it. Every digit still traced to the dataset, so the number
+    audit passed: the guarantee is that a printed figure is real, not that every
+    real figure was offered. A silent dict overwrite sits underneath that
+    guarantee and this is the hole it opened.
+
+    68 (credit, field) pairs across the dataset share a truncated slug and 18 of
+    those involve tokenised fields, so the next mapping row could re-open this
+    at any time. Hence: resolve it structurally, not for the one known pair.
+
+    Only colliding names change, so tokens for every other field keep the
+    spelling they already had and their prompts — and therefore their cached
+    prose — stay valid.
+    """
+    base = {p: slug(*p) for p in pairs}
+    clashes = {t for t, n in collections.Counter(base.values()).items() if n > 1}
+
+    out = {}
+    for pair, name in base.items():
+        if name not in clashes:
+            out[pair] = name
+            continue
+        # Deterministic, order-independent suffix from the FULL name, so the
+        # token does not depend on which row happened to be processed first.
+        digest = hashlib.sha1(
+            f"{pair[0]} {pair[1]}".encode("utf-8")).hexdigest()[:6]
+        out[pair] = f"{name[:SLUG_MAX - 7].rstrip('_')}_{digest}"
+
+    if len(set(out.values())) != len(out):        # pragma: no cover
+        raise WriterError(
+            "token names are not unique after disambiguation — a figure would "
+            "be silently dropped. Pairs: "
+            f"{sorted(p for p in out if list(out.values()).count(out[p]) > 1)}")
+    return out
 
 
 def gather(institution, section, gri, mapping, master) -> dict:
@@ -190,6 +250,21 @@ def gather(institution, section, gri, mapping, master) -> dict:
               for n, t in s["disclosures"].items()}
 
     figures, context, gaps, caveats, unavailable = {}, [], [], [], []
+
+    # Name every tokenisable field for this section UP FRONT, so collisions are
+    # resolved against the whole set rather than by whichever row is written
+    # last. Assigning inside the loop is what let one field overwrite another.
+    tokenisable = set()
+    for number in section["disclosures"]:
+        rows = mapping[(mapping.gri_disclosure.astype(str).str.strip() == number)
+                       & (mapping.review_status == "confirmed")
+                       & mapping.relationship.isin(USABLE)]
+        for r in rows.itertuples(index=False):
+            credit, field = str(r.stars_credit).strip(), str(r.stars_field).strip()
+            match = inst[(inst.credit_code == credit) & (inst.field == field)]
+            if len(match) and str(match.iloc[0].value_type) in TOKENISED_TYPES:
+                tokenisable.add((credit, field))
+    token_for = unique_tokens(tokenisable)
 
     for number in section["disclosures"]:
         rows = mapping[(mapping.gri_disclosure.astype(str).str.strip() == number)
@@ -225,7 +300,16 @@ def gather(institution, section, gri, mapping, master) -> dict:
                     f"GRI {number}: {redact_figures(str(r.caveat).strip())}")
 
             if str(v.value_type) in TOKENISED_TYPES:
-                figures[slug(credit, field)] = {
+                token = token_for[(credit, field)]
+                # A second write to the same token would mean two fields share a
+                # name and one figure is being discarded — the exact failure
+                # unique_tokens() exists to prevent. Refuse rather than proceed.
+                if token in figures and figures[token]["label"] != field:
+                    raise WriterError(
+                        f"token {token!r} claimed by two fields: "
+                        f"{figures[token]['label']!r} and {field!r}. A figure "
+                        f"would be silently dropped.")
+                figures[token] = {
                     "value": value, "units": units, "label": field,
                     "disclosure": number, "credit": credit,
                     "gri_title": titles.get(number, ""),

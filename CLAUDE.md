@@ -1819,3 +1819,56 @@ which is precisely the argument for committing the cache, demonstrated by
 accident. But the lesson stands: **`--backend stub` is not a read-only
 operation.** It is a full build that happens to use a fake model. Never run it
 to "just check something" against a directory holding real output.
+
+### ⚠️ Token names collided and silently destroyed a figure (fixed 2026-08-30)
+
+Found by the third external review, which was aimed at the generated prose
+rather than the code — and found a code defect by reading the output.
+
+`slug()` truncated token names to 60 characters. STARS discriminates many fields
+in their **suffix**, which is exactly what truncation removes:
+
+```
+Scope 2 GHG emissions from off-site sources of electricity (market-based)
+Scope 2 GHG emissions from off-site sources of electricity (location-based)
+                    -> op_6_scope_2_ghg_emissions_from_off_site_sources_of_electric
+```
+
+Both produced the same name, and `figures[slug(...)] = {...}` is a **dict
+write**. The second row silently overwrote the first.
+
+**What that cost.** TU Dublin's market-based scope 2 — 4,992 tCO2e, its own
+declared quantification method — was never offered to the model. The narrative
+correctly reported what it *had* been given (location-based 0, plus heating 181)
+and added that the total was "left unstated", while the content index printed
+4,992 a hundred and sixty lines later **in the same document**. Cork, whose two
+methods are both 8,144, lost no number but was told only one existed, so its
+report claimed market-based figures "were unavailable at the time of
+publication" — false, and printed twice.
+
+**Why nothing caught it.** The number audit checks that every printed figure is
+real. It has never checked that every real figure was *offered*. A silent
+overwrite sits underneath that guarantee, and the build stamped both reports
+"every digit traced to the dataset" — correctly.
+
+    The guarantee is: a figure in the report is genuine.
+    The guarantee is NOT: the report contains the figures it should.
+
+**The fix is structural, not a patch for this pair.** 68 (credit, field) pairs
+across the dataset share a truncated slug and 18 of those involve tokenised
+fields, so the next mapping row could re-open this at any time.
+`unique_tokens()` names every tokenisable field for a section **up front**,
+detects clashes against the whole set, and disambiguates only the colliding ones
+with a deterministic 6-character hash of the full name. Non-colliding fields keep
+the spelling they already had — so only Cork's and TU Dublin's environment
+sections needed regenerating (2 API calls), and Berkeley's cache stayed valid
+because its location-based field is blank and never collided.
+
+`gather()` additionally **raises** if a token is ever claimed by two different
+fields, so the silent path is gone even if the naming scheme is changed again.
+
+**The lesson generalises past this bug.** A guarantee about what reaches the
+output says nothing about what was dropped on the way in. When an invariant is
+"nothing false gets through", ask separately what happens to things that never
+get through at all — that failure is invisible by construction, and here it
+produced two confident, fluent, false sentences that passed every check.
