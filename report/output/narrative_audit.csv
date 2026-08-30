@@ -1,25 +1,25 @@
 institution,section,backend,figures_offered,figures_used,digits_from_figures,digits_needing_review,digits_invented,spelled_numbers
 "University of California, Berkeley",organisation,gemini,1,1,1,,,
-"University of California, Berkeley",workforce,gemini,1,1,1,,,two
+"University of California, Berkeley",workforce,gemini,1,1,1,,,
 "University of California, Berkeley",material_topics,gemini,0,0,0,,,
 "University of California, Berkeley",governance,gemini,0,0,0,,,
 "University of California, Berkeley",strategy,gemini,0,0,0,,,
 "University of California, Berkeley",stakeholders,gemini,0,0,0,,,
-"University of California, Berkeley",environment,gemini,44,44,58,,,thousand
-"University of California, Berkeley",social,gemini,11,11,11,,,
+"University of California, Berkeley",environment,gemini,45,45,61,,,
+"University of California, Berkeley",social,gemini,12,12,12,,,
 University College Cork,organisation,gemini,1,1,1,,,
-University College Cork,workforce,gemini,1,1,1,,,
+University College Cork,workforce,gemini,1,1,1,,,two
 University College Cork,material_topics,gemini,0,0,0,,,
 University College Cork,governance,gemini,0,0,0,,,
 University College Cork,strategy,gemini,0,0,0,,,
 University College Cork,stakeholders,gemini,0,0,0,,,
-University College Cork,environment,gemini,48,48,66,1; 14064,,
-University College Cork,social,gemini,11,11,11,,,
-Technological University Dublin,organisation,gemini,1,1,1,,,three
-Technological University Dublin,workforce,gemini,1,1,1,,,two
+University College Cork,environment,gemini,49,49,67,1; 14064,,
+University College Cork,social,gemini,12,12,16,,,forty; six; twenty; two
+Technological University Dublin,organisation,gemini,1,1,2,,,
+Technological University Dublin,workforce,gemini,1,1,1,,,
 Technological University Dublin,material_topics,gemini,0,0,0,,,
-Technological University Dublin,governance,gemini,1,1,1,,,four; two
+Technological University Dublin,governance,gemini,1,1,1,,,
 Technological University Dublin,strategy,gemini,0,0,0,,,
 Technological University Dublin,stakeholders,gemini,0,0,0,,,
-Technological University Dublin,environment,gemini,47,47,64,13432,,
-Technological University Dublin,social,gemini,8,8,8,,,
+Technological University Dublin,environment,gemini,48,48,65,,,four
+Technological University Dublin,social,gemini,9,9,9,,,

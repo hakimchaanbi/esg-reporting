@@ -4,42 +4,39 @@ Prepared **with reference to** the GRI Standards. Source data: [University Colle
 
 ## The organisation and its reporting
 
-### Organisational Context and Boundary
+### Organisational Profile and Boundary
 
-University College Cork is a public higher education institution. The boundary of this sustainability report encompasses the main campus and satellite campuses managed directly by the university's Buildings and Estates office. This physical footprint includes facilities such as the medical school, museum, and satellite locations. 
+University College Cork is a public higher education institution. Its physical footprint and primary operational activities encompass its main campus, satellite campuses, a medical school, and a museum.
 
-Subsidiary entities are excluded from this reporting boundary, specifically Campus Accommodation, the Mardyke Arena, the Student Centre, and the Irish Management Institute. Rented multi-tenant buildings are also omitted from the institutional boundary in accordance with reporting guidelines.
+In accordance with Disclosure 2-2, the reporting boundary defined for this report covers all main campus facilities and satellite locations under the direct management of the University College Cork Buildings and Estates office. Certain affiliated bodies and operational entities are excluded from this reporting boundary. Specifically, subsidiary companies—including Campus Accommodation, the Mardyke Arena, the Student Centre, and the Irish Management Institute in Dublin—are not included. In addition, rented multi-tenant buildings fall outside the operational scope of this report.
 
-### Reporting Governance and Assurance
+### Reporting Process and External Assurance
 
-The preparation of this report was led by Dr Maria Kirrane, Head of Sustainability and Climate. For greenhouse gas disclosures, the performance year for Scope 1 and Scope 2 GHG emissions corresponds to 2024.
+The compilation of this report was led by Dr Maria Kirrane, Head of Sustainability and Climate. With respect to energy and climate accounting under GRI 305, the performance period evaluated for Scope 1 and Scope 2 greenhouse gas emissions corresponds to 2024.
 
-External assurance was undertaken for environmental metrics. The university's Scope 1 and Scope 2 emissions figures were independently verified by Sustineo, University College Cork's contracted carbon footprint provider.
+In alignment with Disclosure 2-5, external verification was obtained for specific climate indicators. The institution's reported Scope 1 and Scope 2 emissions figures were subject to independent external assurance provided by Sustineo, the university's contracted carbon footprint provider.
 
-### Reporting Limitations and Exclusions
+### Limitations and Data Gaps
 
-Several disclosures within the GRI Standards cannot be fully addressed due to the structure of the primary data sources:
+This report reflects the boundaries and structures of the underlying data source, resulting in specific reporting omissions:
 
-* **GRI 2-1:** The source data does not record official legal entity names, headquarters location, or countries of operation.
-* **GRI 2-2:** The framework does not state whether the reporting entities differ from those in financial statements, nor how minority interests are consolidated.
-* **GRI 2-3:** Designated contact details for enquiries are not maintained alongside named preparers. Publication frequency, formal release date, and a uniform reporting period across all credits are not captured, as underlying indicator periods vary across the dataset.
-* **GRI 2-4:** Restatements of information from prior periods are not reported, as the source framework collects independent snapshots without linking to earlier submissions.
-* **GRI 2-5:** Specific audit standards, levels of assurance, and operational limitations of the external verification process are not recorded beyond the general verification statement.
-* **GRI 2-6:** Value chain details, broader operational sectors, and commercial markets served are omitted beyond the reported physical campus assets.
+- **Organisational details and business model (GRI 2-1 and GRI 2-6):** The legal name, headquarters location, countries of operation, full value chain description, and broader market sectors served are not reported beyond the physical campus attributes noted.
+- **Financial boundary alignment (GRI 2-2):** The source data does not specify whether the reporting boundary differs from the university's consolidated financial statements, nor does it detail how minority interests are consolidated.
+- **Reporting period and contact details (GRI 2-3):** Reporting periods vary across individual credit topics rather than following a single institutional reporting period. Furthermore, the reporting frequency, publication date, and official public contact details are not recorded.
+- **Restatements of information (GRI 2-4):** Restatements of information are not reported, as the data source represents independent assessment snapshots without comparative restatement mechanisms.
+- **Assurance details (GRI 2-5):** Specific assurance standards, the precise level of assurance obtained, inherent limitations of the audit process, and the formal nature of the relationship with the assurance provider are not detailed in the source material.
 
 ## Activities and workers
 
-### Workforce Scale and Structure
+### Workforce Size and Structure
 
-University College Cork monitors its internal staffing capacity to understand the scale of its academic and operational activities. Under GRI 2-7, the institution reports a total employee strength of 3,643. 
+University College Cork records an employed workforce of 3,643. This metric represents the full-time equivalent capacity supporting the university's academic, operational, and administrative functions.
 
-### Reporting Limitations and Omissions
+### Framework Alignment and Data Limitations
 
-The current data capture framework presents specific limitations regarding the detailed workforce disclosures requested under the GRI Standards. 
+The reported figure carries specific methodological boundaries when evaluated against GRI Standards. Under GRI 2-7, full-time equivalent measures total operational workload capacity rather than a direct headcount, meaning two half-time staff members are aggregated as one unit. The primary reporting source collects a single undifferentiated figure. Consequently, the institution does not currently disaggregate its employee data into the specific categories required by Disclosure 2-7, such as breakdowns by employment contract (permanent and temporary), employment type (full-time and part-time), gender, or region.
 
-In relation to GRI 2-7, the reported figure represents full-time equivalents rather than a direct headcount, meaning multiple part-time staff members are aggregated into single units. The reporting methodology collects a single combined metric and does not provide disaggregated data by employment contract type (permanent or temporary), employment capacity (full-time or part-time), gender, or geographic region.
-
-With respect to GRI 2-8, information regarding workers who are not direct employees but whose work is controlled by the university is not reported. The primary dataset records direct staff and students only, excluding quantitative details on agency workers, third-party contractors, and their associated contractual relationships.
+Furthermore, data required under GRI 2-8 regarding workers who are not employees is not reported. Disclosure 2-8 requires tracking the total number and contractual relationships of workers whose work is controlled by the organisation but who are not directly employed. The reporting frameworks utilised by the university monitor employees and students only. While third-party contracting firms operate on campus, the source data records contracting entities rather than the headcount of individual personnel performing work under those service agreements.
 
 ## Material topics
 
@@ -143,77 +140,84 @@ Regarding Disclosure GRI 2-30, the university does not report the percentage of 
 
 ## Environmental performance
 
-### Energy Consumption and Intensity
+### Energy Performance
 
-In alignment with GRI 302-1, University College Cork reports total annual energy consumption of 55,148.70 Megawatt-hours. Total electricity consumption accounts for 32,599.70 Megawatt-hours, whilst total stationary fuel consumption equals 22,549 Megawatt-hours. Non-renewable stationary energy consumption includes natural gas at 22,549 Megawatt-hours, heating oil at 0 Megawatt-hours, coal or coke at 0 Megawatt-hours, and propane or LPG at 0 Megawatt-hours. Annual renewable energy consumption stands at 0.70 Megawatt-hours, of which renewable stationary fuels represent 0 Megawatt-hours, indicating that renewable energy provision is overwhelmingly delivered through purchased electricity. Off-site sources of heating and cooling total 0 Megawatt-hours, and on-site renewable electricity exported equals 0 Megawatt-hours. For reporting under Disclosure 302-1, energy values recorded in megawatt-hours require conversion to joules.
+To align with the reporting requirements of GRI 302, University College Cork tracks its energy consumption across all operations. The university's total annual energy consumption is `55,148.70 Megawatt-hours`. Under Disclosure 302-1, energy consumption is typically reported in joules; however, the data here is recorded in megawatt-hours and can be converted to gigajoules by applying standard conversion factors.
 
-Energy intensity evaluated under GRI 302-3 is 2,139.20 Kilowatt-hours per full-time equivalent student and employee. Measured relative to total institutional space, energy intensity is 195.31 Kilowatt-hours per square meter based on gross floor area.
+Of this total, electricity consumption accounts for `32,599.70 Megawatt-hours` and total stationary fuel consumption is `22,549 Megawatt-hours`. The university's annual renewable energy consumption stands at `0.70 Megawatt-hours`. It should be noted that this renewable energy figure includes purchased renewable electricity, which is broader than the scope of GRI 302-1-b (which focuses solely on fuel from renewable sources). The university's consumption of renewable stationary fuels is `0 Megawatt-hours`. Total heating and cooling obtained from off-site sources is `0 Megawatt-hours`. The university exported `0 Megawatt-hours` of on-site renewable electricity.
 
-### Water Withdrawal and Management
+The breakdown of stationary fuel consumption by fuel type includes natural gas of `22,549 Megawatt-hours`, heating oil of `0 Megawatt-hours`, coal or coke of `0 Megawatt-hours`, and propane or LPG of `0 Megawatt-hours`. Other stationary fuels are reported as zero, making this a complete representation of the university's stationary fuel mix.
 
-Assessment of interactions with water under GRI 303-1 indicates a low-medium physical water quantity risk level for the main campus. The university operates on-site rainwater harvesting systems to capture and utilise rainwater. 
+In terms of energy intensity (GRI 302-3), the annual energy consumption per person is `2,139.20 Kilowatt-hours`. The denominator for this metric is the university's population of full-time equivalent students and employees. The annual energy consumption per unit of floor area is `195.31 Kilowatt-hours per square meter`. The denominator for this metric is the gross floor area of the university's buildings.
 
-Under Disclosure 303-3, total water withdrawal is 54,153 Cubic meters. All potable water is drawn from third-party off-site municipal sources, totalling 54,153 Cubic meters, with on-site potable abstraction recorded as 0 Cubic meters. For GRI 303-3 compliance, cubic metre volumes require conversion to megalitres.
+### Water Performance
 
-### Greenhouse Gas Emissions
+Under GRI 303, the university monitors its water withdrawal and interactions with water as a shared resource. The physical water quantity risk for the main campus is classified as low-medium. The university harvests rainwater on-site for storage and use, though the exact volume harvested is not currently quantified. This risk assessment is limited to the main campus and does not describe the specific withdrawal, consumption, or discharge processes, nor does it detail stakeholder engagement on shared water resources across all campuses.
 
-Greenhouse gas emissions inventories are conducted by external consultant Sustineo following GHG Protocol standards and ISO 14064-1, combining top-down expenditure assessments and primary bottom-up data. The university reports these metrics annually to the Sustainable Energy Authority of Ireland.
+For water withdrawal (GRI 303-3), the total water withdrawal is `54,153 Cubic meters`. Potable water from off-site sources (third-party water) is `54,153 Cubic meters`. Potable water from on-site sources is `0 Cubic meters`. To align with GRI 303-3, which requires reporting in megalitres, these cubic-metre figures must be divided by a standard conversion factor. Because on-site abstraction is zero, third-party water constitutes the entirety of the university's water withdrawal. This reporting does not include a breakdown of water stress areas, which is a limitation of the current data set.
 
-Direct Scope 1 GHG emissions under GRI 305-1 total 6,215.78 Metric tons of CO2 equivalent. Breakdown by source comprises Scope 1 emissions from stationary combustion of 5,517 Metric tons of CO2 equivalent, mobile combustion emissions of 62.78 Metric tons of CO2 equivalent, fugitive emissions of 636 Metric tons of CO2 equivalent, and biogenic GHG emissions of 0 Metric tons of CO2 equivalent.
+### Emissions Performance
 
-Indirect Scope 2 GHG emissions under GRI 305-2 total 8,144 Metric tons of CO2 equivalent. Location-based Scope 2 emissions from off-site electricity stand at 8,144 Metric tons of CO2 equivalent, market-based Scope 2 electricity emissions are 8,144 Metric tons of CO2 equivalent, and off-site heating and cooling emissions equal 0 Metric tons of CO2 equivalent.
+The greenhouse gas emissions inventory for University College Cork is calculated by its contracted supplier, Sustineo, in accordance with the GHG Protocol standards and ISO 14064-1. The methodology uses a top-down approach to assess expenditure data and identify hotspots, followed by a bottom-up methodology using primary data. Data is also submitted annually to the Sustainable Energy Authority of Ireland.
 
-Other indirect Scope 3 GHG emissions evaluated under GRI 305-3 cover business travel at 3,565 Metric tons of CO2 equivalent, employee and student commuting at 20,991 Metric tons of CO2 equivalent, purchased goods and services at 1,572 Metric tons of CO2 equivalent, capital goods at 0 Metric tons of CO2 equivalent, and fuel- and energy-related activities not included in Scope 1 or Scope 2 at 3,318 Metric tons of CO2 equivalent.
+For Scope 1 emissions (GRI 305-1), the annual Scope 1 GHG emissions are `6,215.78 Metric tons of CO2 equivalent`. This includes `5,517 Metric tons of CO2 equivalent` from stationary combustion, `62.78 Metric tons of CO2 equivalent` from mobile combustion, and `636 Metric tons of CO2 equivalent` from fugitive emissions. Emissions from biogenic sources are `0 Metric tons of CO2 equivalent`. Process emissions are currently blank or not reported.
 
-Emissions intensity calculated under Disclosure 305-4 is 557.01 Kilograms of CO2 equivalent per FTE student and staff member, and 50.86 Kilograms per square meter per square metre of gross floor area.
+For Scope 2 emissions (GRI 305-2), the annual Scope 2 GHG emissions are `8,144 Metric tons of CO2 equivalent`. The location-based emissions from off-site electricity are `8,144 Metric tons of CO2 equivalent`. Market-based emissions from off-site electricity are `8,144 Metric tons of CO2 equivalent`. Emissions from off-site heating and cooling are `0 Metric tons of CO2 equivalent`.
 
-Under GRI 305-5, decarbonisation progress is measured against baseline year 2017, established by the Irish government for all national public bodies, with baseline Scope 1 and Scope 2 emissions of 19,460 Metric tons of CO2 equivalent. The institution has achieved a 26.21% reduction in Scope 1 and Scope 2 emissions from this baseline, leaving adjusted net Scope 1 and Scope 2 emissions of 14,359.78 Metric tons of CO2 equivalent. Third-party certified carbon offsets total 0 Metric tons of CO2 equivalent.
+For Scope 3 emissions (GRI 305-3), the university reports emissions from business travel of `3,565 Metric tons of CO2 equivalent` and commuting emissions of `20,991 Metric tons of CO2 equivalent`. Emissions from purchased goods and services are `1,572 Metric tons of CO2 equivalent`. Emissions from capital goods are `0 Metric tons of CO2 equivalent`. Fuel- and energy-related activities not included in Scope 1 or Scope 2 account for `3,318 Metric tons of CO2 equivalent`. Emissions from waste generated in operations are currently blank or not reported.
 
-### Waste Generation and Diversion
+The emissions intensity (GRI 305-4) is `557.01 Kilograms of CO2 equivalent` per person (using full-time equivalent students and employees as the denominator) and `50.86 Kilograms per square meter` per unit of floor area (using gross floor area in square metres as the denominator).
 
-Operational waste management includes surplus equipment programmes, reuse channels for personal items, elimination of selected single-use disposable plastics, and dedicated hazardous waste protocols under GRI 306 guidance. Compostable lunchboxes are collected within on-site food waste streams.
+Regarding emissions reductions (GRI 305-5), the baseline year for Scope 1 and Scope 2 emissions is `2017`. This baseline was established by the government of Ireland for all public bodies. The baseline Scope 1 and Scope 2 emissions are `19,460 Metric tons of CO2 equivalent`. The percentage reduction in Scope 1 and Scope 2 emissions from this baseline is `26.21%`. The adjusted net Scope 1 and Scope 2 emissions are `14,359.78 Metric tons of CO2 equivalent`. The university holds `0 Metric tons of CO2 equivalent` of third-party certified carbon offsets. Because these offsets are zero, the gross and net percentage reductions are identical.
 
-Under Disclosure 306-3, annual non-hazardous waste generated totals 520 Metric tons, alongside construction and demolition waste generated of 6,914.08 Metric tons. Under Disclosure 306-4, non-hazardous waste diverted from disposal totals 242 Metric tons, comprising 183 Metric tons recycled, 59 Metric tons composted, and 0 Metric tons prepared for reuse. Construction and demolition waste diverted from disposal totals 6,837.95 Metric tons, with recycling accounting for 5,675.22 Metric tons.
+### Waste Performance
 
-Under Disclosure 306-5, non-hazardous waste directed to disposal via combined landfill and incineration streams is 278 Metric tons, whilst construction and demolition waste directed to disposal equals 76.13 Metric tons.
+The university manages waste-related impacts (GRI 306-2) through several active programmes. It operates a surplus programme to store, sell, donate, or reuse university-owned items that are no longer needed. A reuse programme is also available for employees and students to donate personal items. The university has eliminated certain forms of single-use disposable plastic on-site. A hazardous waste management protocol is in place to minimise the use of hazardous materials. For organic waste, compostable lunchboxes are accepted in the university's food waste bins.
 
-### Sustainable Procurement
+For waste generation (GRI 306-3), the annual non-hazardous waste generated is `520 Metric tons`. This represents a subset of total waste, as hazardous waste tonnages are not quantified. The annual construction and demolition waste generated is `6,914.08 Metric tons`.
 
-In relation to GRI 308-1, the proportion of formal bid solicitations identifying supplier sustainability considerations stands at 21%. The university's supplier code of conduct does not currently mandate environmental performance requirements beyond baseline legal compliance.
+For waste diverted from disposal (GRI 306-4), the total non-hazardous waste diverted is `242 Metric tons`. This is recovered through recycling (`183 Metric tons`), composting (`59 Metric tons`), and preparation for reuse (`0 Metric tons`). For construction and demolition waste, the total diverted from disposal is `6,837.95 Metric tons`. This is recovered through recycling (`5,675.22 Metric tons`), and preparation for reuse (`1,162.73 Metric tons`).
 
-### Limitations and Omissions
+For waste directed to disposal (GRI 306-5), non-hazardous waste disposed of to a landfill or incinerator is `278 Metric tons`. Construction and demolition waste disposed of to a landfill or incinerator is `76.13 Metric tons`.
 
-Data structures present several reporting limitations relative to complete GRI standards. Energy figures under GRI 302-1 and water figures under GRI 303-3 are reported in megawatt-hours and cubic metres respectively, requiring unit conversions for standard GRI joule and megalitre metrics. Baseline figures for GRI 305-5 aggregate Scope 1 and Scope 2 emissions into a single combined baseline, preventing scope-specific reduction tracking. Tonnage records under Disclosure 306-3, Disclosure 306-4, and Disclosure 306-5 track non-hazardous and construction streams only, omitting hazardous waste masses.
+### Supplier Environmental Assessment
 
-Certain GRI disclosures cannot be reported from available institutional data. Disclosures under GRI 301-1, GRI 301-2, and GRI 301-3 are omitted because the university produces no physical products. GRI 302-2, GRI 302-4, and GRI 302-5 are not tracked within internal reporting boundaries. Water discharge quality details under GRI 303-2 are not recorded. Emissions of ozone-depleting substances under GRI 305-6 and ambient air emissions under GRI 305-7 are unquantified. Narrative descriptions of upstream waste impacts under GRI 306-1 and supplier-level assessment outcomes under GRI 308-2 are not collected. In addition, Scope 1 process emissions (Disclosure 305-1) and Scope 3 operational waste emissions (Disclosure 305-3) were unrecorded for the current reporting period.
+The university's supplier code of conduct does not include environmental expectations that exceed regulatory compliance. The percentage of bid solicitations that identify supplier sustainability considerations is `21%`. This metric does not represent the actual percentage of new suppliers screened using environmental criteria (GRI 308-1), as the denominator is bid solicitations rather than new suppliers, and "sustainability considerations" is broader than environmental criteria.
+
+### Limitations and Unreported Disclosures
+
+Several disclosures under the GRI standards are not reported due to data limitations or applicability. GRI 301-1, GRI 301-2, and GRI 301-3 (materials used, recycled inputs, and reclaimed products) are not reported because the university does not manufacture physical products. GRI 302-2 (energy consumption outside the organisation) is not tracked. GRI 302-4 (energy reductions in absolute joules) is not reported as STARS does not collect baseline energy data. GRI 302-5 (reductions in energy requirements of products) is not applicable. GRI 303-2 (water discharge-related impacts and effluent quality standards) is not monitored. GRI 305-6 (ozone-depleting substances) and GRI 305-7 (NOx, SOx, and other air emissions) are not quantified. GRI 306-1 (waste generation process descriptions and value chain impacts) is not detailed. GRI 308-2 (negative environmental impacts in the supply chain) is not tracked at the supplier level. Specific data gaps in the current reporting cycle include Scope 1 process emissions, Scope 3 emissions from waste generated in operations, and market-based Scope 2 emissions.
 
 ## Social and economic performance
 
-### Compensation and Living Wages
-University College Cork maintains a standard entry-level wage floor for regular and permanent staff of 16.40. The institution evaluates compensation against a living wage benchmark of 15.40, with 100% of employees receiving remuneration equal to or exceeding this level.
+### Pay and Employment Conditions
 
-With respect to Disclosure 202-1, the university reports against a higher-education sector living wage benchmark rather than statutory minimum wage figures, and does not disaggregate entry-level wage ratios by gender. Compensation figures reflect local currency values.
+University College Cork provides standard remuneration and benefits to its workforce. The wage floor for regular and permanent employees is 16.40. For student workers, the local hourly minimum wage is 14.25. The university benchmarks its pay against a living wage of 15.40, and 100% of employees receive remuneration equivalent to at least this living wage.
 
-### Working Conditions and Parental Leave
- institutional policies provide all-gender family and medical leave eligibility to 100% of the workforce. Statutory and university maternity provisions grant eligible staff 26 of full pay, alongside options for supplementary unpaid leave.
+In terms of parental leave, the university provides 26 of paid maternity leave. Under national legislation, female employees are entitled to a total of forty-two weeks of maternity leave, consisting of twenty-six weeks fully paid by the university and/or the Department of Social Welfare, and an additional sixteen weeks of unpaid leave. Paid all-gender family or medical leave is available, with 100% of employees eligible.
 
-Reporting for Disclosure 401-2 reflects an aggregate institution-wide eligibility rate rather than a breakdown between full-time, part-time, and temporary contract categories. Regarding GRI 401-3, data accounts for standard policy terms rather than total counts of leave takers, return-to-work rates, or retention rates disaggregated by gender.
+The university has published a Gender Pay Gap Report, which indicates progress in reducing the pay gap. This gap is driven by representation patterns rather than unequal pay for equal work. Specifically, there are fewer women in higher-paid senior academic and professional roles, and more women in lower-paid, entry-grade, or part-time roles. To address this, the university plans to implement the requirements of the EU Gender Pay Transparency Directive, expand support for staff returning from career breaks, monitor the uptake of flexible working policies by gender, and introduce wellbeing metrics in staff surveys.
 
-### Occupational Health, Safety, and Wellbeing
-Workplace health and safety is structured through a Safety Representative Forum, which acts as a collaborative mechanism between employee representatives and management. The forum conducts workplace safety tours, reviews accident reports, and supports legal compliance across university sites. 
+### Occupational Health and Safety
 
-In alignment with GRI 403-3 and Disclosure 403-6, staff have access to occupational health and wellbeing provisions, including physical health services, behavioural and mental health support, spiritual activities, and subsidized fitness schemes. Smoking and tobacco use are regulated on campus grounds, though a total ban across all outdoor space is not enforced.
+The university maintains a Safety Representative Forum to enhance the safety, health, and welfare of employees, safeguard students, and secure legal compliance through consultation. Staff safety representatives represent employees on health and safety matters, conduct workplace safety tours upon request, review accident and dangerous occurrence reports, and contribute to initiatives aimed at improving the safety culture.
+
+To promote worker health, the university provides physical and behavioural health services, free or reduced-cost fitness activities, and contemplative or spiritual activities. Smoking and tobacco use are not prohibited across the entire campus, with restrictions limited to specific areas.
 
 ### Workforce Diversity
-Gender and ethnic diversity indicators are tracked across staff groups in reference to GRI 405-1. The proportion of regular and permanent staff identifying as women or other marginalised gender identities is 47% among executive staff, 49% among academic staff, and 63% among non-academic staff.
 
-Ethnic diversity is monitored via a concentration index, resulting in 0 for executive staff, 0.44 for academic staff, and 0.34 for non-academic staff.
+The university tracks diversity across its workforce categories. The ethnic diversity index is 0 for executive staff, 0.44 for academic staff, and 0.34 for non-academic staff.
 
-The institutional framework combines female and marginalised gender identity data into consolidated metrics rather than distinct gender categories, does not collect workforce age distributions, and does not record executive board membership percentages.
+In terms of gender diversity, 47% of executive staff identify as women or other marginalised gender identities. For regular permanent academic staff, this figure is 49%, and for regular permanent non-academic staff, it is 63%. To further understand the diversity profile of its workforce, the university plans to launch an Employee Self-Service Diversity tool to collect data across all equality grounds.
 
-### Data Limitations and Omitted Disclosures
-Several GRI disclosures are not covered by current operational reporting. Disclosure 202-2 (proportion of senior management recruited from the local community) and Disclosure 405-2 (salary and remuneration ratios by gender) are not reported. 
+### Limitations and Gaps in Reporting
 
-Regarding procurement, Disclosure 204-1 (spending on local suppliers) is not tracked; institutional procurement metrics monitor spend with social enterprises rather than local geographic boundaries. 
+Several limitations exist in the current reporting framework:
 
-Within health and safety, Disclosure 403-2 (hazard identification and incident investigation processes), Disclosure 403-5 (occupational health and safety training), Disclosure 403-7 (prevention of safety impacts within business relationships), Disclosure 403-8 (percentage of workforce covered by formal safety management systems), Disclosure 403-9 (work-related injuries), and Disclosure 403-10 (work-related ill health) are omitted. Additionally, Disclosure 401-1 (new employee hires and turnover rates) is not available.
+*   **GRI 202-1**: The student minimum wage 14.25 represents the local statutory minimum for student workers rather than the general workforce. While the ratio of standard entry-level wage to minimum wage can be derived, the required breakdown by gender is unanswerable. The living wage 15.40 is a separate benchmark and cannot be substituted for the minimum wage. All monetary values are in Euros and cannot be compared directly with other currencies without conversion.
+*   **GRI 401-2**: The eligibility rate for paid all-gender family and medical leave 100% is reported as a single institution-wide figure, meaning the comparison between full-time and part-time or temporary employees cannot be drawn.
+*   **GRI 401-3**: Headcounts, uptake, and retention rates for parental leave are not reported; only the policy of 26 of paid maternity leave is recorded, which is narrower than all-gender parental leave.
+*   **GRI 403-1, GRI 403-3, GRI 403-4, GRI 403-6, GRI 403-8**: The legal basis, standards, and worker coverage of the management system are not recorded. General health promotion services are reported, but specific occupational health functions, hazard identification, and data confidentiality are not detailed. The Safety Representative Forum's meeting frequency, decision-making authority, and exact representation are not fully documented. Campus smoking restrictions do not constitute a complete ban.
+*   **GRI 405-1**: Gender diversity is reported as a combined figure for women and marginalised gender identities rather than a detailed split. Age-group breakdowns are unavailable, and the representation percentage on the highest governance body is not recorded. Ethnic diversity is reported as a concentration index rather than a percentage breakdown.
+
+The following disclosures are not reported: GRI 202-2 (local hiring of senior management), GRI 204-1 (local procurement spend, as social impact spend is measured instead), GRI 401-1 (new hires and turnover), GRI 403-2 (hazard identification and risk assessment processes), GRI 403-5 (health and safety training), GRI 403-7 (business relationship impacts), GRI 403-9 (work-related injuries), GRI 403-10 (work-related ill health), and GRI 405-2 (ratio of basic salary and remuneration of women to men).
