@@ -198,6 +198,5 @@ The finished deliverable is one document per institution — narrative, GRI cont
 index and a methodology statement — as Markdown, HTML and a 31-page PDF
 (`CLAUDE.md` §19). Berkeley's and Cork's are complete.
 
-Outstanding: TU Dublin's narrative is **two sections short**. The daily Gemini
-quota ran out mid-run and the build correctly refused to write a partial report;
-two calls finish it.
+**All three reports are complete** — 24 of 24 sections generated, zero invented
+figures, zero digits flagged for review. 31, 32 and 34 pages respectively.
