@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 8af2f5a87abbda246f769716fbf6f87bf09eeb299c177db6203f2a618ae13992
+generated: 2026-08-29
+-->
 ### Governance Structure and Composition
 
 The University of California, Berkeley operates within the governance framework of the University of California system under the authority of the Board of Regents. Representation on the institution's highest decision-making processes encompasses academic staff, non-managerial worker representatives, and student representatives.

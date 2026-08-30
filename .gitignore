@@ -66,10 +66,14 @@ rag/index/
 #
 # What was already reproducible without it: every figure, unit and GRI status,
 # because those are mechanical. What was not: the prose. This closes that gap.
-# ~250 KB. The cache is keyed on model + prompt, so a changed mapping still
-# forces regeneration of the affected sections — staleness cannot hide.
+# ~250 KB. The cache is keyed on the PROMPT alone -- not the model -- so a clone
+# hits it whatever GEMINI_MODEL is set to. The model that produced each section
+# is recorded inside the file. A changed mapping still changes the prompt, so
+# staleness cannot hide.
 report/output/*.md.incomplete
 
 # generated section previews
 report/output/*_preview.md
 report/output/narrative_audit_*_preview.csv
+report/output/*.stub.md
+report/output/*.rogue.md

@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 0a09d6909c86f9351708333f042ebb17f000b90dbab817821ff82512ae3790e1
+generated: 2026-08-29
+-->
 The University of California, Berkeley structures its sustainability disclosures around the framework provided by the Sustainability Tracking, Assessment & Rating System (STARS), administered by the Association for the Advancement of Sustainability in Higher Education (AASHE). Because the topics covered correspond to predefined credit categories established by AASHE for the higher-education sector as a whole, the institution did not conduct a separate internal materiality assessment to identify or prioritise its specific sustainability impacts. Consequently, the selection of topics reflects external sector standardisation rather than an institutional determination of material impacts.
 
 ### Adopted Sustainability Objectives and Management Approach

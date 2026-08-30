@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: e657f90f5232e6b365b8d62cbe6480d72eea3856559485837ac053594f21b61f
+generated: 2026-08-29
+-->
 ### Strategic Vision and Policy Commitments
 
 Technological University Dublin frames its sustainability vision around a commitment to establishing an equitable, sustainable, and environmentally responsible institution. This vision is articulated across several core strategic documents, including its Strategic Intent plan, Sustainability Strategy, Climate Action Roadmap, and regular progress reports on the United Nations Sustainable Development Goals. Strategic leadership for climate action and sustainability governance is provided by a Vice President for Sustainability, who oversees implementation across functional areas including sustainability education and campus decarbonisation.

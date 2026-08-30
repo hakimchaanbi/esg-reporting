@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 233d00b036cf8ee61058f6a9743f42ee4a6b0a114f21d54094ddfdcf3e3afa92
+generated: 2026-08-29
+-->
 ### Governance Structure and Composition
 
 The highest decision-making body of University College Cork is the Governing Authority. Decision-making representation on the Governing Authority encompasses key internal campus constituencies, including academic staff, non-managerial staff, and student representatives. Academic staff representation on the Governing Authority is determined through democratic election by university staff.

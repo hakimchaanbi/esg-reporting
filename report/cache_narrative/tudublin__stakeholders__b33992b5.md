@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 59f8d008103806a701178ad89976fa0dc3e9388555275341c0baf801d102d0af
+generated: 2026-08-29
+-->
 ### Student Consultation
 
 Technological University Dublin engages students in university decision-making, planning, and policy formulation through direct representation on standing bodies, working groups, and regular university surveys. Student representation is primarily coordinated through the Students' Union. Standing university committees and governance structures with active student involvement include the University Student Committee, the Green Campus committee, the Student Finance Committee, the Research Ethics Committee, and the EUt+ Governing Body.
