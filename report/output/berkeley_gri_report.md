@@ -4,41 +4,29 @@ Prepared **with reference to** the GRI Standards. Source data: [University of Ca
 
 ## The organisation and its reporting
 
-### Organisational Details and Boundary
+### Organisational Context and Boundary
+The University of California, Berkeley is a public higher education institution. For sustainability reporting purposes, the institution defines its boundary based on operational control in accordance with GRI 2-2. This operational boundary encompasses the main campus in the City of Berkeley, the adjacent Hill campus, the Richmond Field Station, campus-operated stations and reserves, and campus-owned buildings across various locations. Operational features situated within this physical footprint include academic facilities and a museum (GRI 2-6).
 
-The University of California, Berkeley is a public higher education institution. In accordance with GRI 2-1 and GRI 2-6, the institution's physical footprint and operational scope encompass educational and research facilities, as well as institutional assets such as a museum.
+### Reporting Process and Timeframe
+Preparation of the data for this report was led by the Office of Sustainability, with primary contributions from Marina Zdobnova, Sustainability Data and Program Manager, and Ashley Smiley, Postdoctoral Fellow (GRI 2-3). The reporting period varies across specific disclosures based on data collection cycles; for instance, the performance year for Scope 1 and Scope 2 greenhouse gas emissions is 2023.
 
-Under Disclosure 2-2, the reporting boundary comprises all operational entities over which the campus exercises operational control. This boundary includes the main campus in the City of Berkeley, the adjacent Hill campus to the east, the Richmond Field Station, various field stations and reserves operated by the institution, and administrative or academic buildings owned by the campus across multiple locations.
+### External Assurance
+No independent audits or external assurance processes were used in the preparation of this report (GRI 2-5).
 
-### Reporting Period, Preparers, and Assurance
-
-In alignment with Disclosure 2-3, the performance year for Scope 1 and Scope 2 greenhouse gas emissions is 2023. Compilation of this report was led by the Sustainability Data and Program Manager alongside a Postdoctoral Fellow within the university's Office of Sustainability.
-
-Regarding Disclosure 2-5, no independent external assurance or third-party audit was conducted in the preparation of this sustainability report.
-
-### Data Limitations and Omissions
-
-Where specific disclosures under the GRI Standards cannot be reported due to framework constraints, the omissions are noted below:
-
-- **GRI 2-1**: The source data does not record the formal legal name, headquarters address, or operational countries as distinct reporting fields.
-- **GRI 2-2**: The reporting structure does not indicate whether the defined operational boundary differs from the entities included in the institution's audited financial statements, nor does it state how minority interests are consolidated.
-- **GRI 2-3**: Data collection across different topics does not share a single uniform reporting period. Specific contact details for stakeholder enquiries, publication dates, and reporting frequency are not specified in the source framework beyond naming the primary preparers.
-- **GRI 2-4**: Restatements of information from prior periods are not reported, as the submission framework evaluates performance through independent snapshots without mechanisms to track historical figure revisions.
-- **GRI 2-6**: Information on value chains, specific business relationships, market segments, and commercial products is omitted beyond the primary physical campus features.
+### Reporting Limitations and Omissions
+Certain elements required by the GRI Standards are not captured within the STARS dataset used for this report. Under GRI 2-1 and GRI 2-2, institutional metadata—such as legal name, headquarters location, countries of operation, alignment with financial statements, and minority interest consolidation—are not recorded. Under GRI 2-3, named preparers are recorded without direct contact details, no specific enquiry contact point is designated, and overall reporting frequency and publication dates are omitted. Restatements of information are not reported under GRI 2-4, as STARS submissions exist as standalone data snapshots. Under GRI 2-5, no external assurance was undertaken, and framework-level assurance parameters are not tracked. Finally, GRI 2-6 disclosures are limited to physical campus features rather than comprehensive value chain and market sector analyses.
 
 ## Activities and workers
 
-### Workforce Overview
+### Workforce Scale and Composition
 
-The University of California, Berkeley maintains a substantial staff to support its academic, research, and administrative functions. Reported under GRI 2-7, the total scale of the institutional workforce stands at 13,678. 
+The University of California, Berkeley maintains a workforce to support its academic, research, and administrative functions. The operational scale of this staff is measured at 13,678. 
 
-### Reporting Limitations and Exclusions
+### Reporting Limitations and Data Gaps
 
-The current institutional dataset presents several structural limitations when evaluated against GRI disclosure requirements. 
+While this metric provides an overall measure of labor capacity, it has notable limitations when aligned with standard reporting frameworks. Under Disclosure 2-7, full-time equivalent metrics do not reflect total headcount, as multiple part-time positions are combined into single full-time units. Furthermore, Disclosure 2-7 calls for specific disaggregations of employee figures by employment contract (permanent and temporary), employment type (full-time and part-time), gender, and region. The STARS data collection process gathers only a single aggregate figure, leaving these detailed demographic and contractual categories unreported.
 
-Under Disclosure 2-7, the reported figure represents full-time equivalent positions rather than an absolute headcount of individual workers. Consequently, positions held on a partial basis are aggregated, such that two half-time members of staff are recorded as one full-time equivalent. Furthermore, the source STARS reporting mechanism captures a single consolidated metric. It does not collect or provide the detailed disaggregations mandated by GRI 2-7, such as breakdowns by employment contract (permanent or temporary), employment type (full-time or part-time), gender, or region.
-
-Data required for Disclosure 2-8 concerning workers who are not direct employees but whose work is controlled by the university is not reported. The primary framework records figures for employees and students only. Although institutional records track significant contractor entities, these measures reflect a total count of contracting firms rather than the specific headcount of third-party personnel performing work for the university.
+A similar data gap exists regarding GRI 2-8, which covers workers who are not direct employees but whose daily tasks are controlled by the organization. Primary institutional data collection focuses on employees and students. While third-party contractor relationships are monitored, these figures represent the number of contracting firms engaged rather than the actual count of individual workers operating on campus under those contracts.
 
 ## Material topics
 
@@ -128,71 +116,84 @@ Regarding GRI 2-30, the institution does not report the percentage of total empl
 
 ## Environmental performance
 
-### Energy consumption and intensity
+### Energy Performance
 
-Under GRI 302-1, total annual energy consumption at the University of California, Berkeley was 78,414.00 Megawatt-hours. Electricity consumption accounted for 47,744.70 Megawatt-hours, whilst total stationary fuel consumption comprised 30,414 Megawatt-hours. The stationary fuel portfolio included natural gas at 30,014 Megawatt-hours, heating oil at 400 Megawatt-hours, coal or coke at 0 Megawatt-hours, and propane or LPG at 0 Megawatt-hours. Annual renewable energy consumption across thermal and electric sources reached 18,173 Megawatt-hours, of which renewable stationary fuels represented 0 Megawatt-hours. Off-site heating and cooling sources delivered 255.30 Megawatt-hours, and on-site renewable electricity exported stood at 0 Megawatt-hours. To align with standard GRI reporting units, figures reported in megawatt-hours must be converted to gigajoules.
+The total annual energy consumption within the organisation is `78,414.00 Megawatt-hours`. This total comprises electricity consumption of `47,744.70 Megawatt-hours` and stationary fuel consumption of `30,414 Megawatt-hours`. The university consumes `255.30 Megawatt-hours` of heating and cooling from off-site sources, and exports `0 Megawatt-hours` of on-site renewable electricity.
 
-Energy intensity evaluated under GRI 302-3 was 1,346.02 Kilowatt-hours per campus occupant, calculated using a combined denominator of full-time equivalent students and staff. Measured against gross floor space, energy intensity reached 52.17 Kilowatt-hours per square meter.
+In terms of fuel composition, natural gas consumption is `30,014 Megawatt-hours`. Heating oil consumption is `400 Megawatt-hours` and coal or coke consumption is `0 Megawatt-hours`. Propane and liquefied petroleum gas consumption is `0 Megawatt-hours`. Annual renewable energy consumption stands at `18,173 Megawatt-hours`. Renewable stationary fuels account for `0 Megawatt-hours`.
 
-### Water stewardship and withdrawal
+Energy intensity metrics show an annual energy consumption per person of `1,346.02 Kilowatt-hours` and an annual energy consumption per unit of floor area of `52.17 Kilowatt-hours per square meter`.
 
-The institution's primary campus operates in an area designated as having a high level of physical water quantity risk. To mitigate reliance on external supplies, the university collects and stores rainwater on-site for operational use.
+### Water Performance
 
-Under GRI 303-3, total water withdrawal reached 2,092,006 Cubic meters. Potable water sourced from off-site third-party utilities comprised 2,092,006 Cubic meters, while potable water derived from on-site sources totalled 0 Cubic meters. Reporting under GRI 303-3 standard units of megalitres requires dividing cubic metre volumes by one thousand.
+The total water withdrawal is `2,092,006 Cubic meters`. This is entirely drawn as potable water from off-site sources, which is `2,092,006 Cubic meters`. Potable water from on-site sources is `0 Cubic meters`.
 
-### Greenhouse gas emissions
+The physical water quantity risk for the main campus is classified as high. To mitigate water impacts, the university harvests rainwater on-site for storage and use.
 
-UC Berkeley compiles its greenhouse gas emissions inventory following The Climate Registry protocol, reporting data to both The Climate Registry and the California Air Resources Board. The baseline year for combined Scope 1 and Scope 2 GHG emissions is 2019, selected to capture standard operational activity prior to pandemic disruption. Baseline Scope 1 and Scope 2 emissions totaled 147,623 Metric tons of CO2 equivalent.
+### Emissions Performance
 
-In the current reporting year, direct Scope 1 emissions under Disclosure 305-1 comprised 134,957 Metric tons of CO2 equivalent from stationary combustion, 1,676 Metric tons of CO2 equivalent from fleet vehicles, and 76 Metric tons of CO2 equivalent from fugitive sources. Greenhouse gas emissions from biogenic sources were 0 Metric tons of CO2 equivalent. Indirect Scope 2 emissions under Disclosure 305-2 included 1,256 Metric tons of CO2 equivalent from off-site electricity (market-based) and 0 Metric tons of CO2 equivalent from off-site heating and cooling.
+Direct Scope 1 greenhouse gas emissions from stationary combustion are `134,957 Metric tons of CO2 equivalent`. Scope 1 emissions from mobile combustion are `1,676 Metric tons of CO2 equivalent`. Scope 1 fugitive emissions are `76 Metric tons of CO2 equivalent`. Greenhouse gas emissions from biogenic sources are `0 Metric tons of CO2 equivalent`.
 
-Scope 3 emissions under Disclosure 305-3 included 19,913 Metric tons of CO2 equivalent from business travel, 12,836 Metric tons of CO2 equivalent from student and employee commuting, 728 Metric tons of CO2 equivalent from solid waste management, and 22 Metric tons of CO2 equivalent from fuel- and energy-related activities not included in Scope 1 or Scope 2.
+Indirect Scope 2 greenhouse gas emissions from off-site sources of electricity, calculated using a market-based method, are `1,256 Metric tons of CO2 equivalent`. Scope 2 emissions from off-site sources of heating and cooling are `0 Metric tons of CO2 equivalent`.
 
-GHG emissions intensity reported under GRI 305-4 was 2,368.25 Kilograms of CO2 equivalent per campus occupant (FTE students and staff) and 91.79 Kilograms per square meter per square metre of gross floor area.
+Other indirect Scope 3 emissions include `19,913 Metric tons of CO2 equivalent` from business travel, `12,836 Metric tons of CO2 equivalent` from commuting, `728 Metric tons of CO2 equivalent` from waste generated in operations, and `22 Metric tons of CO2 equivalent` from fuel- and energy-related activities not included in Scope 1 or Scope 2.
 
-Under Disclosure 305-5, the percentage reduction in Scope 1 and Scope 2 emissions relative to the baseline was 9.83%. Adjusted net Scope 1 and Scope 2 emissions stood at 133,106.95 Metric tons of CO2 equivalent, incorporating 4,858 Metric tons of CO2 equivalent of third-party certified carbon offsets.
+The annual Scope 1 and Scope 2 emissions intensity is `2,368.25 Kilograms of CO2 equivalent` per person and `91.79 Kilograms per square meter` per unit of floor area.
 
-### Waste management and diversion
+The baseline year for Scope 1 and Scope 2 emissions is `2019`, with baseline emissions of `147,623 Metric tons of CO2 equivalent`. The percentage reduction in Scope 1 and Scope 2 emissions from this baseline is `9.83%`. The adjusted net Scope 1 and Scope 2 emissions are `133,106.95 Metric tons of CO2 equivalent`. The university holds `4,858 Metric tons of CO2 equivalent` of external certified carbon offsets.
 
-Operational waste management prioritises reduction, reuse, recycling, and composting. The university operates a surplus program to reallocate unused institutional assets, maintains personal item reuse initiatives for staff and students, and has banned at least one category of single-use disposable plastic on campus. Campus composting systems route organic waste to commercial compost processing facilities. Hazardous materials are managed under a dedicated protocol designed to reduce usage and control exposure risk.
+The baseline year was adopted because it represents the final period of business-as-usual emissions before the global pandemic. The emissions inventory includes major greenhouse gases and is reported to both The Climate Registry and the California Air Resources Board (CARB). Scope 1 and Scope 2 inventories adhere to The Climate Registry protocol.
 
-Under GRI 306-3, annual non-hazardous waste generated reached 7,732.13 Metric tons. Construction and demolition waste generated was 4,753.09 Metric tons.
+### Waste Performance
 
-Under Disclosure 306-4, non-hazardous waste diverted from disposal totalled 4,254.13 Metric tons, consisting of 1,576 Metric tons recycled, 2,554 Metric tons composted, and 124.13 Metric tons prepared for reuse. Construction and demolition waste diverted from disposal reached 3,452.02 Metric tons, of which 2,858.23 Metric tons was recycled.
+The annual non-hazardous waste generated is `7,732.13 Metric tons`. The annual construction and demolition waste generated is `4,753.09 Metric tons`.
 
-Under Disclosure 306-5, non-hazardous waste directed to disposal via landfill or incineration was 3,478 Metric tons. Construction and demolition waste sent to landfill or incineration totalled 1,301.07 Metric tons.
+Regarding waste diversion, the total non-hazardous waste diverted from disposal is `4,254.13 Metric tons`. This includes `1,576 Metric tons` recycled, `2,554 Metric tons` composted, and `124.13 Metric tons` prepared for reuse. The total construction and demolition waste diverted from disposal is `3,452.02 Metric tons`. This consists of `2,858.23 Metric tons` recycled and `593.79 Metric tons` prepared for reuse.
 
-### Sustainable procurement and reporting limitations
+Waste directed to disposal includes `3,478 Metric tons` of non-hazardous waste disposed of to a landfill or incinerator, and `1,301.07 Metric tons` of construction and demolition waste disposed of to a landfill or incinerator.
 
-The institution embeds sustainability expectations into procurement processes through a supplier code of conduct that exceeds statutory requirements. Under Disclosure 308-1, 100% of bid solicitations included explicit supplier sustainability criteria.
+The university operates a surplus programme to store, sell, donate, or reuse institution-owned items. It also participates in a reuse programme for personal items. Composting is integrated into campus collection systems and processed at an industrial composting facility. The university has eliminated certain single-use disposable plastics and maintains a hazardous waste management programme to minimise hazardous material use.
 
-A number of reporting limitations exist across the dataset. Standards GRI 301-1, GRI 301-2, GRI 301-3, and GRI 302-5 are omitted as the university produces no commercial physical products. Upstream and downstream energy consumption (GRI 302-2) and absolute energy reduction figures (GRI 302-4) are not recorded. Effluent discharge quality (GRI 303-2) and specific water withdrawal breakdowns for water-stressed regions (GRI 303-3) are unavailable. Emissions of ozone-depleting substances (GRI 305-6) and NOx/SOx air pollutants (GRI 305-7) are not reported. GHG baselines combine Scope 1 and Scope 2 emissions without individual attribution, and Scope 3 reporting omits capital goods and purchased goods. Hazardous waste quantities are unmeasured under GRI 306-3, and supplier environmental impact assessments (GRI 308-2) are not systematically tracked.
+### Supplier Environmental Assessment
+
+The percentage of bid solicitations that identify supplier sustainability considerations is `100%`. The supplier code of conduct includes environmental expectations that exceed regulatory compliance.
+
+### Data Limitations and Gaps
+
+Several reporting limitations exist when mapping the available data to GRI standards:
+
+- **Energy (GRI 302):** GRI 302-1 requires energy values in joules, whereas the source data is reported in megawatt-hours. A conversion factor must be applied. The renewable energy consumption field includes renewable electricity, which is broader than the renewable fuel scope of Disclosure 302-1-b; the precise renewable fuel figure is represented by renewable stationary fuels. Heating oil and coal/coke are reported as nil, representing a complete absence of consumption rather than missing data. The denominators for energy intensity ratios are the combined full-time equivalent of students and employees, and the gross floor area. GRI 302-2, GRI 302-4, and GRI 302-5 are not reported.
+- **Water (GRI 303):** GRI 303-3 requires water volumes in megalitres, whereas the source data is in cubic metres. On-site abstraction is reported as nil, meaning off-site potable water represents the entire withdrawal. The volume of harvested rainwater is not quantified. GRI 303-1 is limited to a risk grade for the main campus and does not describe wider stakeholder interactions or multi-campus impacts. GRI 303-2 is not reported.
+- **Emissions (GRI 305):** The baseline year and baseline emissions are reported as a combined Scope 1 and Scope 2 total, which cannot be split to satisfy Disclosure 305-1 and Disclosure 305-2 separately. The source of emission factors, global warming potential rates, and the consolidation approach are not reported. The percentage reduction is net of purchased offsets; the gross reduction differs because the university holds offsets. GRI 305-5-b and Disclosure 305-5-d remain unallocated by scope or gas. Biogenic emissions are reported as CO2-equivalent, which may differ from the biogenic CO2 boundary. Specific Scope 1, Scope 2, and Scope 3 categories (such as capital goods and purchased goods) were left blank. GRI 305-6 and GRI 305-7 are not reported.
+- **Waste (GRI 306):** Hazardous waste is not quantified by weight, meaning total waste generation under Disclosure 306-3 and diversion under Disclosure 306-4 cannot be fully reported. Disclosure 306-4-d requires a split of recovery operations into on-site and off-site, which is not collected. Disclosure 306-5 requires a split of disposal across multiple operations, but the source data merges landfill and incineration. GRI 306-1 is not reported.
+- **Suppliers (GRI 308):** GRI 308-1 requires the percentage of new suppliers screened, whereas the source data reports the percentage of bid solicitations. GRI 308-2 is not reported.
+- **Materials (GRI 301):** GRI 301-1, GRI 301-2, and GRI 301-3 are not reported as the university does not manufacture physical products.
 
 ## Social and economic performance
 
-### Remuneration and Employment Conditions
+### Pay and Employment Conditions
+The University of California, Berkeley, monitors employee compensation against local economic benchmarks. The percentage of employees receiving remuneration equivalent to at least a living wage is `96.20%`. The designated living wage for the region is `39.62`, while the wage floor for regular and permanent employees is `22.54`. For student employees, the local hourly minimum wage is `16.99`.
 
-The University of California, Berkeley records a wage floor for regular and permanent staff of 22.54, compared against a regional living wage baseline of 39.62. Across the institution, the proportion of employees earning at least the local living wage is 96.20%.
-
-With respect to family and medical leave, institutional eligibility for paid all-gender leave stands at 100%. The duration of paid maternity leave provided by the university is 12. Qualifying employees access leave under statutory mechanisms, such as the Family and Medical Leave Act and the California Family Rights Act, upon fulfilling required service and hour thresholds.
+Regarding employee benefits and leave, `100%` of employees are eligible for paid all-gender family or medical leave. The standard allowance for paid maternity leave is `12`. Under the Family and Medical Leave Act (FMLA) and the California Family Rights Act (CFRA), eligible employees who meet the cumulative service and hours thresholds are entitled to a standard period of leave. Employees disabled by pregnancy are eligible for leave under the Pregnancy Disability Leave Laws (PDLL) from the start of their employment.
 
 ### Occupational Health and Safety
+The university operates an institutional health and safety management system overseen by dedicated workplace safety committees. These committees bring together workers and management to develop, review, and implement workplace health and safety policies.
 
-Workplace safety governance is supported by an institution-wide committee network that connects staff and management representatives to review health and safety practices and procedures. The university provides direct access to physical health services and behavioural health services for employees. Broader health promotion initiatives include access to free or reduced-cost fitness activities, as well as contemplative and spiritual activities. Additionally, a comprehensive policy prohibiting smoking and tobacco use applies across the entire campus.
+Physical and behavioural health services are made available to all employees. The university also provides free or reduced-cost fitness activities, alongside contemplative and spiritual activities. To promote a healthy environment, smoking and tobacco use are prohibited across the entire campus.
 
 ### Workforce Diversity
+The university tracks diversity across different staff categories. The ethnic diversity index is `0.51` for executive staff, `0.50` for academic staff, and `0.69` for non-academic staff.
 
-Diversity across institutional workforce categories is tracked through gender representation and ethnic diversity measures. For executive staff, the share of individuals identifying as women or other marginalised gender identities is 50%, and the ethnic diversity index for executive staff is 0.51.
+In terms of gender representation, the percentage of executive staff who identify as women or other marginalised gender identities is `50%`. For regular, permanent academic staff, this figure is `36.70%`, and for regular, permanent non-academic staff, it is `56.50%`.
 
-Among regular permanent academic staff, the representation of women and other marginalised gender identities is 36.70%, alongside an ethnic diversity index for academic staff of 0.50. For regular permanent non-academic staff, the proportion identifying as women or other marginalised gender identities is 56.50%, while the ethnic diversity index for non-academic staff is 0.69.
+### Data Limitations and Gaps
+Several limitations exist within the reported data. For GRI 202-1, the local minimum wage figure is derived from student-employment records and represents the minimum for student workers rather than the general workforce. The ratio of standard entry-level wage by gender is unanswerable as gender-disaggregated wage data is not collected. The living wage is a separate benchmark and cannot be substituted for the minimum wage. Values are reported in US Dollars and are not directly comparable to other currencies without conversion.
 
-### Data Limitations and Unreported Disclosures
+For GRI 401-2, the university reports a single institution-wide eligibility rate, preventing a comparison between full-time and temporary or part-time employees. For GRI 401-3, the data is descriptive and lacks the required headcounts, return-to-work rates, and retention rates by gender, with maternity leave being narrower than parental leave.
 
-Several limitations affect alignment with the GRI Standards:
-- **GRI 202-1**: Entry-level pay is benchmarked against a calculated living wage rather than the statutory local minimum wage, and figures are not broken down by gender. Reported values reflect US dollars.
-- **GRI 401-2**: Paid family and medical leave eligibility is presented as a single institution-wide metric rather than disaggregated by full-time, part-time, or temporary employment status.
-- **GRI 401-3**: Reporting outlines leave policy frameworks and paid maternity duration, but omits headcounts of eligible employees, leave takers, returnees, and retention rates disaggregated by gender.
-- **GRI 403-1, GRI 403-3, GRI 403-4, and GRI 403-6**: While committee structures and general health services exist, institutional reporting does not specify formal occupational health management standards, legal origins, committee meeting frequencies, decision-making powers, or explicit hazard identification protocols. The campus tobacco prohibition functions as an operational restriction rather than a voluntary health promotion service.
-- **GRI 405-1**: Gender diversity combines women and marginalised gender identities into one figure rather than reporting distinct gender categories, ethnic diversity is reported via composite index scores rather than demographic percentage shares, age groups are not tracked, and percentage breakdowns for governance body members are not recorded.
+Under GRI 403-1, GRI 403-3, GRI 403-4, and GRI 403-6, there is no information on whether the safety system is legally required, which standards it follows, or its specific worker coverage. Reported health services are general rather than specific occupational health services designed to identify and eliminate hazards. Committee responsibilities, meeting frequency, decision-making authority, and representation gaps are not fully detailed. Furthermore, the campus smoking prohibition is a control rather than a voluntary health promotion service, and the precise scope of access to health services is not quantified.
 
-The university does not report data for GRI 202-2 (senior management hired from the local community), GRI 204-1 (procurement spending on local suppliers), GRI 401-1 (new employee hires and turnover), GRI 403-2 (hazard identification and risk assessment), GRI 403-5 (worker health and safety training), GRI 403-7 (prevention of impacts directly linked by business relationships), GRI 403-8 (workers covered by an occupational health and safety management system), GRI 403-9 (work-related injuries), GRI 403-10 (work-related ill health), or Disclosure 405-2 (ratio of basic salary and remuneration of women to men).
+For GRI 405-1, gender data is combined into a single category for women and marginalised gender identities rather than a detailed split. Employee age-group breakdowns are unanswerable, and the percentage representation of constituencies on the highest decision-making body is not recorded. The ethnic diversity figures represent a concentration index rather than a percentage breakdown.
+
+### Not Reported
+The following disclosures are not reported: GRI 202-2 (proportion of senior management hired from the local community); GRI 204-1 (proportion of spending on local suppliers, as procurement metrics focus on social impact suppliers rather than locality); GRI 401-1 (new employee hires and turnover); GRI 403-2 (hazard identification, risk assessment, and incident investigation); GRI 403-5 (occupational health and safety training); GRI 403-7 (prevention of impacts in business relationships); GRI 403-8 (workers covered by an occupational health and safety management system); GRI 403-9 (work-related injuries); GRI 403-10 (work-related ill health); and GRI 405-2 (ratio of basic salary and remuneration of women to men).

@@ -582,7 +582,17 @@ def _gri_reference_pattern() -> re.Pattern:
         alt = "|".join(re.escape(s)
                        for s in sorted(standards, key=len, reverse=True))
         parts.append(rf"\b{prefix}(?:{alt})\b")
-    parts.append(r"\bScope\s+[123]\b")
+    # Scope references, including the forms GRI itself uses. `\bScope\s+[123]\b`
+    # covered only the singular: "Scopes 1 and 2 adhere to The Climate Registry"
+    # had its digits audited as fabricated data, and the build refused a section
+    # whose prose was entirely correct. A guard that rejects good output erodes
+    # trust in it as surely as one that passes bad output, and this one nearly
+    # cost a regeneration to a defect that did not exist.
+    #
+    # Only 1-3 immediately after Scope/Scopes, joined by commas or "and", are
+    # exempt — a fabricated quantity cannot wear that shape.
+    parts.append(r"\bScopes?\s+[123](?:\s*,\s*[123])*"
+                 r"(?:\s*(?:and|&|to)\s*[123])?\b")
     return re.compile("|".join(parts), re.IGNORECASE)
 
 

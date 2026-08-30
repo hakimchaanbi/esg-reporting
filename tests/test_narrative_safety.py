@@ -266,7 +266,14 @@ def main():
             if any(re.search(r"(?i)\b(?:GRI|Disclosure)\s+%s\b" % re.escape(ref),
                              window) for ref in vocabulary):
                 continue                       # part of e.g. "GRI 305-1"
-            if re.search(r"(?i)\bScope\s+%s\b" % re.escape(digit), window):
+            # Scope references, singular and plural. This scanner is
+            # deliberately independent of GRI_REF, which means it has to be
+            # taught the same real-world notation separately — including
+            # "Scopes 1 and 2", which GRI itself uses and which was missing
+            # from both for a while.
+            if re.search(r"(?i)\bScopes?\s+[123](?:\s*,\s*[123])*"
+                         r"(?:\s*(?:and|&|to)\s*[123])?\b", window) \
+                    and digit in "123":
                 continue
             out.append(digit)
         return out
@@ -325,6 +332,24 @@ def main():
     check("prefixed references are still exempt",
           not audit_digits(real_refs, [], [])["invented"],
           f"wrongly flagged: {audit_digits(real_refs, [], [])['invented']}")
+
+    # ⚠️ FALSE POSITIVES MATTER TOO. The Scope pattern was singular-only, so
+    # "Scopes 1 and 2 adhere to The Climate Registry protocol" — ordinary GRI
+    # usage, and correct prose — had its digits audited as fabricated data and
+    # the build refused the section. A guard that rejects good output erodes
+    # trust in it as surely as one that passes bad output, and this one nearly
+    # cost a regeneration for a defect that did not exist.
+    for phrase in ("Scope 1 emissions", "Scopes 1 and 2 adhere to the protocol",
+                   "Scopes 1, 2 and 3 are reported", "Scopes 1 to 3",
+                   "combined Scope 1 and Scope 2 emissions"):
+        check(f"exempt: {phrase!r}", not numbers_in(phrase),
+              f"flagged: {numbers_in(phrase)}")
+
+    # …and the exemption must not become a hiding place for real figures.
+    for phrase, want in (("Scope 1 emissions were 134,957 tonnes", "134,957"),
+                         ("scopes of 1,234 tonnes", "1,234")):
+        check(f"still audited: {phrase!r}", want in numbers_in(phrase),
+              f"found: {numbers_in(phrase)}")
 
     print("\n3c. Retrieved passages carry no figures into the prompt\n")
 
