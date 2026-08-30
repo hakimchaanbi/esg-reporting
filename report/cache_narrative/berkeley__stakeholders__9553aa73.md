@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: b0352196a3a93cf4f37b4c4ea43b51ee5066efe281032051720fa35390b6dadd
+generated: 2026-08-29
+-->
 ### Consultation Mechanisms
 
 The University of California, Berkeley engages with students, academic staff, and the local community through established standing bodies and consultative mechanisms in accordance with GRI 2-29.

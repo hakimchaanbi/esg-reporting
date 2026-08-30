@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 615739ae567fc105c08221cdd86057a7fb3442aa33bcef7e1c31b033a64a1ff0
+generated: 2026-08-29
+-->
 The sustainability topics covered in this report are aligned with the framework established by the Sustainability Tracking, Assessment & Rating System (STARS), developed by the Association for the Advancement of Sustainability in Higher Education for the higher-education sector. University College Cork did not run an independent materiality assessment to identify or prioritize institution-specific topics. Consequently, the topics reported reflect the standardized STARS structure rather than a bespoke materiality determination.
 
 ### Operational and Institutional Objectives

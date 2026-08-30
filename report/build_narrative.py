@@ -51,6 +51,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import datetime as dt
 import hashlib
 import json
 import pathlib
@@ -698,37 +699,84 @@ def render(prose: str, figures: dict) -> tuple[str, list[str]]:
     return out, used
 
 
+CACHE_META = re.compile(r"\A<!--\s*cache-meta\n(.*?)\n-->\n", re.DOTALL)
+
+
 def cache_path(writer, institution, section, prompt) -> pathlib.Path:
     """Where one generated section lives between runs.
 
-    Keyed on the model, the system rule and the prompt, so changing any of them
-    regenerates. Note what is NOT in the key: the figure VALUES. They never
-    reach the prompt (that is the whole design), so a corrected number in
-    esg_master_dataset.csv flows into the report on the next run without
-    spending an API call — substitution happens fresh every time against live
-    data, and only the sentences are cached.
+    ⚠️ THE MODEL IS DELIBERATELY NOT IN THIS KEY — it used to be, and that broke
+    the reproducibility the committed cache exists to provide.
+
+    The key was sha256(model, SYSTEM, prompt), and the model string was recorded
+    nowhere. So a fresh clone could not know which GEMINI_MODEL would hit the
+    cache: every lookup missed, the run went to the live API, and with no key it
+    fell through to the stub. The third external review hit exactly that — its
+    keyless rebuild, run as documented, made a dozen live API calls.
+
+    Keyed on the prompt alone, the cache is portable: clone, run, hit, whatever
+    GEMINI_MODEL happens to be set. The model that produced each section is
+    written INTO the file instead (see cache_meta), so provenance survives and a
+    mismatch is reported rather than silently mixing two models' prose.
+
+    Note what is still NOT in the key: the figure VALUES. They never reach the
+    prompt, so a corrected number in esg_master_dataset.csv flows into the report
+    on the next run without spending an API call — substitution happens fresh
+    every time against live data, and only the sentences are cached.
     """
     digest = hashlib.sha256(
-        f"{getattr(writer, 'model', writer.name)}\0{SYSTEM}\0{prompt}"
-        .encode("utf-8")).hexdigest()[:8]
+        f"{SYSTEM}\0{prompt}".encode("utf-8")).hexdigest()[:8]
     return CACHE_DIR / f"{institution.key}__{section['key']}__{digest}.md"
+
+
+def cache_meta(text: str) -> dict:
+    """Read the provenance header off a cached section, if it has one."""
+    m = CACHE_META.match(text)
+    if not m:
+        return {}
+    out = {}
+    for line in m.group(1).splitlines():
+        key, _, value = line.partition(":")
+        out[key.strip()] = value.strip()
+    return out
+
+
+def strip_meta(text: str) -> str:
+    return CACHE_META.sub("", text, count=1)
 
 
 def write_section(writer, institution, section, facts, use_cache=True) -> dict:
     prompt = build_prompt(institution, section, facts)
     tokens = list(facts["figures"])
+    model = getattr(writer, "model", writer.name)
 
     # The free tier allows very few calls a day, so never pay twice for the
     # same section. A run that dies halfway resumes instead of restarting.
     path = cache_path(writer, institution, section, prompt)
     cached = use_cache and path.exists()
     if cached:
-        prose = path.read_text(encoding="utf-8")
+        raw = path.read_text(encoding="utf-8")
+        meta = cache_meta(raw)
+        prose = strip_meta(raw)
+        # Mixing two models' prose across one report is a real quality problem;
+        # it just must not happen SILENTLY, which is what keying on the model
+        # was trying to prevent at the cost of portability.
+        if meta.get("model") and meta["model"] != model:
+            print(f"       [note] cached prose came from {meta['model']}, "
+                  f"this run is configured for {model} — using the cache")
     else:
         prose = writer.write(SYSTEM, prompt, tokens)
-        if use_cache:
+        # ⚠️ FAKE BACKENDS NEVER WRITE TO THE CACHE. Taking the model out of the
+        # cache key bought portability and cost separation: stub output stored
+        # under a prompt-only key is indistinguishable from real prose, and the
+        # next Gemini run would read it back and ship it. The model-in-key
+        # scheme kept them apart by accident; this keeps them apart on purpose.
+        if use_cache and writer.name not in ("stub", "rogue"):
             CACHE_DIR.mkdir(parents=True, exist_ok=True)
-            path.write_text(prose, encoding="utf-8")
+            header = (f"<!-- cache-meta\nmodel: {model}\n"
+                      f"prompt_sha256: {hashlib.sha256(prompt.encode()).hexdigest()}\n"
+                      f"generated: {dt.date.today().isoformat()}\n-->\n")
+            path.write_text(header + prose, encoding="utf-8")
 
     rendered, used = render(prose, facts["figures"])
     context_texts = [c["text"] for c in facts["context"]]
@@ -868,6 +916,25 @@ def main():
         # STOP and wrote the file anyway. Anyone opening the directory later,
         # including a reviewer, would have found three plausible-looking
         # reports of which one was empty.
+        # ⚠️ THE STUB MUST NEVER BE ABLE TO CLOBBER A REAL REPORT.
+        #
+        # `--backend stub` is not a read-only check — it is a full build with a
+        # fake model, writing to the same path as a real run. It overwrote
+        # Berkeley's finished report with placeholder text once by my hand, and
+        # the keyless path (no API key -> automatic stub fallback) meant anyone
+        # cloning the repo and running the pipeline would have done the same
+        # thing to all three, unprompted. Stub output now goes to its own file.
+        if writer.name in ("stub", "rogue"):
+            out = OUT_DIR / f"{institution.key}_gri_report.{writer.name}.md"
+            if incomplete:
+                print(f"  [skip] {writer.name} output not written — "
+                      f"{len(incomplete)} section(s) incomplete")
+            else:
+                out.write_text("\n".join(parts), encoding="utf-8")
+                print(f"  -> {out.relative_to(PROJECT_ROOT)}  "
+                      f"({writer.name} output — the real report is untouched)")
+            continue
+
         out = OUT_DIR / f"{institution.key}_gri_report.md"
         if incomplete:
             print(f"  [skip] not written — {len(incomplete)} section(s) "

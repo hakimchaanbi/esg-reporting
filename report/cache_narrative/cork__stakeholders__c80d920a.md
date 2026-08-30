@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 2cadcbff555ac74a5be70020ac1e631e4f13483715802b6fd41dec8a70e7bd27
+generated: 2026-08-29
+-->
 ### Consultation Mechanisms for Students and Staff
 
 University College Cork consults with internal stakeholders through established deliberative bodies and governance forums. Student participation in strategic decisions, policy formulation, and institutional planning is facilitated primarily through the UCC Student Forum. Modeled on the structure of the Irish Citizens’ Assembly, this forum serves as a platform for deliberative democracy, embedding student input into university decision-making to enhance institutional transparency and integrity.

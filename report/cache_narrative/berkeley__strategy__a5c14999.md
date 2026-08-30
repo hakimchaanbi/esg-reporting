@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 9f010918f89d39da94bf851a774de65dc3daac27994e32bf0a298685e8ab7931
+generated: 2026-08-29
+-->
 ### Sustainability Vision and Strategy
 The University of California, Berkeley sets out its sustainability direction through published strategic frameworks, including its Climate Action Plan and the UC Berkeley Sustainability Plan. These framework documents establish institutional goals for reducing greenhouse gas emissions across campus operations, improving energy efficiency, increasing the adoption of renewable energy, and encouraging sustainable transportation choices. The institution's overarching vision is coordinated by the Office of Sustainability under the direction of the Sustainability Officer, who leads strategy formulation, operational integration, and campus engagement. Operational accomplishments directed by this office include progress towards a clean, electrified campus energy system and external recognition in global university sustainability rankings.
 

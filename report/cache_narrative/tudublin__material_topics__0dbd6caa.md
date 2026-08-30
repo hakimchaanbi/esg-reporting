@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 9bad17b3591261c1cc9ba337df37811b6b12484e9e227e515d14ef7ba8681bd0
+generated: 2026-08-29
+-->
 ### Topic Identification and Framework
 
 Technological University Dublin aligns its sustainability reporting with the Sustainability Tracking, Assessment & Rating System (STARS), a sector-specific framework developed by the Association for the Advancement of Sustainability in Higher Education (AASHE). The university has established measurable sustainability objectives across the core operational and academic areas defined within the STARS credit set: campus operations; teaching, learning, and research; racial equity and social justice; administration and finance; and campus and community engagement.

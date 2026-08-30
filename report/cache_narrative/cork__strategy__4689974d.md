@@ -1,3 +1,8 @@
+<!-- cache-meta
+model: gemini-3.6-flash
+prompt_sha256: 4ec4b00f25e0feb806b18c8328b18b99dd954c1f27171a522a1979520b3b6444
+generated: 2026-08-29
+-->
 ### Sustainability Vision and Commitments
 
 University College Cork (UCC) details its strategic direction through its Sustainability and Climate Action Plan, which builds upon its prior sustainability strategy. The university aims to embed sustainability principles across education, research, campus infrastructure, administration, and community engagement. Key institutional goals focus on campus waste elimination and reaching carbon neutrality.
