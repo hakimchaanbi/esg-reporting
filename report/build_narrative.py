@@ -411,7 +411,18 @@ name that does not exist will crash the build.
 
 Other rules:
 - British English. Formal, plain, factual. No marketing language.
-- Never claim the institution did something the material does not state.
+- Never claim the institution did something the material does not state — and
+  equally, never claim that it did NOT. An absence is one of two things and only
+  one of them is a fact about the institution:
+    - STARS asked and the institution left it unanswered. "The institution does
+      not report X" is accurate. Write it plainly.
+    - STARS never asked. Then NOTHING follows about the institution, because a
+      university that does X has no field in which to say so. The subject of
+      that sentence is this report, never the university: "this report cannot
+      evidence X", "STARS does not collect X". Never "the institution does not
+      do X", "did not conduct X", "has no X".
+  Where the material does not make clear which of the two applies, use the
+  second form. It is the weaker claim and it is always the safe one.
 - Where the material shows a gap, report the gap plainly. Unanswered questions
   are a legitimate and expected part of a GRI report.
 - Keep limitations SHORT. This is a report about the institution, not a review
@@ -571,17 +582,30 @@ def _gri_reference_pattern() -> re.Pattern:
     # cost is a false positive on an unprefixed reference, which is loud, and
     # the system prompt tells the model to always write "GRI 305-1" or
     # "Disclosure 305-1" — which is what it does unprompted anyway.
-    prefix = r"(?:GRI|Disclosure)\s+"
+    prefix = r"(?:GRI|Disclosures?)\s+"
     parts = []
-    if numbers:
+    # ⚠️ THIRD FIX, 2026-08-31, and the same shape as the Scopes one below.
+    # Requiring the prefix on EVERY item rejected the way GRI references are
+    # actually written — one prefix distributed over a list:
+    #
+    #   "GRI 301-1, 301-2, 301-3, 302-2, 305-6, 306-1, and 308-2 are not
+    #    reported."
+    #
+    # Every number there is a real disclosure and the sentence is correct, but
+    # only the first carried a prefix, so the other ten were audited as
+    # fabricated data and the build refused the section. Twice now a false
+    # positive has cost more than the hole it was guarding.
+    #
+    # A single prefix may now govern a comma/and-separated run — but EVERY item
+    # in the run must itself be in the vocabulary, so a fabricated quantity
+    # cannot ride along behind a genuine reference. "GRI 305-1 and 4,858" still
+    # audits 4,858, because 4,858 is not a disclosure.
+    vocabulary = sorted(numbers | standards, key=len, reverse=True)
+    if vocabulary:
         # Longest first so 403-10 is consumed before 403-1 can match its prefix.
-        alt = "|".join(re.escape(n)
-                       for n in sorted(numbers, key=len, reverse=True))
-        parts.append(rf"\b{prefix}(?:{alt})\b")
-    if standards:
-        alt = "|".join(re.escape(s)
-                       for s in sorted(standards, key=len, reverse=True))
-        parts.append(rf"\b{prefix}(?:{alt})\b")
+        item = "(?:%s)" % "|".join(re.escape(v) for v in vocabulary)
+        sep = r"(?:\s*,\s*(?:and\s+|&\s+)?|\s+(?:and|&)\s+)"
+        parts.append(rf"\b{prefix}{item}(?:{sep}{item})*\b")
     # Scope references, including the forms GRI itself uses. `\bScope\s+[123]\b`
     # covered only the singular: "Scopes 1 and 2 adhere to The Climate Registry"
     # had its digits audited as fabricated data, and the build refused a section
@@ -670,6 +694,15 @@ def audit_digits(rendered: str, substituted: list[str], context: list[str]):
 
 PERCENT_FIELD = re.compile(r"(?i)\bpercentage\b|\bpercent\b")
 
+# STARS sometimes states the unit in the FIELD NAME and leaves `units` empty:
+# "Number of weeks of paid maternity leave" has no unit column, so the value
+# rendered as a bare "26" and Cork's report read "consists of 26 of paid leave".
+# The model was not at fault — the prompt promises that every placeholder
+# carries its own unit, so writing the placeholder alone is exactly what it was
+# told to do. Where the name states the unit, honour that promise.
+COUNTED_UNIT_FIELD = re.compile(
+    r"(?i)^\s*(?:total\s+)?number of (weeks|days|months|years|hours) of\b")
+
 
 def substituted_value(f: dict) -> str:
     """What a placeholder actually becomes in the finished text.
@@ -681,13 +714,28 @@ def substituted_value(f: dict) -> str:
 
     Of the 46 that do not, 21 are percentages: STARS leaves `units` empty for
     them, so `96.20` rendered bare and the model wrote "96.20 of employees",
-    with the per-cent sign nowhere. The remaining 25 are genuinely unitless —
-    baseline years, diversity indices, counts — and must stay bare.
+    with the per-cent sign nowhere.
+
+    A third case, found 2026-08-31 in Cork's finished report: some field NAMES
+    state the unit where the `units` column is empty, so "Number of weeks of
+    paid maternity leave" rendered as a bare "26" and the sentence read
+    "consists of 26 of paid leave". The prompt promises that every placeholder
+    carries its unit, so the model wrote the placeholder alone as instructed —
+    the promise was the code's to keep.
+
+    What remains bare is genuinely unitless and must stay so: baseline and
+    performance years, ethnic diversity indices, FTE counts, and the IL-62
+    compensation factor. The three wage fields are bare on purpose too — STARS
+    records no currency, and their caveat supplies it (EUR for the Irish
+    universities, USD for Berkeley) rather than the code guessing.
     """
     if f["units"]:
         return f"{f['value']} {f['units']}".strip()
     if PERCENT_FIELD.search(f["label"]):
         return f"{f['value']}%"
+    named = COUNTED_UNIT_FIELD.match(f["label"])
+    if named:
+        return f"{f['value']} {named.group(1).lower()}"
     return f["value"]
 
 

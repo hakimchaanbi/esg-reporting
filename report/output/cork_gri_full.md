@@ -1,6 +1,6 @@
 # Sustainability Report — University College Cork
 
-Prepared **with reference to** the GRI Standards · compiled 2026-08-30
+Prepared **with reference to** the GRI Standards · compiled 2026-08-31
 
 <div class="frontmatter">
 
@@ -35,223 +35,200 @@ AASHE; it is not openly licensed.
 
 ## The organisation and its reporting
 
-### Organisational Profile and Boundary
+### Organisational details and reporting boundary
 
-University College Cork is a public higher education institution. Its physical footprint and primary operational activities encompass its main campus, satellite campuses, a medical school, and a museum.
+University College Cork is a public institution. In accordance with Disclosure 2-1, this report describes the sustainability performance of the university, focusing on its operational and academic impact. The reporting boundary, as defined under Disclosure 2-2, encompasses the University College Cork main campus and all satellite campuses managed by the Buildings and Estates office. This boundary includes specific facilities such as the medical school and the university museum.
 
-In accordance with Disclosure 2-2, the reporting boundary defined for this report covers all main campus facilities and satellite locations under the direct management of the University College Cork Buildings and Estates office. Certain affiliated bodies and operational entities are excluded from this reporting boundary. Specifically, subsidiary companies—including Campus Accommodation, the Mardyke Arena, the Student Centre, and the Irish Management Institute in Dublin—are not included. In addition, rented multi-tenant buildings fall outside the operational scope of this report.
+Certain entities are excluded from this sustainability reporting scope. These include subsidiary companies such as Campus Accommodation, the Mardyke Arena, the Student Centre, and the Irish Management Institute in Dublin. Furthermore, rented multi-tenant buildings are not included within the institutional boundary. Regarding Disclosure 2-6, the activities reported are those associated with the operation of these campus locations and their associated academic and research functions.
 
-### Reporting Process and External Assurance
+### Reporting period and external assurance
 
-The compilation of this report was led by Dr Maria Kirrane, Head of Sustainability and Climate. With respect to energy and climate accounting under GRI 305, the performance period evaluated for Scope 1 and Scope 2 greenhouse gas emissions corresponds to 2024.
+The preparation of this report was led by the Head of Sustainability and Climate. Under Disclosure 2-3, it is noted that the data points collected through the STARS framework do not correspond to a single, uniform reporting period. Different credits within the submission reflect different performance windows; for instance, the performance year for Scope 1 and Scope 2 greenhouse gas emissions is 2024.
 
-In alignment with Disclosure 2-5, external verification was obtained for specific climate indicators. The institution's reported Scope 1 and Scope 2 emissions figures were subject to independent external assurance provided by Sustineo, the university's contracted carbon footprint provider.
+In accordance with Disclosure 2-5, external assurance was sought for specific environmental data. The university’s greenhouse gas emissions figures were verified by Sustineo, a contracted carbon footprint provider.
 
-### Limitations and Data Gaps
+### Limitations of the report
 
-This report reflects the boundaries and structures of the underlying data source, resulting in specific reporting omissions:
+This report is subject to several limitations based on the data collected by the source framework. Regarding Disclosure 2-1, the source material does not record the legal name of the institution, the location of its headquarters, or its specific countries of operation. For Disclosure 2-2, the source does not evidence whether the reporting entities differ from those included in the university's financial statements, nor does it describe the consolidation of minority interests.
 
-- **Organisational details and business model (GRI 2-1 and GRI 2-6):** The legal name, headquarters location, countries of operation, full value chain description, and broader market sectors served are not reported beyond the physical campus attributes noted.
-- **Financial boundary alignment (GRI 2-2):** The source data does not specify whether the reporting boundary differs from the university's consolidated financial statements, nor does it detail how minority interests are consolidated.
-- **Reporting period and contact details (GRI 2-3):** Reporting periods vary across individual credit topics rather than following a single institutional reporting period. Furthermore, the reporting frequency, publication date, and official public contact details are not recorded.
-- **Restatements of information (GRI 2-4):** Restatements of information are not reported, as the data source represents independent assessment snapshots without comparative restatement mechanisms.
-- **Assurance details (GRI 2-5):** Specific assurance standards, the precise level of assurance obtained, inherent limitations of the audit process, and the formal nature of the relationship with the assurance provider are not detailed in the source material.
+Under Disclosure 2-3, while the lead preparer is identified, the source does not provide a designated contact point for enquiries, a specific reporting frequency, or a publication date. Disclosure 2-4 regarding restatements of information is not reported, as the source framework treats submissions as independent snapshots and does not provide a mechanism for linking or explaining changes from previous figures. For Disclosure 2-5, the specific assurance standards used, the level of assurance obtained, and the nature of the relationship with the assurance provider are not recorded. Finally, regarding Disclosure 2-6, the source does not collect comprehensive details on the university's value chain, products, services, or the specific markets served beyond the physical features of the campus.
 
 ## Activities and workers
 
-### Workforce Size and Structure
+University College Cork maintains a workforce with a total full-time equivalent of 3,643. This figure, reported in accordance with Disclosure 2-7, represents the total volume of labour utilised by the institution. In line with the reporting methodology, this value is a measure of full-time equivalence rather than a raw headcount; consequently, multiple part-time staff members may be represented as a single unit within this total.
 
-University College Cork records an employed workforce of 3,643. This metric represents the full-time equivalent capacity supporting the university's academic, operational, and administrative functions.
+### Workforce Composition and Activities
 
-### Framework Alignment and Data Limitations
+The activities performed by the workforce encompass academic instruction, research, and professional services. Internal rubrics for staff progression indicate that employees contribute to the community, industry, and public service at local, regional, national, and international levels. These contributions include engagement with neighbourhood and regional development, as well as professional service to industry and public bodies.
 
-The reported figure carries specific methodological boundaries when evaluated against GRI Standards. Under GRI 2-7, full-time equivalent measures total operational workload capacity rather than a direct headcount, meaning two half-time staff members are aggregated as one unit. The primary reporting source collects a single undifferentiated figure. Consequently, the institution does not currently disaggregate its employee data into the specific categories required by Disclosure 2-7, such as breakdowns by employment contract (permanent and temporary), employment type (full-time and part-time), gender, or region.
-
-Furthermore, data required under GRI 2-8 regarding workers who are not employees is not reported. Disclosure 2-8 requires tracking the total number and contractual relationships of workers whose work is controlled by the organisation but who are not directly employed. The reporting frameworks utilised by the university monitor employees and students only. While third-party contracting firms operate on campus, the source data records contracting entities rather than the headcount of individual personnel performing work under those service agreements.
-
-## Material topics
-
-The sustainability topics covered in this report are aligned with the framework established by the Sustainability Tracking, Assessment & Rating System (STARS), developed by the Association for the Advancement of Sustainability in Higher Education for the higher-education sector. University College Cork did not run an independent materiality assessment to identify or prioritize institution-specific topics. Consequently, the topics reported reflect the standardized STARS structure rather than a bespoke materiality determination.
-
-### Operational and Institutional Objectives
-
-Under GRI 3-2, the reporting scope encompasses standard sector areas where University College Cork has adopted measurable sustainability objectives:
-* Campus operations
-* Teaching, learning, and research
-* Equity and social justice
-* Administration and finance
-* Campus and community engagement
-
-Within campus operations, the University maintains measurable targets set out in its Sustainability and Climate Action Plan. These include commitments to exceed national reduction targets for Scope 1 and Scope 2 greenhouse gas emissions, as well as achieving net zero total greenhouse gas emissions. Operational objectives also cover adapting estate management policies and infrastructure for climate resilience, securing funding for carbon reduction programmes, applying a Living Laboratory model to campus sustainability solutions, and preserving green spaces in accordance with the campus masterplan.
-
-### Governance and Management
-
-Institutional management under GRI 3-3 is led by the Head of Sustainability and Climate Action within the Office of Sustainability and Climate Action. This office oversees governance bodies including the Green Campus Committee, the Green Forum, and a University Leadership Team subcommittee focused on sustainability and climate action. 
-
-Key outcomes coordinated through this structure include the publication of the institutional Sustainability and Climate Action Plan, securing external Green Flag accreditation, maintaining international university sustainability rankings, and managing the Green Campus Living Laboratory Fund. The institution maintains public commitments to sustainability through published strategic plans and external charter participation.
+Staff are also involved in activities related to the student experience, such as recruitment, hosting open days, and conducting school visits. Operational data regarding the institution's environmental impact further indicates that the workforce operates through a mix of on-site attendance and working-from-home arrangements.
 
 ### Data Limitations and Omissions
 
-* **GRI 3-1 Process to determine material topics:** Not reported. The University does not carry out a dedicated materiality assessment. Process details regarding how actual and potential impacts on the economy, environment, and people were identified, prioritised, or informed by stakeholder engagement are therefore unavailable.
-* **GRI 3-2 List of material topics:** The reported topic areas represent fixed STARS credit categories rather than an institution-specific impact evaluation, and historical comparisons against previous reporting periods are not captured by this dataset.
-* **GRI 3-3 Management of material topics:** Management mechanisms are reported institution-wide rather than on a topic-by-topic basis. The source framework does not record specific positive or negative impacts, does not differentiate direct operational involvement from business relationships, does not separate harm prevention from remediation, and does not report lessons learned.
+While the total full-time equivalent is recorded, this report cannot provide the specific breakdowns required by Disclosure 2-7. The source data does not differentiate employees by gender or by region. Furthermore, the institution does not report a breakdown of the workforce by employment contract type, such as permanent or temporary contracts, nor by employment type, such as full-time or part-time status.
+
+Regarding Disclosure 2-8, this report does not include data on workers who are not employees but whose work is controlled by the university. The STARS framework, which serves as the primary data source, does not collect a headcount of individuals working under third-party contracts or similar arrangements. Consequently, the scale and nature of the non-employee workforce remain unquantified in this section.
+
+## Material topics
+
+### Approach to Materiality
+
+The sustainability topics addressed in this report are derived from the Sustainability Tracking, Assessment & Rating System (STARS) framework. This framework is designed by the Association for the Advancement of Sustainability in Higher Education (AASHE) to provide a standardised set of credits for the higher education sector. Consequently, University College Cork did not conduct a bespoke materiality assessment to identify these topics. This report cannot evidence a specific process for identifying and prioritising impacts on the economy, environment, and people as required by Disclosure 3-1, as the credit set is fixed by AASHE and is identical for all participating institutions.
+
+### List of Material Topics
+
+The institution has adopted measurable sustainability objectives across five broad areas defined by the STARS framework:
+
+*   Campus operations
+*   Teaching, learning, and research
+*   Racial equity and social justice
+*   Administration and finance
+*   Campus and community engagement
+
+These categories are fixed within the STARS credit set. This report does not record changes in material topics against previous reporting periods, as such comparisons are not facilitated by a single STARS submission. The inclusion of these areas indicates that the institution has set objectives within them, rather than representing a determination of significant impact made by the institution itself.
+
+### Management of Material Topics
+
+Sustainability at University College Cork is managed through the Office of Sustainability and Climate Action, led by the Head of Sustainability and Climate Action. This office coordinates the Green Campus Committee, the Green Forum, and the University Leadership Team Subcommittee on Sustainability and Climate Action. The institution has made a public commitment to sustainability through the publication of its Sustainability and Climate Action Plan.
+
+Within this plan, the university has committed to several operational objectives. These include exceeding government targets for the reduction of Scope 1 and Scope 2 greenhouse gas emissions and achieving net zero total greenhouse gas emissions. The university also aims to adapt estate management policies and infrastructure to mitigate climate change impacts, utilise the campus as a living laboratory for climate solutions, and prioritise the protection and restoration of campus green space.
+
+Recent activities and accomplishments include the awarding of the Green Flag from the Foundation for Environmental Education, maintaining a high UI Green Metric Ranking, and the coordination of the Green Campus Living Laboratory Fund. The university also conducts mapping of its curriculum to evaluate the integration of sustainability and the Sustainable Development Goals across its academic programmes.
+
+### Reporting Limitations
+
+This report provides institution-wide management information rather than the topic-specific disclosures required by GRI 3-3. The STARS framework does not collect data on specific impacts, the role of business relationships in those impacts, or lessons learned. Furthermore, the source material reports on outcomes rather than distinguishing between actions taken to prevent potential harm and those taken to remediate actual harm. STARS does not collect information regarding a formal materiality determination process, and this report cannot evidence such a process.
 
 ## Governance
 
 ### Governance Structure and Composition
 
-The highest decision-making body of University College Cork is the Governing Authority. Decision-making representation on the Governing Authority encompasses key internal campus constituencies, including academic staff, non-managerial staff, and student representatives. Academic staff representation on the Governing Authority is determined through democratic election by university staff.
+The highest decision-making body at University College Cork is the Governing Authority. This body includes representation from across the university community, specifically including academic staff, staff representing non-managerial workers, and student representatives. Academic staff representation is facilitated through two positions on the Governing Authority which are democratically elected by the staff of the institution.
 
-### Delegation of Responsibility
+While the presence of these representatives is confirmed, this report cannot evidence the full numeric composition of the body as required by GRI 2-9, such as the number of executive and non-executive members, their independence, tenure, or other significant positions held. Furthermore, the source material does not provide a breakdown of the governing body by gender or membership of under-represented social groups.
 
-Responsibility for coordinating sustainability across campus constituencies is delegated to specific administrative officers. Dedicated roles within the university include the Head of Sustainability and Climate Action, the Sustainability Support Officer, and the Greenshoots coordinator, who focuses specifically on student engagement. These officers lead and coordinate sustainability initiatives across operational and academic units.
+### Delegation of Responsibility for Managing Impacts
+
+The institution delegates responsibility for the advancement of sustainability through dedicated officers and committees. The Head of Sustainability and Climate Action leads these efforts, supported by a Sustainability Support Officer and a Greenshoots coordinator, the latter of whom focuses specifically on student engagement. These roles are tasked with coordinating various campus constituencies to integrate sustainability across the entire institution.
+
+Staff are expected to align their activities with the goals set out in the university strategy and the Sustainability and Climate Action Plan. Advocacy within the institution is expected to be conducted through the lens of the United Nations Sustainable Development Goals. In terms of investment stewardship, the institution recognises the value of collective action and prioritises collaborative efforts, maintaining guidelines on environmental, social, and governance factors, as well as specific guidelines on climate change and exclusions.
+
+The reporting lines between these sustainability officers and the highest governance body are not consistently stated in the source material, and STARS does not collect information regarding the frequency with which these executives report to the Governing Authority on the management of impacts.
 
 ### Role in Sustainability Reporting
 
-In relation to GRI 2-14, executive endorsement of the institution's sustainability reporting submission is evidenced by formal cover documentation submitted alongside institutional assessment data.
+The highest governance body’s involvement in sustainability reporting is evidenced by an executive cover letter accompanying the submission. However, the source does not record whether the Governing Authority or a senior executive formally reviewed and approved the reported information or the identified material topics.
 
-### Limitations and Unreported Disclosures
+### Limitations and Omissions
 
-The available source material presents several reporting limitations. Regarding governance composition under GRI 2-9, the data confirms constituency representation but does not supply full numerical details on overall board size, executive status, independence, tenure, or demographic background. For GRI 2-13, designated officers carry operational responsibility, but formal reporting lines and the frequency of updates to the Governing Authority are not specified. Under GRI 2-14, executive cover documentation indicates executive endorsement rather than formal review and approval of material topics by the highest governance body.
+Several aspects of governance required by the GRI Standards are not captured by the STARS framework or were not reported by the institution. This report cannot evidence the criteria and processes for nominating and selecting members of the Governing Authority (GRI 2-10), nor does it record information regarding the chair of this body or potential conflicts of interest (GRI 2-11, GRI 2-15).
 
-Where GRI framework indicators request information on governing body behaviour and oversight processes, the source material contains no records. Specifically, the data does not address:
-- Nomination and selection mechanisms for governing body members under Disclosure 2-10
-- Leadership structure and conflict management regarding the chair under Disclosure 2-11
-- Direct oversight of impact due diligence and stakeholder engagement under Disclosure 2-12
-- Processes for preventing and disclosing conflicts of interest under Disclosure 2-15
-- Communication channels and volume of critical concerns under Disclosure 2-16
-- Measures to advance the collective sustainability knowledge of board members under Disclosure 2-17
-- Performance evaluation of the highest governance body under Disclosure 2-18
-- Remuneration policies and determination processes under Disclosure 2-19 and Disclosure 2-20
-- The annual compensation ratio under Disclosure 2-21, which is left uncalculated in the reported data.
+The source does not describe the specific role of the Governing Authority in overseeing due diligence or reviewing the effectiveness of impact management (GRI 2-12). There is no data available regarding the communication of critical concerns to the highest governance body (GRI 2-16), the measures taken to advance its collective knowledge on sustainable development (GRI 2-17), or the processes for evaluating its performance (GRI 2-18). Finally, the institution does not report on remuneration policies and processes for the governing body and senior executives (GRI 2-19, GRI 2-20), and the annual total compensation ratio (GRI 2-21) was left blank.
 
 ## Strategy, policies and practices
 
-### Sustainability Vision and Commitments
+University College Cork (UCC) defines its sustainability vision through the Sustainability and Climate Action Plan. This strategy builds on previous frameworks to embed sustainability goals across education, research, university operations, infrastructural developments, and community engagement. The institution aims to achieve significant environmental targets, including attaining a status of zero waste and becoming a carbon neutral campus.
 
-University College Cork (UCC) details its strategic direction through its Sustainability and Climate Action Plan, which builds upon its prior sustainability strategy. The university aims to embed sustainability principles across education, research, campus infrastructure, administration, and community engagement. Key institutional goals focus on campus waste elimination and reaching carbon neutrality.
+Under Disclosure 2-23, the university has established public commitments to sustainability, which include requirements set by the Irish government to reduce absolute greenhouse gas emissions. The institution publishes annual roadmaps to outline the steps taken toward these objectives. To embed these policy commitments, as described in Disclosure 2-24, UCC maintains a code of conduct for suppliers that details social and environmental expectations. Internal responsibility is co-ordinated by the Head of Sustainability and Climate Action, who leads the Office of Sustainability and Climate Action and facilitates the work of the Green Campus Committee and the Green Forum. Recent accomplishments include the publication of the university's climate action plan and the receipt of Green Flag awards. Sustainability training is made available to non-academic staff on an annual basis.
 
-In addition to internal strategies, UCC is subject to statutory requirements from the Irish government to reduce its absolute greenhouse gas emissions. The university publishes annual climate action roadmaps outlining the measures planned to meet these statutory targets.
+Regarding mechanisms for seeking advice and raising concerns, UCC provides accessible information to employees on grievance resolution and whistleblower protections. As outlined for Disclosure 2-25 and Disclosure 2-26, these measures include frameworks for addressing sexual violence and harassment, a disclosures policy, and information on employee rights and trade union representation.
 
-### Governance and Embedding Policy Commitments
-
-Coordination of sustainability efforts is directed by the Head of Sustainability and Climate Action through the Office of Sustainability and Climate Action. This office oversees key institutional bodies, including the Green Campus Committee, the Green Forum, and the University Leadership Team Subcommittee on Sustainability and Climate Action. Operational achievements include administering the Green Campus Living Laboratory Fund, securing Green Flag accreditation from the Foundation for Environmental Education, and participating in global sustainability rankings.
-
-To integrate sustainability into university operations, UCC enforces a code of conduct for suppliers that outlines social and environmental expectations. In addition, regular sustainability-focused training opportunities are made available to non-academic staff.
-
-### Grievances and Mechanisms for Raising Concerns
-
-UCC maintains published policies outlining employee rights, grievance resolution, and mechanisms for raising concerns. Accessible documentation covers grievance procedures, whistleblower protections, and frameworks to address sexual violence and harassment. Operational policies recognize fundamental constitutional rights, including freedom of association, and facilitate union representation through partners such as the Irish Federation of University Teachers.
-
-### Summary of Governance Disclosures and Limitations
-
-Certain GRI disclosures cannot be fully reported due to the structure of available data:
-- **Strategy and Commitments (Disclosure 2-22, GRI 2-23, GRI 2-28):** Under Disclosure 2-22, the published strategic vision is recorded without attribution to a named executive signatory. For GRI 2-23 and GRI 2-28, reported commitments center on broad sustainability and statutory emissions targets rather than explicit human rights due diligence or UN Guiding Principles, and organizational association memberships are not captured.
-- **Embedding Commitments (Disclosure 2-24):** Available information highlights institutional achievements and general non-academic training rather than formal internal allocations of responsibility, integration into business relationships, or training on specific policy commitments.
-- **Grievance and Whistleblower Mechanisms (Disclosure 2-25, Disclosure 2-26):** Records confirm the publication of policies for employees, but do not detail operational workflows, mechanism effectiveness, or coverage for external stakeholders and business relationships.
-- **Compliance with Laws and Regulations (GRI 2-27):** Information regarding non-compliance with laws, regulations, or associated fines is not collected within the underlying dataset, leaving GRI 2-27 unreported.
+This report notes several limitations in the available data. For Disclosure 2-22, the source material does not attribute the sustainability statement to a named senior executive or the highest governance body. Regarding Disclosure 2-23, the reported commitments focus on sustainability rather than human rights or the UN Guiding Principles, and the source only includes commitments with a reporting requirement. Disclosure 2-24 does not detail the internal allocation of responsibility or the integration of commitments into all business relationships, and training data is restricted to non-academic staff. Mechanisms for remediation and advice (Disclosure 2-25 and Disclosure 2-26) are reported for employees only and do not describe operational effectiveness for all stakeholders. The institution's memberships in associations are not reported under Disclosure 2-28, as the source material is restricted to reporting-linked commitments. Finally, the source does not report data for Disclosure 2-27, as STARS does not collect information on legal compliance, fines, or regulatory enforcement.
 
 ## Stakeholder engagement
 
-### Consultation Mechanisms for Students and Staff
+The University College Cork (UCC) approach to stakeholder engagement is integrated into its strategic planning and governance structures, focusing on deliberative participation and transparency.
 
-University College Cork consults with internal stakeholders through established deliberative bodies and governance forums. Student participation in strategic decisions, policy formulation, and institutional planning is facilitated primarily through the UCC Student Forum. Modeled on the structure of the Irish Citizens’ Assembly, this forum serves as a platform for deliberative democracy, embedding student input into university decision-making to enhance institutional transparency and integrity.
+### Student Consultation
+The UCC Student Forum serves as a primary mechanism for student involvement in institutional decision-making. Modelled on the Irish Citizens’ Assembly, the forum is designed as an exercise in deliberative and participatory democracy. It aims to place students at the centre of strategic and policy issues, moving beyond access to ensure active involvement in the university community. The forum is intended to strengthen the integrity of decision-making processes and cultivate citizens who contribute to the common good.
 
-Academic staff are consulted via the Academic Leadership Forum, a non-executive body that acts as a strategic reference group for academic leadership. This forum facilitates institutional dialogue on key operational and strategic matters, including admissions quotas, postgraduate entry, and cross-university initiatives, prior to formal submission to the Academic Council or Academic Board. Additionally, the forum coordinates university inputs for national higher education calls, promotes interdisciplinary initiatives, and supports integration between teaching and research activities across faculties.
+### Staff Consultation
+Academic staff are consulted through the Academic Leadership Forum, a non-executive body that provides a reference group for academic strategy. This forum initiates discussions on matters of university interest—such as academic strategy and intake quotas—for reference to the Academic Council or Academic Board. It also coordinates university input on national and international academic agendas, including calls from the Higher Education Authority (HEA) and the Department of Education and Skills (DES). The forum promotes inter-disciplinary research-based approaches and facilitates connections between teaching and research across various colleges and schools.
 
-### Local Community Engagement
+### Community Engagement
+UCC maintains ongoing engagement with the local community, specifically through support for the Magazine Road Residents Association. The university also operates standing bodies through which local community-based organisations not affiliated with the institution can participate democratically in its governance.
 
-The university maintains engagement mechanisms for local community members and neighbourhood organisations. Consultation occurs through both targeted ad hoc interactions and standing channels, including direct engagement with community bodies such as the Magazine Road Residents Association. University College Cork maintains ongoing structures through which non-affiliated community-based organisations can participate democratically in institutional governance processes. External community stakeholder engagement is further embedded in academic practices through engaged research frameworks, which require societal partners, service users, and public representatives to be consulted during the design and execution of research projects.
+### Engaged Research Framework
+The university employs an Engaged Research Framework to facilitate collaboration between researchers and societal partners. This framework encourages public engagement and involvement throughout the research process, ensuring that research is conducted with societal partners rather than for them. Stakeholders, including members of the public, technical experts, service providers, and community organisations, are invited to inform research plans, refine methodological frameworks, and establish pathways to impact.
 
-### Framework Limitations and Omissions
+### Limitations and Gaps
+This report cannot evidence the specific methods used to identify stakeholders or the measures taken to ensure engagement is meaningful, as Disclosure GRI 2-29 requirements in these areas are not fully covered by the STARS framework. Furthermore, STARS focuses on fixed constituencies and does not specifically cover engagement with suppliers, customers, or vulnerable groups.
 
-While the institution maintains structures for consulting core campus groups, reporting under Disclosure GRI 2-29 is subject to scope limitations imposed by the underlying data collection framework. The framework focuses on predefined campus constituencies and does not record details regarding how stakeholders are systematically identified, how the effectiveness of engagement is evaluated, or how specific external groups—such as suppliers, customers, or vulnerable populations—are consulted.
-
-Regarding Disclosure GRI 2-30, the university does not report the percentage of its total employee workforce covered by collective bargaining agreements. The available reporting standards track institutional policies on freedom of association and contractor wage thresholds, but do not collect total collective bargaining coverage data across all staff categories.
+The institution does not report the percentage of total employees covered by collective bargaining agreements. While Disclosure GRI 2-30 requires this data, the STARS framework instead records whether freedom-of-association information is published in Disclosure PA-[figure] and the percentage of significant contractors paying specific wage levels in Disclosure PA-[figure], which represent different populations and metrics.
 
 ## Environmental performance
 
-### Energy Performance
+### Energy Usage and Efficiency
 
-To align with the reporting requirements of GRI 302, University College Cork tracks its energy consumption across all operations. The university's total annual energy consumption is `55,148.70 Megawatt-hours`. Under Disclosure 302-1, energy consumption is typically reported in joules; however, the data here is recorded in megawatt-hours and can be converted to gigajoules by applying standard conversion factors.
+Total annual energy consumption within the organisation was 55,148.70 Megawatt-hours. This total includes 32,599.70 Megawatt-hours of electricity and 22,549 Megawatt-hours of stationary fuel. The consumption of stationary fuels is further categorised into 22,549 Megawatt-hours of natural gas, 0 Megawatt-hours of heating oil, 0 Megawatt-hours of propane or LPG, and 0 Megawatt-hours of coal or coke. Annual renewable energy consumption was 0.70 Megawatt-hours, of which 0 Megawatt-hours was derived from renewable stationary fuels. The university exported 0 Megawatt-hours of on-site renewable electricity. Energy consumption is reported in megawatt-hours rather than the joules required by GRI 302-1.
 
-Of this total, electricity consumption accounts for `32,599.70 Megawatt-hours` and total stationary fuel consumption is `22,549 Megawatt-hours`. The university's annual renewable energy consumption stands at `0.70 Megawatt-hours`. It should be noted that this renewable energy figure includes purchased renewable electricity, which is broader than the scope of GRI 302-1-b (which focuses solely on fuel from renewable sources). The university's consumption of renewable stationary fuels is `0 Megawatt-hours`. Total heating and cooling obtained from off-site sources is `0 Megawatt-hours`. The university exported `0 Megawatt-hours` of on-site renewable electricity.
+Energy intensity was 2,139.20 Kilowatt-hours per person, based on a denominator of full-time equivalent students and employees. The energy intensity per unit of floor area was 195.31 Kilowatt-hours per square meter, calculated using the gross floor area of the institution.
 
-The breakdown of stationary fuel consumption by fuel type includes natural gas of `22,549 Megawatt-hours`, heating oil of `0 Megawatt-hours`, coal or coke of `0 Megawatt-hours`, and propane or LPG of `0 Megawatt-hours`. Other stationary fuels are reported as zero, making this a complete representation of the university's stationary fuel mix.
+### Greenhouse Gas Emissions
 
-In terms of energy intensity (GRI 302-3), the annual energy consumption per person is `2,139.20 Kilowatt-hours`. The denominator for this metric is the university's population of full-time equivalent students and employees. The annual energy consumption per unit of floor area is `195.31 Kilowatt-hours per square meter`. The denominator for this metric is the gross floor area of the university's buildings.
+The university reports Scope 1 GHG emissions of 6,215.78 Metric tons of CO2 equivalent. This figure includes 5,517 Metric tons of CO2 equivalent from stationary combustion, 62.78 Metric tons of CO2 equivalent from mobile combustion, and 636 Metric tons of CO2 equivalent in fugitive emissions. Emissions from biogenic sources were 0 Metric tons of CO2 equivalent.
 
-### Water Performance
+Scope 2 emissions from off-site sources of electricity were 8,144 Metric tons of CO2 equivalent on a location-based basis. Market-based Scope 2 figures were not available at the time of publication. Emissions from off-site sources of heating and cooling were 0 Metric tons of CO2 equivalent.
 
-Under GRI 303, the university monitors its water withdrawal and interactions with water as a shared resource. The physical water quantity risk for the main campus is classified as low-medium. The university harvests rainwater on-site for storage and use, though the exact volume harvested is not currently quantified. This risk assessment is limited to the main campus and does not describe the specific withdrawal, consumption, or discharge processes, nor does it detail stakeholder engagement on shared water resources across all campuses.
+Scope 3 emissions include 3,565 Metric tons of CO2 equivalent from business travel, 20,991 Metric tons of CO2 equivalent from commuting, 1,572 Metric tons of CO2 equivalent from purchased goods and services, 0 Metric tons of CO2 equivalent from capital goods, and 3,318 Metric tons of CO2 equivalent from fuel- and energy-related activities.
 
-For water withdrawal (GRI 303-3), the total water withdrawal is `54,153 Cubic meters`. Potable water from off-site sources (third-party water) is `54,153 Cubic meters`. Potable water from on-site sources is `0 Cubic meters`. To align with GRI 303-3, which requires reporting in megalitres, these cubic-metre figures must be divided by a standard conversion factor. Because on-site abstraction is zero, third-party water constitutes the entirety of the university's water withdrawal. This reporting does not include a breakdown of water stress areas, which is a limitation of the current data set.
+The emissions baseline of 19,460 Metric tons of CO2 equivalent was established in 2017, following the mandate set by the government of Ireland for public bodies. The university reports a reduction in Scope 1 and Scope 2 GHG emissions of 26.21% from this baseline. This reduction is reported net of purchased offsets, which were 0 Metric tons of CO2 equivalent. The adjusted net Scope 1 and Scope 2 emissions were 14,359.78 Metric tons of CO2 equivalent.
 
-### Emissions Performance
+GHG emissions intensity was 557.01 Kilograms of CO2 equivalent per person and 50.86 Kilograms per square meter per unit of floor area. Emissions inventories are conducted by an external supplier to GHG Protocol standards and ISO 14064-1.
 
-The greenhouse gas emissions inventory for University College Cork is calculated by its contracted supplier, Sustineo, in accordance with the GHG Protocol standards and ISO 14064-1. The methodology uses a top-down approach to assess expenditure data and identify hotspots, followed by a bottom-up methodology using primary data. Data is also submitted annually to the Sustainable Energy Authority of Ireland.
+### Water and Effluent
 
-For Scope 1 emissions (GRI 305-1), the annual Scope 1 GHG emissions are `6,215.78 Metric tons of CO2 equivalent`. This includes `5,517 Metric tons of CO2 equivalent` from stationary combustion, `62.78 Metric tons of CO2 equivalent` from mobile combustion, and `636 Metric tons of CO2 equivalent` from fugitive emissions. Emissions from biogenic sources are `0 Metric tons of CO2 equivalent`. Process emissions are currently blank or not reported.
+Total water withdrawal was 54,153 Cubic meters. The institution reports that all potable water was obtained from off-site sources, as indicated by the figure of 54,153 Cubic meters, while withdrawal from on-site sources was 0 Cubic meters. Water withdrawal is reported in cubic meters, which differs from the megaliters required by GRI 303-3.
 
-For Scope 2 emissions (GRI 305-2), the annual Scope 2 GHG emissions are `8,144 Metric tons of CO2 equivalent`. The location-based emissions from off-site electricity are `8,144 Metric tons of CO2 equivalent`. Market-based emissions from off-site electricity are `8,144 Metric tons of CO2 equivalent`. Emissions from off-site heating and cooling are `0 Metric tons of CO2 equivalent`.
+The physical water quantity risk for the main campus is classified as low-medium. The university harvests rainwater on-site for storage and use, although the specific volume harvested is not quantified.
 
-For Scope 3 emissions (GRI 305-3), the university reports emissions from business travel of `3,565 Metric tons of CO2 equivalent` and commuting emissions of `20,991 Metric tons of CO2 equivalent`. Emissions from purchased goods and services are `1,572 Metric tons of CO2 equivalent`. Emissions from capital goods are `0 Metric tons of CO2 equivalent`. Fuel- and energy-related activities not included in Scope 1 or Scope 2 account for `3,318 Metric tons of CO2 equivalent`. Emissions from waste generated in operations are currently blank or not reported.
+### Waste Reduction and Management
 
-The emissions intensity (GRI 305-4) is `557.01 Kilograms of CO2 equivalent` per person (using full-time equivalent students and employees as the denominator) and `50.86 Kilograms per square meter` per unit of floor area (using gross floor area in square metres as the denominator).
+Annual non-hazardous waste generated was 520 Metric tons. Total non-hazardous waste diverted from disposal was 242 Metric tons, comprising 183 Metric tons recycled, 59 Metric tons composted, and 0 Metric tons prepared for reuse. Non-hazardous waste directed to landfill or incineration was 278 Metric tons.
 
-Regarding emissions reductions (GRI 305-5), the baseline year for Scope 1 and Scope 2 emissions is `2017`. This baseline was established by the government of Ireland for all public bodies. The baseline Scope 1 and Scope 2 emissions are `19,460 Metric tons of CO2 equivalent`. The percentage reduction in Scope 1 and Scope 2 emissions from this baseline is `26.21%`. The adjusted net Scope 1 and Scope 2 emissions are `14,359.78 Metric tons of CO2 equivalent`. The university holds `0 Metric tons of CO2 equivalent` of third-party certified carbon offsets. Because these offsets are zero, the gross and net percentage reductions are identical.
+Construction and demolition waste generated was 6,914.08 Metric tons. Of this, 6,837.95 Metric tons was diverted from disposal, including 5,675.22 Metric tons recycled and 1,162.73 Metric tons prepared for reuse. The remaining 76.13 Metric tons was directed to landfill or incineration.
 
-### Waste Performance
+The university operates surplus and reuse programmes for institution-owned and personal items. It has eliminated at least one form of single-use disposable plastic and maintains a hazardous waste management protocol to minimise the use of hazardous materials. Composting is supported through the acceptance of compostable lunchboxes in food waste bins.
 
-The university manages waste-related impacts (GRI 306-2) through several active programmes. It operates a surplus programme to store, sell, donate, or reuse university-owned items that are no longer needed. A reuse programme is also available for employees and students to donate personal items. The university has eliminated certain forms of single-use disposable plastic on-site. A hazardous waste management protocol is in place to minimise the use of hazardous materials. For organic waste, compostable lunchboxes are accepted in the university's food waste bins.
+### Environmental Supply Chain Performance
 
-For waste generation (GRI 306-3), the annual non-hazardous waste generated is `520 Metric tons`. This represents a subset of total waste, as hazardous waste tonnages are not quantified. The annual construction and demolition waste generated is `6,914.08 Metric tons`.
+The institution reports that 21% of bid solicitations identify supplier sustainability considerations. The university's supplier code of conduct does not currently include environmental expectations that exceed regulatory compliance.
 
-For waste diverted from disposal (GRI 306-4), the total non-hazardous waste diverted is `242 Metric tons`. This is recovered through recycling (`183 Metric tons`), composting (`59 Metric tons`), and preparation for reuse (`0 Metric tons`). For construction and demolition waste, the total diverted from disposal is `6,837.95 Metric tons`. This is recovered through recycling (`5,675.22 Metric tons`), and preparation for reuse (`1,162.73 Metric tons`).
+### Reporting Limitations
 
-For waste directed to disposal (GRI 306-5), non-hazardous waste disposed of to a landfill or incinerator is `278 Metric tons`. Construction and demolition waste disposed of to a landfill or incinerator is `76.13 Metric tons`.
-
-### Supplier Environmental Assessment
-
-The university's supplier code of conduct does not include environmental expectations that exceed regulatory compliance. The percentage of bid solicitations that identify supplier sustainability considerations is `21%`. This metric does not represent the actual percentage of new suppliers screened using environmental criteria (GRI 308-1), as the denominator is bid solicitations rather than new suppliers, and "sustainability considerations" is broader than environmental criteria.
-
-### Limitations and Unreported Disclosures
-
-Several disclosures under the GRI standards are not reported due to data limitations or applicability. GRI 301-1, GRI 301-2, and GRI 301-3 (materials used, recycled inputs, and reclaimed products) are not reported because the university does not manufacture physical products. GRI 302-2 (energy consumption outside the organisation) is not tracked. GRI 302-4 (energy reductions in absolute joules) is not reported as STARS does not collect baseline energy data. GRI 302-5 (reductions in energy requirements of products) is not applicable. GRI 303-2 (water discharge-related impacts and effluent quality standards) is not monitored. GRI 305-6 (ozone-depleting substances) and GRI 305-7 (NOx, SOx, and other air emissions) are not quantified. GRI 306-1 (waste generation process descriptions and value chain impacts) is not detailed. GRI 308-2 (negative environmental impacts in the supply chain) is not tracked at the supplier level. Specific data gaps in the current reporting cycle include Scope 1 process emissions, Scope 3 emissions from waste generated in operations, and market-based Scope 2 emissions.
+This report cannot evidence the weight or volume of materials used, as the institution produces no physical products. Data is unavailable for energy consumption outside the organisation, reductions in energy requirements of products, or specific effluent discharge quality standards. Tonnages for hazardous waste are not reported. This report does not include emissions of ozone-depleting substances, nitrogen oxides, or sulfur oxides. Supplier-level environmental assessment outcomes are not collected. GRI 305-1 process emissions and GRI 305-3 waste-related emissions were left blank in the source material.
 
 ## Social and economic performance
 
-### Pay and Employment Conditions
+### Remuneration and Pay Equity
 
-University College Cork provides standard remuneration and benefits to its workforce. The wage floor for regular and permanent employees is 16.40. For student workers, the local hourly minimum wage is 14.25. The university benchmarks its pay against a living wage of 15.40, and 100% of employees receive remuneration equivalent to at least this living wage.
+University College Cork reports that `100%` of its employees receive remuneration equivalent to at least a living wage, which is defined as `15.40`. The wage floor for regular and permanent employees is `16.40`. For student workers, the local hourly minimum wage is `14.25`. These values are reported in Euros.
 
-In terms of parental leave, the university provides 26 of paid maternity leave. Under national legislation, female employees are entitled to a total of forty-two weeks of maternity leave, consisting of twenty-six weeks fully paid by the university and/or the Department of Social Welfare, and an additional sixteen weeks of unpaid leave. Paid all-gender family or medical leave is available, with 100% of employees eligible.
+The institution has published its fourth annual gender pay gap report, which tracks mean and median pay gaps. While the university policy and national legislation mandate equal pay for equal work, the institution identifies that representation patterns—specifically fewer women in senior academic and professional roles and more women in entry-grade or part-time positions—contribute to the existing gap.
 
-The university has published a Gender Pay Gap Report, which indicates progress in reducing the pay gap. This gap is driven by representation patterns rather than unequal pay for equal work. Specifically, there are fewer women in higher-paid senior academic and professional roles, and more women in lower-paid, entry-grade, or part-time roles. To address this, the university plans to implement the requirements of the EU Gender Pay Transparency Directive, expand support for staff returning from career breaks, monitor the uptake of flexible working policies by gender, and introduce wellbeing metrics in staff surveys.
+### Employment Conditions and Parental Leave
+
+The institution reports that `100%` of employees are eligible for paid all-gender family or medical leave. Under maternity legislation, all women are entitled to a total of 42 weeks of maternity leave. This entitlement consists of `26 weeks` of paid leave, followed by an additional 16 weeks of unpaid leave. The university provides full pay during the initial 26-week period.
 
 ### Occupational Health and Safety
 
-The university maintains a Safety Representative Forum to enhance the safety, health, and welfare of employees, safeguard students, and secure legal compliance through consultation. Staff safety representatives represent employees on health and safety matters, conduct workplace safety tours upon request, review accident and dangerous occurrence reports, and contribute to initiatives aimed at improving the safety culture.
+The University maintains a Safety Representative Forum to enhance the health, safety, and welfare of employees and students. This forum facilitates consultation between management and staff safety representatives, who are tasked with conducting workplace safety tours, reviewing accident and dangerous occurrence reports, and contributing to initiatives aimed at improving safety culture.
 
-To promote worker health, the university provides physical and behavioural health services, free or reduced-cost fitness activities, and contemplative or spiritual activities. Smoking and tobacco use are not prohibited across the entire campus, with restrictions limited to specific areas.
+The institution provides various health and wellbeing services to its workforce, including physical health services, behavioural health services, and access to fitness activities. Contemplative and spiritual activities are also made available. Smoking and tobacco use are not prohibited across the entire campus.
 
 ### Workforce Diversity
 
-The university tracks diversity across its workforce categories. The ethnic diversity index is 0 for executive staff, 0.44 for academic staff, and 0.34 for non-academic staff.
+Workforce diversity is monitored across different employee categories. The percentage of executive staff identifying as women or other marginalised gender identities is `47%`. For regular permanent academic staff, this figure is `49%`, and for non-academic staff, it is `63%`.
 
-In terms of gender diversity, 47% of executive staff identify as women or other marginalised gender identities. For regular permanent academic staff, this figure is 49%, and for regular permanent non-academic staff, it is 63%. To further understand the diversity profile of its workforce, the university plans to launch an Employee Self-Service Diversity tool to collect data across all equality grounds.
+Ethnic diversity is reported using a concentration index. The ethnic diversity index for executive staff is `0`, while the index for academic staff is `0.44` and for non-academic staff is `0.34`.
 
-### Limitations and Gaps in Reporting
+### Data Limitations and Omissions
 
-Several limitations exist in the current reporting framework:
+This report is subject to several data limitations. Disclosure 202-1 is partially satisfied; while a ratio of the wage floor to the local minimum wage is derivable, the source material does not provide a breakdown by gender. The minimum wage figure used refers specifically to student workers. Disclosure 401-2 provides an institution-wide eligibility rate but does not distinguish between benefits for full-time, part-time, or temporary staff. Disclosure 401-3 reports on maternity policy rather than the headcounts, return-to-work, or retention rates required by the standard.
 
-*   **GRI 202-1**: The student minimum wage 14.25 represents the local statutory minimum for student workers rather than the general workforce. While the ratio of standard entry-level wage to minimum wage can be derived, the required breakdown by gender is unanswerable. The living wage 15.40 is a separate benchmark and cannot be substituted for the minimum wage. All monetary values are in Euros and cannot be compared directly with other currencies without conversion.
-*   **GRI 401-2**: The eligibility rate for paid all-gender family and medical leave 100% is reported as a single institution-wide figure, meaning the comparison between full-time and part-time or temporary employees cannot be drawn.
-*   **GRI 401-3**: Headcounts, uptake, and retention rates for parental leave are not reported; only the policy of 26 of paid maternity leave is recorded, which is narrower than all-gender parental leave.
-*   **GRI 403-1, GRI 403-3, GRI 403-4, GRI 403-6, GRI 403-8**: The legal basis, standards, and worker coverage of the management system are not recorded. General health promotion services are reported, but specific occupational health functions, hazard identification, and data confidentiality are not detailed. The Safety Representative Forum's meeting frequency, decision-making authority, and exact representation are not fully documented. Campus smoking restrictions do not constitute a complete ban.
-*   **GRI 405-1**: Gender diversity is reported as a combined figure for women and marginalised gender identities rather than a detailed split. Age-group breakdowns are unavailable, and the representation percentage on the highest governance body is not recorded. Ethnic diversity is reported as a concentration index rather than a percentage breakdown.
+Occupational health and safety disclosures (GRI 403) lack specific data on legal requirements, meeting frequency, and the total number of workers covered by a formal management system. Disclosure 405-1 uses a diversity index rather than a percentage breakdown and does not include data on employee age groups. Furthermore, while constituencies on the highest decision-making body are identified, their percentage of the total body is not reported.
 
-The following disclosures are not reported: GRI 202-2 (local hiring of senior management), GRI 204-1 (local procurement spend, as social impact spend is measured instead), GRI 401-1 (new hires and turnover), GRI 403-2 (hazard identification and risk assessment processes), GRI 403-5 (health and safety training), GRI 403-7 (business relationship impacts), GRI 403-9 (work-related injuries), GRI 403-10 (work-related ill health), and GRI 405-2 (ratio of basic salary and remuneration of women to men).
+The following disclosures are not reported as the source material does not collect the necessary data: local hiring of senior management (GRI 202-2), local supplier spending (GRI 204-1), employee turnover (GRI 401-1), specific hazard identification and incident investigation processes (GRI 403-2), health and safety training (GRI 403-5), health impacts linked to business relationships (GRI 403-7), work-related injury and ill health rates (GRI 403-9, GRI 403-10), and the ratio of basic salary and remuneration of women to men (GRI 405-2).
 
 ---
 
@@ -302,8 +279,8 @@ The following disclosures are not reported: GRI 202-2 (local hiring of senior ma
 
 | Disclosure | Status | Value / reason | Notes |
 |---|---|---|---|
-| **3-1** Process to determine material topics | Not reported | No STARS data exists for this disclosure. | This is a structural difference, not missing data. AASHE determined materiality for the whole higher-education sector when it designed the STARS credit set; the institution answers that fixed set rather than identifying its own impacts. PA-2 records a climate-vulnerability assessment and PA-3 records stakeholder consultation, but neither is a materiality process and neither should be presented as one. |
-| **3-2** List of material topics | Partially reported | **Has the institution adopted one or more measurable sustainability objectives that address campus operations?**: Yes<br>**Has the institution adopted one or more measurable sustainability objectives that address teaching, learning, and/or research?**: Yes<br>**Has the institution adopted one or more measurable sustainability objectives that address racial equity and/or social justice?**: Yes<br>**Has the institution adopted one or more measurable sustainability objectives that address administration and/or finance?**: Yes<br>**Has the institution adopted one or more measurable sustainability objectives that address campus and/or community engagement?**: Yes | NOT A MATERIALITY DETERMINATION. These five areas are fixed by STARS and identical for every institution, so they say where an institution has set objectives, not which impacts it judged significant and why. GRI 3-2-b also requires changes against the previous reporting period, which a single STARS submission cannot show. Presenting these as material topics would overstate what the institution actually did. See the campus-operations row: fixed areas, not a materiality determination. |
+| **3-1** Process to determine material topics | Not reported | No STARS data exists for this disclosure. | A structural difference between the two FRAMEWORKS, not missing data and not a criticism of the institution. GRI assumes the organisation identifies and prioritises its own impacts; STARS assumes AASHE settled that for the higher-education sector and asks the institution to answer a fixed credit set. ⚠️ DO NOT WRITE THAT THE INSTITUTION DID NOT CONDUCT, DID NOT RUN, OR DOES NOT CARRY OUT A MATERIALITY ASSESSMENT. Nothing here supports it; STARS never asked, so a university that ran one has nowhere to say so. The defensible statement is that this report cannot evidence such a process, and that the topics it covers are AASHE's sector-level determination rather than an institution-specific one. PA-2 records a climate-vulnerability assessment and PA-3 records stakeholder consultation, but neither is a materiality process and neither should be presented as one. |
+| **3-2** List of material topics | Partially reported | **Has the institution adopted one or more measurable sustainability objectives that address campus operations?**: Yes<br>**Has the institution adopted one or more measurable sustainability objectives that address teaching, learning, and/or research?**: Yes<br>**Has the institution adopted one or more measurable sustainability objectives that address racial equity and/or social justice?**: Yes<br>**Has the institution adopted one or more measurable sustainability objectives that address administration and/or finance?**: Yes<br>**Has the institution adopted one or more measurable sustainability objectives that address campus and/or community engagement?**: Yes | NOT A MATERIALITY DETERMINATION. These five areas are fixed by STARS and identical for every institution, so they say where an institution has set objectives, not which impacts it judged significant and why. GRI 3-2-b also requires changes against the previous reporting period, which a single STARS submission cannot show. Presenting these as material topics would overstate what this dataset establishes: it shows that objectives exist in an area, never how that area was chosen. Whether the institution determined its own topics outside STARS is not recorded here either way, and must not be asserted in either direction. See the campus-operations row: fixed areas, not a materiality determination. |
 | **3-3** Management of material topics | Partially reported | **Narrative listing the institution’s measurable sustainability objectives that address campus operations**: Within the University's Sustainability and Climate Action Plan 2023-28, UCC has committ…<br>**Narrative outlining the activities and substantive accomplishments of the institution-wide coordinating body or officer during the previous three years**: The Head of Sustainability and Climate Action coordinates the Office of Sustainability …<br>**Has the institution made a public commitment to sustainability, as evidenced by an external commitment or a published plan?**: Yes | Asked per material topic, and no material-topics list exists (see GRI 3-2) — so these are institution-wide answers to a question GRI asks topic by topic. GRI 3-3 also requires the impacts themselves (3-3-a), whether the organisation is involved through its own activities or its business relationships (3-3-b), and lessons learned (3-3-e-iv). STARS collects none of those. It reports outcomes rather than distinguishing actions that prevent potential harm from actions that remediate actual harm, which is the split GRI 3-3-d asks for. |
 
 ## GRI 202: Market Presence 2016

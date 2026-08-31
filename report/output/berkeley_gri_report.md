@@ -4,196 +4,213 @@ Prepared **with reference to** the GRI Standards. Source data: [University of Ca
 
 ## The organisation and its reporting
 
-### Organisational Context and Boundary
-The University of California, Berkeley is a public higher education institution. For sustainability reporting purposes, the institution defines its boundary based on operational control in accordance with GRI 2-2. This operational boundary encompasses the main campus in the City of Berkeley, the adjacent Hill campus, the Richmond Field Station, campus-operated stations and reserves, and campus-owned buildings across various locations. Operational features situated within this physical footprint include academic facilities and a museum (GRI 2-6).
+### Organisational details and reporting boundary
 
-### Reporting Process and Timeframe
-Preparation of the data for this report was led by the Office of Sustainability, with primary contributions from Marina Zdobnova, Sustainability Data and Program Manager, and Ashley Smiley, Postdoctoral Fellow (GRI 2-3). The reporting period varies across specific disclosures based on data collection cycles; for instance, the performance year for Scope 1 and Scope 2 greenhouse gas emissions is 2023.
+The University of California, Berkeley is a public higher education institution. In accordance with Disclosure 2-2, the sustainability reporting boundary encompasses facilities over which the university maintains operational control. This boundary covers the main campus in the City of Berkeley, the adjacent Hill campus to the east, the Richmond Field Station, additional university-operated research stations and reserves, and campus-owned buildings across various locations. Physical facilities within this boundary include museum operations, meeting Disclosure 2-6 in part regarding campus activities. 
 
-### External Assurance
-No independent audits or external assurance processes were used in the preparation of this report (GRI 2-5).
+### Reporting period and governance
 
-### Reporting Limitations and Omissions
-Certain elements required by the GRI Standards are not captured within the STARS dataset used for this report. Under GRI 2-1 and GRI 2-2, institutional metadata—such as legal name, headquarters location, countries of operation, alignment with financial statements, and minority interest consolidation—are not recorded. Under GRI 2-3, named preparers are recorded without direct contact details, no specific enquiry contact point is designated, and overall reporting frequency and publication dates are omitted. Restatements of information are not reported under GRI 2-4, as STARS submissions exist as standalone data snapshots. Under GRI 2-5, no external assurance was undertaken, and framework-level assurance parameters are not tracked. Finally, GRI 2-6 disclosures are limited to physical campus features rather than comprehensive value chain and market sector analyses.
+The preparation of this reporting was coordinated by the Office of Sustainability, led by the Sustainability Data and Program Manager, Marina Zdobnova, and Postdoctoral Fellow, Ashley Smiley. For core climate indicators, such as Scope 1 and Scope 2 greenhouse gas emissions, the reporting describes the performance year 2023. 
+
+In relation to Disclosure 2-5, no independent audits or external assurance processes were used in the preparation of this reporting. 
+
+### Reporting limitations and gaps
+
+Several disclosures under the GRI Standards cannot be fully addressed due to the structure of the underlying data source:
+
+- **GRI 2-1 and GRI 2-2:** STARS does not record the university's legal name, headquarters location, or countries of operation as credit fields. Furthermore, this report cannot evidence whether the reporting entities differ from those in the university's audited financial statements, nor how minority interests are consolidated, as STARS does not collect this information.
+- **GRI 2-3:** The data source does not operate on a single uniform reporting period; measurement periods vary across individual credits. STARS does not record reporting frequency, official publication dates, or direct contact details for public enquiries, capturing only the names and roles of the report preparers.
+- **GRI 2-4:** Restatements of information are not reported, as STARS submissions represent standalone snapshots without linkages or reconciliation to previous reporting periods.
+- **GRI 2-5:** Beyond recording the absence of external assurance, the reporting framework does not collect details concerning assurance standards, assurance levels, or relationships with assurance providers.
+- **GRI 2-6:** The available institutional data identifies specific physical features such as museums, but does not capture broader supply chain structures, downstream value chains, or external market sectors served.
 
 ## Activities and workers
 
-### Workforce Scale and Composition
+### Workforce scale and profile
 
-The University of California, Berkeley maintains a workforce to support its academic, research, and administrative functions. The operational scale of this staff is measured at 13,678. 
+Under GRI 2-7, the institution records its staffing levels using full-time equivalent metrics. The overall full-time equivalent of employees at the University of California, Berkeley is 13,678.
 
-### Reporting Limitations and Data Gaps
+### Reporting limitations and omissions
 
-While this metric provides an overall measure of labor capacity, it has notable limitations when aligned with standard reporting frameworks. Under Disclosure 2-7, full-time equivalent metrics do not reflect total headcount, as multiple part-time positions are combined into single full-time units. Furthermore, Disclosure 2-7 calls for specific disaggregations of employee figures by employment contract (permanent and temporary), employment type (full-time and part-time), gender, and region. The STARS data collection process gathers only a single aggregate figure, leaving these detailed demographic and contractual categories unreported.
+The source framework presents several structural limitations regarding workforce composition. The reported metric reflects full-time equivalent staffing rather than a distinct employee headcount. Furthermore, STARS collects a single aggregate figure, meaning this report cannot provide the detailed breakdowns required by Disclosure 2-7 concerning employment contract type (permanent or temporary), employment schedule (full-time or part-time), gender, or geographic region.
 
-A similar data gap exists regarding GRI 2-8, which covers workers who are not direct employees but whose daily tasks are controlled by the organization. Primary institutional data collection focuses on employees and students. While third-party contractor relationships are monitored, these figures represent the number of contracting firms engaged rather than the actual count of individual workers operating on campus under those contracts.
+Regarding Disclosure 2-8, which covers workers who are not direct employees but whose labour is controlled by the institution, STARS does not track individual non-employee worker numbers or their specific contractual arrangements. Although institutional records account for contracting organisations, they do not document the number of individual workers engaged under these contracts, and this report cannot evidence that data.
 
 ## Material topics
 
-The University of California, Berkeley structures its sustainability disclosures around the framework provided by the Sustainability Tracking, Assessment & Rating System (STARS), administered by the Association for the Advancement of Sustainability in Higher Education (AASHE). Because the topics covered correspond to predefined credit categories established by AASHE for the higher-education sector as a whole, the institution did not conduct a separate internal materiality assessment to identify or prioritise its specific sustainability impacts. Consequently, the selection of topics reflects external sector standardisation rather than an institutional determination of material impacts.
+### Determination of Reporting Topics
 
-### Adopted Sustainability Objectives and Management Approach
+The topics addressed in this report are derived directly from the credit framework of the Sustainability Tracking, Assessment & Rating System (STARS), administered by the Association for the Advancement of Sustainability in Higher Education (AASHE). Because STARS applies a standardised credit set designed for the higher-education sector as a whole, the reporting boundaries reflect these predetermined categories rather than an institution-specific materiality assessment. 
 
-While the institution has not executed a dedicated materiality assessment process, it maintains public commitments and measurable objectives across the core operational and functional areas defined within the STARS reporting structure. These areas encompass campus operations; teaching, learning, and research; racial equity and social justice; administration and finance; and campus and community engagement.
+The University of California, Berkeley maintains formal, measurable sustainability objectives across the core operational and functional areas established within the STARS framework:
+- Campus operations;
+- Teaching, learning, and research;
+- Racial equity and social justice;
+- Administration and finance; and
+- Campus and community engagement.
 
-To address these areas, UC Berkeley aligns its governance with the systemwide Sustainable Practices Policy of the University of California alongside its own Sustainability Plan. Within campus operations, the university has established target goals for greenhouse gas emissions reduction, zero waste, and energy transition. The institution's Climate & Resiliency strategy focuses on accelerating a just and equitable transition towards clean energy, zero-carbon operations, and campus resilience.
+### Management of Sustainability Topics
 
-Governance and implementation of these objectives are coordinated by the UC Berkeley Office of Sustainability. Led by the Sustainability Officer, the office provides campus leadership by setting institutional targets, developing strategic partnerships, and facilitating project implementation across academic, operational, and community dimensions.
+Sustainability management across these operational and academic areas is governed through both systemwide policies and campus-level initiatives. UC Berkeley operates under the University of California Sustainable Practices Policy, which establishes systemwide environmental targets encompassing greenhouse gas emissions reductions, clean energy, and waste diversion. At the campus level, the university implements its own Sustainability Plan, including dedicated climate and resiliency strategies aimed at transitioning to a clean energy and zero-carbon campus.
 
-### Reporting Limitations and Framework Framework Differences
+Institution-wide coordination is led by the UC Berkeley Office of Sustainability, which sets strategic sustainability objectives, coordinates project implementation, and engages the campus community. These efforts include advancing electrified campus energy infrastructure, fostering sustainable operational practices, and integrating sustainability principles across university administration and academic programmes. External commitments and published institutional plans further formalise these operational targets.
 
-Reporting against Disclosure 3-1, Disclosure 3-2, and Disclosure 3-3 involves several limitations due to reliance on the standardised STARS framework:
+### Reporting Limitations
 
-- Process to determine material topics (GRI 3-1): The university does not report on an internal process for identifying, prioritising, or consulting stakeholders regarding actual and potential impacts on the economy, environment, and people, as STARS contains no internal materiality assessment mechanism.
-- List of material topics (GRI 3-2): The reported objective areas reflect fixed STARS credit categories rather than topics selected through an internal evaluation of significant impacts. Furthermore, changes in material topics compared to previous reporting periods required under Disclosure 3-2-b are not detailed.
-- Management of material topics (GRI 3-3): Management approaches are reported on an institution-wide basis rather than topic by topic. The framework does not collect data required by Disclosure 3-3 regarding specific actual and potential impacts, involvement through business relationships, distinctions between preventive and remediating actions, or lessons learned.
+In relation to GRI 3-1, this report cannot evidence an institutional process for determining material topics. STARS does not request information regarding how an organisation identifies, prioritises, and selects specific impacts for reporting, and this silence reflects the structure of the data collection framework rather than the presence or absence of internal institutional processes.
+
+In relation to GRI 3-2 and GRI 3-3, the standard areas reported indicate where the university has adopted measurable sustainability objectives rather than the results of a bespoke impact materiality evaluation. Furthermore, the available information reflects broad institutional management practices rather than topic-by-topic management disclosures, and the source data does not disaggregate actions between preventative measures and remediation, nor does it detail specific value-chain impacts or past evaluation lessons.
 
 ## Governance
 
-### Governance Structure and Composition
+The highest decision-making body of the University of California, Berkeley, includes representatives from the academic staff, non-managerial staff, and the student body. Faculty participation in governance is primarily facilitated through the Berkeley Division of the Academic Senate. This body serves as a mechanism for shared governance, as established by the Board of Regents, and enables academic staff to participate in university management through elections, representative councils, and various committees.
 
-The University of California, Berkeley operates within the governance framework of the University of California system under the authority of the Board of Regents. Representation on the institution's highest decision-making processes encompasses academic staff, non-managerial worker representatives, and student representatives.
+### Delegation of Responsibility
 
-Academic staff participate in democratic university governance through established bodies, primarily the Berkeley Division of the Academic Senate. As part of the system-wide University of California Academic Senate, this body enables faculty members to carry out shared-governance responsibilities via representative councils, committees, and elections. Non-managerial staff and student representatives are likewise included as members of the highest decision-making governance structures.
+Responsibility for the management of sustainability impacts is delegated to specialized officers and departments. The Office of Sustainability is led by the Chief Sustainability and Carbon Solutions Officer, who is responsible for coordinating sustainability efforts across the institution. This role involves collaboration with diverse campus constituencies to develop strategies for reducing greenhouse gas emissions, including Scope 1, Scope 2, and Scope 3 emissions, and enhancing sustainable purchasing practices. Additional sustainability officers are located within the Haas School of Business and the Student Environmental Resource Center to support these objectives.
 
-### Delegation of Responsibility for Sustainability
+### Role in Sustainability Reporting
 
-Responsibility for operationalising sustainability strategies and managing environmental impacts is delegated to dedicated officers and specialised offices. The Office of Sustainability leads efforts across the campus to reduce greenhouse gas emissions, enhance sustainable purchasing, and foster environmental responsibility in daily operations.
-
-Leadership is provided by the Chief Sustainability and Carbon Solutions Officer, alongside dedicated sustainability officers within the Office of Sustainability, the Haas School of Business, and the Student Environmental Resource Center. At least one sustainability officer and office is explicitly charged with coordinating campus constituencies to advance sustainability across the entire institution. In relation to GRI 2-14, an executive cover letter was provided with the institutional submission.
-
-### Governance Reporting Limitations and Omissions
-
-The source material provides information on governance representation and administrative delegation, but does not contain data regarding the operational behaviour or detailed composition of the highest governance body. The specific limitations and omissions comprise:
-
-- **Composition and Demographics (GRI 2-9):** The source records the inclusion of key constituencies, but does not provide numeric breakdowns regarding executive and non-executive status, independence, tenure, external commitments, or demographic characteristics such as gender and representation of social groups.
-- **Delegation and Governance Oversight (GRI 2-13 and GRI 2-14):** The precise reporting line and reporting frequency between sustainability officers and the highest governance body are not stated. Additionally, the submission of an executive cover letter does not detail whether the governing body formally reviewed, approved, or discussed the material topics and contents of the sustainability report.
-- **Governing Body Processes:** The source material does not report on the active oversight functions of the highest governance body. Consequently, no information is available for GRI 2-10 (nomination and selection criteria), GRI 2-11 (chair duties and conflict management), GRI 2-12 (oversight of impact management and stakeholder engagement), GRI 2-15 (conflict-of-interest mitigation), GRI 2-16 (escalation of critical concerns), GRI 2-17 (advancement of collective sustainability knowledge), or GRI 2-18 (performance evaluation of the governing body).
-- **Remuneration (GRI 2-19, GRI 2-20, and GRI 2-21):** Institutional remuneration policies and the process for determining executive pay are not reported. Disclosure 2-21, regarding the ratio between the highest-compensated administrator and the lowest-compensated full-time employee, was left blank by the institution.
-
-## Strategy, policies and practices
-
-### Sustainability Vision and Strategy
-The University of California, Berkeley sets out its sustainability direction through published strategic frameworks, including its Climate Action Plan and the UC Berkeley Sustainability Plan. These framework documents establish institutional goals for reducing greenhouse gas emissions across campus operations, improving energy efficiency, increasing the adoption of renewable energy, and encouraging sustainable transportation choices. The institution's overarching vision is coordinated by the Office of Sustainability under the direction of the Sustainability Officer, who leads strategy formulation, operational integration, and campus engagement. Operational accomplishments directed by this office include progress towards a clean, electrified campus energy system and external recognition in global university sustainability rankings.
-
-In alignment with its strategic goals, the university is a signatory to the Second Nature Climate Leadership Commitments, specifically endorsing the Carbon Commitment. This pledge reinforces institutional efforts to lower carbon emissions and strengthen climate resilience. In accordance with Disclosure 2-22, the institution articulates a clear sustainability vision; however, the source documentation records these strategic goals without attributing the statement to a named executive or governance body signatory.
-
-### Policy and External Commitments
-The university maintains several public sustainability commitments that incorporate external performance reporting. Through participation in the Sustainability Tracking, Assessment & Rating System (STARS), administered by the Association for the Advancement of Sustainability in Higher Education (AASHE), UC Berkeley publicly reports operational and institutional sustainability metrics. Additionally, the university submits verified annual greenhouse gas emissions inventories to The Climate Registry to ensure standardized monitoring and transparent reporting of operational emissions.
-
-Regarding Disclosure 2-23, these commitments focus on environmental sustainability and climate action. The source framework specifically tracks external pledges that carry mandatory reporting requirements, meaning pledges lacking formal reporting mechanisms are omitted from the record. Furthermore, these general sustainability pledges do not explicitly incorporate formal policy commitments to the UN Guiding Principles on Business and Human Rights or dedicated human rights due diligence frameworks.
-
-### Embedding Sustainability and Supplier Expectations
-To embed sustainability practices across university operations, UC Berkeley provides annual sustainability training opportunities for non-academic staff. Ethical and environmental expectations are extended into the supply chain through a published supplier code of conduct, which specifies social and environmental standards for commercial partners.
-
-In relation to Disclosure 2-24, the available disclosures document training offerings and supplier expectations as operational outputs. They do not detail the internal allocation of governance responsibility, procedural integration mechanisms, or specific monitoring processes used to enforce compliance across business relationships. Furthermore, staff training data is restricted to non-academic personnel and measures general sustainability instruction rather than specialized training on formal policy commitments.
-
-### Grievances and Advice Mechanisms
-The university provides mechanisms for raising concerns and seeking guidance on workplace standards and ethical conduct. Human resources policies, grievance procedures, anti-discrimination guidelines, and whistleblower protections are published on the institution's HR portal and are accessible to employees. Personnel across UC campuses are also subject to the University of California Statement of Ethical Values and Standards of Ethical Conduct, alongside applicable union representation provisions.
-
-In accordance with Disclosure 2-25 and Disclosure 2-26, the published disclosures confirm the availability of grievance procedures and whistleblower protection policies. However, the reported records do not outline the functional operational steps of these grievance processes, their handling capacity, or indicators of their effectiveness.
-
-### Reporting Limitations and Exclusions
-Several limitations apply to the governance and strategy disclosures under the GRI framework. Under GRI 2-22, published strategic plans are recorded without attribution to a named senior executive or highest governance body signatory. Regarding Disclosure 2-23, collected commitments are limited to those with explicit reporting requirements, and broad sustainability goals do not explicitly incorporate formal human rights due diligence obligations. Under GRI 2-24, disclosures confirm the presence of supplier expectations and annual non-academic staff training, but do not detail internal responsibility allocation or mechanisms for embedding commitments across business relationships. Furthermore, under GRI 2-25 and GRI 2-26, grievance resolution and whistleblower protection information is maintained for employees, but operational details, user scope beyond employees, and effectiveness evaluations are omitted. Under GRI 2-28, reporting frameworks such as STARS and The Climate Registry are recorded as commitments rather than institutional association memberships. Finally, for GRI 2-27 (Compliance with laws and regulations), the institution does not report information on regulatory compliance, legal non-compliance instances, or associated fines, as STARS does not collect legal enforcement data.
-
-## Stakeholder engagement
-
-### Consultation Mechanisms
-
-The University of California, Berkeley engages with students, academic staff, and the local community through established standing bodies and consultative mechanisms in accordance with GRI 2-29.
-
-Student perspectives are represented within institutional governance through a Student Regent who holds voting rights on the Board of Regents of the University of California. Prior to assuming this voting role, a Student Regent-designate serves in a non-voting capacity to prepare for the position. The Student Regent attends meetings of the Board and its Committees, bringing student concerns directly into systemwide decision-making processes. The position is accessible to the student body through an application process.
-
-Academic staff are consulted on institutional decisions, policies, and strategic plans through the Berkeley Academic Senate, which acts as the official body for faculty participation in governance.
-
-Local community engagement is facilitated through collaboration between the Chancellor's Office Government and Community Relations unit and the Berkeley City Manager's Office. Together, these entities convene the Berkeley City Council's Special City/UC/Student Committee. This body meets regularly during each academic semester to address matters of shared concern, including university capital projects and local development. The committee comprises City Councilmembers representing neighborhoods adjacent to the campus, representatives from both undergraduate and graduate student governments, and university administrators. Additionally, the university maintains ongoing bodies that enable non-affiliated local community-based organisations to participate democratically in institutional governance.
+Regarding Disclosure 2-14, the institution submitted an executive cover letter as part of its sustainability reporting process. However, this report cannot evidence whether the highest governance body formally reviews and approves the sustainability report or the identified material topics, as the source material focuses on executive-level endorsement rather than board-level approval processes.
 
 ### Reporting Limitations and Omissions
 
-In relation to Disclosure 2-29, the available reporting outlines consultative mechanisms for designated internal and local constituencies, but does not detail how stakeholders are identified or how engagement is rendered meaningful for broader groups such as suppliers or vulnerable populations.
+The available data contains several limitations regarding governance. While representation of various constituencies is confirmed under Disclosure 2-9, the source does not provide the specific numeric composition, tenure, or demographic diversity of the governing body. Furthermore, the reporting lines and the frequency with which sustainability officers report to the highest governance body are not recorded.
 
-Regarding GRI 2-30, the institution does not report the percentage of total employees covered by collective bargaining agreements within the assessed framework.
+This report does not contain information regarding the nomination and selection processes for the highest governance body (Disclosure 2-10) or the identity and functions of its chair (Disclosure 2-11). The specific role of the governing body in overseeing the management of impacts (Disclosure 2-12) and the processes for managing conflicts of interest (Disclosure 2-15) are not reported. Additionally, the source does not provide data on the communication of critical concerns (Disclosure 2-16), the measures taken to advance the collective knowledge of the governing body (Disclosure 2-17), or the evaluation of its performance (Disclosure 2-18). Policies and processes regarding remuneration (Disclosure 2-19 and Disclosure 2-20) and the annual total compensation ratio (Disclosure 2-21) are also not disclosed.
+
+## Strategy, policies and practices
+
+The University of California, Berkeley, articulates its sustainability vision through several primary documents, including the UC Berkeley Climate Action Plan and the UC Berkeley Sustainability Plan. These plans establish strategies for reducing greenhouse gas emissions and meeting climate goals through energy efficiency, the promotion of renewable energy, and the support of sustainable transportation options. The institution is a signatory to the Second Nature Climate Leadership Commitments, specifically the Carbon Commitment, which reinforces its pledge to reduce carbon emissions and enhance resilience against climate change.
+
+### Policy Commitments and Implementation
+
+The university maintains public commitments to sustainability that include formal reporting requirements. It participates in the Sustainability Tracking, Assessment & Rating System (STARS) to share performance data transparently and reports verified annual greenhouse gas inventories to The Climate Registry (TCR). To embed these standards within its operations, the university provides a published code of conduct for suppliers that outlines social and environmental expectations.
+
+The UC Berkeley Office of Sustainability provides campus leadership by setting goals and accelerating their achievement through project implementation and community engagement. Recent accomplishments include attaining a leading position in international sustainability rankings and supporting the development of a clean electrified campus energy system. To further integrate these commitments, the university provides sustainability-focused training opportunities to non-academic staff on at least an annual basis.
+
+### Ethics and Grievance Mechanisms
+
+The university provides several mechanisms for seeking advice and raising concerns regarding ethical conduct and employee rights. The University of California Statement of Ethical Values and Standards of Ethical Conduct serves as a comprehensive code for the campus, emphasizing integrity, respect, and accountability. Human Resources policies further outline rights related to fair treatment, anti-discrimination, and work-life balance.
+
+Information regarding grievance resolution and whistleblower protections is published and accessible to all employees. These measures are designed to protect employee rights and provide transparent procedures for addressing concerns.
+
+### Limitations and Omissions
+
+This report cannot evidence the specific authorship of the sustainability vision as required by Disclosure 2-22, as the source material does not attribute the statement to a specific senior executive or governance body. While sustainability commitments are documented, they do not specifically confirm adherence to the UN Guiding Principles or human rights due diligence as defined in Disclosure 2-23. Regarding Disclosure 2-24, the available information describes general outcomes and training for non-academic staff rather than the specific internal allocation of responsibility or the integration of commitments into business relationships.
+
+Mechanisms for grievance and whistleblowing under Disclosure 2-25 and Disclosure 2-26 are reported as available to employees, but this report cannot evidence their operational details, effectiveness, or availability to external stakeholders and those in business relationships. Furthermore, STARS data is restricted to commitments with reporting requirements and does not collect information on general association memberships as required by Disclosure 2-28.
+
+Disclosure 2-27, concerning compliance with laws and regulations, is not reported. STARS does not collect data regarding significant instances of non-compliance, fines, or the monetary value of legal actions.
+
+## Stakeholder engagement
+
+The University of California, Berkeley, employs several formal mechanisms to ensure that students, staff, and the local community are consulted on institutional decisions and policies. These standing bodies and roles provide structured pathways for stakeholder perspectives to influence governance at both the campus and systemwide levels.
+
+### Student and Staff Consultation
+
+Student representation is integrated into the highest level of university governance through the Board of Regents. A student is appointed as a Student Regent, serving as a voting member of the Board and its committees. This position is preceded by a year as a Student Regent-designate, a non-voting role that allows the individual to prepare for their term. The Student Regent is responsible for advocating for student concerns and ensuring that student perspectives are considered during the decision-making process.
+
+For academic staff, the Berkeley Academic Senate serves as the primary body for consultation. This standing body allows faculty to participate in the formulation of institutional plans and policies, maintaining a formal channel of communication between the academic staff and the university administration.
+
+### Community Engagement
+
+The university facilitates engagement with the local community through the Government and Community Relations unit of the Chancellor’s Office. A central mechanism for this consultation is the Special City/UC/Student Committee, which includes representatives from the Berkeley City Council, undergraduate and graduate student governments, and campus administrators. This committee meets regularly to discuss issues of mutual concern, including university capital projects and land-use planning.
+
+Beyond these government-linked committees, the institution maintains ongoing bodies through which local community-based organisations not affiliated with the university can participate in governance. This ensures that external stakeholders have a democratic avenue to influence university decisions that affect the surrounding area.
+
+### Operational and Task-Specific Consultation
+
+Stakeholder engagement also occurs through thematic initiatives and task forces. For example, the university has conducted focus groups with front-line herbicide applicators to gather direct feedback on safety considerations and pesticide management. Similarly, the university’s waste management units collaborate with event planners and caterers to implement zero waste strategies for major campus events, ensuring that operational goals are met through active engagement with those responsible for their execution.
+
+### Limitations of Disclosure
+
+This report cannot evidence the specific methods used to identify stakeholders or the processes used to ensure that engagement is meaningful, as the STARS framework does not collect this information. While students, staff, and the local community are covered, this report does not include data regarding the engagement of suppliers, customers, or vulnerable groups. Regarding Disclosure 2-30, the institution does not report the percentage of total employees covered by collective bargaining agreements, as the source material focuses on contractor wage levels and the publication of freedom-of-association information rather than internal bargaining coverage.
 
 ## Environmental performance
 
 ### Energy Performance
 
-The total annual energy consumption within the organisation is `78,414.00 Megawatt-hours`. This total comprises electricity consumption of `47,744.70 Megawatt-hours` and stationary fuel consumption of `30,414 Megawatt-hours`. The university consumes `255.30 Megawatt-hours` of heating and cooling from off-site sources, and exports `0 Megawatt-hours` of on-site renewable electricity.
+The University of California, Berkeley reports a total annual energy consumption of 78,414.00 Megawatt-hours. This figure comprises 47,744.70 Megawatt-hours of electricity and 30,414 Megawatt-hours of stationary fuel. The institution also utilizes 255.30 Megawatt-hours for heating and cooling from off-site sources. Within the reporting period, the university exported 0 Megawatt-hours of on-site renewable electricity.
 
-In terms of fuel composition, natural gas consumption is `30,014 Megawatt-hours`. Heating oil consumption is `400 Megawatt-hours` and coal or coke consumption is `0 Megawatt-hours`. Propane and liquefied petroleum gas consumption is `0 Megawatt-hours`. Annual renewable energy consumption stands at `18,173 Megawatt-hours`. Renewable stationary fuels account for `0 Megawatt-hours`.
+The breakdown of stationary fuel consumption includes 30,014 Megawatt-hours of natural gas, 400 Megawatt-hours of heating oil, 0 Megawatt-hours of coal or coke, and 0 Megawatt-hours of propane or LPG. Renewable stationary fuels account for 0 Megawatt-hours of the total fuel usage. The annual renewable energy consumption, which includes both fuels and electricity, is 18,173 Megawatt-hours.
 
-Energy intensity metrics show an annual energy consumption per person of `1,346.02 Kilowatt-hours` and an annual energy consumption per unit of floor area of `52.17 Kilowatt-hours per square meter`.
+Energy intensity is measured at 1,346.02 Kilowatt-hours per person, based on a denominator of full-time equivalent students and employees. When measured against the gross floor area of the campus, the energy intensity is 52.17 Kilowatt-hours per square meter.
 
-### Water Performance
+In accordance with Disclosure GRI 302-1, it is noted that while the standard requires energy to be reported in joules, the figures provided here are in megawatt-hours as collected by the STARS framework.
 
-The total water withdrawal is `2,092,006 Cubic meters`. This is entirely drawn as potable water from off-site sources, which is `2,092,006 Cubic meters`. Potable water from on-site sources is `0 Cubic meters`.
+### Greenhouse Gas Emissions
 
-The physical water quantity risk for the main campus is classified as high. To mitigate water impacts, the university harvests rainwater on-site for storage and use.
+The institution conducts its greenhouse gas inventory following protocols from The Climate Registry and the California Air Resources Board (CARB). The inventory includes all six major greenhouse gases. The university has adopted 2019 as its baseline year for Scope 1 and Scope 2 emissions, as this was the final year of typical operations prior to the global pandemic. The combined baseline for these scopes is 147,623 Metric tons of CO2 equivalent.
 
-### Emissions Performance
+Direct Scope 1 emissions are reported across several categories: 134,957 Metric tons of CO2 equivalent from stationary combustion, 1,676 Metric tons of CO2 equivalent from mobile combustion, and 76 Metric tons of CO2 equivalent from fugitive sources. Emissions from biogenic sources are reported as 0 Metric tons of CO2 equivalent.
 
-Direct Scope 1 greenhouse gas emissions from stationary combustion are `134,957 Metric tons of CO2 equivalent`. Scope 1 emissions from mobile combustion are `1,676 Metric tons of CO2 equivalent`. Scope 1 fugitive emissions are `76 Metric tons of CO2 equivalent`. Greenhouse gas emissions from biogenic sources are `0 Metric tons of CO2 equivalent`.
+Indirect Scope 2 emissions from off-site sources include 1,256 Metric tons of CO2 equivalent for electricity (market-based) and 0 Metric tons of CO2 equivalent for heating and cooling.
 
-Indirect Scope 2 greenhouse gas emissions from off-site sources of electricity, calculated using a market-based method, are `1,256 Metric tons of CO2 equivalent`. Scope 2 emissions from off-site sources of heating and cooling are `0 Metric tons of CO2 equivalent`.
+Scope 3 emissions are tracked for several activities: 19,913 Metric tons of CO2 equivalent from business travel, 12,836 Metric tons of CO2 equivalent from student and staff commuting, 728 Metric tons of CO2 equivalent from solid waste generated in operations, and 22 Metric tons of CO2 equivalent from fuel- and energy-related activities not included in Scope 1 or Scope 2.
 
-Other indirect Scope 3 emissions include `19,913 Metric tons of CO2 equivalent` from business travel, `12,836 Metric tons of CO2 equivalent` from commuting, `728 Metric tons of CO2 equivalent` from waste generated in operations, and `22 Metric tons of CO2 equivalent` from fuel- and energy-related activities not included in Scope 1 or Scope 2.
+The university reports a 9.83% reduction in Scope 1 and Scope 2 emissions from the baseline. This reduction is an adjusted net figure that includes 4,858 Metric tons of CO2 equivalent of third-party certified carbon offsets, resulting in adjusted net emissions of 133,106.95 Metric tons of CO2 equivalent.
 
-The annual Scope 1 and Scope 2 emissions intensity is `2,368.25 Kilograms of CO2 equivalent` per person and `91.79 Kilograms per square meter` per unit of floor area.
+Emissions intensity is 2,368.25 Kilograms of CO2 equivalent per person (students and employees) and 91.79 Kilograms per square meter per unit of gross floor area. Disclosure GRI 305-5 requires reductions to be reported as absolute quantities, whereas the STARS framework provides a percentage net of offsets.
 
-The baseline year for Scope 1 and Scope 2 emissions is `2019`, with baseline emissions of `147,623 Metric tons of CO2 equivalent`. The percentage reduction in Scope 1 and Scope 2 emissions from this baseline is `9.83%`. The adjusted net Scope 1 and Scope 2 emissions are `133,106.95 Metric tons of CO2 equivalent`. The university holds `4,858 Metric tons of CO2 equivalent` of external certified carbon offsets.
+### Water Consumption
 
-The baseline year was adopted because it represents the final period of business-as-usual emissions before the global pandemic. The emissions inventory includes major greenhouse gases and is reported to both The Climate Registry and the California Air Resources Board (CARB). Scope 1 and Scope 2 inventories adhere to The Climate Registry protocol.
+The University of California, Berkeley reports a total water withdrawal of 2,092,006 Cubic meters. This total is comprised of 2,092,006 Cubic meters from off-site sources and 0 Cubic meters from on-site sources. The institution does not abstract its own water.
 
-### Waste Performance
+The main campus is situated in an area identified as having a high level of physical water quantity risk. To mitigate shared water resource impacts, the university practices on-site rainwater harvesting for storage and use.
 
-The annual non-hazardous waste generated is `7,732.13 Metric tons`. The annual construction and demolition waste generated is `4,753.09 Metric tons`.
+Under Disclosure GRI 303-3, water withdrawal should be reported in megalitres; however, the figures here are reported in cubic metres. The report cannot provide a breakdown of withdrawal by source for water-stressed areas as STARS does not collect this specific data.
 
-Regarding waste diversion, the total non-hazardous waste diverted from disposal is `4,254.13 Metric tons`. This includes `1,576 Metric tons` recycled, `2,554 Metric tons` composted, and `124.13 Metric tons` prepared for reuse. The total construction and demolition waste diverted from disposal is `3,452.02 Metric tons`. This consists of `2,858.23 Metric tons` recycled and `593.79 Metric tons` prepared for reuse.
+### Waste Management
 
-Waste directed to disposal includes `3,478 Metric tons` of non-hazardous waste disposed of to a landfill or incinerator, and `1,301.07 Metric tons` of construction and demolition waste disposed of to a landfill or incinerator.
+The institution generated 7,732.13 Metric tons of non-hazardous waste and 4,753.09 Metric tons of construction and demolition waste during the reporting period.
 
-The university operates a surplus programme to store, sell, donate, or reuse institution-owned items. It also participates in a reuse programme for personal items. Composting is integrated into campus collection systems and processed at an industrial composting facility. The university has eliminated certain single-use disposable plastics and maintains a hazardous waste management programme to minimise hazardous material use.
+Diversion efforts for non-hazardous waste reached a total of 4,254.13 Metric tons. This includes 1,576 Metric tons through recycling, 2,554 Metric tons through an industrial composting programme, and 124.13 Metric tons through surplus and reuse programmes. For construction and demolition waste, 3,452.02 Metric tons was diverted, with 2,858.23 Metric tons recycled and 593.79 Metric tons prepared for reuse.
 
-### Supplier Environmental Assessment
+Waste directed to disposal, including landfill and incineration, amounted to 3,478 Metric tons for non-hazardous waste and 1,301.07 Metric tons for construction and demolition waste.
 
-The percentage of bid solicitations that identify supplier sustainability considerations is `100%`. The supplier code of conduct includes environmental expectations that exceed regulatory compliance.
+The university maintains a hazardous waste management programme to minimise the use of hazardous materials. Additionally, the institution has eliminated the on-site use of at least one form of single-use disposable plastic.
 
-### Data Limitations and Gaps
+Regarding Disclosure GRI 306-3, the reported figures represent a subset of total waste, as STARS does not quantify hazardous waste tonnage. Furthermore, Disclosure GRI 306-5 requires a split between landfill and incineration, which are merged in the STARS data.
 
-Several reporting limitations exist when mapping the available data to GRI standards:
+### Environmental Procurement
 
-- **Energy (GRI 302):** GRI 302-1 requires energy values in joules, whereas the source data is reported in megawatt-hours. A conversion factor must be applied. The renewable energy consumption field includes renewable electricity, which is broader than the renewable fuel scope of Disclosure 302-1-b; the precise renewable fuel figure is represented by renewable stationary fuels. Heating oil and coal/coke are reported as nil, representing a complete absence of consumption rather than missing data. The denominators for energy intensity ratios are the combined full-time equivalent of students and employees, and the gross floor area. GRI 302-2, GRI 302-4, and GRI 302-5 are not reported.
-- **Water (GRI 303):** GRI 303-3 requires water volumes in megalitres, whereas the source data is in cubic metres. On-site abstraction is reported as nil, meaning off-site potable water represents the entire withdrawal. The volume of harvested rainwater is not quantified. GRI 303-1 is limited to a risk grade for the main campus and does not describe wider stakeholder interactions or multi-campus impacts. GRI 303-2 is not reported.
-- **Emissions (GRI 305):** The baseline year and baseline emissions are reported as a combined Scope 1 and Scope 2 total, which cannot be split to satisfy Disclosure 305-1 and Disclosure 305-2 separately. The source of emission factors, global warming potential rates, and the consolidation approach are not reported. The percentage reduction is net of purchased offsets; the gross reduction differs because the university holds offsets. GRI 305-5-b and Disclosure 305-5-d remain unallocated by scope or gas. Biogenic emissions are reported as CO2-equivalent, which may differ from the biogenic CO2 boundary. Specific Scope 1, Scope 2, and Scope 3 categories (such as capital goods and purchased goods) were left blank. GRI 305-6 and GRI 305-7 are not reported.
-- **Waste (GRI 306):** Hazardous waste is not quantified by weight, meaning total waste generation under Disclosure 306-3 and diversion under Disclosure 306-4 cannot be fully reported. Disclosure 306-4-d requires a split of recovery operations into on-site and off-site, which is not collected. Disclosure 306-5 requires a split of disposal across multiple operations, but the source data merges landfill and incineration. GRI 306-1 is not reported.
-- **Suppliers (GRI 308):** GRI 308-1 requires the percentage of new suppliers screened, whereas the source data reports the percentage of bid solicitations. GRI 308-2 is not reported.
-- **Materials (GRI 301):** GRI 301-1, GRI 301-2, and GRI 301-3 are not reported as the university does not manufacture physical products.
+The university’s supplier code of conduct includes environmental expectations that exceed regulatory compliance. In the procurement process, 100% of bid solicitations identify supplier sustainability considerations. This figure refers to the number of solicitations rather than the number of new suppliers screened, as requested by Disclosure GRI 308-1.
+
+### Reporting Limitations
+
+This report cannot evidence performance for GRI 301-1, GRI 301-2, or GRI 301-3 as the institution does not produce physical products. Data for GRI 302-2, GRI 302-4, GRI 302-5, GRI 303-2, GRI 305-6, GRI 305-7, GRI 306-1, and GRI 308-2 are not collected by the STARS framework or were not reported by the institution. Specific data for hazardous waste tonnages and the on-site versus off-site split of waste recovery operations are also unavailable.
 
 ## Social and economic performance
 
-### Pay and Employment Conditions
-The University of California, Berkeley, monitors employee compensation against local economic benchmarks. The percentage of employees receiving remuneration equivalent to at least a living wage is `96.20%`. The designated living wage for the region is `39.62`, while the wage floor for regular and permanent employees is `22.54`. For student employees, the local hourly minimum wage is `16.99`.
+### Pay and Remuneration
 
-Regarding employee benefits and leave, `100%` of employees are eligible for paid all-gender family or medical leave. The standard allowance for paid maternity leave is `12`. Under the Family and Medical Leave Act (FMLA) and the California Family Rights Act (CFRA), eligible employees who meet the cumulative service and hours thresholds are entitled to a standard period of leave. Employees disabled by pregnancy are eligible for leave under the Pregnancy Disability Leave Laws (PDLL) from the start of their employment.
+The institution reports a living wage of 39.62. The percentage of employees receiving remuneration equivalent to at least this living wage is 96.20%. For regular permanent employees, the wage floor is 22.54. Regarding student employment, the local hourly minimum wage is 16.99.
+
+This report partially satisfies Disclosure 202-1. The ratio of the standard entry-level wage to the local minimum wage is derivable from the reported wage floor and the student minimum wage, though the latter is scoped to student workers rather than the general workforce. Disclosure 202-1 further requires this ratio to be reported by gender, which is not collected by the source framework.
+
+### Employment Conditions
+
+The university provides various leave options for employees. Eligibility for paid all-gender family or medical leave stands at 100%. Paid maternity leave is available for a period of 12 weeks. Eligibility for leave under family and medical leave regulations generally requires a cumulative year of service and a minimum hourly threshold worked during the preceding year. Pregnancy disability leave is available to employees disabled by pregnancy regardless of tenure.
+
+Regarding Disclosure 401-2, the source provides an institution-wide eligibility rate but does not provide the specific comparison between full-time and part-time or temporary employees required by the standard. For Disclosure 401-3, the report describes maternity leave policies but does not provide the headcounts, return-to-work rates, or retention rates required by the GRI standard.
 
 ### Occupational Health and Safety
-The university operates an institutional health and safety management system overseen by dedicated workplace safety committees. These committees bring together workers and management to develop, review, and implement workplace health and safety policies.
 
-Physical and behavioural health services are made available to all employees. The university also provides free or reduced-cost fitness activities, alongside contemplative and spiritual activities. To promote a healthy environment, smoking and tobacco use are prohibited across the entire campus.
+The institution maintains an institution-wide health and safety committee and a network of committees that facilitate consultation between workers and management on workplace safety policies. Physical and behavioural health services are made available to employees, alongside free or reduced-cost fitness activities and spiritual or contemplative activities. The university also enforces a campus-wide prohibition on smoking and tobacco use.
+
+This report cannot evidence the specific management system details required by Disclosure 403-1, such as whether the system is legally required or which specific standards it follows. While general health services are reported, they are not identified as occupational health services under Disclosure 403-3, which focuses on hazard identification and data confidentiality. Furthermore, the source does not record the meeting frequency or decision-making authority of safety committees as required by Disclosure 403-4.
 
 ### Workforce Diversity
-The university tracks diversity across different staff categories. The ethnic diversity index is `0.51` for executive staff, `0.50` for academic staff, and `0.69` for non-academic staff.
 
-In terms of gender representation, the percentage of executive staff who identify as women or other marginalised gender identities is `50%`. For regular, permanent academic staff, this figure is `36.70%`, and for regular, permanent non-academic staff, it is `56.50%`.
+Diversity is monitored across different employee categories using an ethnic diversity index, which measures group concentration on a specific scale. The index is 0.51 for executive staff, 0.50 for academic staff, and 0.69 for non-academic staff.
 
-### Data Limitations and Gaps
-Several limitations exist within the reported data. For GRI 202-1, the local minimum wage figure is derived from student-employment records and represents the minimum for student workers rather than the general workforce. The ratio of standard entry-level wage by gender is unanswerable as gender-disaggregated wage data is not collected. The living wage is a separate benchmark and cannot be substituted for the minimum wage. Values are reported in US Dollars and are not directly comparable to other currencies without conversion.
+Gender representation is reported as a combined percentage for women and other marginalised gender identities. This figure is 50% for executive staff, 36.70% for academic staff, and 56.50% for non-academic staff.
 
-For GRI 401-2, the university reports a single institution-wide eligibility rate, preventing a comparison between full-time and temporary or part-time employees. For GRI 401-3, the data is descriptive and lacks the required headcounts, return-to-work rates, and retention rates by gender, with maternity leave being narrower than parental leave.
+In relation to Disclosure 405-1, the ethnic diversity index provides a measure of group mixture rather than the specific percentage breakdown by group required by the standard. Gender is reported in two categories rather than the three required by GRI. This report cannot provide the age-group breakdown for any employee category, as the source framework does not collect employee age data.
 
-Under GRI 403-1, GRI 403-3, GRI 403-4, and GRI 403-6, there is no information on whether the safety system is legally required, which standards it follows, or its specific worker coverage. Reported health services are general rather than specific occupational health services designed to identify and eliminate hazards. Committee responsibilities, meeting frequency, decision-making authority, and representation gaps are not fully detailed. Furthermore, the campus smoking prohibition is a control rather than a voluntary health promotion service, and the precise scope of access to health services is not quantified.
+### Limitations and Omissions
 
-For GRI 405-1, gender data is combined into a single category for women and marginalised gender identities rather than a detailed split. Employee age-group breakdowns are unanswerable, and the percentage representation of constituencies on the highest decision-making body is not recorded. The ethnic diversity figures represent a concentration index rather than a percentage breakdown.
+The following disclosures are not reported as the source material does not collect the necessary data: GRI 202-2 regarding local hiring of senior management; GRI 204-1 regarding local supplier spending; GRI 401-1 regarding employee hires and turnover; and GRI 405-2 regarding the remuneration ratio of women to men.
 
-### Not Reported
-The following disclosures are not reported: GRI 202-2 (proportion of senior management hired from the local community); GRI 204-1 (proportion of spending on local suppliers, as procurement metrics focus on social impact suppliers rather than locality); GRI 401-1 (new employee hires and turnover); GRI 403-2 (hazard identification, risk assessment, and incident investigation); GRI 403-5 (occupational health and safety training); GRI 403-7 (prevention of impacts in business relationships); GRI 403-8 (workers covered by an occupational health and safety management system); GRI 403-9 (work-related injuries); GRI 403-10 (work-related ill health); and GRI 405-2 (ratio of basic salary and remuneration of women to men).
+In the area of occupational health and safety, several disclosures are unaddressed by the source framework. This includes GRI 403-2 on hazard identification and incident investigation, GRI 403-5 on safety training, GRI 403-7 on business relationships, and GRI 403-8 regarding the number of workers covered by a formal management system. Data on work-related injuries and ill health required by Disclosure 403-9 and Disclosure 403-10 are also absent.
