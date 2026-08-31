@@ -1094,6 +1094,159 @@ two of the thirteen fixes were incomplete. Numbering continues.
     implied. That question is now at least visible in the report, because GRI 3
     is listed. **Decide the topic set, then add.**
 
+### Open from the THIRD external review (2026-08-30)
+
+A third cold audit, aimed at the generated **prose** rather than the code. It
+read the finished reports as a sceptical examiner would, and found a code defect
+(§19, the token collision) plus a class of sentence the number audit was never
+designed to catch. F1/F2/F3/F5/F7/F9 are fixed and recorded in git.
+
+22. ~~🟠 **Three reports asserted something no data can establish.**~~
+    **FIXED 2026-08-30.** All three said the university had *not* carried out a
+    materiality assessment — *"the institution did not conduct"*, *"University
+    College Cork did not run"*, *"The University does not carry out"*.
+
+    **STARS never asks the question.** A university that ran one has no field in
+    which to say so, so the dataset cannot distinguish "did not" from "was not
+    asked". The mapping row taught the model to conflate them: its rationale
+    closed with *"STARS contains no materiality assessment of any kind"* — a
+    statement about the framework, phrased so that it reads as one about the
+    institution, and the model read it the second way.
+
+    The distinction that makes an absence reportable, now in both the row and
+    the prompt:
+
+    | The dataset shows | Legitimate sentence |
+    |---|---|
+    | STARS asked, institution left it blank | *"the institution does not report X"* — a fact about the institution |
+    | STARS never asked | *"this report cannot evidence X"* — the subject is the report, and **nothing** follows about the institution |
+
+    ⚠️ **This is not the number guarantee failing; it is outside it.** Every
+    sentence audited clean, because none of them contained a digit. §17 already
+    warned that qualitative claims have no mechanical check — this is the first
+    time that limit produced a false statement in a shipped deliverable, and it
+    did so three times in one paragraph each. The guard is now a prompt rule and
+    a caveat, i.e. a request rather than a guarantee, and it should be read that
+    way.
+
+    **An earlier claim in this file's session notes was itself unverified.** The
+    reviewer reported that IL-40 Materiality/Hot-Spot Analysis exists in STARS
+    and that none of the three pursued it. That could not be confirmed — no
+    match in the cached technical manual, and IL credits are pick-from-catalog
+    so their absence from our data proves nothing either way. The fix therefore
+    does not rest on it. **Do not repeat the IL-40 claim without checking it.**
+
+23. ⚠️ **pandas 3.0 changed `.astype(str)` on missing values, and it broke an
+    amendment lookup silently for months.** Under the new `str` dtype a missing
+    value stays missing through `.astype(str).str.strip()`, where the old object
+    dtype produced the literal string `"nan"`.
+
+    `add_pass2_rows.py` built its row key two ways — `str(r.x).strip()` in a set
+    comprehension, and the vectorised form twelve lines below in the amendment
+    loop. pandas 3.0 pulled them apart. Every gap row has an empty credit and
+    field, so **no amendment to a gap row could match**, while the duplicate
+    check saw the same rows perfectly well. Collapsed to one `row_key()` used by
+    both — the `pillar_for()` drift (§8) for the third time in this repo.
+
+    It surfaced only because the loop prints `[warn] amendment target not
+    found` instead of continuing quietly. **That warn is the reason this was a
+    ten-minute fix rather than a wrong report**; keep it.
+
+    Checked and NOT affected: `validate_mapping.py`'s integrity gate walks rows
+    with Python-level `str()` and a `blank()` helper, so §3's mechanical
+    guarantees are untouched. Other `.astype(str)` sites compare against
+    non-empty literals where a missing value should be excluded anyway.
+
+24. ~~🔴 **Six caveats ordered the model to write a figure.**~~
+    **FIXED 2026-08-31, and the recurring `INVENTED` failure was ours.** Three
+    303-3 rows said *"Divide by 1,000 before citing the figure … and state the
+    conversion"*; three 302-1 rows said *"convertible, but state the
+    conversion"* for MWh against joules.
+
+    §3 forbids the model from writing any figure, and a conversion factor is a
+    figure. **Those rows asked for something that cannot be done without failing
+    the build**, and the build duly failed — Cork's environment section on
+    `1,000` and `3.6`, then Berkeley's on the same two constants, both of which
+    are quoted verbatim in the caveats that caused them. It was diagnosed twice
+    as a flaky model before anyone read the instruction it was obeying.
+
+    They were written for a **human** report author, before a model was reading
+    the same cells. The unit mismatch is real and stays; acting on it in prose
+    does not. `_NO_PROSE_CONVERSION` now says a conversion belongs in code
+    beside the substitution.
+
+    **Generalises past unit conversions:** every caveat and rationale is read by
+    the model as instructions. Anything phrased as guidance to a report author —
+    *"state X", "divide by Y", "compute Z"* — is an order the model will try to
+    follow, and some of those orders are unsatisfiable under §3.
+
+25. ~~🟠 **`AMENDMENTS` silently discarded three fixes.**~~
+    **FIXED 2026-08-31.** A dict literal keeps the LAST block for a repeated
+    key. The three OP-3 water amendments lost to the 2026-08-22 blocks lower in
+    the file; the run printed `already current` and changed nothing, which is
+    indistinguishable from success.
+
+    The built dict cannot be asked about this — by the time it exists the
+    duplicate is gone — so `assert_no_duplicate_amendments()` parses the
+    module's **own source**, where both keys still exist.
+    `mapping/test_amendments_unique.py` injects a duplicate and proves the run
+    stops, with a positive control that the clean file still runs.
+
+26. ~~🟠 **The number audit rejected correct GRI citation style.**~~
+    **FIXED 2026-08-31 — the second false positive of the same shape.** After
+    the prefix was made mandatory (§14.14), a single prefix distributed over a
+    list stopped being recognised:
+
+    > *"…GRI 301-1, 301-2, 301-3, 302-2, 305-6, 306-1, and 308-2 are not
+    > reported."*
+
+    All eleven are real disclosures and the sentence is correct; ten were
+    audited as fabricated data and TU Dublin's environment section was refused.
+    `GRI_REF` now lets one prefix govern a comma/and-separated run — but **every
+    item must itself be in the vocabulary**, so `GRI 305-1 and 4,858 tonnes`
+    still audits `4,858`.
+
+    ⚠️ **The vocabulary sweep added in §14.14 could not catch this.** It tests
+    each of the 78 disclosures on its own, and the defect only appears when
+    references are written *together*. A property test is only as wide as the
+    shapes it imagines.
+
+    Verified free of cache cost: `GRI_REF` also drives `redact_figures()`, so a
+    wider pattern could have changed every prompt. The combined sha256 of all
+    24 prompts is **identical** before and after (`52fa922c…`), so no section
+    needed regenerating.
+
+27. ~~🟡 **A substituted value lost a unit the field name states.**~~
+    **FIXED 2026-08-31.** Cork's report read *"consists of `26` of paid
+    leave"*. `Number of weeks of paid maternity leave` carries an empty `units`
+    column, so it rendered bare — while the prompt promises *"EACH PLACEHOLDER
+    ALREADY CARRIES ITS OWN UNIT … write the placeholder ALONE"*. The model
+    obeyed; **the promise was the code's to keep.**
+
+    `COUNTED_UNIT_FIELD` now reads the unit out of names shaped
+    *"Number of weeks/days/months/years/hours of …"*. Of 180 tokenised figures,
+    133 carry a dataset unit, 21 are percentages and 26 stay bare — years,
+    diversity indices, FTE counts, the IL-62 ratio, and the three wage fields,
+    which are bare on purpose because STARS records no currency and their
+    caveat supplies it rather than the code guessing.
+
+    Cost nothing to fix: figure values never enter the prompt, so the corrected
+    render flowed into all three reports **with no API call** — the property
+    §17 claims, demonstrated.
+
+28. 🟡 **F4/F8 — data-quality caveats, deferred by Hakim on 2026-08-30.**
+    Neither prints anything false; both are things an examiner could raise.
+    - **Berkeley's energy and emissions cannot both be right.** 30,414 MWh of
+      stationary fuel against 134,957 tCO2e of Scope 1 is roughly 25× what any
+      fuel produces. The likeliest explanation is that cogeneration fuel is in
+      the emissions inventory and not in OP-5. This also undercuts the
+      dashboard's *"Berkeley lowest energy per m²"* line (§18), which may be an
+      artefact of the same omission.
+    - **Cork's water boundary excludes Campus Accommodation**, so the 17× gap
+      against Berkeley — which includes residence halls and irrigation — is
+      partly a boundary difference rather than a performance one, while
+      `bi_metrics.comparable` marks the pair comparable.
+
 ---
 
 ## 13. Phase 5a — the retrieval layer (built 2026-08-17, restructured 2026-08-22)

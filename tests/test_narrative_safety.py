@@ -351,6 +351,30 @@ def main():
         check(f"still audited: {phrase!r}", want in numbers_in(phrase),
               f"found: {numbers_in(phrase)}")
 
+    # ⚠️ THE SAME FALSE POSITIVE, SECOND INSTANCE — 2026-08-31. Requiring the
+    # prefix on every item rejected the way GRI references are actually written,
+    # one prefix distributed over a list. TU Dublin's environment section was
+    # refused over a sentence in which all eleven numbers were real disclosures.
+    # Sweeping the vocabulary (above) could not catch this: it tests references
+    # one at a time, and the defect only appears when they are written together.
+    for phrase in (
+            "GRI 301-1, 301-2, 301-3, 302-2, 305-6, 306-1, and 308-2 are not "
+            "reported",
+            "GRI 302-1 and 303-3 differ in units",
+            "Disclosures 403-9, 403-10 and 405-2 cannot be answered",
+            "GRI 305, 306 and 308 are partially covered"):
+        check(f"exempt (reference list): {phrase[:44]!r}",
+              not numbers_in(phrase), f"flagged: {numbers_in(phrase)}")
+
+    # A list must not become a hiding place either: every item has to be real
+    # vocabulary, so a fabricated quantity cannot ride along behind one.
+    for phrase, want in (
+            ("GRI 305-1 and 4,858 tonnes were offset", "4,858"),
+            ("GRI 302-1, 303-3 and 42,000 metric tons", "42,000"),
+            ("GRI 305-1, 40-50 buildings were retrofitted", "40")):
+        check(f"still audited inside a list: {phrase[:40]!r}",
+              want in numbers_in(phrase), f"found: {numbers_in(phrase)}")
+
     print("\n3c. Retrieved passages carry no figures into the prompt\n")
 
     # Lane A style extracts and the institution's own evidence PDFs are the one

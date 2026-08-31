@@ -26,6 +26,8 @@ RUN
 
 from __future__ import annotations
 
+import ast
+import pathlib
 import sys
 
 import pandas as pd
@@ -36,6 +38,45 @@ from scrapers.institutions import PROJECT_ROOT  # noqa: E402
 
 MAPPING = PROJECT_ROOT / "mapping" / "stars_gri_mapping.csv"
 REVIEWED = "2026-08-20"
+
+
+def assert_no_duplicate_amendments() -> None:
+    """Refuse to run if AMENDMENTS repeats a key.
+
+    A dict literal silently keeps the LAST of any repeated key, so an amendment
+    written twice loses to whichever block sits lower in the file. That happened
+    on 2026-08-30: the three OP-3 water rows were amended in the 2026-08-22 unit
+    pass and again for the conversion-instruction fix, and the OLDER block won
+    because it was further down. The run reported "already current" and changed
+    nothing — which reads exactly like success.
+
+    The built dict cannot be asked about this: by the time it exists the
+    duplicate has already been discarded. So parse our own source, where both
+    keys are still there to be seen. Same reasoning as unique_tokens() in
+    build_narrative.py — a silent overwrite is invisible by construction, and
+    the only place to catch it is upstream of the overwrite.
+    """
+    tree = ast.parse(pathlib.Path(__file__).read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if not (isinstance(node, ast.Assign) and isinstance(node.value, ast.Dict)
+                and any(getattr(t, "id", None) == "AMENDMENTS"
+                        for t in node.targets)):
+            continue
+        seen: set = set()
+        dupes: list = []
+        for key_node in node.value.keys:
+            try:
+                key = ast.literal_eval(key_node)
+            except (ValueError, TypeError):
+                continue          # a computed key; nothing to compare
+            if key in seen and key not in dupes:
+                dupes.append(key)
+            seen.add(key)
+        if dupes:
+            raise SystemExit(
+                f"AMENDMENTS repeats {len(dupes)} key(s). The LAST block for a "
+                "key wins and the earlier one is dead code — merge them:\n  "
+                + "\n  ".join(repr(d) for d in dupes))
 
 
 def row(credit, field, std, disc, rel, conf, rationale, caveat="", note=""):
@@ -776,10 +817,29 @@ TUD_UNPARSEABLE = ("DATA QUALITY: TU Dublin's value is the string '0 Revised on 
 # problem on GRI 302-1 ("STARS reports megawatt-hours - convertible, but state
 # the conversion"), so the omission here was inconsistency rather than a
 # judgement. No figure is wrong; the disclosure is simply not in GRI's unit.
+# Six caveats used to tell the narrator to perform a unit conversion and "state
+# the conversion". §3 forbids the model from writing ANY figure, and a
+# conversion factor is a figure — so those rows asked for something that cannot
+# be done without failing the build. Not hypothetical: the number audit rejected
+# Cork's environment section on 1,000 and 3.6, then Berkeley's on the same two,
+# and both constants were quoted verbatim in the caveats that caused them.
+#
+# They were written for a HUMAN report author, before a model was reading the
+# same cells. The unit mismatch is real and stays; the instruction to act on it
+# in prose does not. A conversion, if ever wanted, belongs in code beside the
+# substitution — which is what §3 is for.
+_NO_PROSE_CONVERSION = (
+    " ⚠️ DO NOT CONVERT IN PROSE, AND DO NOT STATE THE CONVERSION FACTOR. A "
+    "conversion factor is a figure, and no figure may enter the narrative that "
+    "the code did not substitute. Report the STARS value in its own units and "
+    "name the unit difference in words; if a figure in GRI's units is ever "
+    "required, derive it in code from the verified value.")
+
 ML_CONVERSION = ("UNITS: GRI 303-3 requires megaliters and STARS reports cubic "
-                 "meters. Divide by 1,000 before citing the figure as a GRI "
-                 "303-3 value, and state the conversion — the same treatment "
-                 "GRI 302-1 gets for megawatt-hours against joules.")
+                 "meters — a thousandfold difference, so the two are never "
+                 "interchangeable. The same mismatch affects GRI 302-1, which "
+                 "wants joules where STARS reports megawatt-hours."
+                 + _NO_PROSE_CONVERSION)
 
 # GRI 306-3/4/5 all rest on the same limitation — STARS collects non-hazardous
 # waste only, and holds no hazardous TONNAGE anywhere (OP-11 has a programme
@@ -835,8 +895,126 @@ WAGE_RATIO_TRUTH = (
     "with no currency - EUR for the Irish universities, USD for Berkeley - and "
     "are not comparable across them without saying so.")
 
+# Six caveats told the narrator to perform a unit conversion and "state the
+# conversion". §3 forbids the model from writing ANY figure, and a conversion
+# factor is a figure — so those rows asked for something that cannot be done
+# without failing the build. It was not a hypothetical: the audit rejected
+# Cork's environment section on 1,000 and 3.6, then Berkeley's on the same two,
+# and both constants are quoted verbatim in the caveats below.
+#
+# The instructions were written for a HUMAN report author, before a model was
+# reading the same cells. The unit mismatch is real and stays; the instruction
+# to act on it in prose does not. A conversion, if ever wanted, belongs in code
+# beside the substitution — which is the whole point of §3.
 # (stars_credit, stars_field, gri_disclosure) -> the columns to overwrite.
 AMENDMENTS = {
+    ("OP-5", "Total annual energy consumption", "302-1"): {
+        "caveat":
+            "GRI 302-1 expects joules or multiples and requires fuel "
+            "consumption split into renewable and non-renewable. STARS "
+            "reports megawatt-hours." + _NO_PROSE_CONVERSION,
+        "claude_verdict": "amend",
+        "claude_note":
+            "Corrected 2026-08-30: the caveat instructed prose to state a "
+            "conversion the number audit forbids, and repeatedly caused it to "
+            "fail. The unit mismatch is unchanged.",
+        "reviewed_date": "2026-08-30",
+    },
+    ("OP-5", "Total heating and cooling from off-site sources", "302-1"): {
+        "caveat":
+            "GRI 302-1 requires joules; STARS reports MMBtu or MWh, so this "
+            "value is not in GRI's unit as collected." + _NO_PROSE_CONVERSION,
+        "claude_verdict": "amend",
+        "claude_note": "Corrected 2026-08-30 with the OP-5 total; see its note.",
+        "reviewed_date": "2026-08-30",
+    },
+    ("OP-5", "Natural gas", "302-1"): {
+        "caveat":
+            "GRI 302-1 expects joules; STARS reports MWh."
+            + _NO_PROSE_CONVERSION,
+        "claude_verdict": "amend",
+        "claude_note": "Corrected 2026-08-30 with the OP-5 total; see its note.",
+        "reviewed_date": "2026-08-30",
+    },
+    # THE ROW TOLD THE MODEL SOMETHING NOBODY CAN KNOW, AND ALL THREE REPORTS
+    # DULY PRINTED IT: "the institution did not conduct a separate internal
+    # materiality assessment", "University College Cork did not run an
+    # independent materiality assessment", "The University does not carry out a
+    # dedicated materiality assessment."
+    #
+    # None of that is establishable from this dataset. STARS never asks the
+    # question, so an institution that DID run a materiality assessment has no
+    # field in which to record it. The old rationale's closing line — "STARS
+    # contains no materiality assessment of any kind" — is a statement about the
+    # framework that reads as a statement about the institution, and the model
+    # read it that way.
+    #
+    # The distinction being drawn here is the one that makes an absence
+    # reportable. STARS ASKED and the institution left it blank -> "does not
+    # report" is a fact about the institution. STARS NEVER ASKED -> nothing
+    # whatsoever follows about the institution, and the only honest subject of
+    # the sentence is this report.
+    ("nan", "nan", "3-1"): {
+        "rationale":
+            "GRI 3-1 requires the organisation to describe the process by "
+            "which it determined its material topics: how it identified "
+            "actual and potential impacts on the economy, environment and "
+            "people, how it prioritised them, and which stakeholders and "
+            "experts informed that. A STARS submission records no such "
+            "process, because STARS never asks for one — the credit set is "
+            "fixed by AASHE and is identical for every institution. Note "
+            "exactly what that does and does not establish: it establishes "
+            "that this dataset cannot evidence a materiality process, NOT "
+            "that the institution never carried one out. Silence about a "
+            "question that was never put is not a finding about the "
+            "institution.",
+        "caveat":
+            "A structural difference between the two FRAMEWORKS, not missing "
+            "data and not a criticism of the institution. GRI assumes the "
+            "organisation identifies and prioritises its own impacts; STARS "
+            "assumes AASHE settled that for the higher-education sector and "
+            "asks the institution to answer a fixed credit set. ⚠️ DO NOT "
+            "WRITE THAT THE INSTITUTION DID NOT CONDUCT, DID NOT RUN, OR DOES "
+            "NOT CARRY OUT A MATERIALITY ASSESSMENT. Nothing here supports "
+            "it; STARS never asked, so a university that ran one has nowhere "
+            "to say so. The defensible statement is that this report cannot "
+            "evidence such a process, and that the topics it covers are "
+            "AASHE's sector-level determination rather than an "
+            "institution-specific one. PA-2 records a climate-vulnerability "
+            "assessment and PA-3 records stakeholder consultation, but "
+            "neither is a materiality process and neither should be "
+            "presented as one.",
+        "claude_verdict": "amend",
+        "claude_note":
+            "Corrected 2026-08-30 after the third external review. The row "
+            "licensed an unknowable negative claim about the institution, "
+            "which all three narratives printed. The gap itself stands — it "
+            "is the reason GRI 3-1 is gap_gri_side — but its subject is the "
+            "dataset, not the university.",
+        "reviewed_date": "2026-08-30",
+    },
+    # Same failure one disclosure along: "would overstate what the institution
+    # actually did" invites the report to say what the institution did.
+    ("PA-2", "Has the institution adopted one or more measurable sustainability "
+     "objectives that address campus operations?", "3-2"): {
+        "caveat":
+            "NOT A MATERIALITY DETERMINATION. These five areas are fixed by "
+            "STARS and identical for every institution, so they say where an "
+            "institution has set objectives, not which impacts it judged "
+            "significant and why. GRI 3-2-b also requires changes against the "
+            "previous reporting period, which a single STARS submission "
+            "cannot show. Presenting these as material topics would overstate "
+            "what this dataset establishes: it shows that objectives exist in "
+            "an area, never how that area was chosen. Whether the institution "
+            "determined its own topics outside STARS is not recorded here "
+            "either way, and must not be asserted in either direction.",
+        "claude_verdict": "amend",
+        "claude_note":
+            "Corrected 2026-08-30 with the GRI 3-1 row; see its note. The "
+            "closing line made the institution the subject of a sentence only "
+            "the dataset can be the subject of.",
+        "reviewed_date": "2026-08-30",
+    },
     # The old caveat said "derive the absolute figure from the baseline and
     # current fields". Following that instruction on Berkeley gives 147,623 -
     # 137,965 = 9,658 tCO2e, a 6.54% reduction — while the percentage printed
@@ -1429,26 +1607,38 @@ def main():
     write = "--write" in sys.argv
     mapping = pd.read_csv(MAPPING)
 
-    existing = {
-        (str(r.stars_credit).strip(), str(r.stars_field).strip(),
-         str(r.gri_disclosure).strip())
-        for r in mapping.itertuples(index=False)
-    }
+    assert_no_duplicate_amendments()
+
+    # ONE construction of the row key, used by both the amendment lookup and the
+    # duplicate check below. They used to build it separately — a set comprehension
+    # here and a vectorised .astype(str) comparison in the amendment loop — and
+    # pandas 3.0 pulled them apart: under the new `str` dtype .astype(str) leaves
+    # a missing value missing, where str() still yields the literal "nan". Every
+    # gap row has an empty credit and field, so amendments to gap rows silently
+    # matched nothing while the duplicate check saw them perfectly well. Only the
+    # [warn] below made it visible. Same drift as pillar_for() (CLAUDE.md §8):
+    # two copies of one rule is one copy too many.
+    def row_key(r) -> tuple:
+        return (str(r.stars_credit).strip(), str(r.stars_field).strip(),
+                str(r.gri_disclosure).strip())
+
+    row_index: dict = {}
+    for pos, r in enumerate(mapping.itertuples(index=False)):
+        row_index.setdefault(row_key(r), mapping.index[pos])
+    existing = set(row_index)
 
     # Amendments come first: an existing row whose JUDGEMENT was wrong, as
     # opposed to a row that was missing. Rewriting in place rather than adding a
     # second row for the same (credit, field, disclosure) keeps the content
     # index from reporting one field twice.
     amended, already = 0, 0
-    for (credit, field, disclosure), columns in AMENDMENTS.items():
-        hit = ((mapping.stars_credit.astype(str).str.strip() == credit)
-               & (mapping.stars_field.astype(str).str.strip() == field)
-               & (mapping.gri_disclosure.astype(str).str.strip() == disclosure))
-        if not hit.any():
+    for key, columns in AMENDMENTS.items():
+        credit, field, disclosure = key
+        idx = row_index.get(key)
+        if idx is None:
             print(f"   [warn] amendment target not found: {credit} / "
                   f"{field[:40]} -> {disclosure}")
             continue
-        idx = mapping.index[hit][0]
         if all(str(mapping.loc[idx, k]) == str(v) for k, v in columns.items()):
             already += 1
             continue
