@@ -5,7 +5,7 @@ institution,section,backend,figures_offered,figures_used,digits_from_figures,dig
 "University of California, Berkeley",governance,gemini,0,0,0,,,
 "University of California, Berkeley",strategy,gemini,0,0,0,,,
 "University of California, Berkeley",stakeholders,gemini,0,0,0,,,
-"University of California, Berkeley",environment,gemini,45,45,59,,,six
+"University of California, Berkeley",environment,gemini,45,45,59,,,
 "University of California, Berkeley",social,gemini,12,12,12,,,three; two
 University College Cork,organisation,gemini,1,1,1,,,
 University College Cork,workforce,gemini,1,1,1,,,
@@ -13,9 +13,9 @@ University College Cork,material_topics,gemini,0,0,0,,,five
 University College Cork,governance,gemini,0,0,0,,,two
 University College Cork,strategy,gemini,0,0,0,,,
 University College Cork,stakeholders,gemini,0,0,0,,,
-University College Cork,environment,gemini,49,46,62,1; 14064,,
+University College Cork,environment,gemini,49,49,67,1; 14064,,
 University College Cork,social,gemini,12,12,13,16; 42,,
-Technological University Dublin,organisation,gemini,1,1,1,,,
+Technological University Dublin,organisation,gemini,1,1,1,,,three
 Technological University Dublin,workforce,gemini,1,1,1,,,two
 Technological University Dublin,material_topics,gemini,0,0,0,,,
 Technological University Dublin,governance,gemini,1,1,1,,,four; two

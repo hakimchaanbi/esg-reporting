@@ -835,6 +835,43 @@ _NO_PROSE_CONVERSION = (
     "name the unit difference in words; if a figure in GRI's units is ever "
     "required, derive it in code from the verified value.")
 
+# F4 and F8 from the third external review. Both were re-verified against the
+# institutions' own submissions on 2026-09-06 BEFORE anything was written here,
+# because the same review's IL-40 claim did not survive checking (§14.22).
+#
+# Note what makes these safe to state, where "the institution did not conduct a
+# materiality assessment" was not: each is a comparison between two figures the
+# institution itself published, or a quotation from its own boundary narrative.
+# Nothing is inferred about what the university did off the page.
+COGEN_GAP = (
+    " ⚠️ BERKELEY ONLY, AND IT IS AN INCOMPLETE RETURN RATHER THAN A RESULT. "
+    "Berkeley's reported stationary fuel consumption is far too small — by a "
+    "factor of roughly twenty-five — to have produced the stationary "
+    "combustion emissions it reports in the same submission, and no fuel burns "
+    "at that intensity. Its own emissions methodology names natural gas from "
+    "the campus cogeneration plant as a Scope 1 source, while its energy "
+    "return records no on-site non-renewable electricity at all: the plant is "
+    "in the emissions inventory and absent from the energy one. State plainly "
+    "that Berkeley's energy total is incomplete and that the size of the gap "
+    "cannot be established from this data. Do NOT present Berkeley's energy "
+    "figures as an efficiency achievement, and do NOT repeat any of this in "
+    "Cork's or TU Dublin's report — neither shows the mismatch.")
+
+BOUNDARY_MISMATCH = (
+    " ⚠️ THE THREE SUBMISSIONS DO NOT SHARE A REPORTING BOUNDARY, so figures "
+    "normalised per person or per unit of area are not like-for-like across "
+    "them. Cork's boundary narrative excludes its subsidiary companies by "
+    "name — Campus Accommodation, the Mardyke Arena, the Student Centre and "
+    "the Irish Management Institute — and excludes rented multi-tenant "
+    "buildings; Berkeley's covers everything under its operational control, "
+    "residences and grounds included. This biases Cork's per-person figures "
+    "DOWNWARD: students living in Campus Accommodation still count in its "
+    "full-time-equivalent denominator while their residential consumption "
+    "falls outside the numerator. Per-area figures are less affected, since "
+    "the excluded buildings are missing from both halves. Where such a figure "
+    "is cited comparatively, name the boundary difference; never present the "
+    "gap as performance alone.")
+
 ML_CONVERSION = ("UNITS: GRI 303-3 requires megaliters and STARS reports cubic "
                  "meters — a thousandfold difference, so the two are never "
                  "interchangeable. The same mismatch affects GRI 302-1, which "
@@ -912,13 +949,81 @@ AMENDMENTS = {
         "caveat":
             "GRI 302-1 expects joules or multiples and requires fuel "
             "consumption split into renewable and non-renewable. STARS "
-            "reports megawatt-hours." + _NO_PROSE_CONVERSION,
+            "reports megawatt-hours." + _NO_PROSE_CONVERSION + COGEN_GAP,
         "claude_verdict": "amend",
         "claude_note":
             "Corrected 2026-08-30: the caveat instructed prose to state a "
             "conversion the number audit forbids, and repeatedly caused it to "
-            "fail. The unit mismatch is unchanged.",
-        "reviewed_date": "2026-08-30",
+            "fail. The unit mismatch is unchanged. Extended 2026-09-06 with "
+            "F4, Berkeley's missing cogeneration plant — MERGED into this "
+            "block rather than added as a second entry for the same key, "
+            "which assert_no_duplicate_amendments() would now reject (§14.25).",
+        "reviewed_date": "2026-09-06",
+    },
+    ("OP-5", "Total stationary fuel consumption", "302-1"): {
+        "caveat":
+            "GRI 302-1-a is fuel consumption from non-renewable sources. This "
+            "is the STARS total for it, and the figure the cogeneration "
+            "arithmetic below turns on." + COGEN_GAP,
+        "claude_verdict": "amend",
+        "claude_note":
+            "F4, 2026-09-06. This is the field whose value is irreconcilable "
+            "with the OP-6 stationary combustion emissions; the caveat belongs "
+            "on it most of all.",
+        "reviewed_date": "2026-09-06",
+    },
+    ("OP-5", "Annual energy consumption per person", "302-3"): {
+        "caveat":
+            "GRI 302-3 energy intensity, normalised per person."
+            + BOUNDARY_MISMATCH + COGEN_GAP,
+        "claude_verdict": "amend",
+        "claude_note": "F4 + F8, 2026-09-06. Both defects land on this figure.",
+        "reviewed_date": "2026-09-06",
+    },
+    ("OP-5", "Annual energy consumption per unit of floor area", "302-3"): {
+        "caveat":
+            "GRI 302-3 energy intensity, normalised per unit of floor area."
+            + BOUNDARY_MISMATCH + COGEN_GAP,
+        "claude_verdict": "amend",
+        "claude_note":
+            "F4 + F8, 2026-09-06. THIS is the figure the dashboard used to "
+            "headline as 'Berkeley lowest energy per square metre'. The "
+            "ranking was an artefact of the omitted cogeneration plant.",
+        "reviewed_date": "2026-09-06",
+    },
+    ("OP-6", "Annual scope 1 and 2 GHG emissions per person", "305-4"): {
+        "caveat":
+            "GRI 305-4 emissions intensity, normalised per person."
+            + BOUNDARY_MISMATCH,
+        "claude_verdict": "amend",
+        "claude_note": "F8, 2026-09-06.",
+        "reviewed_date": "2026-09-06",
+    },
+    ("OP-6", "Annual scope 1 and 2 GHG emissions per unit of floor area",
+     "305-4"): {
+        "caveat":
+            "GRI 305-4 emissions intensity, normalised per unit of floor area."
+            + BOUNDARY_MISMATCH,
+        "claude_verdict": "amend",
+        "claude_note": "F8, 2026-09-06.",
+        "reviewed_date": "2026-09-06",
+    },
+    ("PRE-3",
+     "Narrative outlining the institutional boundary used to complete this report",
+     "2-2"): {
+        "caveat":
+            "GRI 2-2-a, the entities included in the report. STARS collects "
+            "this as a free-text boundary narrative, so it answers the "
+            "disclosure but is not structured as GRI's list of entities."
+            + BOUNDARY_MISMATCH,
+        "claude_verdict": "amend",
+        "claude_note":
+            "F8, 2026-09-06. The boundary narratives are where the "
+            "comparability problem is actually declared — Cork names the "
+            "subsidiaries it excludes — so this row carries it as well as the "
+            "intensity rows, and it reaches the reporting section rather than "
+            "only the environmental one.",
+        "reviewed_date": "2026-09-06",
     },
     ("OP-5", "Total heating and cooling from off-site sources", "302-1"): {
         "caveat":

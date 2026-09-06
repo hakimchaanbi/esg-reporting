@@ -615,8 +615,25 @@ def _gri_reference_pattern() -> re.Pattern:
     #
     # Only 1-3 immediately after Scope/Scopes, joined by commas or "and", are
     # exempt — a fabricated quantity cannot wear that shape.
-    parts.append(r"\bScopes?\s+[123](?:\s*,\s*[123])*"
-                 r"(?:\s*(?:and|&|to)\s*[123])?\b")
+    #
+    # ⚠️ AN EXEMPTION MUST NOT EAT THE FIRST DIGIT OF THE NUMBER NEXT TO IT.
+    # 2026-09-06: the comma-list above matched "Scope 2, 3" inside
+    #
+    #     "…not included in Scope 1 or Scope 2, 3,565 Metric tons from business
+    #      travel…"
+    #
+    # consuming the 3 that begins 3,565 and leaving a bare "565" for the audit
+    # to report as fabricated. Cork's environment section was refused over a
+    # figure the code had itself substituted. The exemption did not merely
+    # cover too much — it CREATED a phantom number out of a real one.
+    #
+    # `scope_item` therefore rejects a digit that is really a thousands or
+    # decimal group: "3" followed by ",5" is the head of 3,565, never a scope.
+    # "Scopes 1, 2 and 3" is untouched, because there the comma is followed by
+    # a space rather than a digit.
+    scope_item = r"[123](?![\d,.]\d)"
+    parts.append(rf"\bScopes?\s+{scope_item}(?:\s*,\s*{scope_item})*"
+                 rf"(?:\s*(?:and|&|to)\s*{scope_item})?\b")
     return re.compile("|".join(parts), re.IGNORECASE)
 
 

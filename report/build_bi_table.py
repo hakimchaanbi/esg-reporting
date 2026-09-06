@@ -66,6 +66,45 @@ CITABLE = {"equivalent", "component", "intensity"}
 
 INTENSITY_RE = r"per person|per unit of floor area|per capita"
 
+# ⚠️ TWO FIGURES ARE FAITHFULLY EXTRACTED AND STILL CANNOT BE COMPARED AT FACE
+# VALUE. Both are the institutions' own reporting decisions, verified against
+# their own submissions — nothing here is an extraction error, and the values
+# stay in the table unchanged. What they get is a note that travels with them
+# into any export, because a chart that ignores them draws a false conclusion.
+#
+# Suppressing the rows instead would be its own dishonesty: a metric that
+# vanishes with no explanation looks like missing data rather than a finding.
+COGEN_GAP = (
+    "Under-count. Berkeley's stationary fuel is ~25x too small to produce the "
+    "stationary-combustion emissions it reports in OP-6, and no fuel burns at "
+    "that intensity. Its OP-6 methodology names gas from the campus "
+    "cogeneration plant as a scope 1 source, while OP-5 records zero on-site "
+    "non-renewable electricity — the plant is in the emissions inventory and "
+    "absent from the energy one. Not a performance result.")
+
+BOUNDARY_GAP = (
+    "Boundary. Cork's PRE-3 narrative excludes its subsidiaries by name — "
+    "Campus Accommodation, the Mardyke Arena, the Student Centre, the IMI — "
+    "and rented multi-tenant buildings. Berkeley's covers everything under its "
+    "operational control, residences and grounds included. Students in Campus "
+    "Accommodation still count in Cork's FTE denominator while their "
+    "residential use sits outside the numerator, biasing its per-person "
+    "figures downward.")
+
+
+def data_quality_note(row) -> str:
+    """A known reason this row's figure cannot be read at face value, or "".
+
+    Keyed on what was actually verified, not on a guess about which metrics
+    "look odd": Berkeley's OP-5 energy against its own OP-6 emissions, and
+    Cork's per-person figures against its own declared boundary.
+    """
+    if row.institution_key == "berkeley" and row.credit_code == "OP-5":
+        return COGEN_GAP
+    if row.institution_key == "cork" and "per person" in str(row.field).lower():
+        return BOUNDARY_GAP
+    return ""
+
 
 def key_for(name: str) -> str:
     for inst in INSTITUTIONS.values():
@@ -123,6 +162,13 @@ def build_metrics(master: pd.DataFrame, mapping: pd.DataFrame) -> pd.DataFrame:
     counts = joined.groupby(["credit_code", "field"]).institution.nunique()
     joined["comparable"] = joined.set_index(
         ["credit_code", "field"]).index.map(counts).values == len(INSTITUTIONS)
+
+    # `comparable` answers "did all three report it?" and is deliberately left
+    # alone here — a figure can be reported by everyone and still not mean the
+    # same thing in each submission. That second question gets its own column
+    # rather than being folded into the first, so a consumer of the CSV cannot
+    # mistake "all three answered" for "these three numbers are like for like".
+    joined["data_quality"] = joined.apply(data_quality_note, axis=1)
 
     return joined.sort_values(
         ["institution", "credit_code", "field"]).reset_index(drop=True)
@@ -215,6 +261,11 @@ def main():
           f"metrics — the only fair cross-institution comparison")
     print(f"[check] {metrics.mapped_to_gri.sum()} of {len(metrics)} metric rows "
           f"carry a GRI disclosure")
+
+    flagged = metrics[metrics.data_quality.astype(str) != ""]
+    print(f"[check] {len(flagged)} rows carry a data-quality note, "
+          f"{len(flagged[flagged.is_intensity])} of them intensity metrics — "
+          f"these are reported faithfully but are NOT like-for-like")
 
 
 if __name__ == "__main__":

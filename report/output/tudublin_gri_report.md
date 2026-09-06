@@ -4,17 +4,26 @@ Prepared **with reference to** the GRI Standards. Source data: [Technological Un
 
 ## The organisation and its reporting
 
-Technological University Dublin (TU Dublin) is a public institution. The reporting boundary encompasses the campuses of City, Tallaght, and Blanchardstown. The City campus comprises several areas, including Grangegorman, Bolton Street, and Aungier Street. This report includes data for all estates, buildings, university functions, staff, students, and research outputs. A group of personnel contributed to the data collection and validation process.
+### Organisational details and reporting boundary
 
-The performance year for Scope 1 and Scope 2 greenhouse gas emissions is 2023. The reporting process was led by Dr. Philippe Lemarchand, Head of Sustainability Intelligence, and Dr. Zeyan Zhao, Data Analyst in Sustainability Intelligence.
+Technological University Dublin (TU Dublin) is a public higher education institution. In accordance with Disclosure 2-2, the reporting boundary encompasses all three of the university's campuses: the City campus—which includes Grangegorman, Bolton Street, Aungier Street, and central Dublin properties—alongside the Tallaght and Blanchardstown campuses. The operational scope covers all university estates, academic and non-academic functions, student bodies, staff, research hubs, and research repositories. Operational features reported within the institutional boundary also include an agricultural school.
 
-The institution's activities include the operation of an agricultural school. No independent audits or external assurance processes were used in the preparation of this report.
+### Reporting period and coordination
 
-### Reporting Limitations
+Data for Scope 1 and Scope 2 greenhouse gas emissions correspond to the performance year 2023. The collation and validation of institutional data were coordinated by the Head of Sustainability Intelligence and a Data Analyst within Sustainability Intelligence.
 
-Regarding GRI 2-1, this report does not include the legal name, headquarters location, or countries of operation. For GRI 2-2, STARS does not collect information on whether reporting entities differ from financial statements or how minority interests are consolidated. A limitation exists regarding data access from food service providers.
+### External assurance
 
-Under GRI 2-3, contact details for enquiries, reporting frequency, and publication dates are not provided. Furthermore, STARS does not utilize a single reporting period, and performance years may diverge between different disclosures. Disclosure 2-4 is not reported as the source framework does not provide a mechanism for restatements. For GRI 2-5, details on assurance standards and provider relationships are unavailable. Finally, for GRI 2-6, the source does not provide a full account of the value chain, products, services, or markets served.
+For Disclosure 2-5, the institution reports that no independent audit or external assurance process was used in the preparation of this report.
+
+### Framework limitations and omissions
+
+Several specific disclosures required by the GRI Standards cannot be evidenced from the source data:
+
+- **GRI 2-1 and GRI 2-6:** The source framework does not capture corporate metadata such as legal registration details, headquarters location, or country breakdown, nor does it record the full supply chain, product and service structures, or market profiles outside designated campus operational features.
+- **GRI 2-3:** Contact details, designated channels for stakeholder enquiries, publication dates, and standard reporting frequencies are not collected by the framework. Furthermore, STARS operates through credit-specific reference years rather than a single unified reporting period.
+- **GRI 2-4:** The framework evaluates institutional submissions as independent assessments and contains no mechanism to report restatements of information from previous periods.
+- **GRI 2-5:** Detailed assurance disclosures—such as the assurance standard, the level of assurance, and relationships with assurance providers—are not structured within the reporting tool.
 
 ## Activities and workers
 
@@ -100,17 +109,43 @@ Regarding the limitations of this report, Disclosure GRI 2-29 requires an explan
 
 ## Environmental performance
 
-### Environmental performance
+### Energy consumption and intensity
 
-The institution’s energy consumption is managed through a combination of direct fuel combustion and purchased electricity. The total annual energy consumption is 38,391 Megawatt-hours. This comprises 15,053 Megawatt-hours of electricity and 21,072 Megawatt-hours of stationary fuel. Within the stationary fuel category, the institution reports 21,056 Megawatt-hours of natural gas, 16 Megawatt-hours of heating oil, 0 Megawatt-hours of coal and coke, and 0 Megawatt-hours of propane and LPG. The institution reports 8,397.21 Megawatt-hours of renewable energy, which includes renewable electricity and 0.21 Megawatt-hours of renewable stationary fuels. Additionally, the institution accounts for 2,266 Megawatt-hours of heating and cooling from off-site sources, while 0 Megawatt-hours of on-site renewable electricity is exported. Energy intensity is measured at 1,520.74 Kilowatt-hours per person and 182.05 Kilowatt-hours per square meter per unit of floor area.
+Under GRI 302-1, Technological University Dublin reports total annual energy consumption of 38,391 Megawatt-hours. Electricity consumption across operations accounts for 15,053 Megawatt-hours, while stationary fuel consumption totals 21,072 Megawatt-hours. By fuel source, non-renewable combustion comprises natural gas at 21,056 Megawatt-hours, heating oil at 16 Megawatt-hours, propane and LPG at 0 Megawatt-hours, and coal or coke at 0 Megawatt-hours. Off-site heating and cooling imported to campus facilities accounts for 2,266 Megawatt-hours, including recovered heat from an adjacent data centre infrastructure network. Total renewable energy consumption stands at 8,397.21 Megawatt-hours, while renewable stationary fuel consumption is 0.21 Megawatt-hours, reflecting that renewable consumption is concentrated in electricity supply rather than combustible fuels. On-site renewable electricity exported to the grid totals 0 Megawatt-hours.
 
-Water withdrawal is sourced entirely from off-site potable supplies, totalling 56,570 Cubic meters. The institution reports 56,570 Cubic meters as the total water withdrawal, with 0 Cubic meters attributed to on-site sources. The institution maintains a medium-high risk rating for physical water quantity on its main campus and engages in on-site rainwater harvesting.
+Institutional energy intensity under GRI 302-3 is 1,520.74 Kilowatt-hours and 182.05 Kilowatt-hours per square meter. Energy metrics are reported in megawatt-hours as collected by the source framework rather than joules as specified by GRI 302-1.
 
-Greenhouse gas emissions are tracked against a baseline established during the 2018 period, which serves as a reference for both Scope 1 and Scope 2 emissions, totalling 10,064 Metric tons of CO2 equivalent. Current Scope 1 emissions include 3,728 Metric tons of CO2 equivalent from stationary combustion, 2 Metric tons of CO2 equivalent from mobile combustion, 55 Metric tons of CO2 equivalent from fugitive sources, and 0 Metric tons of CO2 equivalent from process emissions. Scope 2 emissions are reported as 4,992 Metric tons of CO2 equivalent (market-based) and 0 Metric tons of CO2 equivalent (location-based), alongside 181 Metric tons of CO2 equivalent from off-site heating and cooling. Scope 3 emissions are attributed to business travel (410 Metric tons of CO2 equivalent), commuting (10,694 Metric tons of CO2 equivalent), purchased goods and services (26,269 Metric tons of CO2 equivalent), capital goods (83 Metric tons of CO2 equivalent), waste generated in operations (9 Metric tons of CO2 equivalent), and fuel- and energy-related activities (0 Metric tons of CO2 equivalent). The institution reports an emissions intensity of 354.84 Kilograms of CO2 equivalent per person and 42.48 Kilograms per square meter per unit of floor area. The percentage reduction in Scope 1 and 2 emissions from the baseline is 10.99%, with adjusted net emissions of 8,958 Metric tons of CO2 equivalent after accounting for 0 Metric tons of CO2 equivalent of third-party certified carbon offsets.
+### Greenhouse gas emissions
 
-Waste management performance includes 1,768.85 Metric tons of non-hazardous waste and 1,244.08 Metric tons of construction and demolition waste. Of the non-hazardous waste, 1,452.64 Metric tons was diverted, comprising 691.73 Metric tons recycled, 56.01 Metric tons composted, and 704.90 Metric tons prepared for reuse. Construction and demolition waste diversion totalled 1,121.85 Metric tons, with 531.95 Metric tons recycled and 589.89 Metric tons prepared for reuse. Waste directed to disposal includes 316.21 Metric tons of non-hazardous waste and 122.23 Metric tons of construction and demolition waste. The institution identifies supplier sustainability considerations in 0% of bid solicitations.
+Greenhouse gas emissions calculations follow the GHG Protocol Corporate Standard, utilising utility billing records, public sector energy monitoring platforms, and national conversion factors. Under GRI 305-1, Scope 1 direct emissions from stationary combustion are 3,728 Metric tons of CO2 equivalent, mobile combustion emissions from university fleet vehicles are 2 Metric tons of CO2 equivalent, fugitive emissions are 55 Metric tons of CO2 equivalent, and process emissions are 0 Metric tons of CO2 equivalent. The institution does not report aggregate annual Scope 1 emissions or biogenic emissions separately.
 
-Several disclosures remain limited. GRI 302-1 and GRI 303-3 data are reported in MWh and cubic metres respectively, which differ from the standard GRI units of joules and megalitres. Hazardous waste data is not quantified, and GRI 301-1, 301-2, 301-3, 302-2, 302-4, 302-5, 303-2, 305-6, 305-7, 306-1, and 308-2 are not reported. The institution does not report on the specific breakdown of water discharge quality or the application of environmental criteria to individual suppliers.
+Under GRI 305-2, indirect Scope 2 emissions from purchased electricity are 4,992 Metric tons of CO2 equivalent under the market-based method and 0 Metric tons of CO2 equivalent under the location-based method. Emissions associated with off-site heating and cooling imports are 181 Metric tons of CO2 equivalent. Aggregate annual Scope 2 emissions are not reported as a separate total.
+
+Under GRI 305-3, Scope 3 emissions comprise business travel at 410 Metric tons of CO2 equivalent, employee and student commuting at 10,694 Metric tons of CO2 equivalent, purchased goods and services at 26,269 Metric tons of CO2 equivalent, capital goods at 83 Metric tons of CO2 equivalent, operational waste handling at 9 Metric tons of CO2 equivalent, and fuel- and energy-related activities not included in Scope 1 or Scope 2 at 0 Metric tons of CO2 equivalent.
+
+Operational greenhouse gas intensity under GRI 305-4 is 354.84 Kilograms of CO2 equivalent and 42.48 Kilograms per square meter. Emissions reduction progress under GRI 305-5 is evaluated against a baseline established in 2018, when metering and billing data alignment was formalised. Baseline Scope 1 and Scope 2 emissions were 10,064 Metric tons of CO2 equivalent. Current adjusted net emissions are 8,958 Metric tons of CO2 equivalent, representing a reduction of 10.99% from the baseline. The institution reports 0 Metric tons of CO2 equivalent of carbon offsets, meaning gross and net reductions are identical.
+
+### Water withdrawal and management
+
+Under GRI 303-3, total water withdrawal is 56,570 Cubic meters, consisting entirely of potable water drawn from off-site municipal supply at 56,570 Cubic meters. Potable water withdrawal from on-site abstraction is 0 Cubic meters. Water quantities are recorded in cubic metres rather than megalitres.
+
+In relation to GRI 303-1, physical water quantity risk for the main campus location is assessed as medium-high. The university maintains on-site rainwater harvesting systems to support water conservation.
+
+### Waste generation, diversion, and disposal
+
+Under GRI 306-3, annual non-hazardous waste generation is 1,768.85 Metric tons, and construction and demolition waste generation is 1,244.08 Metric tons.
+
+Resource recovery under GRI 306-4 diverted 1,452.64 Metric tons of non-hazardous waste from disposal. This diverted volume comprises 691.73 Metric tons sent for recycling, 56.01 Metric tons composted, and 704.90 Metric tons prepared for reuse. Diversion of construction and demolition waste totals 1,121.85 Metric tons, consisting of 531.95 Metric tons recycled and 589.89 Metric tons prepared for reuse.
+
+Under GRI 306-5, non-hazardous waste directed to disposal in landfill or incineration is 316.21 Metric tons, and construction and demolition waste directed to disposal is 122.23 Metric tons.
+
+Under GRI 306-2, waste minimization programmes include institutional surplus property management for redistribution, donation, or resale, as well as community reuse initiatives for staff and students. Single-use plastics are partially replaced by certified compostable and paper alternatives, and a dedicated hazardous waste management protocol is maintained.
+
+### Supplier screening and reporting limitations
+
+Under GRI 308-1, supplier sustainability considerations are incorporated into 0% of bid solicitations, and the university maintains a supplier code of conduct containing environmental provisions beyond statutory compliance.
+
+Several GRI environmental disclosures cannot be reported from available monitoring systems. Material weight and recycled input disclosures (GRI 301-1, GRI 301-2, and GRI 301-3) and product efficiency metrics (GRI 302-5) do not apply to higher education provision. External value chain energy consumption (GRI 302-2) and energy reductions expressed in joules (GRI 302-4) are not recorded. Effluent discharge quality standards (GRI 303-2), emissions of ozone-depleting substances (GRI 305-6), and other significant air emissions including nitrogen oxides and sulphur oxides (GRI 305-7) are not captured within the framework. Process descriptions of waste generation (GRI 306-1), hazardous waste weights (GRI 306-3), and specific supplier screening results (GRI 308-2) are likewise uncollected.
 
 ## Social and economic performance
 

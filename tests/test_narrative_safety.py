@@ -366,6 +366,25 @@ def main():
         check(f"exempt (reference list): {phrase[:44]!r}",
               not numbers_in(phrase), f"flagged: {numbers_in(phrase)}")
 
+    # ⚠️ THE THIRD FALSE POSITIVE, AND THE WORST KIND — 2026-09-06. The Scope
+    # comma-list matched "Scope 2, 3" inside "…in Scope 1 or Scope 2, 3,565
+    # Metric tons from business travel…", eating the 3 that begins 3,565 and
+    # leaving a bare "565" the audit reported as fabricated. Cork's environment
+    # section was refused over a figure the code had substituted itself.
+    #
+    # An exemption that CREATES a phantom number out of a real one is worse
+    # than one that merely covers too much, so each of these asserts the exact
+    # set: the scope reference is exempt AND the figure beside it survives whole.
+    for phrase, want in (
+            ("not included in Scope 1 or Scope 2, 3,565 Metric tons from "
+             "business travel", ["3,565"]),
+            ("Scope 3, 1,572 tonnes from purchased goods", ["1,572"]),
+            ("Scopes 1, 2, 3 all reported", []),
+            ("Scopes 1, 2 and 3 are reported", [])):
+        got = sorted(numbers_in(phrase))
+        check(f"no digit eaten: {phrase[:44]!r}", got == sorted(want),
+              f"expected {want}, got {got}")
+
     # A list must not become a hiding place either: every item has to be real
     # vocabulary, so a fabricated quantity cannot ride along behind one.
     for phrase, want in (

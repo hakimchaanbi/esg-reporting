@@ -1234,18 +1234,63 @@ designed to catch. F1/F2/F3/F5/F7/F9 are fixed and recorded in git.
     render flowed into all three reports **with no API call** — the property
     §17 claims, demonstrated.
 
-28. 🟡 **F4/F8 — data-quality caveats, deferred by Hakim on 2026-08-30.**
-    Neither prints anything false; both are things an examiner could raise.
-    - **Berkeley's energy and emissions cannot both be right.** 30,414 MWh of
-      stationary fuel against 134,957 tCO2e of Scope 1 is roughly 25× what any
-      fuel produces. The likeliest explanation is that cogeneration fuel is in
-      the emissions inventory and not in OP-5. This also undercuts the
-      dashboard's *"Berkeley lowest energy per m²"* line (§18), which may be an
-      artefact of the same omission.
-    - **Cork's water boundary excludes Campus Accommodation**, so the 17× gap
-      against Berkeley — which includes residence halls and irrigation — is
-      partly a boundary difference rather than a performance one, while
-      `bi_metrics.comparable` marks the pair comparable.
+28. ~~🟡 **F4/F8 — the numbers are right and the comparison is still wrong.**~~
+    **FIXED 2026-09-06.** Both were re-verified from primary data before a word
+    was written, because this same review's IL-40 claim had not survived
+    checking (§14.22). Both held, and F8 turned out stronger than reported.
+
+    **F4 — Berkeley's energy and emissions cannot both be complete.**
+    30,414 MWh of stationary fuel against 134,957 tCO2e of stationary
+    combustion is **4.44 tCO2e per MWh**; natural gas is ~0.181, so the fuel
+    figure is ~25x too small for the emissions printed beside it.
+
+    The mechanism is not a guess. Berkeley's own OP-6 methodology names *"natural
+    gas from the campus cogeneration plant"* as a Scope 1 source, and OP-5's
+    electricity reconciles exactly without it — off-site 46,422.30 + on-site
+    renewable 1,322.40 = the 47,744.70 total, leaving **zero on-site
+    non-renewable electricity**. A cogeneration plant would appear there. It is
+    in the emissions inventory and absent from the energy return.
+
+    **F8 — the three do not share a reporting boundary**, and it is declared in
+    PRE-3, not OP-3. Cork's own words:
+
+    > *"Subsidiary companies are not included in this submission, these include
+    > **Campus Accommodation**, the Mardyke Arena, the Student Centre and the
+    > Irish Management Institute… rented multi-tenant buildings are not
+    > included."*
+
+    Berkeley's covers everything under operational control, residences and
+    grounds included. **The bias is asymmetric, and that is the part the review
+    missed:** students living in Campus Accommodation still count in Cork's FTE
+    denominator while their residential consumption sits outside the numerator,
+    so Cork's *per-person* figures are pushed down — its water reads 5.7
+    litres/person/day, which no campus achieves. Per-area figures are less
+    affected, the excluded buildings being missing from both halves.
+
+    ⚠️ **NORMALISING IS NECESSARY AND NOT SUFFICIENT, which is the finding.**
+    §18 restricts cross-institution charts to intensity metrics to remove the
+    size difference. That does nothing about a boundary difference or a missing
+    source, and **6 of the 8 intensity metrics have one**. The dashboard's
+    headline — *"Berkeley has the LOWEST energy per square metre"* — was an
+    artefact of the omitted power plant, and is withdrawn.
+
+    What was done, and what deliberately was not:
+    - `bi_metrics.data_quality` carries the reason per row, so it survives
+      export into any other tool. `comparable` is left alone — it answers *"did
+      all three report it?"*, and folding a second question into it would let a
+      consumer read "all three answered" as "these are like for like".
+    - **The rows are NOT suppressed.** A metric that vanishes without
+      explanation looks like missing data rather than a finding.
+    - The caveats print beside each affected chart, not in a footnote at the
+      bottom of the tab.
+    - Seven mapping rows carry them into the narrative (302-1, 302-3, 305-4,
+      2-2), costing 6 regenerated sections.
+
+    **Neither is an extraction error** — both figures are transcribed exactly as
+    published, and the arithmetic above is entirely between numbers the
+    institutions themselves printed. That is what makes them safe to state where
+    *"the institution did not conduct a materiality assessment"* (§14.22) was
+    not: nothing here is inferred about what a university did off the page.
 
 ---
 

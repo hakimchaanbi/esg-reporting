@@ -22,9 +22,27 @@ WHAT THIS DASHBOARD REFUSES TO DO, AND WHY
 
     That restriction is not cosmetic. It also surfaces the most interesting
     thing in the data: the two denominators disagree. Berkeley has the highest
-    water and emissions per person and the LOWEST energy per square metre. Which
-    university "performs best" depends on whether you divide by people or by
-    floor area, and a dashboard that hides that is lying by omission.
+    water and emissions per person, and its ranking moves when you divide by
+    floor area instead. Which university "performs best" depends on the
+    denominator, and a dashboard that hides that is lying by omission.
+
+⚠️ NORMALISING IS NECESSARY AND NOT SUFFICIENT
+    Dividing by people or floor area fixes the size problem. It does NOT fix a
+    boundary problem or a missing source, and six of the eight intensity
+    metrics have one:
+
+      - Berkeley's OP-5 energy omits its cogeneration plant, which its own OP-6
+        methodology names as a scope 1 source. The reported stationary fuel is
+        ~25x too small for the emissions reported beside it. This dashboard used
+        to headline "Berkeley has the LOWEST energy per square metre" — that
+        claim was an artefact of the omission and has been removed.
+      - Cork's PRE-3 boundary excludes Campus Accommodation and other
+        subsidiaries, while its FTE denominator still counts the students living
+        there. Its per-person figures are biased downward.
+
+    Both are the institutions' own reporting decisions, faithfully extracted.
+    They are carried in `bi_metrics.data_quality` so the warning survives export,
+    and shown beside every affected chart.
 
 THE FOURTH TAB IS THE POINT
     Scores and metrics are what STARS already publishes. The contribution here
@@ -164,12 +182,25 @@ with tab_compare:
                           title=dict(text=field, font=dict(size=14)))
         st.plotly_chart(fig, use_container_width=True)
 
-    st.success(
-        "**The denominator changes the answer.** Berkeley has the highest water "
-        "use and emissions *per person*, and the LOWEST energy use *per square "
-        "metre*. Switch the toggle above and watch the ranking invert. Neither "
-        "view is the true one — which is exactly why a single headline number "
-        "would be misleading.", icon="🔍")
+        # ⚠️ The caveat belongs BESIDE the bars, not in a footnote at the bottom
+        # of the tab. A reader who looks at one chart and scrolls on must still
+        # see why its shortest bar is not a result.
+        notes = group[group.data_quality.astype(str) != ""]
+        for _, bad in notes.iterrows():
+            st.caption(f"⚠️ **{bad.institution}** — {bad.data_quality}")
+
+    st.info(
+        "**The denominator changes the answer, and the boundary changes it "
+        "again.** Berkeley has the highest water use and emissions *per "
+        "person*; switch the toggle above and rankings move. Neither view is "
+        "the true one, which is why a single headline number would mislead.\n\n"
+        "But normalising only removes the size difference. Six of these eight "
+        "metrics carry a boundary or completeness problem on top of it — "
+        "flagged under the charts above — so a short bar here is not "
+        "automatically good performance. **This tab previously headlined "
+        "'Berkeley has the lowest energy per square metre'. That was an "
+        "artefact of a power plant missing from its energy return, and the "
+        "claim has been withdrawn.**", icon="🔍")
 
     with st.expander("Absolute figures — one institution at a time"):
         inst = st.selectbox("Institution", sorted(metrics.institution.unique()),

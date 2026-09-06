@@ -6,23 +6,21 @@ Prepared **with reference to** the GRI Standards. Source data: [University of Ca
 
 ### Organisational details and reporting boundary
 
-The University of California, Berkeley is a public higher education institution. In accordance with Disclosure 2-2, the sustainability reporting boundary encompasses facilities over which the university maintains operational control. This boundary covers the main campus in the City of Berkeley, the adjacent Hill campus to the east, the Richmond Field Station, additional university-operated research stations and reserves, and campus-owned buildings across various locations. Physical facilities within this boundary include museum operations, meeting Disclosure 2-6 in part regarding campus activities. 
+The University of California, Berkeley is a public higher education institution. Under GRI 2-2, the institutional boundary for this report is determined by operational control. This boundary encompasses the main campus in the City of Berkeley, the adjacent Hill campus, the Richmond Field Station, additional university-operated research stations and reserves, and campus-owned buildings across various locations. Operational activities and facilities within this physical footprint include campus museums (GRI 2-6). 
 
-### Reporting period and governance
+The reporting framework records institutional boundaries as descriptive narratives rather than structured entity schedules. Because reporting boundaries differ across higher education institutions—with some institutions excluding auxiliary or residential companies while UC Berkeley includes all facilities under operational control—comparative figures normalised by population or floor space reflect differing operational scopes rather than performance disparities alone.
 
-The preparation of this reporting was coordinated by the Office of Sustainability, led by the Sustainability Data and Program Manager, Marina Zdobnova, and Postdoctoral Fellow, Ashley Smiley. For core climate indicators, such as Scope 1 and Scope 2 greenhouse gas emissions, the reporting describes the performance year 2023. 
+### Reporting period and coordination
 
-In relation to Disclosure 2-5, no independent audits or external assurance processes were used in the preparation of this reporting. 
+Data collation was coordinated by the Sustainability Data and Program Manager and a Postdoctoral Fellow within the Office of Sustainability (GRI 2-3). Performance data for Scope 1 and Scope 2 greenhouse gas emissions corresponds to the performance year 2023. 
 
-### Reporting limitations and gaps
+STARS submissions operate as independent snapshots with divergent evaluation periods across individual credit areas rather than a single unified reporting year. This report cannot evidence restatements of information from prior reporting cycles, as the source framework does not track historical adjustments (GRI 2-4).
 
-Several disclosures under the GRI Standards cannot be fully addressed due to the structure of the underlying data source:
+### External assurance and reporting limitations
 
-- **GRI 2-1 and GRI 2-2:** STARS does not record the university's legal name, headquarters location, or countries of operation as credit fields. Furthermore, this report cannot evidence whether the reporting entities differ from those in the university's audited financial statements, nor how minority interests are consolidated, as STARS does not collect this information.
-- **GRI 2-3:** The data source does not operate on a single uniform reporting period; measurement periods vary across individual credits. STARS does not record reporting frequency, official publication dates, or direct contact details for public enquiries, capturing only the names and roles of the report preparers.
-- **GRI 2-4:** Restatements of information are not reported, as STARS submissions represent standalone snapshots without linkages or reconciliation to previous reporting periods.
-- **GRI 2-5:** Beyond recording the absence of external assurance, the reporting framework does not collect details concerning assurance standards, assurance levels, or relationships with assurance providers.
-- **GRI 2-6:** The available institutional data identifies specific physical features such as museums, but does not capture broader supply chain structures, downstream value chains, or external market sectors served.
+No independent audits or external assurance processes were used in the preparation of this report (GRI 2-5). 
+
+Certain standard disclosures under the GRI framework are outside the scope of the underlying data collection. STARS metadata does not capture the institution's formal legal registration details, headquarters location, or countries of operation (GRI 2-1). The source framework records personnel names and roles without designated contact channels, publication dates, or reporting frequency (GRI 2-3). Furthermore, the source framework does not capture external assurance standards or provider relationships (GRI 2-5), nor does it evaluate broader supply chains, specific market destinations, or products and services beyond physical campus features (GRI 2-6).
 
 ## Activities and workers
 
@@ -129,57 +127,49 @@ This report cannot evidence the specific methods used to identify stakeholders o
 
 ## Environmental performance
 
-### Energy Performance
+### Energy consumption and intensity
 
-The University of California, Berkeley reports a total annual energy consumption of 78,414.00 Megawatt-hours. This figure comprises 47,744.70 Megawatt-hours of electricity and 30,414 Megawatt-hours of stationary fuel. The institution also utilizes 255.30 Megawatt-hours for heating and cooling from off-site sources. Within the reporting period, the university exported 0 Megawatt-hours of on-site renewable electricity.
+Total annual energy consumption within the institution was 78,414.00 Megawatt-hours. Electricity consumption accounted for 47,744.70 Megawatt-hours, whilst total stationary fuel consumption was recorded at 30,414 Megawatt-hours. Within stationary fuels, natural gas accounted for 30,014 Megawatt-hours, propane and liquefied petroleum gas accounted for 0 Megawatt-hours, heating oil stood at 400 Megawatt-hours, and coal or coke was 0 Megawatt-hours. Renewable stationary fuels accounted for 0 Megawatt-hours, total annual renewable energy consumption stood at 18,173 Megawatt-hours, and exported on-site renewable electricity was 0 Megawatt-hours. Consumption of heating and cooling from off-site sources was 255.30 Megawatt-hours.
 
-The breakdown of stationary fuel consumption includes 30,014 Megawatt-hours of natural gas, 400 Megawatt-hours of heating oil, 0 Megawatt-hours of coal or coke, and 0 Megawatt-hours of propane or LPG. Renewable stationary fuels account for 0 Megawatt-hours of the total fuel usage. The annual renewable energy consumption, which includes both fuels and electricity, is 18,173 Megawatt-hours.
+Normalised against operational activity, the institution’s annual energy intensity was 1,346.02 Kilowatt-hours and 52.17 Kilowatt-hours per square meter.
 
-Energy intensity is measured at 1,346.02 Kilowatt-hours per person, based on a denominator of full-time equivalent students and employees. When measured against the gross floor area of the campus, the energy intensity is 52.17 Kilowatt-hours per square meter.
+In relation to Disclosure 302-1, data is reported in megawatt-hours as collected under the STARS reporting tool rather than in joules as requested by the GRI standard. Furthermore, the institution's energy data contains a notable boundary omission: the reported stationary fuel consumption does not account for the primary fuel combusted in the campus cogeneration plant, even though the resulting emissions are captured within the greenhouse gas inventory. Because the cogeneration plant is omitted from the energy accounting, the reported total energy consumption and derived intensity figures are incomplete, and the exact magnitude of the omission cannot be determined from the available data.
 
-In accordance with Disclosure GRI 302-1, it is noted that while the standard requires energy to be reported in joules, the figures provided here are in megawatt-hours as collected by the STARS framework.
+### Greenhouse gas emissions
 
-### Greenhouse Gas Emissions
+Under GRI 305, direct Scope 1 greenhouse gas emissions comprised 134,957 Metric tons of CO2 equivalent from stationary combustion, 1,676 Metric tons of CO2 equivalent from mobile combustion, and 76 Metric tons of CO2 equivalent from fugitive sources. Greenhouse gas emissions from biogenic sources were 0 Metric tons of CO2 equivalent.
 
-The institution conducts its greenhouse gas inventory following protocols from The Climate Registry and the California Air Resources Board (CARB). The inventory includes all six major greenhouse gases. The university has adopted 2019 as its baseline year for Scope 1 and Scope 2 emissions, as this was the final year of typical operations prior to the global pandemic. The combined baseline for these scopes is 147,623 Metric tons of CO2 equivalent.
+For market-based indirect Scope 2 emissions under Disclosure 305-2, emissions from off-site electricity generation were 1,256 Metric tons of CO2 equivalent, and emissions associated with imported heating and cooling were 0 Metric tons of CO2 equivalent. Location-based Scope 2 emissions are not reported. 
 
-Direct Scope 1 emissions are reported across several categories: 134,957 Metric tons of CO2 equivalent from stationary combustion, 1,676 Metric tons of CO2 equivalent from mobile combustion, and 76 Metric tons of CO2 equivalent from fugitive sources. Emissions from biogenic sources are reported as 0 Metric tons of CO2 equivalent.
+Other indirect Scope 3 emissions under Disclosure 305-3 comprised 19,913 Metric tons of CO2 equivalent from business travel, 12,836 Metric tons of CO2 equivalent from employee and student commuting, 728 Metric tons of CO2 equivalent from operational solid waste, and 22 Metric tons of CO2 equivalent from fuel- and energy-related activities not included in Scope 1 or Scope 2. The institution does not report Scope 3 emissions from purchased goods and services or capital goods.
 
-Indirect Scope 2 emissions from off-site sources include 1,256 Metric tons of CO2 equivalent for electricity (market-based) and 0 Metric tons of CO2 equivalent for heating and cooling.
+The institution’s operational emissions intensity under Disclosure 305-4 was 2,368.25 Kilograms of CO2 equivalent and 91.79 Kilograms per square meter. 
 
-Scope 3 emissions are tracked for several activities: 19,913 Metric tons of CO2 equivalent from business travel, 12,836 Metric tons of CO2 equivalent from student and staff commuting, 728 Metric tons of CO2 equivalent from solid waste generated in operations, and 22 Metric tons of CO2 equivalent from fuel- and energy-related activities not included in Scope 1 or Scope 2.
+Progress against historical performance under Disclosure 305-5 is measured against a baseline adopted in 2019, which represented the final business-as-usual reporting period prior to pandemic disruption. Combined baseline Scope 1 and Scope 2 emissions stood at 147,623 Metric tons of CO2 equivalent. Current adjusted net Scope 1 and Scope 2 emissions were 133,106.95 Metric tons of CO2 equivalent, representing a reduction of 9.83% from the baseline. This reduction figure is calculated net of 4,858 Metric tons of CO2 equivalent in third-party certified carbon offsets, creating a distinction between net claimed performance and gross operational emissions reductions.
 
-The university reports a 9.83% reduction in Scope 1 and Scope 2 emissions from the baseline. This reduction is an adjusted net figure that includes 4,858 Metric tons of CO2 equivalent of third-party certified carbon offsets, resulting in adjusted net emissions of 133,106.95 Metric tons of CO2 equivalent.
+### Water stewardship
 
-Emissions intensity is 2,368.25 Kilograms of CO2 equivalent per person (students and employees) and 91.79 Kilograms per square meter per unit of gross floor area. Disclosure GRI 305-5 requires reductions to be reported as absolute quantities, whereas the STARS framework provides a percentage net of offsets.
+Total water withdrawal under Disclosure 303-3 was 2,092,006 Cubic meters. All abstracted water was third-party potable water from off-site municipal sources, recorded at 2,092,006 Cubic meters. Water withdrawal from on-site potable sources was 0 Cubic meters. Data is collected in cubic metres rather than megalitres.
 
-### Water Consumption
+Regarding Disclosure 303-1, the institution's main campus is located in a catchment evaluated as having a high level of physical water quantity risk. The university harvests rainwater on-site for storage and reuse, though STARS does not record the total volume harvested or details of water discharge quality.
 
-The University of California, Berkeley reports a total water withdrawal of 2,092,006 Cubic meters. This total is comprised of 2,092,006 Cubic meters from off-site sources and 0 Cubic meters from on-site sources. The institution does not abstract its own water.
+### Waste management and circularity
 
-The main campus is situated in an area identified as having a high level of physical water quantity risk. To mitigate shared water resource impacts, the university practices on-site rainwater harvesting for storage and use.
+Operational non-hazardous waste generation under Disclosure 306-3 was 7,732.13 Metric tons, whilst construction and demolition waste generation totalled 4,753.09 Metric tons. 
 
-Under Disclosure GRI 303-3, water withdrawal should be reported in megalitres; however, the figures here are reported in cubic metres. The report cannot provide a breakdown of withdrawal by source for water-stressed areas as STARS does not collect this specific data.
+Under Disclosure 306-4, non-hazardous waste diverted from disposal was 4,254.13 Metric tons. Of this diverted non-hazardous stream, 1,576 Metric tons was recycled, 2,554 Metric tons was composted, and 124.13 Metric tons was prepared for reuse. Diverted construction and demolition waste totalled 3,452.02 Metric tons, consisting of 2,858.23 Metric tons recycled and 593.79 Metric tons reused. 
 
-### Waste Management
+Under Disclosure 306-5, non-hazardous waste directed to landfill or incineration was 3,478 Metric tons, and construction and demolition waste disposed of was 1,301.07 Metric tons.
 
-The institution generated 7,732.13 Metric tons of non-hazardous waste and 4,753.09 Metric tons of construction and demolition waste during the reporting period.
+Circular economy and waste minimization programmes include an institutional surplus property programme for redistributing university equipment, a donation programme for personal items, policies eliminating designated single-use disposable plastics, and comprehensive collection for industrial composting. While a hazardous materials management protocol is maintained to minimise hazardous chemical use, STARS does not collect weight data for hazardous waste streams.
 
-Diversion efforts for non-hazardous waste reached a total of 4,254.13 Metric tons. This includes 1,576 Metric tons through recycling, 2,554 Metric tons through an industrial composting programme, and 124.13 Metric tons through surplus and reuse programmes. For construction and demolition waste, 3,452.02 Metric tons was diverted, with 2,858.23 Metric tons recycled and 593.79 Metric tons prepared for reuse.
+### Supplier environmental screening
 
-Waste directed to disposal, including landfill and incineration, amounted to 3,478 Metric tons for non-hazardous waste and 1,301.07 Metric tons for construction and demolition waste.
+Under Disclosure 308-1, the university includes sustainability considerations in 100% of bid solicitations. The institution maintains a supplier code of conduct containing environmental performance standards that exceed regulatory minimums. The source framework does not track the specific number or proportion of new suppliers screened against environmental criteria.
 
-The university maintains a hazardous waste management programme to minimise the use of hazardous materials. Additionally, the institution has eliminated the on-site use of at least one form of single-use disposable plastic.
+### Omissions and data limitations
 
-Regarding Disclosure GRI 306-3, the reported figures represent a subset of total waste, as STARS does not quantify hazardous waste tonnage. Furthermore, Disclosure GRI 306-5 requires a split between landfill and incineration, which are merged in the STARS data.
-
-### Environmental Procurement
-
-The university’s supplier code of conduct includes environmental expectations that exceed regulatory compliance. In the procurement process, 100% of bid solicitations identify supplier sustainability considerations. This figure refers to the number of solicitations rather than the number of new suppliers screened, as requested by Disclosure GRI 308-1.
-
-### Reporting Limitations
-
-This report cannot evidence performance for GRI 301-1, GRI 301-2, or GRI 301-3 as the institution does not produce physical products. Data for GRI 302-2, GRI 302-4, GRI 302-5, GRI 303-2, GRI 305-6, GRI 305-7, GRI 306-1, and GRI 308-2 are not collected by the STARS framework or were not reported by the institution. Specific data for hazardous waste tonnages and the on-site versus off-site split of waste recovery operations are also unavailable.
+STARS does not collect several metrics required by the GRI Standards. In materials management, GRI 301-1, GRI 301-2, and GRI 301-3 are not applicable because higher education institutions do not produce physical manufactured goods. For energy and air emissions, energy consumption outside the organization (GRI 302-2), energy reduction quantities in joules (GRI 302-4), energy reductions in products (GRI 302-5), ozone-depleting substances (GRI 305-6), and significant air emissions such as nitrogen oxides and sulfur oxides (GRI 305-7) are not collected. For water and waste, water discharge impacts (GRI 303-2), process-level waste impact descriptions (GRI 306-1), and quantitative hazardous waste weights are unavailable. Supplier-level screening outcomes and corrective actions (GRI 308-2) are also not collected. Scope 1 process emissions and annual total summaries without category divisions were not reported in the source return.
 
 ## Social and economic performance
 
