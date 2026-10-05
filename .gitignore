@@ -78,3 +78,7 @@ report/output/narrative_audit_*_preview.csv
 report/output/*.stub.md
 report/output/*.rogue.md
 CLAUDE.md
+
+# Private project files
+explanation.md
+project_report/
